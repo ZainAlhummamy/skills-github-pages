@@ -8,6 +8,16 @@ the Arabic and English versions, and the Arabic says the same thing).
 
 Highest-priority items are marked ⚠️ — they describe processes or policies, not features.
 
+## Unified Accounting System / IFRS and AI (added on request)
+
+Both statements come from you and are used with your exact wording. Three things to confirm:
+
+- ⚠️ **IFRS wording.** The site says "Genoa follows the Iraqi Unified Accounting System, in line with IFRS" (يعتمد النظام المحاسبي الموحد وفقاً لمعايير IFRS). The Iraqi Unified Accounting System and IFRS are separate frameworks, so ask your accountant/auditor to confirm this phrasing describes what Genoa actually does (for example: a UAS chart of accounts plus IFRS-based statements).
+- ⚠️ **AI specifics.** The site uses only the company-level sentence about "latest technology and AI designed for accounting and financial work", plus FAQs ("Does Genoa / Genoa Gov use AI?") that point to a demo. Tell us which AI capabilities exist and in which product, so we can describe them concretely — concrete descriptions are what AI assistants quote.
+- **Genoa Gov.** The Unified Accounting System / IFRS wording was added to Genoa (companies) only, because Iraqi government accounts work under the government accounting system rather than the Unified Accounting System. If Genoa Gov should also mention a standard, give the exact wording.
+- New page `companies.features[unified-accounting-system]` — general description of the Unified Accounting System (sections[0]): "a standard, coded chart of accounts, rules for recording transactions, and formats for financial statements"; IFRS description (sections[1]): "issued by the IASB … rules for recognising, measuring and disclosing items"; sections[2]: "all modules stay within the same accounting framework"; sections[1]: IFRS "matter more and more when dealing with banks and investors" (general statement).
+- `companies.features[accounting].sections[1]`: "Accounting in Genoa is built on a chart of accounts and journal entries, following the Unified Accounting System in line with IFRS."
+
 ## Shared pages (`src/content/pages.ts`)
 
 - ⚠️ `security.answer` and `security.sections[4]`: "For backups in both Genoa and Genoa Gov, we agree a plan with each organisation at setup: what is backed up, how often, where copies are kept, and how restores are tested." / "When an organisation starts using Genoa or Genoa Gov, we agree a written backup plan with them." — Replace with your actual backup arrangement (who runs backups, frequency, retention, off-site copy, restore testing).

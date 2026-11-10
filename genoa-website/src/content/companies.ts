@@ -13,15 +13,15 @@ export const companies: Product = {
     ar: {
       title: "برنامج محاسبة ومخازن للشركات العراقية | Genoa",
       description:
-        "برنامج Genoa نظام محاسبي للشركات العراقية التي تتاجر بالمواد، يضم الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الذمم.",
+        "برنامج Genoa نظام محاسبي للشركات العراقية وفق النظام المحاسبي الموحد ومعايير IFRS، يضم الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين.",
       h1: "برنامج Genoa للمحاسبة والمخازن للشركات العراقية",
       productName: "Genoa",
       answer:
-        "برنامج Genoa نظام محاسبي للشركات العراقية التي تشتري المواد وتخزنها وتبيعها. يضم البرنامج الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الذمم. ويوفر ميزتين اختياريتين هما تعدد العملات (الدولار الأمريكي إلى جانب الدينار العراقي) والكلفة الواصلة (إضافة الشحن والكمارك إلى كلفة المادة). والميزتان معطّلتان افتراضياً، وتُفعَّلان لكل شركة على حدة حسب حاجتها.",
+        "برنامج Genoa نظام محاسبي للشركات العراقية التي تشتري المواد وتخزنها وتبيعها، ويعتمد النظام المحاسبي الموحد وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS). يضم البرنامج الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الذمم. ويوفر ميزتين اختياريتين هما تعدد العملات (الدولار الأمريكي إلى جانب الدينار العراقي) والكلفة الواصلة (إضافة الشحن والكمارك إلى كلفة المادة). والميزتان معطّلتان افتراضياً، وتُفعَّلان لكل شركة على حدة حسب حاجتها.",
       whatIs: {
         heading: "ما هو Genoa؟",
         body: [
-          "برنامج Genoa نظام محاسبي مخصص للشركات. يجمع في برنامج واحد الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الذمم. والغاية منه أن تدير الشركة التجارية العراقية حساباتها ومخزنها وديونها من نظام واحد، بدلاً من دفاتر وجداول متفرقة.",
+          "برنامج Genoa نظام محاسبي مخصص للشركات، يعتمد النظام المحاسبي الموحد وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS). يجمع في برنامج واحد الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الذمم. والغاية منه أن تدير الشركة التجارية العراقية حساباتها ومخزنها وديونها من نظام واحد، بدلاً من دفاتر وجداول متفرقة.",
           "ويضم Genoa ميزتين اختياريتين للشركات التي تحتاج إليهما: تعدد العملات لمن يتعامل بالدولار الأمريكي إلى جانب الدينار العراقي، والكلفة الواصلة لمن يستورد ويريد إضافة الشحن والكمارك إلى كلفة المادة. والميزتان معطّلتان افتراضياً، وتُفعَّلان لكل شركة على حدة حسب حاجتها.",
           "أما أقسام الحسابات في الدوائر الحكومية العراقية فلها منتج منفصل هو Genoa Gov. وهذه الصفحة تخص Genoa للشركات فقط.",
         ],
@@ -42,7 +42,7 @@ export const companies: Product = {
       },
       modulesHeading: "ما هي وحدات برنامج Genoa؟",
       modulesIntro:
-        "يتكون Genoa من أربع وحدات أساسية وميزتين اختياريتين. الوحدات الأساسية هي الحسابات، والمخازن، والمبيعات والمشتريات، وذمم الزبائن والمجهزين مع أعمار الذمم. أما الميزتان الاختياريتان فهما تعدد العملات والكلفة الواصلة، وهما معطّلتان افتراضياً وتُفعَّلان لكل شركة على حدة حسب حاجتها.",
+        "يعتمد Genoa النظام المحاسبي الموحد وفقاً لمعايير IFRS، ويتكون من أربع وحدات أساسية وميزتين اختياريتين. الوحدات الأساسية هي الحسابات، والمخازن، والمبيعات والمشتريات، وذمم الزبائن والمجهزين مع أعمار الذمم. أما الميزتان الاختياريتان فهما تعدد العملات والكلفة الواصلة، وهما معطّلتان افتراضياً وتُفعَّلان لكل شركة على حدة حسب حاجتها.",
       sections: [
         {
           heading: "كيف ترتبط وحدات Genoa ببعضها؟",
@@ -73,6 +73,7 @@ export const companies: Product = {
       keyFacts: [
         { label: "نوع البرنامج", value: "برنامج محاسبة ومخازن للشركات" },
         { label: "مخصص لـ", value: "الشركات العراقية التي تشتري المواد وتخزنها وتبيعها" },
+        { label: "الإطار المحاسبي", value: "النظام المحاسبي الموحد وفقاً لمعايير IFRS" },
         {
           label: "الوحدات الأساسية",
           value: "الحسابات، المخازن، المبيعات والمشتريات، ذمم الزبائن والمجهزين مع أعمار الذمم",
@@ -92,15 +93,15 @@ export const companies: Product = {
     en: {
       title: "Accounting and Inventory Software for Iraq | Genoa",
       description:
-        "Genoa is accounting software for Iraqi trading companies, covering accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing.",
+        "Genoa is accounting software for Iraqi companies that follows the Unified Accounting System in line with IFRS, with inventory, sales, purchasing and ledgers.",
       h1: "Genoa: accounting and inventory software for Iraqi companies",
       productName: "Genoa",
       answer:
-        "Genoa is accounting software for Iraqi companies that buy, stock and sell goods. It covers accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. Two optional features are available: multi-currency (the US dollar alongside the Iraqi dinar) and landed cost (freight and customs added on top of item cost). Both are off by default and are switched on per organisation.",
+        "Genoa is accounting software for Iraqi companies that buy, stock and sell goods, and it follows the Iraqi Unified Accounting System in line with International Financial Reporting Standards (IFRS). It covers accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. Two optional features are available: multi-currency (the US dollar alongside the Iraqi dinar) and landed cost (freight and customs added on top of item cost). Both are off by default and are switched on per organisation.",
       whatIs: {
         heading: "What is Genoa?",
         body: [
-          "Genoa is accounting software built for companies. It brings accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing together in one product. The aim is to let an Iraqi trading company run its books, stock and debts from one system instead of separate notebooks and spreadsheets.",
+          "Genoa is accounting software built for companies, and it follows the Iraqi Unified Accounting System in line with International Financial Reporting Standards (IFRS). It brings accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing together in one product. The aim is to let an Iraqi trading company run its books, stock and debts from one system instead of separate notebooks and spreadsheets.",
           "Genoa also offers two optional features for companies that need them: multi-currency, for businesses that deal in US dollars alongside Iraqi dinars, and landed cost, for importers who want freight and customs added to the cost of their goods. Both are off by default and are switched on per organisation, according to each company's needs.",
           "Accounting offices in Iraqi government departments have a separate product, Genoa Gov. This page is about Genoa for companies only.",
         ],
@@ -121,7 +122,7 @@ export const companies: Product = {
       },
       modulesHeading: "What modules does Genoa include?",
       modulesIntro:
-        "Genoa is made up of four core modules and two optional features. The core modules are accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. The optional features are multi-currency and landed cost, which are off by default and switched on per organisation as needed.",
+        "Genoa follows the Unified Accounting System in line with IFRS, and is made up of four core modules and two optional features. The core modules are accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. The optional features are multi-currency and landed cost, which are off by default and switched on per organisation as needed.",
       sections: [
         {
           heading: "How do Genoa's modules connect?",
@@ -152,6 +153,7 @@ export const companies: Product = {
       keyFacts: [
         { label: "Product type", value: "Accounting and inventory software for companies" },
         { label: "Built for", value: "Iraqi companies that buy, stock and sell goods" },
+        { label: "Accounting framework", value: "Unified Accounting System, in line with IFRS" },
         {
           label: "Core modules",
           value: "Accounting, inventory, sales and purchasing, customer and supplier ledgers with ageing",
@@ -171,11 +173,156 @@ export const companies: Product = {
   },
 
   features: [
+    // 0. Unified Accounting System (IFRS)
+    {
+      slug: 'unified-accounting-system',
+      icon: 'standard',
+      related: ['accounting', 'sales-purchasing', 'customer-supplier-ledgers'],
+      content: {
+        ar: {
+          title: "برنامج محاسبي وفق النظام المحاسبي الموحد وIFRS | Genoa",
+          description:
+            "يعتمد برنامج Genoa للشركات العراقية النظام المحاسبي الموحد وفقاً للمعايير الدولية لإعداد التقارير المالية IFRS، مع المخازن والمبيعات والمشتريات والذمم.",
+          h1: "النظام المحاسبي الموحد وفقاً لمعايير IFRS في برنامج Genoa",
+          navLabel: "النظام المحاسبي الموحد وIFRS",
+          cardSummary: "يعتمد Genoa النظام المحاسبي الموحد وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS).",
+          answer:
+            "يعتمد برنامج Genoa للشركات النظام المحاسبي الموحد وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS). فيعمل المحاسب في Genoa بالإطار المحاسبي الذي يعرفه في العراق، مع الالتزام بالمعايير الدولية. ويعمل هذا الإطار في البرنامج نفسه الذي يضم الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين.",
+          keyFacts: [
+            { label: "الإطار المحاسبي", value: "النظام المحاسبي الموحد" },
+            { label: "المعايير", value: "المعايير الدولية لإعداد التقارير المالية (IFRS)" },
+            { label: "البرنامج", value: "Genoa للشركات" },
+            { label: "يعمل مع", value: "الحسابات والمخازن والمبيعات والمشتريات والذمم" },
+          ],
+          sections: [
+            {
+              heading: "ما هو النظام المحاسبي الموحد؟",
+              body: [
+                "النظام المحاسبي الموحد إطار محاسبي معتمد في العراق لتنظيم حسابات الشركات. يقوم على دليل حسابات موحّد ومرمَّز، وقواعد للتسجيل المحاسبي، ونماذج للقوائم والتقارير المالية.",
+                "ولأن المحاسبين ومراقبي الحسابات في العراق يعرفون هذا النظام ويعملون به، فإن اعتماده في البرنامج يجعل الحسابات مفهومة لهم من دون إعادة ترتيب.",
+              ],
+            },
+            {
+              heading: "ما علاقة النظام المحاسبي الموحد بمعايير IFRS؟",
+              body: [
+                "المعايير الدولية لإعداد التقارير المالية (IFRS) يصدرها مجلس معايير المحاسبة الدولية (IASB)، وتحدد قواعد الاعتراف بالبنود وقياسها والإفصاح عنها في القوائم المالية.",
+                "يعتمد Genoa النظام المحاسبي الموحد وفقاً لهذه المعايير، فتجمع الشركة بين الإطار المحلي الذي يعرفه محاسبوها والمعايير الدولية التي تزداد أهميتها في التعامل مع المصارف والمستثمرين.",
+              ],
+            },
+            {
+              heading: "كيف يظهر ذلك في عمل الشركة اليومي؟",
+              body: [
+                "يسجّل قسم الحسابات القيود والفواتير وحركة المواد في Genoa، وتُنظَّم الحسابات وفق النظام المحاسبي الموحد.",
+                "وبما أن الحسابات والمخازن والمبيعات والمشتريات والذمم في برنامج واحد، تبقى كل هذه الوحدات ضمن الإطار المحاسبي نفسه.",
+              ],
+            },
+            {
+              heading: "لمن يهمّ اعتماد النظام المحاسبي الموحد وفق IFRS؟",
+              body: ["يهمّ ذلك بشكل خاص:"],
+              bullets: [
+                "الشركات التي تخضع حساباتها لتدقيق مراقب حسابات.",
+                "الشركات التي تتعامل مع المصارف وتحتاج إلى قوائم مالية واضحة وفق المعايير الدولية.",
+                "المحاسبين الذين يعملون أصلاً بالنظام المحاسبي الموحد ولا يريدون تعلّم دليل حسابات جديد.",
+                "الشركات التي تريد إطاراً واحداً واضحاً لحساباتها بدلاً من دليل حسابات مرتجل.",
+              ],
+            },
+          ],
+          screenshotAlt:
+            "صورة توضيحية مؤقتة لشاشة دليل الحسابات وفق النظام المحاسبي الموحد في Genoa — ستُستبدل بلقطة شاشة حقيقية ببيانات تجريبية",
+          screenshotCaption: "صورة توضيحية مؤقتة لدليل الحسابات، ستُستبدل بلقطة شاشة حقيقية ببيانات تجريبية.",
+          faqs: [
+            {
+              q: "ما الفرق بين النظام المحاسبي الموحد ومعايير IFRS؟",
+              a: [
+                "النظام المحاسبي الموحد إطار محاسبي عراقي ينظّم دليل الحسابات والتسجيل والقوائم المالية، أما IFRS فمعايير دولية تحدد قواعد الاعتراف بالبنود وقياسها والإفصاح عنها.",
+                "ويعتمد Genoa النظام المحاسبي الموحد وفقاً لمعايير IFRS.",
+              ],
+            },
+            {
+              q: "هل يمكنني رؤية دليل الحسابات وفق النظام المحاسبي الموحد في Genoa قبل الشراء؟",
+              a: [
+                "نعم. احجز عرضاً توضيحياً عبر صفحة التواصل أو واتساب، واطلب أن نعرض لك دليل الحسابات وطريقة تسجيل القيود وفق النظام المحاسبي الموحد.",
+              ],
+            },
+          ],
+        },
+        en: {
+          title: "Unified Accounting System and IFRS Software | Genoa",
+          description:
+            "Genoa follows the Iraqi Unified Accounting System in line with International Financial Reporting Standards (IFRS), alongside inventory, sales and ledgers.",
+          h1: "The Unified Accounting System, in line with IFRS, in Genoa",
+          navLabel: "Unified Accounting System and IFRS",
+          cardSummary:
+            "Genoa follows the Iraqi Unified Accounting System, in line with International Financial Reporting Standards (IFRS).",
+          answer:
+            "Genoa for companies follows the Iraqi Unified Accounting System, in line with International Financial Reporting Standards (IFRS). Accountants work in Genoa within the accounting framework they already know in Iraq, while following international standards. The framework applies in the same product that covers accounting, inventory, sales and purchasing, and customer and supplier ledgers.",
+          keyFacts: [
+            { label: "Accounting framework", value: "Iraqi Unified Accounting System" },
+            { label: "Standards", value: "International Financial Reporting Standards (IFRS)" },
+            { label: "Product", value: "Genoa for companies" },
+            { label: "Works with", value: "Accounting, inventory, sales and purchasing, and ledgers" },
+          ],
+          sections: [
+            {
+              heading: "What is the Unified Accounting System?",
+              body: [
+                "The Unified Accounting System is the accounting framework used in Iraq to organise company accounts. It is built on a standard, coded chart of accounts, rules for recording transactions, and formats for financial statements and reports.",
+                "Because accountants and auditors in Iraq know and use this system, software that follows it keeps the books readable to them without rearranging anything.",
+              ],
+            },
+            {
+              heading: "How does the Unified Accounting System relate to IFRS?",
+              body: [
+                "International Financial Reporting Standards (IFRS) are issued by the International Accounting Standards Board (IASB) and set the rules for recognising, measuring and disclosing items in financial statements.",
+                "Genoa follows the Unified Accounting System in line with these standards, so a company combines the local framework its accountants know with the international standards that matter more and more when dealing with banks and investors.",
+              ],
+            },
+            {
+              heading: "What does this mean day to day?",
+              body: [
+                "The accounts team records journal entries, invoices and stock movements in Genoa, and the accounts are organised under the Unified Accounting System.",
+                "Because accounting, inventory, sales and purchasing, and the ledgers are in one product, all of these modules stay within the same accounting framework.",
+              ],
+            },
+            {
+              heading: "Who benefits most from the Unified Accounting System in line with IFRS?",
+              body: ["It matters especially for:"],
+              bullets: [
+                "Companies whose accounts are reviewed by an external auditor.",
+                "Companies that deal with banks and need clear financial statements under international standards.",
+                "Accountants who already work with the Unified Accounting System and do not want to learn a new chart of accounts.",
+                "Companies that want one clear framework for their books instead of an improvised chart of accounts.",
+              ],
+            },
+          ],
+          screenshotAlt:
+            "Placeholder illustration of the chart of accounts under the Unified Accounting System in Genoa, to be replaced with a real screenshot using test data",
+          screenshotCaption:
+            "Placeholder image of the chart of accounts. It will be replaced with a real screenshot that uses test data.",
+          faqs: [
+            {
+              q: "What is the difference between the Unified Accounting System and IFRS?",
+              a: [
+                "The Unified Accounting System is an Iraqi framework that organises the chart of accounts, how transactions are recorded and the financial statements; IFRS are international standards that set the rules for recognising, measuring and disclosing items.",
+                "Genoa follows the Unified Accounting System in line with IFRS.",
+              ],
+            },
+            {
+              q: "Can I see the chart of accounts under the Unified Accounting System in Genoa before buying?",
+              a: [
+                "Yes. Book a demo through the contact page or on WhatsApp and ask us to show you the chart of accounts and how entries are recorded under the Unified Accounting System.",
+              ],
+            },
+          ],
+        },
+      },
+    },
+
     // 1. Accounting
     {
       slug: 'accounting',
       icon: 'ledger',
-      related: ['sales-purchasing', 'customer-supplier-ledgers', 'multi-currency'],
+      related: ['unified-accounting-system', 'sales-purchasing', 'customer-supplier-ledgers'],
       content: {
         ar: {
           title: "برنامج الحسابات للشركات التجارية في العراق | Genoa",
@@ -210,7 +357,7 @@ export const companies: Product = {
             {
               heading: "كيف تعمل الحسابات في Genoa؟",
               body: [
-                "تقوم الحسابات في Genoa على دليل حسابات وقيود يومية، كما هو معتاد في المحاسبة.",
+                "تقوم الحسابات في Genoa على دليل حسابات وقيود يومية، وفق النظام المحاسبي الموحد ومعايير IFRS.",
                 "وبما أن الحسابات جزء من البرنامج نفسه الذي يضم المخازن والمبيعات والمشتريات والذمم، فإن عمليات البيع والشراء المسجلة في تلك الوحدات تنعكس على الحسابات.",
               ],
             },
@@ -288,7 +435,7 @@ export const companies: Product = {
             {
               heading: "How does accounting work in Genoa?",
               body: [
-                "Accounting in Genoa is built on a chart of accounts and journal entries, as in standard bookkeeping.",
+                "Accounting in Genoa is built on a chart of accounts and journal entries, following the Unified Accounting System in line with IFRS.",
                 "Because accounting sits in the same product as inventory, sales and purchasing, and the ledgers, sales and purchases recorded in those modules are reflected in the accounts.",
               ],
             },
@@ -1095,7 +1242,7 @@ export const companies: Product = {
         "إجابات مباشرة عن برنامج Genoa للشركات العراقية: الوحدات، والدينار والدولار، والكلفة الواصلة والكمارك، وأعمار الذمم، والفرق عن Genoa Gov، والسعر والعرض التوضيحي.",
       h1: "الأسئلة الشائعة عن برنامج Genoa للشركات",
       answer:
-        "تجيب هذه الصفحة عن أسئلة يطرحها أصحاب الشركات والمحاسبون في العراق عند اختيار برنامج محاسبة. برنامج Genoa نظام محاسبي للشركات يضم الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الذمم. ويوفر أيضاً ميزتين اختياريتين هما تعدد العملات والكلفة الواصلة، وهما معطّلتان افتراضياً وتُفعَّلان لكل شركة على حدة حسب حاجتها.",
+        "تجيب هذه الصفحة عن أسئلة يطرحها أصحاب الشركات والمحاسبون في العراق عند اختيار برنامج محاسبة. برنامج Genoa نظام محاسبي للشركات يعتمد النظام المحاسبي الموحد وفقاً لمعايير IFRS، ويضم الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الذمم. ويوفر أيضاً ميزتين اختياريتين هما تعدد العملات والكلفة الواصلة، وهما معطّلتان افتراضياً وتُفعَّلان لكل شركة على حدة حسب حاجتها.",
       groups: [
         {
           heading: "عن برنامج Genoa واختيار برنامج المحاسبة",
@@ -1104,8 +1251,8 @@ export const companies: Product = {
               q: "ما هو أفضل برنامج محاسبي للشركات في العراق؟",
               a: [
                 "أفضل برنامج محاسبي لشركتك هو الذي يغطي طريقة عملها الفعلية، ولا يوجد برنامج واحد يناسب كل الشركات.",
-                "عند المقارنة بين البرامج، تحقق من أن البرنامج يجمع الحسابات والمخزن والمبيعات والمشتريات في نظام واحد، وأنه يتابع ذمم الزبائن والمجهزين مع أعمار الديون، وأنه يتعامل مع الدينار العراقي والدولار الأمريكي إذا كانت شركتك تحتاج إلى ذلك، وأنه يضيف الشحن والكمارك إلى كلفة المادة إذا كنت تستورد. واطلب دائماً عرضاً توضيحياً قبل أن تقرر.",
-                "برنامج Genoa يغطي هذه النقاط. فهو يضم الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الذمم، ويوفر تعدد العملات (الدولار إلى جانب الدينار) والكلفة الواصلة كميزتين اختياريتين، معطّلتين افتراضياً، وتُفعَّلان لكل شركة على حدة. ويمكنك حجز عرض توضيحي لتحكم بنفسك.",
+                "عند المقارنة بين البرامج، تحقق من أن البرنامج يعمل وفق النظام المحاسبي الموحد ومعايير IFRS، وأنه يجمع الحسابات والمخزن والمبيعات والمشتريات في نظام واحد، وأنه يتابع ذمم الزبائن والمجهزين مع أعمار الديون، وأنه يتعامل مع الدينار العراقي والدولار الأمريكي إذا كانت شركتك تحتاج إلى ذلك، وأنه يضيف الشحن والكمارك إلى كلفة المادة إذا كنت تستورد. واطلب دائماً عرضاً توضيحياً قبل أن تقرر.",
+                "برنامج Genoa يغطي هذه النقاط. فهو يعتمد النظام المحاسبي الموحد وفقاً لمعايير IFRS، ويضم الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الذمم، ويوفر تعدد العملات (الدولار إلى جانب الدينار) والكلفة الواصلة كميزتين اختياريتين، معطّلتين افتراضياً، وتُفعَّلان لكل شركة على حدة. ويمكنك حجز عرض توضيحي لتحكم بنفسك.",
               ],
             },
             {
@@ -1120,6 +1267,20 @@ export const companies: Product = {
               a: [
                 "يضم برنامج Genoa أربع وحدات أساسية: الحسابات، والمخازن، والمبيعات والمشتريات، وذمم الزبائن والمجهزين مع أعمار الذمم.",
                 "ويوفر أيضاً ميزتين اختياريتين: تعدد العملات (الدولار الأمريكي إلى جانب الدينار العراقي) والكلفة الواصلة (إضافة الشحن والكمارك إلى كلفة المادة). والميزتان معطّلتان افتراضياً، وتُفعَّلان لكل شركة على حدة حسب حاجتها.",
+              ],
+            },
+            {
+              q: "هل يعمل برنامج Genoa وفق النظام المحاسبي الموحد ومعايير IFRS؟",
+              a: [
+                "نعم. يعتمد Genoa النظام المحاسبي الموحد وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS).",
+                "ويعمل هذا الإطار في الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين، لأنها كلها في برنامج واحد. وتجد التفاصيل في صفحة النظام المحاسبي الموحد وIFRS.",
+              ],
+            },
+            {
+              q: "هل يستخدم برنامج Genoa الذكاء الاصطناعي؟",
+              a: [
+                "تقدّم Genoa Systems حلولاً مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي الموجّه للأعمال المحاسبية والمالية.",
+                "لمعرفة ما يتوفر من هذه الحلول في Genoa وكيف يناسب عمل شركتك، احجز عرضاً توضيحياً.",
               ],
             },
             {
@@ -1206,7 +1367,7 @@ export const companies: Product = {
         "Straight answers about Genoa for Iraqi companies: modules, dinar and dollar, landed cost and customs, debt ageing, Genoa vs Genoa Gov, pricing and demos.",
       h1: "Frequently asked questions about Genoa",
       answer:
-        "This page answers questions that business owners and accountants in Iraq ask when choosing accounting software. Genoa is accounting software for companies, covering accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. It also offers two optional features, multi-currency and landed cost, which are off by default and switched on per organisation.",
+        "This page answers questions that business owners and accountants in Iraq ask when choosing accounting software. Genoa is accounting software for companies that follows the Unified Accounting System in line with IFRS, covering accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. It also offers two optional features, multi-currency and landed cost, which are off by default and switched on per organisation.",
       groups: [
         {
           heading: "About Genoa and choosing accounting software",
@@ -1215,8 +1376,8 @@ export const companies: Product = {
               q: "What is the best accounting software for companies in Iraq?",
               a: [
                 "The best accounting software for your company is the one that fits how it actually works; no single program suits every business.",
-                "When comparing options, check that the software keeps accounting, inventory, sales and purchasing in one system; that it tracks customer and supplier balances with ageing; that it handles both Iraqi dinars and US dollars if your company needs that; and that it can add freight and customs to item cost if you import. Always ask for a demo before you decide.",
-                "Genoa covers these points. It includes accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing, plus multi-currency (the US dollar alongside the Iraqi dinar) and landed cost as optional features that are off by default and switched on per organisation. You can book a demo and judge for yourself.",
+                "When comparing options, check that the software follows the Unified Accounting System and IFRS; that it keeps accounting, inventory, sales and purchasing in one system; that it tracks customer and supplier balances with ageing; that it handles both Iraqi dinars and US dollars if your company needs that; and that it can add freight and customs to item cost if you import. Always ask for a demo before you decide.",
+                "Genoa covers these points. It follows the Unified Accounting System in line with IFRS and includes accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing, plus multi-currency (the US dollar alongside the Iraqi dinar) and landed cost as optional features that are off by default and switched on per organisation. You can book a demo and judge for yourself.",
               ],
             },
             {
@@ -1231,6 +1392,20 @@ export const companies: Product = {
               a: [
                 "Genoa has four core modules: accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing.",
                 "It also offers two optional features: multi-currency (the US dollar alongside the Iraqi dinar) and landed cost (freight and customs added on top of item cost). Both are off by default and switched on per organisation, according to each company's needs.",
+              ],
+            },
+            {
+              q: "Does Genoa follow the Unified Accounting System and IFRS?",
+              a: [
+                "Yes. Genoa follows the Iraqi Unified Accounting System, in line with International Financial Reporting Standards (IFRS).",
+                "The framework applies across accounting, inventory, sales and purchasing, and customer and supplier ledgers, because they are all in one product. The Unified Accounting System and IFRS page has the details.",
+              ],
+            },
+            {
+              q: "Does Genoa use artificial intelligence?",
+              a: [
+                "Genoa Systems provides financial and accounting solutions built with the latest technology and with AI designed for accounting and financial work.",
+                "To find out which of these solutions are available in Genoa and how they fit your company, book a demo.",
               ],
             },
             {

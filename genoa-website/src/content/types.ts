@@ -138,4 +138,6 @@ export type IconKey =
   | 'book'
   | 'database'
   | 'shield'
-  | 'chart';
+  | 'chart'
+  | 'standard'
+  | 'spark';

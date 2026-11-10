@@ -21,7 +21,7 @@ npm run lighthouse   # needs `npm run preview` running; writes reports/lighthous
 npm run og           # regenerates Open Graph images + icons (needs Playwright)
 ```
 
-`LH_PAGES=key npm run lighthouse` audits 8 representative pages instead of all 42.
+`LH_PAGES=key npm run lighthouse` audits 8 representative pages instead of all 44.
 
 ## Before launch — required
 
@@ -53,7 +53,7 @@ Also before launch:
 ```
 src/config/site.ts        domain, WhatsApp, e-mail, form endpoint
 src/content/types.ts      the content contract (every page is generated from typed data)
-src/content/companies.ts  Genoa: overview, 6 feature pages, FAQ (ar + en)
+src/content/companies.ts  Genoa: overview, 7 feature pages, FAQ (ar + en)
 src/content/government.ts Genoa Gov: overview, 7 feature pages, FAQ (ar + en)
 src/content/pages.ts      home, security & backups, about, contact, 404
 src/content/screenshots.ts  real-screenshot registry (placeholders until filled)

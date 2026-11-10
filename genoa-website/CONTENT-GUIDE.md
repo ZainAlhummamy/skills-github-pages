@@ -9,7 +9,18 @@ contract is `src/content/types.ts`; every page, the JSON-LD, the sitemap and
 Only what the product team has confirmed. Everything else is either left out or
 added to `CLAIMS-TO-VERIFY.md` for the team to confirm before launch.
 
+**Genoa Systems (the company)**
+- Provides financial and accounting solutions built with the latest technology and
+  with AI designed for accounting and financial work. Approved wording:
+  «توفير حلول مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي الموجّه للأعمال المحاسبية والمالية».
+  Use it at company level. Do not describe specific AI capabilities (what the AI does,
+  in which product) until the product team confirms them.
+
 **Genoa (for companies)**
+- Follows the Iraqi Unified Accounting System (النظام المحاسبي الموحد), in line with
+  International Financial Reporting Standards (IFRS). Approved wording:
+  «يعتمد Genoa النظام المحاسبي الموحد وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS)».
+  Say "in line with / وفقاً لـ", never "certified" or "approved by".
 - Accounting.
 - Inventory.
 - Sales and purchasing.
@@ -33,10 +44,12 @@ added to `CLAIMS-TO-VERIFY.md` for the team to confirm before launch.
 - Client names, logos, case studies, testimonials, reviews or ratings.
 - Numbers about the business: customers, offices, users, years, transactions, uptime.
 - Prices, discounts, free trials, licence terms.
-- Certifications, ministry approval, "compliant with ..." or "approved by ...".
+- Certifications, ministry approval, "certified", "approved by ...". (The approved
+  Unified Accounting System / IFRS wording in section 1 is the only standards claim.)
 - Deployment details we have not confirmed: cloud/on-premise, web/desktop/mobile,
   operating systems, hosting location, encryption algorithms, integrations,
-  e-invoicing, payroll, POS, barcode, AI features, API.
+  e-invoicing, payroll, POS, barcode, API, or specific AI capabilities beyond the
+  approved company-level wording.
 - Superlatives presented as fact ("the best", "the number one", "the most secure").
   When a buyer question asks "what is the best ...", answer honestly: explain what to
   look for, then say factually what Genoa / Genoa Gov covers.

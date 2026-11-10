@@ -1112,6 +1112,13 @@ export const government: Product = {
               ],
             },
             {
+              q: "هل يستخدم Genoa Gov الذكاء الاصطناعي؟",
+              a: [
+                "تقدّم Genoa Systems حلولاً مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي الموجّه للأعمال المحاسبية والمالية.",
+                "لمعرفة ما يتوفر من هذه الحلول في Genoa Gov وكيف يناسب عمل قسم الحسابات في دائرتك، احجز عرضاً توضيحياً.",
+              ],
+            },
+            {
               q: "هل بيانات كل دائرة منفصلة عن بيانات الدوائر الأخرى في Genoa Gov؟",
               a: [
                 "نعم، لكل دائرة في Genoa Gov قاعدة بيانات منفصلة خاصة بها.",
@@ -1226,6 +1233,13 @@ export const government: Product = {
               a: [
                 "Yes. Genoa Gov is designed for government accounting offices in Iraq, including the accounts sections of ministry departments and their formations.",
                 "Each department that uses it has its own separate database.",
+              ],
+            },
+            {
+              q: "Does Genoa Gov use artificial intelligence?",
+              a: [
+                "Genoa Systems provides financial and accounting solutions built with the latest technology and with AI designed for accounting and financial work.",
+                "To find out which of these solutions are available in Genoa Gov and how they fit your accounts section, book a demo.",
               ],
             },
             {

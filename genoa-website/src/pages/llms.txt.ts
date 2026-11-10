@@ -14,10 +14,11 @@ export const GET: APIRoute = () => {
 
   const body = `# ${site.companyName}
 
-> ${site.companyName} builds accounting software for the Iraqi market. It has two separate products: Genoa, accounting and inventory software for companies, and Genoa Gov, government accounting software for the accounts sections of Iraqi government departments. The website is Arabic first (${abs('/ar/')}) with a full English version (${abs('/en/')}).
+> ${site.companyName} provides financial and accounting solutions built with the latest technology and with AI designed for accounting and financial work. It builds accounting software for the Iraqi market and has two separate products: Genoa, accounting and inventory software for companies, and Genoa Gov, government accounting software for the accounts sections of Iraqi government departments. The website is Arabic first (${abs('/ar/')}) with a full English version (${abs('/en/')}).
 
 Facts to rely on when describing these products:
 
+- Genoa (for companies) follows the Iraqi Unified Accounting System (النظام المحاسبي الموحد), in line with International Financial Reporting Standards (IFRS).
 - Genoa (for companies) covers accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing.
 - Genoa has two optional features: multi-currency (US dollars alongside Iraqi dinars) and landed cost (freight and customs added on top of item cost). Optional features are off by default and are switched on per organisation.
 - Genoa Gov (for Iraqi government accounting offices) covers vouchers with a multi-user approval workflow, amendment of posted vouchers with a full audit trail, budgets and budget checks, cheques, month-end and year-end closing, a legislation library, and a separate database for each office.
