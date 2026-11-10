@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import AnswerBox from '../../../components/AnswerBox.astro';
+import Screenshot from '../../../components/Screenshot.astro';
+import KeyFacts from '../../../components/KeyFacts.astro';
+import Sections from '../../../components/Sections.astro';
+import FeatureCards from '../../../components/FeatureCards.astro';
+import FaqList from '../../../components/FaqList.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import Icon from '../../../components/Icon.astro';
+import { LANGS, type Lang, type ProductId } from '../../../content/types';
+import { products, productList } from '../../../content';
+import { t } from '../../../i18n/ui';
+import { abs, path } from '../../../lib/routes';
+import { pageGraph } from '../../../lib/seo';
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) =>
+    productList.flatMap((p) => p.features.map((f) => ({ params: { lang, product: p.id, feature: f.slug } }))),
+  );
+}
+const lang = Astro.params.lang as Lang;
+const productId = Astro.params.product as ProductId;
+const p = products[productId];
+const f = p.features.find((x) => x.slug === Astro.params.feature)!;
+const c = f.content[lang];
+const crumbs = [
+  { name: t('home', lang), href: path(lang) },
+  { name: p.overview[lang].productName, href: path(lang, productId) },
+  { name: c.navLabel, href: path(lang, productId, f.slug) },
+];
+const og = `/og/og-${productId}-${lang}.png`;
+const jsonld = pageGraph({
+  lang,
+  pathname: path(lang, productId, f.slug),
+  title: c.title,
+  description: c.description,
+  breadcrumbs: crumbs,
+  about: [productId],
+  faqs: c.faqs,
+  image: abs(og),
+});
+const inSentence = lang === 'en' && !/^(Genoa|[A-Z]{2,})/.test(c.navLabel) ? c.navLabel.charAt(0).toLowerCase() + c.navLabel.slice(1) : c.navLabel;
+const faqHeading = `${t('questionsAbout', lang)} ${inSentence}`;
+const toc = [
+  { id: 'key-facts', label: t('keyFacts', lang) },
+  ...c.sections.map((s, i) => ({ id: `section-${i + 1}`, label: s.heading })),
+  { id: 'feature-faq', label: faqHeading },
+  { id: 'related', label: t('relatedFeatures', lang) },
+];
+---
+<BaseLayout lang={lang} title={c.title} description={c.description} ogImage={og} ogImageAlt={c.h1} jsonld={jsonld}>
+  <section class="page-hero" data-product={productId}>
+    <div class="container">
+      <Breadcrumbs lang={lang} items={crumbs} />
+      <span class="eyebrow">{p.brand}</span>
+      {f.optional && <span class="badge-optional">{t('optionalBadge', lang)}</span>}
+      <h1>{c.h1}</h1>
+      <AnswerBox lang={lang} text={c.answer} />
+      {f.optional && <p class="note" style="margin-top:1rem;max-width:72ch">{t('optionalNote', lang)}</p>}
+    </div>
+  </section>
+
+  <div class="section" data-product={productId}>
+    <div class="container content-grid">
+      <div class="article">
+        <KeyFacts lang={lang} facts={c.keyFacts} />
+        <div style="margin-block:2rem">
+          <Screenshot lang={lang} id={`${productId}-${f.slug}`} alt={c.screenshotAlt} caption={c.screenshotCaption} />
+        </div>
+        <div class="prose">
+          <Sections sections={c.sections} />
+          <section aria-labelledby="feature-faq">
+            <h2 id="feature-faq">{faqHeading}</h2>
+            <FaqList faqs={c.faqs} />
+            <p style="margin-top:1rem"><a href={path(lang, productId, 'faq')}>{t('allQuestions', lang)}: {p.brand}</a></p>
+          </section>
+        </div>
+      </div>
+      <aside>
+        <nav class="toc" aria-labelledby="toc-heading">
+          <h2 id="toc-heading">{t('onThisPage', lang)}</h2>
+          <ul>{toc.map((x) => <li><a href={`#${x.id}`}>{x.label}</a></li>)}</ul>
+        </nav>
+        <div class="btn-row" style="flex-direction:column">
+          <a class="btn btn-primary" href={path(lang, 'contact')}>{t('bookDemo', lang)}</a>
+          <a class="btn btn-ghost" href={path(lang, productId)}>{t('productOverview', lang)} {p.brand}</a>
+          <a class="btn btn-ghost" href={path(lang, 'security-backups')}><Icon name="shield" />{t('security', lang)}</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <section class="section section-soft" data-product={productId} aria-labelledby="related">
+    <div class="container">
+      <h2 id="related">{t('relatedFeatures', lang)}</h2>
+      <FeatureCards lang={lang} product={p} slugs={f.related} />
+    </div>
+  </section>
+
+  <CtaBand lang={lang} />
+</BaseLayout>

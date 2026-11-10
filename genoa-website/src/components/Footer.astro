@@ -1,0 +1,51 @@
+---
+import type { Lang } from '../content/types';
+import { productList } from '../content';
+import { t, otherLang } from '../i18n/ui';
+import { path, swapLang } from '../lib/routes';
+import { site } from '../config/site';
+import Logo from './Logo.astro';
+interface Props { lang: Lang; pathname: string; hasAlternate?: boolean; }
+const { lang, pathname, hasAlternate = true } = Astro.props;
+const other = otherLang(lang);
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <Logo lang={lang} />
+        <p>{t('footerTagline', lang)}</p>
+      </div>
+      {productList.map((p) => (
+        <nav aria-labelledby={`footer-${p.id}`}>
+          <h2 id={`footer-${p.id}`}>{p.id === 'companies' ? t('companies', lang) : t('government', lang)}</h2>
+          <ul>
+            <li><a href={path(lang, p.id)}>{t('productOverview', lang)} {p.brand}</a></li>
+            {p.features.map((f) => (
+              <li><a href={path(lang, p.id, f.slug)}>{f.content[lang].navLabel}</a></li>
+            ))}
+            <li><a href={path(lang, p.id, 'faq')}>{t('faq', lang)}: {p.brand}</a></li>
+          </ul>
+        </nav>
+      ))}
+      <nav aria-labelledby="footer-company">
+        <h2 id="footer-company">{t('footerCompany', lang)}</h2>
+        <ul>
+          <li><a href={path(lang, 'about')}>{t('about', lang)}</a></li>
+          <li><a href={path(lang, 'security-backups')}>{t('security', lang)}</a></li>
+          <li><a href={path(lang, 'contact')}>{t('bookDemo', lang)}</a></li>
+          <li><a href="/sitemap.xml">{t('sitemap', lang)}</a></li>
+          <li><a href="/llms.txt">{t('forAI', lang)}</a></li>
+          <li>
+            <a href={hasAlternate ? swapLang(pathname, other) : path(other)} hreflang={other} lang={other}>{t('switchLang', lang)}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© {year} {site.companyName}. {t('rights', lang)}</span>
+      <span>{t('footerNote', lang)}</span>
+    </div>
+  </div>
+</footer>

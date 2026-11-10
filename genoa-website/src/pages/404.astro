@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { notFound } from '../content/pages';
+import { t } from '../i18n/ui';
+import { path } from '../lib/routes';
+const ar = notFound.ar;
+const en = notFound.en;
+const links = (['ar', 'en'] as const).map((lang) => [
+  { href: path(lang), label: t('home', lang) },
+  { href: path(lang, 'companies'), label: t('companies', lang) },
+  { href: path(lang, 'government'), label: t('government', lang) },
+  { href: path(lang, 'contact'), label: t('bookDemo', lang) },
+]);
+---
+<BaseLayout lang="ar" title={ar.title} description={ar.body} hasAlternate={false} noindex>
+  <section class="section">
+    <div class="container prose">
+      <h1>{ar.h1}</h1>
+      <p>{ar.body}</p>
+      <ul>{links[0].map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+      <div lang="en" dir="ltr" style="margin-top:2.5rem">
+        <h2>{en.h1}</h2>
+        <p>{en.body}</p>
+        <ul>{links[1].map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,87 @@
+---
+import '../styles/global.css';
+import type { Lang } from '../content/types';
+import { dir, ogLocale, otherLang, t } from '../i18n/ui';
+import { abs, alternates } from '../lib/routes';
+import { site } from '../config/site';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  /** Root-relative path of the OG image (1200x630 PNG). */
+  ogImage?: string;
+  ogImageAlt?: string;
+  jsonld?: object;
+  /** false for pages without a translated twin (404). */
+  hasAlternate?: boolean;
+  noindex?: boolean;
+}
+
+const {
+  lang,
+  title,
+  description,
+  ogImage = `/og/og-home-${lang}.png`,
+  ogImageAlt,
+  jsonld,
+  hasAlternate = true,
+  noindex = false,
+} = Astro.props;
+
+const pathname = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const canonical = abs(pathname);
+const other = otherLang(lang);
+const imageUrl = abs(ogImage);
+const imageAlt = ogImageAlt ?? title;
+const fontPreload = lang === 'ar' ? '/fonts/plex-arabic-arabic-400.woff2' : '/fonts/plex-arabic-latin-400.woff2';
+const ld = jsonld ? JSON.stringify(jsonld).replace(/</g, '\\u003c') : null;
+---
+<!doctype html>
+<html lang={lang} dir={dir(lang)}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />}
+    {!noindex && <link rel="canonical" href={canonical} />}
+    {hasAlternate && alternates(pathname).map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.companyName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale(lang)} />
+    {hasAlternate && <meta property="og:locale:alternate" content={ogLocale(other)} />}
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0f1b2d" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="preload" href={fontPreload} as="font" type="font/woff2" crossorigin />
+    {ld && <script type="application/ld+json" set:html={ld} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t('skipToContent', lang)}</a>
+    <Header lang={lang} pathname={pathname} hasAlternate={hasAlternate} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer lang={lang} pathname={pathname} hasAlternate={hasAlternate} />
+  </body>
+</html>

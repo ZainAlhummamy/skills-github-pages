@@ -1,0 +1,25 @@
+---
+/* "/" — Arabic is the default language. Static hosts cannot redirect by
+ * header without extra config, so this page redirects with a meta refresh
+ * (and public/_redirects does a real 301 on Netlify/Cloudflare Pages). */
+import { abs } from '../lib/routes';
+const target = '/ar/';
+---
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Genoa Systems — برامج محاسبة للشركات والدوائر الحكومية في العراق</title>
+    <meta name="description" content="Genoa Systems: Genoa للشركات وGenoa Gov للدوائر الحكومية العراقية. Accounting software for Iraqi companies and government departments." />
+    <link rel="canonical" href={abs(target)} />
+    <link rel="alternate" hreflang="ar" href={abs('/ar/')} />
+    <link rel="alternate" hreflang="en" href={abs('/en/')} />
+    <link rel="alternate" hreflang="x-default" href={abs('/ar/')} />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <p><a href="/ar/">العربية</a> · <a href="/en/" lang="en">English</a></p>
+  </body>
+</html>

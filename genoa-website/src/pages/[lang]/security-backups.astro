@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import AnswerBox from '../../components/AnswerBox.astro';
+import Sections from '../../components/Sections.astro';
+import FeatureCards from '../../components/FeatureCards.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { LANGS, type Lang } from '../../content/types';
+import { products } from '../../content';
+import { security } from '../../content/pages';
+import { t } from '../../i18n/ui';
+import { abs, path } from '../../lib/routes';
+import { pageGraph } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Lang;
+const c = security[lang];
+const crumbs = [
+  { name: t('home', lang), href: path(lang) },
+  { name: t('security', lang), href: path(lang, 'security-backups') },
+];
+const og = `/og/og-home-${lang}.png`;
+const jsonld = pageGraph({
+  lang,
+  pathname: path(lang, 'security-backups'),
+  title: c.title,
+  description: c.description,
+  breadcrumbs: crumbs,
+  about: ['government', 'companies'],
+  image: abs(og),
+});
+---
+<BaseLayout lang={lang} title={c.title} description={c.description} ogImage={og} jsonld={jsonld}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs lang={lang} items={crumbs} />
+      <h1>{c.h1}</h1>
+      <AnswerBox lang={lang} text={c.answer} />
+    </div>
+  </section>
+  <div class="section">
+    <div class="container content-grid">
+      <div class="article prose"><Sections sections={c.sections} /></div>
+      <aside>
+        <nav class="toc" aria-labelledby="toc-heading">
+          <h2 id="toc-heading">{t('onThisPage', lang)}</h2>
+          <ul>{c.sections.map((s, i) => <li><a href={`#section-${i + 1}`}>{s.heading}</a></li>)}</ul>
+        </nav>
+      </aside>
+    </div>
+  </div>
+  <section class="section section-soft" data-product="government" aria-labelledby="related">
+    <div class="container">
+      <h2 id="related">{t('relatedFeatures', lang)}</h2>
+      <FeatureCards lang={lang} product={products.government} slugs={['office-databases', 'voucher-amendments', 'vouchers-approval', 'period-closing']} />
+    </div>
+  </section>
+  <CtaBand lang={lang} />
+</BaseLayout>

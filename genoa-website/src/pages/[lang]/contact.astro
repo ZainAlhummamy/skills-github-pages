@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Icon from '../../components/Icon.astro';
+import { LANGS, type Lang } from '../../content/types';
+import { contact, governorates } from '../../content/pages';
+import { t } from '../../i18n/ui';
+import { abs, path } from '../../lib/routes';
+import { pageGraph } from '../../lib/seo';
+import { site, whatsappLink } from '../../config/site';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Lang;
+const c = contact[lang];
+const F = c.fields;
+const crumbs = [
+  { name: t('home', lang), href: path(lang) },
+  { name: t('bookDemo', lang), href: path(lang, 'contact') },
+];
+const og = `/og/og-home-${lang}.png`;
+const jsonld = pageGraph({
+  lang,
+  pathname: path(lang, 'contact'),
+  title: c.title,
+  description: c.description,
+  pageType: 'ContactPage',
+  breadcrumbs: crumbs,
+  about: ['companies', 'government'],
+  image: abs(og),
+});
+const mode = site.formEndpoint ? 'endpoint' : 'whatsapp';
+---
+<BaseLayout lang={lang} title={c.title} description={c.description} ogImage={og} jsonld={jsonld}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs lang={lang} items={crumbs} />
+      <h1>{c.h1}</h1>
+      <p class="answer">{c.answer}</p>
+      <div class="btn-row">
+        <a class="btn btn-wa" href={whatsappLink(t('whatsappPrefill', lang))} rel="noopener" target="_blank"><Icon name="whatsapp" />{t('whatsapp', lang)}</a>
+        <a class="btn btn-ghost" href="#form-heading">{c.formHeading}</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="section">
+    <div class="container content-grid">
+      <section class="form-card" aria-labelledby="form-heading">
+        <h2 id="form-heading">{c.formHeading}</h2>
+        <form
+          id="demo-form"
+          action={site.formEndpoint || `mailto:${site.email}`}
+          method="post"
+          enctype={site.formEndpoint ? undefined : 'text/plain'}
+          data-mode={mode}
+          data-wa={site.whatsapp}
+          data-intro={c.waMessageIntro}
+          data-opening={c.statusOpening}
+          data-missing={c.statusMissing}
+        >
+          <div class="form-grid">
+            <div class="field">
+              <label for="f-name">{F.name}</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required data-label={F.name} />
+            </div>
+            <div class="field">
+              <label for="f-org">{F.organisation}</label>
+              <input id="f-org" name="organisation" type="text" autocomplete="organization" required data-label={F.organisation} />
+            </div>
+            <div class="field">
+              <label for="f-type">{F.orgType}</label>
+              <select id="f-type" name="organisation_type" required data-label={F.orgType}>
+                {F.orgTypes.map((o) => <option value={o.value}>{o.label}</option>)}
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-product">{F.product}</label>
+              <select id="f-product" name="product" required data-label={F.product}>
+                {F.products.map((o) => <option value={o.value}>{o.label}</option>)}
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-phone">{F.phone}</label>
+              <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" required aria-describedby="f-phone-hint" data-label={F.phone} />
+              <p class="hint" id="f-phone-hint">{F.phoneHint}</p>
+            </div>
+            <div class="field">
+              <label for="f-gov">{F.governorate} <span class="opt">{F.optional}</span></label>
+              <select id="f-gov" name="governorate" data-label={F.governorate}>
+                <option value="">{F.governorateNone}</option>
+                {governorates[lang].map((g) => <option value={g}>{g}</option>)}
+              </select>
+            </div>
+            <div class="field full">
+              <label for="f-email">{F.email} <span class="opt">{F.optional}</span></label>
+              <input id="f-email" name="email" type="email" autocomplete="email" dir="ltr" data-label={F.email} />
+            </div>
+            <div class="field full">
+              <label for="f-msg">{F.message} <span class="opt">{F.optional}</span></label>
+              <textarea id="f-msg" name="message" rows="4" data-label={F.message}></textarea>
+            </div>
+            <div class="hp" aria-hidden="true">
+              <label for="f-hp">Leave empty</label>
+              <input id="f-hp" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+          </div>
+          <p class="hint" style="margin-top:1rem">{c.privacy}</p>
+          <button class="btn btn-primary" type="submit">
+            {mode === 'whatsapp' ? <><Icon name="whatsapp" />{c.submitWhatsapp}</> : c.submitEndpoint}
+          </button>
+          <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+          <noscript><p class="note">{c.noscript}</p></noscript>
+        </form>
+      </section>
+
+      <aside>
+        <section class="form-card" aria-labelledby="direct-heading">
+          <h2 id="direct-heading">{c.directHeading}</h2>
+          <p>{c.directBody}</p>
+          <div class="btn-row" style="flex-direction:column;margin-top:0.5rem">
+            <a class="btn btn-wa" href={whatsappLink(t('whatsappPrefill', lang))} rel="noopener" target="_blank"><Icon name="whatsapp" />{t('whatsapp', lang)}</a>
+            <a class="btn btn-ghost" href={`mailto:${site.email}`}><Icon name="mail" /><span class="ltr">{site.email}</span></a>
+          </div>
+        </section>
+        <section style="margin-top:1.5rem" aria-labelledby="next-heading">
+          <h2 id="next-heading">{c.nextHeading}</h2>
+          <ol>{c.nextSteps.map((s) => <li>{s}</li>)}</ol>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var f = document.getElementById('demo-form');
+      if (!f || f.getAttribute('data-mode') !== 'whatsapp') return;
+      var status = document.getElementById('form-status');
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!f.checkValidity()) {
+          f.reportValidity();
+          status.textContent = f.getAttribute('data-missing');
+          return;
+        }
+        if (f.elements['_gotcha'] && f.elements['_gotcha'].value) return;
+        var lines = [f.getAttribute('data-intro')];
+        f.querySelectorAll('[data-label]').forEach(function (el) {
+          var v = (el.value || '').trim();
+          if (el.tagName === 'SELECT') v = el.value ? el.options[el.selectedIndex].text : '';
+          if (v) lines.push(el.getAttribute('data-label') + ': ' + v);
+        });
+        status.textContent = f.getAttribute('data-opening');
+        window.open('https://wa.me/' + f.getAttribute('data-wa') + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+      });
+    })();
+  </script>
+</BaseLayout>

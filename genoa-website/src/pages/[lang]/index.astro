@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import { LANGS, type Lang } from '../../content/types';
+import { products, productList } from '../../content';
+import { home } from '../../content/pages';
+import { t } from '../../i18n/ui';
+import { path } from '../../lib/routes';
+import { pageGraph } from '../../lib/seo';
+import { abs } from '../../lib/routes';
+import { whatsappLink } from '../../config/site';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Lang;
+const h = home[lang];
+const og = `/og/og-home-${lang}.png`;
+const jsonld = pageGraph({
+  lang,
+  pathname: path(lang),
+  title: h.title,
+  description: h.description,
+  about: ['companies', 'government'],
+  image: abs(og),
+});
+const shot = {
+  ar: {
+    alt: 'صورة توضيحية مؤقتة لواجهة برنامجي Genoa وGenoa Gov — ستُستبدل بلقطة شاشة حقيقية ببيانات تجريبية',
+    caption: 'صورة توضيحية مؤقتة. ستُستبدل بلقطة شاشة حقيقية ببيانات تجريبية.',
+  },
+  en: {
+    alt: 'Placeholder illustration of the Genoa and Genoa Gov interface — to be replaced with a real screenshot using test data',
+    caption: 'Temporary placeholder. It will be replaced with a real screenshot using test data.',
+  },
+}[lang];
+---
+<BaseLayout lang={lang} title={h.title} description={h.description} ogImage={og} jsonld={jsonld}>
+  <section class="page-hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Genoa Systems</span>
+        <h1>{h.h1}</h1>
+        <p class="answer">{h.answer}</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href={path(lang, 'contact')}>{t('bookDemo', lang)}</a>
+          <a class="btn btn-wa" href={whatsappLink(t('whatsappPrefill', lang))} rel="noopener" target="_blank"><Icon name="whatsapp" />{t('whatsapp', lang)}</a>
+        </div>
+      </div>
+      <Screenshot lang={lang} id="home" alt={shot.alt} caption={shot.caption} eager />
+    </div>
+  </section>
+
+  <div class="section">
+    <div class="container product-split">
+      {productList.map((p) => {
+        const card = h.products[p.id];
+        return (
+          <section class="product-card" data-product={p.id} aria-labelledby={`what-${p.id}`}>
+            <span class="tag">{p.id === 'companies' ? t('companies', lang) : t('government', lang)}</span>
+            <h2 id={`what-${p.id}`}>{card.heading}</h2>
+            <p>{card.body}</p>
+            <ul class="module-links">
+              {p.features.map((f) => (
+                <li>
+                  <a href={path(lang, p.id, f.slug)}>
+                    <Icon name={f.icon} />
+                    <span>{f.content[lang].navLabel}</span>
+                    {f.optional && <span class="badge-optional">{t('optionalBadge', lang)}</span>}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a class="btn btn-primary" href={path(lang, p.id)}>{card.cta}</a>
+          </section>
+        );
+      })}
+    </div>
+  </div>
+
+  <section class="section section-soft" aria-labelledby="compare-heading">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="compare-heading">{h.compare.heading}</h2>
+        <p>{h.compare.intro}</p>
+      </div>
+      <div class="table-wrap" role="region" aria-labelledby="compare-heading" tabindex="0">
+        <table class="compare">
+          <thead>
+            <tr>
+              <td></td>
+              <th scope="col">Genoa</th>
+              <th scope="col">Genoa Gov</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">{h.compare.rowLabels.for}</th><td>{h.compare.genoa.for}</td><td>{h.compare.gov.for}</td></tr>
+            <tr><th scope="row">{h.compare.rowLabels.modules}</th><td>{h.compare.genoa.modules}</td><td>{h.compare.gov.modules}</td></tr>
+            <tr><th scope="row">{h.compare.rowLabels.distinctive}</th><td>{h.compare.genoa.distinctive}</td><td>{h.compare.gov.distinctive}</td></tr>
+            <tr>
+              <th scope="row">{h.compare.rowLabels.more}</th>
+              <td><a href={path(lang, 'companies')}>{t('companies', lang)}</a></td>
+              <td><a href={path(lang, 'government')}>{t('government', lang)}</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="principles-heading">
+    <div class="container">
+      <h2 id="principles-heading">{h.principles.heading}</h2>
+      <div class="principles">
+        {h.principles.items.map((it) => (
+          <div>
+            <h3>{it.title}</h3>
+            <p>{it.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="section section-soft">
+    <div class="container product-split">
+      <section class="product-card" aria-labelledby="security-heading">
+        <h2 id="security-heading">{h.security.heading}</h2>
+        <p>{h.security.body}</p>
+        <a class="btn btn-ghost" href={path(lang, 'security-backups')}><Icon name="shield" />{h.security.link}</a>
+      </section>
+      <section class="product-card" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">{h.faq.heading}</h2>
+        <p>{h.faq.body}</p>
+        <ul class="module-links">
+          {productList.map((p) => (
+            <li><a href={path(lang, p.id, 'faq')}><Icon name="book" /><span>{products[p.id].faq[lang].h1}</span></a></li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <CtaBand lang={lang} />
+</BaseLayout>

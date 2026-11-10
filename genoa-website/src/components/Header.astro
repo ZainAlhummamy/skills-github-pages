@@ -1,0 +1,58 @@
+---
+import type { Lang } from '../content/types';
+import { t, otherLang } from '../i18n/ui';
+import { path, swapLang } from '../lib/routes';
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+interface Props { lang: Lang; pathname: string; hasAlternate?: boolean; }
+const { lang, pathname, hasAlternate = true } = Astro.props;
+const other = otherLang(lang);
+const links = [
+  { href: path(lang, 'companies'), label: t('companies', lang) },
+  { href: path(lang, 'government'), label: t('government', lang) },
+  { href: path(lang, 'security-backups'), label: t('securityShort', lang) },
+  { href: path(lang, 'about'), label: t('about', lang) },
+];
+const isCurrent = (href: string) => pathname === href;
+const inSection = (href: string) => pathname !== href && pathname.startsWith(href);
+const altHref = hasAlternate ? swapLang(pathname, other) : path(other);
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <Logo lang={lang} />
+    {['nav', 'menu'].map((kind) => {
+      const list = (
+        <ul class="nav-list">
+          {links.map((l) => (
+            <li>
+              <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined} data-section={inSection(l.href) ? 'true' : undefined}>
+                {l.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a class="lang-switch" href={altHref} hreflang={other} lang={other} title={t('switchLangLabel', lang)}>
+              {t('switchLang', lang)}
+            </a>
+          </li>
+          <li>
+            <a class="btn btn-primary" href={path(lang, 'contact')} aria-current={isCurrent(path(lang, 'contact')) ? 'page' : undefined}>
+              {t('bookDemo', lang)}
+            </a>
+          </li>
+        </ul>
+      );
+      return kind === 'nav' ? (
+        <nav class="nav" aria-label={t('mainNav', lang)}>{list}</nav>
+      ) : (
+        <details class="menu">
+          <summary><Icon name="menu" /><span>{t('menu', lang)}</span></summary>
+          <nav class="menu-panel" aria-label={t('mainNav', lang)}>{list}</nav>
+        </details>
+      );
+    })}
+  </div>
+</header>
+<style>
+  .menu summary :global(svg) { width: 22px; height: 22px; }
+</style>

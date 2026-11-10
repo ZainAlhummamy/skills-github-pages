@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import AnswerBox from '../../../components/AnswerBox.astro';
+import Screenshot from '../../../components/Screenshot.astro';
+import KeyFacts from '../../../components/KeyFacts.astro';
+import Sections from '../../../components/Sections.astro';
+import FeatureCards from '../../../components/FeatureCards.astro';
+import FaqList from '../../../components/FaqList.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import Icon from '../../../components/Icon.astro';
+import { LANGS, type Lang, type ProductId } from '../../../content/types';
+import { products } from '../../../content';
+import { t } from '../../../i18n/ui';
+import { abs, path } from '../../../lib/routes';
+import { pageGraph } from '../../../lib/seo';
+import { whatsappLink } from '../../../config/site';
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) =>
+    (['companies', 'government'] as ProductId[]).map((product) => ({ params: { lang, product } })),
+  );
+}
+const lang = Astro.params.lang as Lang;
+const productId = Astro.params.product as ProductId;
+const p = products[productId];
+const o = p.overview[lang];
+const faq = p.faq[lang];
+const teaser = faq.groups.flatMap((g) => g.faqs).slice(0, 4);
+const hasOptional = p.features.some((f) => f.optional);
+const otherId: ProductId = productId === 'companies' ? 'government' : 'companies';
+const other = products[otherId];
+const crumbs = [
+  { name: t('home', lang), href: path(lang) },
+  { name: o.productName, href: path(lang, productId) },
+];
+const og = `/og/og-${productId}-${lang}.png`;
+const jsonld = pageGraph({
+  lang,
+  pathname: path(lang, productId),
+  title: o.title,
+  description: o.description,
+  breadcrumbs: crumbs,
+  about: [productId],
+  image: abs(og),
+});
+const crossSell = {
+  ar: productId === 'companies' ? 'تبحث عن برنامج لقسم حسابات في دائرة حكومية؟' : 'تبحث عن برنامج محاسبة ومخازن لشركة؟',
+  en: productId === 'companies' ? 'Looking for software for a government accounts section?' : 'Looking for accounting and inventory software for a company?',
+}[lang];
+---
+<BaseLayout lang={lang} title={o.title} description={o.description} ogImage={og} ogImageAlt={o.h1} jsonld={jsonld}>
+  <section class="page-hero" data-product={productId}>
+    <div class="container">
+      <Breadcrumbs lang={lang} items={crumbs} />
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">{productId === 'companies' ? t('companies', lang) : t('government', lang)}</span>
+          <h1>{o.h1}</h1>
+          <AnswerBox lang={lang} text={o.answer} />
+          <div class="btn-row">
+            <a class="btn btn-primary" href={path(lang, 'contact')}>{t('bookDemo', lang)}</a>
+            <a class="btn btn-wa" href={whatsappLink(t('whatsappPrefill', lang))} rel="noopener" target="_blank"><Icon name="whatsapp" />{t('whatsapp', lang)}</a>
+          </div>
+        </div>
+        <Screenshot lang={lang} id={`${productId}-overview`} alt={o.screenshotAlt} caption={o.screenshotCaption} eager />
+      </div>
+    </div>
+  </section>
+
+  <div class="section" data-product={productId}>
+    <div class="container content-grid">
+      <div class="article prose">
+        <Sections sections={[o.whatIs, o.whoFor]} idPrefix="intro" />
+      </div>
+      <aside>
+        <KeyFacts lang={lang} facts={o.keyFacts} />
+      </aside>
+    </div>
+  </div>
+
+  <section class="section section-soft" data-product={productId} aria-labelledby="modules-heading">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="modules-heading">{o.modulesHeading}</h2>
+        <p>{o.modulesIntro}</p>
+      </div>
+      <FeatureCards lang={lang} product={p} />
+      {hasOptional && <p class="note" style="margin-top:1.25rem">{t('optionalNote', lang)}</p>}
+    </div>
+  </section>
+
+  <div class="section">
+    <div class="container article prose">
+      <Sections sections={o.sections} idPrefix="more" />
+    </div>
+  </div>
+
+  <section class="section section-soft" aria-labelledby="faq-teaser">
+    <div class="container prose">
+      <h2 id="faq-teaser">{o.faqTeaserHeading}</h2>
+      <FaqList faqs={teaser} idPrefix="teaser" />
+      <p style="margin-top:1.25rem"><a class="btn btn-ghost" href={path(lang, productId, 'faq')}>{t('allQuestions', lang)}: {p.brand}</a></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="other-product">
+    <div class="container">
+      <div class="product-card" data-product={otherId}>
+        <h2 id="other-product">{crossSell}</h2>
+        <p>{other.overview[lang].answer}</p>
+        <a class="btn btn-primary" href={path(lang, otherId)}>{t('learnMore', lang)}: {other.brand}</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand lang={lang} />
+</BaseLayout>

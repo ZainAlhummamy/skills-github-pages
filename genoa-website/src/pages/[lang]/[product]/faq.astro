@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import AnswerBox from '../../../components/AnswerBox.astro';
+import FaqList from '../../../components/FaqList.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import Icon from '../../../components/Icon.astro';
+import { LANGS, type Lang, type ProductId } from '../../../content/types';
+import { products } from '../../../content';
+import { t } from '../../../i18n/ui';
+import { abs, path } from '../../../lib/routes';
+import { pageGraph } from '../../../lib/seo';
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) =>
+    (['companies', 'government'] as ProductId[]).map((product) => ({ params: { lang, product } })),
+  );
+}
+const lang = Astro.params.lang as Lang;
+const productId = Astro.params.product as ProductId;
+const p = products[productId];
+const faq = p.faq[lang];
+const crumbs = [
+  { name: t('home', lang), href: path(lang) },
+  { name: p.overview[lang].productName, href: path(lang, productId) },
+  { name: t('faq', lang), href: path(lang, productId, 'faq') },
+];
+const og = `/og/og-${productId}-${lang}.png`;
+const jsonld = pageGraph({
+  lang,
+  pathname: path(lang, productId, 'faq'),
+  title: faq.title,
+  description: faq.description,
+  breadcrumbs: crumbs,
+  about: [productId],
+  faqPage: faq.groups.flatMap((g) => g.faqs),
+  image: abs(og),
+});
+---
+<BaseLayout lang={lang} title={faq.title} description={faq.description} ogImage={og} ogImageAlt={faq.h1} jsonld={jsonld}>
+  <section class="page-hero" data-product={productId}>
+    <div class="container">
+      <Breadcrumbs lang={lang} items={crumbs} />
+      <span class="eyebrow">{p.brand}</span>
+      <h1>{faq.h1}</h1>
+      <AnswerBox lang={lang} text={faq.answer} />
+    </div>
+  </section>
+
+  <div class="section" data-product={productId}>
+    <div class="container content-grid">
+      <div class="article prose">
+        {faq.groups.map((g, gi) => (
+          <section aria-labelledby={`group-${gi + 1}`}>
+            <h2 id={`group-${gi + 1}`}>{g.heading}</h2>
+            <FaqList faqs={g.faqs} idPrefix={`g${gi + 1}-q`} />
+          </section>
+        ))}
+      </div>
+      <aside>
+        <nav class="toc" aria-labelledby="toc-heading">
+          <h2 id="toc-heading">{t('onThisPage', lang)}</h2>
+          <ul>{faq.groups.map((g, gi) => <li><a href={`#group-${gi + 1}`}>{g.heading}</a></li>)}</ul>
+        </nav>
+        <nav class="toc" style="margin-top:1rem" aria-labelledby="toc-modules">
+          <h2 id="toc-modules">{t('modules', lang)}</h2>
+          <ul>{p.features.map((f) => <li><a href={path(lang, productId, f.slug)}>{f.content[lang].navLabel}</a></li>)}</ul>
+        </nav>
+        <div class="btn-row" style="flex-direction:column">
+          <a class="btn btn-primary" href={path(lang, 'contact')}>{t('bookDemo', lang)}</a>
+          <a class="btn btn-ghost" href={path(lang, productId)}>{t('productOverview', lang)} {p.brand}</a>
+          <a class="btn btn-ghost" href={path(lang, 'security-backups')}><Icon name="shield" />{t('security', lang)}</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <CtaBand lang={lang} />
+</BaseLayout>

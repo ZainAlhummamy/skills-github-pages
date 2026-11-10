@@ -1,0 +1,17 @@
+---
+import type { KeyFact, Lang } from '../content/types';
+import { t } from '../i18n/ui';
+interface Props { lang: Lang; facts: KeyFact[]; headingId?: string; }
+const { lang, facts, headingId = 'key-facts' } = Astro.props;
+---
+<section aria-labelledby={headingId}>
+  <h2 id={headingId}>{t('keyFacts', lang)}</h2>
+  <dl class="facts">
+    {facts.map((f) => (
+      <div>
+        <dt>{f.label}</dt>
+        <dd>{f.value}</dd>
+      </div>
+    ))}
+  </dl>
+</section>

@@ -1,0 +1,13 @@
+---
+import type { Faq } from '../content/types';
+interface Props { faqs: Faq[]; idPrefix?: string; }
+const { faqs, idPrefix = 'q' } = Astro.props;
+---
+<div class="faq-list">
+  {faqs.map((f, i) => (
+    <article class="faq-item" aria-labelledby={`${idPrefix}-${i + 1}`}>
+      <h3 id={`${idPrefix}-${i + 1}`}>{f.q}</h3>
+      {f.a.map((p) => <p>{p}</p>)}
+    </article>
+  ))}
+</div>

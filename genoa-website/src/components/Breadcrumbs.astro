@@ -1,0 +1,15 @@
+---
+import type { Lang } from '../content/types';
+import { t } from '../i18n/ui';
+interface Props { lang: Lang; items: { name: string; href: string }[]; }
+const { lang, items } = Astro.props;
+---
+<nav class="breadcrumbs" aria-label={t('breadcrumb', lang)}>
+  <ol>
+    {items.map((it, i) => (
+      <li>
+        {i === items.length - 1 ? <span aria-current="page">{it.name}</span> : <a href={it.href}>{it.name}</a>}
+      </li>
+    ))}
+  </ol>
+</nav>

@@ -1,0 +1,30 @@
+---
+import type { Lang } from '../content/types';
+import { t } from '../i18n/ui';
+import { screenshotFor } from '../content/screenshots';
+interface Props {
+  lang: Lang;
+  /** Key such as "companies-inventory"; see src/content/screenshots.ts */
+  id: string;
+  alt: string;
+  caption: string;
+  eager?: boolean;
+}
+const { lang, id, alt, caption, eager = false } = Astro.props;
+const shot = screenshotFor(id);
+---
+<figure class="shot">
+  <img
+    src={shot.src}
+    alt={alt}
+    width={shot.width}
+    height={shot.height}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding="async"
+    fetchpriority={eager ? 'high' : undefined}
+  />
+  <figcaption>
+    {shot.placeholder && <span class="tag">{t('placeholderTag', lang)}</span>}
+    <span>{caption}</span>
+  </figcaption>
+</figure>

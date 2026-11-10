@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import AnswerBox from '../../components/AnswerBox.astro';
+import Sections from '../../components/Sections.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { LANGS, type Lang } from '../../content/types';
+import { productList } from '../../content';
+import { about } from '../../content/pages';
+import { t } from '../../i18n/ui';
+import { abs, path } from '../../lib/routes';
+import { pageGraph } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Lang;
+const c = about[lang];
+const crumbs = [
+  { name: t('home', lang), href: path(lang) },
+  { name: t('about', lang), href: path(lang, 'about') },
+];
+const og = `/og/og-home-${lang}.png`;
+const jsonld = pageGraph({
+  lang,
+  pathname: path(lang, 'about'),
+  title: c.title,
+  description: c.description,
+  pageType: 'AboutPage',
+  breadcrumbs: crumbs,
+  image: abs(og),
+});
+---
+<BaseLayout lang={lang} title={c.title} description={c.description} ogImage={og} jsonld={jsonld}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs lang={lang} items={crumbs} />
+      <h1>{c.h1}</h1>
+      <AnswerBox lang={lang} text={c.answer} />
+    </div>
+  </section>
+  <div class="section">
+    <div class="container article prose"><Sections sections={c.sections} /></div>
+  </div>
+  <div class="section section-soft">
+    <div class="container product-split">
+      {productList.map((p) => (
+        <section class="product-card" data-product={p.id} aria-labelledby={`about-${p.id}`}>
+          <h2 id={`about-${p.id}`}>{p.overview[lang].whatIs.heading}</h2>
+          <p>{p.overview[lang].answer}</p>
+          <a class="btn btn-primary" href={path(lang, p.id)}>{t('learnMore', lang)}: {p.brand}</a>
+        </section>
+      ))}
+    </div>
+  </div>
+  <CtaBand lang={lang} />
+</BaseLayout>
