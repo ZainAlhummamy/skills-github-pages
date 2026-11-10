@@ -6,6 +6,8 @@ import type { L, PageMeta, Section } from './types';
 
 export interface HomeContent extends PageMeta {
   answer: string;
+  /** Short chips under the hero CTAs. Confirmed facts only. */
+  highlights: string[];
   products: {
     companies: { heading: string; body: string; cta: string };
     government: { heading: string; body: string; cta: string };
@@ -32,6 +34,13 @@ export const home: L<HomeContent> = {
     h1: 'برامج محاسبة عراقية للشركات وللدوائر الحكومية',
     answer:
       'Genoa Systems شركة برمجيات تقدّم حلولاً مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي الموجّه للأعمال المحاسبية والمالية، ولها برنامجان محاسبيان منفصلان للسوق العراقي. برنامج Genoa موجّه للشركات، ويعتمد النظام المحاسبي الموحد وفقاً للمعايير الدولية IFRS، ويجمع الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمارها. برنامج Genoa Gov موجّه لأقسام الحسابات في الدوائر الحكومية العراقية، ويغطي المستندات وسلسلة المصادقة والموازنة والصكوك والغلق الشهري والسنوي.',
+    highlights: [
+      'النظام المحاسبي الموحد وفق IFRS',
+      'سلسلة مصادقة متعددة المستخدمين',
+      'سجل تدقيق كامل للتعديلات',
+      'قاعدة بيانات مستقلة لكل دائرة',
+      'الدينار والدولار (اختياري)',
+    ],
     products: {
       companies: {
         heading: 'ما هو Genoa؟',
@@ -110,6 +119,13 @@ export const home: L<HomeContent> = {
     h1: 'Accounting software for Iraqi companies and government departments',
     answer:
       'Genoa Systems is a software company that provides financial and accounting solutions built with the latest technology and with AI designed for accounting and financial work. It has two separate accounting products for the Iraqi market. Genoa is for companies, follows the Unified Accounting System in line with IFRS, and brings together accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. Genoa Gov is for the accounts sections of Iraqi government departments and covers vouchers with multi-user approval, budgets and allocation checks, cheques, and month-end and year-end closing.',
+    highlights: [
+      'Unified Accounting System, in line with IFRS',
+      'Multi-user approval workflow',
+      'Full audit trail for amendments',
+      'A separate database per office',
+      'Dinar and dollar (optional)',
+    ],
     products: {
       companies: {
         heading: 'What is Genoa?',

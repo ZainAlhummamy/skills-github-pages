@@ -129,6 +129,6 @@ Then:
 
 - Real `SITE_URL`, WhatsApp number and e-mail.
 - `CLAIMS-TO-VERIFY.md` reviewed with the product team.
-- Real screenshots taken with test data, real logo (`npm run og` afterwards), `sameAs` profile links in `src/config/site.ts`.
+- Real screenshots taken with test data, `sameAs` profile links in `src/config/site.ts`.
 
 Until all of that is done, deploy with `SITE_NOINDEX=true`.

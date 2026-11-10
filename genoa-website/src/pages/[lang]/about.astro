@@ -45,7 +45,7 @@ const jsonld = pageGraph({
   <div class="section section-soft">
     <div class="container product-split">
       {productList.map((p) => (
-        <section class="product-card" data-product={p.id} aria-labelledby={`about-${p.id}`}>
+        <section class="product-card" data-product={p.id} aria-labelledby={`about-${p.id}`} data-reveal>
           <h2 id={`about-${p.id}`}>{p.overview[lang].whatIs.heading}</h2>
           <p>{p.overview[lang].answer}</p>
           <a class="btn btn-primary" href={path(lang, p.id)}>{t('learnMore', lang)}: {p.brand}</a>

@@ -41,8 +41,10 @@ Also before launch:
 1. Go through **`CLAIMS-TO-VERIFY.md`** with the product team. Every sentence there goes
    slightly beyond the confirmed feature list; confirm it or delete it.
 2. Replace placeholder screenshots (see below) — **test data only**.
-3. Replace the temporary logo mark (`public/favicon.svg`, `src/components/Logo.astro`),
-   then run `npm run og` to regenerate the OG images and icons.
+3. The logo is the Genoa product mark from the Genoa app (`UAS` repo, `Views/Shared/_BrandMark.cshtml`):
+   the lighthouse tower on the blue tile. It lives in `src/components/BrandMark.astro` (header/footer),
+   `public/brand/genoa-mark.svg` (large sizes) and `public/favicon.svg` (the app's favicon). If the
+   mark changes in the app, update those three files and run `npm run og`.
 4. Add real profile URLs (LinkedIn, Facebook, Google Business Profile …) to `site.sameAs`
    in `src/config/site.ts` — they feed `Organization.sameAs` in JSON-LD.
 5. Submit `https://<domain>/sitemap.xml` in Google Search Console and Bing Webmaster Tools.
@@ -86,14 +88,20 @@ CLAIMS-TO-VERIFY.md       sentences the product team must confirm
 
 ## Screenshots
 
-Every screenshot slot currently shows a generated SVG placeholder clearly labelled
-"PLACEHOLDER SCREENSHOT — صورة توضيحية مؤقتة". To swap in a real one:
+Screenshot slots: `companies-overview`, `companies-<feature-slug>`, `government-overview`,
+`government-<feature-slug>` (and `home`, currently unused). A slot without a real screenshot shows a
+generated SVG placeholder labelled "PLACEHOLDER SCREENSHOT — صورة توضيحية مؤقتة".
 
-1. Take the screenshot from a **test company / test office with test data**. Never real client data.
-2. Save as `public/screenshots/<key>.webp` (about 1600×1000). Keys: `home`, `companies-overview`,
-   `companies-<feature-slug>`, `government-overview`, `government-<feature-slug>`.
-3. Register it in `src/content/screenshots.ts`.
-4. Update that page's `screenshotAlt` / `screenshotCaption` so they no longer say "placeholder".
+To add real screenshots (from the software, with **fictional demo data only** — never client data):
+
+1. Capture them at 1440×900 and name each file after its slot, e.g. `companies-inventory.png`.
+2. Optionally add a `*-manifest.json` next to them: `[{ "file": "companies-inventory.png", "descAr": "…", "descEn": "…" }]`
+   — one plain sentence per screen, used for alt text and captions.
+3. Run `npm run screenshots -- <folder>`. Images are converted to WebP (max 1600px) into
+   `public/screenshots/` and registered in `src/content/screenshots.json`.
+4. Rebuild. Real screenshots get a window frame, open at full size on click, carry a
+   "بيانات تجريبية / Demo data" tag, and product pages gain a "شاهد البرنامج" gallery once a
+   product has two or more.
 
 ## Deploying
 

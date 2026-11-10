@@ -29,7 +29,6 @@ Both statements come from you and are used with your exact wording. Three things
 - ⚠️ `contact.nextSteps[1]`: "We show you the software with test data, focusing on the modules you care about." — confirm demos use test data.
 - `contact.nextSteps[2]`: "We … explain what is needed to get started in your organisation."
 - `about.sections[4]`: "Genoa Systems serves companies and government departments in Iraq." — add a city/address if you want it public (it would also go into `Organization.address` in JSON-LD).
-- Branding: the logo mark (`public/favicon.svg`, `src/components/Logo.astro`) is a temporary design. Replace with the real logo, then run `npm run og`.
 
 ## Illustrative numbers
 

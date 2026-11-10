@@ -18,7 +18,11 @@ const faces = `
 @font-face{font-family:P;font-weight:700;src:url(${font('plex-arabic-arabic-700.woff2')})}
 @font-face{font-family:P;font-weight:400;src:url(${font('plex-arabic-latin-400.woff2')});unicode-range:U+0000-00FF,U+2000-206F}
 @font-face{font-family:P;font-weight:700;src:url(${font('plex-arabic-latin-700.woff2')});unicode-range:U+0000-00FF,U+2000-206F}`;
-const logo = readFileSync(pub('favicon.svg'), 'utf8');
+// The Genoa product mark (tile + lighthouse tower), same artwork as the Genoa app.
+const logo = readFileSync(pub('brand/genoa-mark.svg'), 'utf8');
+// The app's own small-size favicon, used for the 32px PNG.
+const favicon = readFileSync(pub('favicon.svg'), 'utf8');
+const sized = (svg, size) => svg.replace(/<svg\b[^>]*>/, (tag) => tag.replace(/\s(width|height)="[^"]*"/g, '').replace('<svg', `<svg width="${size}" height="${size}"`));
 
 const cards = [
   {
@@ -84,9 +88,9 @@ try {
     await page.screenshot({ path: pub(`og/${c.file}.png`), type: 'png' });
     console.log('wrote', `public/og/${c.file}.png`);
   }
-  for (const [file, size] of [['logo-512.png', 512], ['apple-touch-icon.png', 180], ['favicon-32.png', 32]]) {
+  for (const [file, size, svg] of [['logo-512.png', 512, logo], ['apple-touch-icon.png', 180, logo], ['favicon-32.png', 32, favicon]]) {
     const p = await browser.newPage({ viewport: { width: size, height: size }, deviceScaleFactor: 1 });
-    await p.setContent(`<html><body style="margin:0;background:transparent">${logo.replace('<svg ', `<svg width="${size}" height="${size}" `)}</body></html>`);
+    await p.setContent(`<html><body style="margin:0;background:transparent">${sized(svg, size)}</body></html>`);
     await p.screenshot({ path: pub(file), omitBackground: true });
     await p.close();
     console.log('wrote', `public/${file}`);

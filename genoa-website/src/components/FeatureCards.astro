@@ -8,10 +8,10 @@ const { lang, product, slugs } = Astro.props;
 const features = slugs ? slugs.map((s) => product.features.find((f) => f.slug === s)!).filter(Boolean) : product.features;
 ---
 <ul class="cards">
-  {features.map((f) => {
+  {features.map((f, i) => {
     const c = f.content[lang];
     return (
-      <li>
+      <li data-reveal style={`--i:${i % 3}`}>
         <div class="card" data-product={product.id}>
           <span class="icon"><Icon name={f.icon} /></span>
           <h3><a href={path(lang, product.id, f.slug)}>{c.navLabel}</a></h3>

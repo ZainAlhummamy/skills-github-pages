@@ -6,25 +6,30 @@ interface Props {
   lang: Lang;
   /** Key such as "companies-inventory"; see src/content/screenshots.ts */
   id: string;
+  /** Alt text and caption used while the slot is still a placeholder. */
   alt: string;
   caption: string;
   eager?: boolean;
+  /** Smaller caption, used in galleries. */
+  compact?: boolean;
 }
-const { lang, id, alt, caption, eager = false } = Astro.props;
+const { lang, id, alt, caption, eager = false, compact = false } = Astro.props;
 const shot = screenshotFor(id);
+const realAlt = shot.alt?.[lang];
+const altText = shot.placeholder ? alt : realAlt ?? t('realShotNote', lang);
+const captionText = shot.placeholder ? caption : realAlt ? `${realAlt}` : t('realShotNote', lang);
 ---
-<figure class="shot">
-  <img
-    src={shot.src}
-    alt={alt}
-    width={shot.width}
-    height={shot.height}
-    loading={eager ? 'eager' : 'lazy'}
-    decoding="async"
-    fetchpriority={eager ? 'high' : undefined}
-  />
+<figure class:list={['shot', { framed: !shot.placeholder, compact }]}>
+  {shot.placeholder ? (
+    <img src={shot.src} alt={altText} width={shot.width} height={shot.height} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+  ) : (
+    <a class="shot-link" href={shot.src} target="_blank" rel="noopener" title={t('openFullSize', lang)}>
+      <span class="shot-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+      <img src={shot.src} alt={altText} width={shot.width} height={shot.height} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+    </a>
+  )}
   <figcaption>
-    {shot.placeholder && <span class="tag">{t('placeholderTag', lang)}</span>}
-    <span>{caption}</span>
+    <span class:list={['tag', { demo: !shot.placeholder }]}>{shot.placeholder ? t('placeholderTag', lang) : t('demoDataTag', lang)}</span>
+    <span>{captionText}</span>
   </figcaption>
 </figure>

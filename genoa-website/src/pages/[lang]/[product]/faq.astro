@@ -53,7 +53,7 @@ const jsonld = pageGraph({
         {faq.groups.map((g, gi) => (
           <section aria-labelledby={`group-${gi + 1}`}>
             <h2 id={`group-${gi + 1}`}>{g.heading}</h2>
-            <FaqList faqs={g.faqs} idPrefix={`g${gi + 1}-q`} />
+            <FaqList faqs={g.faqs} idPrefix={`g${gi + 1}-q`} collapsible />
           </section>
         ))}
       </div>

@@ -1,0 +1,44 @@
+---
+/* Home hero illustration: a balanced journal entry (Genoa) and a payment
+ * voucher going through approval (Genoa Gov). Decorative, no figures. */
+import type { Lang } from '../content/types';
+import Icon from './Icon.astro';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const T = {
+  ar: {
+    label: 'رسم توضيحي: قيد يومية متوازن في Genoa، ومستند صرف يمر بسلسلة مصادقة في Genoa Gov',
+    entry: 'قيد يومية', account: 'الحساب', dr: 'مدين', cr: 'دائن',
+    rows: ['المخزن', 'المجهزين', 'الصندوق'], total: 'المجموع', balanced: 'متوازن',
+    voucher: 'مستند صرف', chain: ['تدقيق', 'مصادقة', 'ترحيل'], approved: 'مُصادَق', note: 'رسم توضيحي',
+  },
+  en: {
+    label: 'Illustration: a balanced journal entry in Genoa, and a payment voucher going through an approval workflow in Genoa Gov',
+    entry: 'Journal entry', account: 'Account', dr: 'Debit', cr: 'Credit',
+    rows: ['Inventory', 'Suppliers', 'Cash'], total: 'Total', balanced: 'Balanced',
+    voucher: 'Payment voucher', chain: ['Audit', 'Approve', 'Post'], approved: 'Approved', note: 'Illustration',
+  },
+}[lang];
+---
+<figure class="illus illus-ledger" role="img" aria-label={T.label}>
+  <div class="sheet" aria-hidden="true">
+    <div class="sheet-head"><span class="sheet-title">{T.entry}</span><span class="tag tag-genoa">Genoa</span></div>
+    <div class="ledger">
+      <span class="lh">{T.account}</span><span class="lh">{T.dr}</span><span class="lh">{T.cr}</span>
+      <span class="acc">{T.rows[0]}</span><span class="cell"><i class="bar dr" style="--w:92%;--d:.3s"></i></span><span class="cell"></span>
+      <span class="acc">{T.rows[1]}</span><span class="cell"></span><span class="cell"><i class="bar cr" style="--w:61%;--d:.6s"></i></span>
+      <span class="acc">{T.rows[2]}</span><span class="cell"></span><span class="cell"><i class="bar cr" style="--w:31%;--d:.85s"></i></span>
+      <span class="rule2"></span>
+      <span class="acc total">{T.total}</span><span class="cell"><i class="bar tot" style="--w:92%;--d:1.15s"></i></span><span class="cell"><i class="bar tot" style="--w:92%;--d:1.15s"></i></span>
+    </div>
+    <span class="stamp stamp-ok" style="--d:1.7s"><Icon name="check" />{T.balanced}</span>
+  </div>
+  <div class="sheet sheet-mini" aria-hidden="true" style="--d:.7s">
+    <div class="sheet-head"><span class="sheet-title">{T.voucher}</span><span class="tag tag-gov">Genoa Gov</span></div>
+    <ol class="chain">
+      {T.chain.map((c, i) => <li><span class="dot" style={`--d:${1.3 + i * 0.4}s`}><Icon name="check" /></span>{c}</li>)}
+    </ol>
+    <span class="stamp stamp-gov" style="--d:2.6s">{T.approved}</span>
+  </div>
+  <figcaption class="illus-note" aria-hidden="true">{T.note}</figcaption>
+</figure>

@@ -1,0 +1,41 @@
+---
+/* Genoa Gov hero illustration: a payment voucher through a multi-user
+ * approval chain, allocation check, posting and audit trail. Decorative. */
+import type { Lang } from '../content/types';
+import Icon from './Icon.astro';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const T = {
+  ar: {
+    label: 'رسم توضيحي: مستند صرف يمر بسلسلة مصادقة متعددة المستخدمين في Genoa Gov، مع التحقق من كفاية التخصيص وسجل التدقيق',
+    voucher: 'مستند صرف', steps: ['تنظيم', 'تدقيق', 'مصادقة'], example: 'مثال على سلسلة المصادقة',
+    allocation: 'كفاية التخصيص', posted: 'مُرحَّل', trail: 'سجل التدقيق', note: 'رسم توضيحي',
+  },
+  en: {
+    label: 'Illustration: a payment voucher going through a multi-user approval workflow in Genoa Gov, with an allocation check and an audit trail',
+    voucher: 'Payment voucher', steps: ['Prepare', 'Audit', 'Approve'], example: 'Example approval chain',
+    allocation: 'Allocation check', posted: 'Posted', trail: 'Audit trail', note: 'Illustration',
+  },
+}[lang];
+---
+<figure class="illus" role="img" aria-label={T.label}>
+  <div class="sheet" aria-hidden="true">
+    <div class="sheet-head"><span class="sheet-title">{T.voucher}</span><span class="tag tag-gov">Genoa Gov</span></div>
+    <div class="fields">
+      {['74%', '58%', '66%'].map((w, i) => <div><i style={`--w:${i === 1 ? '70%' : '85%'};--d:${0.2 + i * 0.12}s`}></i><i class="v" style={`--w:${w};--d:${0.3 + i * 0.12}s`}></i></div>)}
+    </div>
+    <ol class="chain gov">
+      {T.steps.map((s, i) => <li><span class="dot" style={`--d:${0.9 + i * 0.45}s`}><Icon name="check" /></span>{s}</li>)}
+    </ol>
+    <p class="chain-note">{T.example}</p>
+    <div class="check-row" style="--d:2.3s"><span class="dot ok"><Icon name="check" /></span>{T.allocation}</div>
+    <span class="stamp stamp-post" style="--d:2.8s">{T.posted}</span>
+  </div>
+  <div class="sheet sheet-mini" aria-hidden="true" style="--d:1s">
+    <div class="sheet-head"><span class="sheet-title">{T.trail}</span><Icon name="history" class="head-icon" /></div>
+    <ul class="log">
+      {['72%', '56%', '64%'].map((w, i) => <li style={`--d:${1.5 + i * 0.3}s`}><Icon name="history" /><i style={`--w:${w}`}></i></li>)}
+    </ul>
+  </div>
+  <figcaption class="illus-note" aria-hidden="true">{T.note}</figcaption>
+</figure>

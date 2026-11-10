@@ -84,11 +84,30 @@ const robots = site.noindex
     {ld && <script type="application/ld+json" set:html={ld} />}
   </head>
   <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
     <a class="skip-link" href="#main">{t('skipToContent', lang)}</a>
     <Header lang={lang} pathname={pathname} hasAlternate={hasAlternate} />
     <main id="main" tabindex="-1">
       <slot />
     </main>
     <Footer lang={lang} pathname={pathname} hasAlternate={hasAlternate} />
+    <script is:inline>
+      /* Scroll reveal. Progressive: only elements below the fold are hidden, and
+         only once this script runs; reduced-motion users get no animation. */
+      (function () {
+        if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var vh = window.innerHeight;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+          });
+        }, { rootMargin: '0px 0px -8% 0px' });
+        document.querySelectorAll('[data-reveal]').forEach(function (el) {
+          if (el.getBoundingClientRect().top < vh * 0.92) return;
+          el.classList.add('reveal');
+          io.observe(el);
+        });
+      })();
+    </script>
   </body>
 </html>
