@@ -977,7 +977,9 @@ li + li {
   color: #a9b5ca;
 }
 .site-footer .logo {
+  display: inline-flex;
   color: #fff;
+  margin-bottom: 0.5rem;
 }
 
 .flip-rtl {
