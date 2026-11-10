@@ -41,8 +41,10 @@ Also before launch:
 1. Go through **`CLAIMS-TO-VERIFY.md`** with the product team. Every sentence there goes
    slightly beyond the confirmed feature list; confirm it or delete it.
 2. Replace placeholder screenshots (see below) — **test data only**.
-3. Replace the temporary logo mark (`public/favicon.svg`, `src/components/Logo.astro`),
-   then run `npm run og` to regenerate the OG images and icons.
+3. The logo is the Genoa product mark from the Genoa app (`UAS` repo, `Views/Shared/_BrandMark.cshtml`):
+   the lighthouse tower on the blue tile. It lives in `src/components/BrandMark.astro` (header/footer),
+   `public/brand/genoa-mark.svg` (large sizes) and `public/favicon.svg` (the app's favicon). If the
+   mark changes in the app, update those three files and run `npm run og`.
 4. Add real profile URLs (LinkedIn, Facebook, Google Business Profile …) to `site.sameAs`
    in `src/config/site.ts` — they feed `Organization.sameAs` in JSON-LD.
 5. Submit `https://<domain>/sitemap.xml` in Google Search Console and Bing Webmaster Tools.

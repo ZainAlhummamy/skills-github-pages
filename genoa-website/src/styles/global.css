@@ -196,9 +196,21 @@ li + li {
 .logo:hover {
   color: var(--ink);
 }
-.logo svg {
-  width: 34px;
-  height: 34px;
+.logo-tile {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(135deg, #2563eb, #4338ca);
+  box-shadow: 0 6px 14px rgb(37 99 235 / 28%), inset 0 0 0 1px rgb(255 255 255 / 10%);
+  overflow: hidden;
+}
+.logo .logo-mark {
+  width: 32px;
+  height: 32px;
 }
 .nav {
   margin-inline-start: auto;
