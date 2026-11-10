@@ -40,6 +40,11 @@ const imageAlt = ogImageAlt ?? title;
 const fontSubset = lang === 'ar' ? 'arabic' : 'latin';
 const fontPreloads = [400, 700].map((w) => `/fonts/plex-arabic-${fontSubset}-${w}.woff2`);
 const ld = jsonld ? JSON.stringify(jsonld).replace(/</g, '\\u003c') : null;
+const robots = site.noindex
+  ? 'noindex, nofollow'
+  : noindex
+    ? 'noindex, follow'
+    : 'index, follow, max-image-preview:large, max-snippet:-1';
 ---
 <!doctype html>
 <html lang={lang} dir={dir(lang)}>
@@ -48,7 +53,7 @@ const ld = jsonld ? JSON.stringify(jsonld).replace(/</g, '\\u003c') : null;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {noindex ? <meta name="robots" content="noindex, follow" /> : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />}
+    <meta name="robots" content={robots} />
     {!noindex && <link rel="canonical" href={canonical} />}
     {hasAlternate && alternates(pathname).map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
 

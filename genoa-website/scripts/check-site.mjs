@@ -157,8 +157,10 @@ if (!/^Sitemap: https?:\/\//m.test(robots)) err('/robots.txt', 'no absolute Site
 // Placeholders still in use
 const all = htmlFiles.map((f) => readFileSync(f, 'utf8')).join('\n');
 const placeholderNotes = [];
-if (all.includes('genoa-systems.example')) placeholderNotes.push('SITE_URL / CONTACT_EMAIL are placeholders (genoa-systems.example)');
+if (all.includes('href="https://genoa-systems.example/')) placeholderNotes.push('SITE_URL is a placeholder (https://genoa-systems.example)');
+if (all.includes('info@genoa-systems.example')) placeholderNotes.push('CONTACT_EMAIL is a placeholder (info@genoa-systems.example)');
 if (all.includes('wa.me/9647000000000')) placeholderNotes.push('WHATSAPP_NUMBER is a placeholder (9647000000000)');
+if (all.includes('content="noindex, nofollow"')) placeholderNotes.push('SITE_NOINDEX=true: STAGING build, search engines are blocked (unset it for production)');
 
 console.log(`\nchecked ${pages.size} pages (${[...pages.keys()].filter((p) => p.startsWith('/ar/')).length} Arabic, ${[...pages.keys()].filter((p) => p.startsWith('/en/')).length} English)`);
 if (warnings.length) console.log(`\n${warnings.length} warning(s):\n  ` + warnings.join('\n  '));

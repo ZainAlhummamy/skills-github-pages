@@ -34,6 +34,7 @@ Set these as environment variables at build time (or edit `src/config/site.ts`).
 | `WHATSAPP_NUMBER` | Digits only, international format, e.g. `9647XXXXXXXXX` | `9647000000000` |
 | `CONTACT_EMAIL` | Public sales e-mail | `info@genoa-systems.example` |
 | `FORM_ENDPOINT` | Optional. Form POST target (Formspree, Basin, own API). Empty = form composes a WhatsApp message, nothing is stored | empty |
+| `SITE_NOINDEX` | Staging only. `true` = `noindex, nofollow` on every page and `Disallow: /` in robots.txt. Never set in production | unset |
 
 Also before launch:
 
@@ -95,6 +96,9 @@ Every screenshot slot currently shows a generated SVG placeholder clearly labell
 4. Update that page's `screenshotAlt` / `screenshotCaption` so they no longer say "placeholder".
 
 ## Deploying
+
+**Full deployment brief (hosts, env vars, verification): [`DEPLOY.md`](DEPLOY.md).**
+Requires Node 22.23.4+ (`.nvmrc`). For a staging deploy that search engines must not index, build with `SITE_NOINDEX=true`.
 
 `dist/` is plain static files; any static host works (Netlify, Cloudflare Pages, GitHub Pages,
 S3 + CloudFront, Nginx). `public/_redirects` and `public/_headers` are picked up by Netlify and

@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { abs } from '../lib/routes';
+import { site } from '../config/site';
 
 /* Search engines and AI assistants are explicitly welcome: being read and
  * cited by them is the point of this site. */
@@ -23,6 +24,10 @@ const aiAgents = [
 ];
 
 export const GET: APIRoute = () => {
+  if (site.noindex) {
+    const staging = ['# STAGING build (SITE_NOINDEX=true): crawling disabled.', 'User-agent: *', 'Disallow: /', '', `Sitemap: ${abs('/sitemap.xml')}`, ''].join('\n');
+    return new Response(staging, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+  }
   const body = [
     '# Genoa Systems — https://' + new URL(abs('/')).host,
     '# Search engines and AI assistants are welcome to crawl and cite this site.',

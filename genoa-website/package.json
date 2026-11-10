@@ -20,5 +20,8 @@
     "chrome-launcher": "1.2.3",
     "lighthouse": "13.6.0",
     "typescript": "6.0.3"
+  },
+  "engines": {
+    "node": ">=22.23.4"
   }
 }

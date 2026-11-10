@@ -35,6 +35,12 @@ export const site = {
    */
   formEndpoint: env('FORM_ENDPOINT') ?? '',
 
+  /**
+   * Staging switch. SITE_NOINDEX=true makes every page "noindex, nofollow" and
+   * robots.txt "Disallow: /", so a preview deploy is not indexed. Leave unset in production.
+   */
+  noindex: env('SITE_NOINDEX') === 'true',
+
   /** Social / directory profiles for Organization.sameAs. Add real URLs only. */
   sameAs: [] as string[],
 
