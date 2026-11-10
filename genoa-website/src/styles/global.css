@@ -1817,3 +1817,102 @@ h2.ruled::after {
     transform: none;
   }
 }
+
+/* ---- Real screenshots: window frame, zoom link, demo-data tag ---- */
+.shot.framed .shot-link {
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(15 27 45 / 6%), 0 18px 40px rgb(15 27 45 / 10%);
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s;
+}
+.shot.framed .shot-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1px 2px rgb(15 27 45 / 6%), 0 24px 52px rgb(15 27 45 / 16%);
+}
+.shot.framed img {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.shot-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding-inline: 12px;
+  background: #eef2f8;
+  border-bottom: 1px solid var(--line);
+  direction: ltr;
+}
+.shot-bar i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #cfd6e2;
+}
+.shot .tag.demo {
+  color: var(--gov-ink);
+  background: var(--gov-soft);
+  border-color: #b9e0d9;
+}
+.shot.compact figcaption {
+  font-size: 0.85rem;
+}
+
+/* ---- Product screenshot gallery (scroll-snap, no JS) ---- */
+.gallery-section {
+  overflow: hidden;
+}
+.gallery {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem max(1rem, calc((100% - var(--container)) / 2)) 1.75rem;
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: max(1rem, calc((100% - var(--container)) / 2));
+  scrollbar-width: thin;
+  scrollbar-color: #c3cddc transparent;
+}
+.gallery li {
+  flex: 0 0 min(84vw, 640px);
+  scroll-snap-align: start;
+  margin: 0;
+}
+.gallery-label {
+  display: inline-block;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.gallery-label:hover {
+  color: var(--brand);
+  text-decoration: underline;
+}
+[data-product='government'] .gallery-label:hover {
+  color: var(--gov);
+}
+
+/* ---- Home: inside the software ---- */
+.inside-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+@media (min-width: 900px) {
+  .inside-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.inside-grid h3 {
+  margin-bottom: 0.6rem;
+}
+.gallery .shot img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+}

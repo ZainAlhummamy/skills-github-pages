@@ -1,0 +1,40 @@
+---
+/* Horizontal, scroll-snapping gallery of the real screenshots of one product
+ * (overview + modules). Renders nothing until at least two real screenshots
+ * exist. CSS only, no JavaScript. */
+import type { Lang, Product } from '../content/types';
+import { t } from '../i18n/ui';
+import { path } from '../lib/routes';
+import { hasRealScreenshot } from '../content/screenshots';
+import Screenshot from './Screenshot.astro';
+interface Props { lang: Lang; product: Product; }
+const { lang, product } = Astro.props;
+const items = [
+  { id: `${product.id}-overview`, label: product.overview[lang].productName, href: path(lang, product.id), alt: product.overview[lang].screenshotAlt, caption: product.overview[lang].screenshotCaption },
+  ...product.features.map((f) => ({
+    id: `${product.id}-${f.slug}`,
+    label: f.content[lang].navLabel,
+    href: path(lang, product.id, f.slug),
+    alt: f.content[lang].screenshotAlt,
+    caption: f.content[lang].screenshotCaption,
+  })),
+].filter((it) => hasRealScreenshot(it.id));
+---
+{items.length >= 2 && (
+  <section class="section gallery-section" data-product={product.id} aria-labelledby="gallery-heading">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <h2 id="gallery-heading">{t('galleryHeading', lang)}</h2>
+        <p>{t('galleryIntro', lang)}</p>
+      </div>
+    </div>
+    <ul class="gallery" role="list">
+      {items.map((it, i) => (
+        <li data-reveal style={`--i:${i % 3}`}>
+          <a class="gallery-label" href={it.href}>{it.label}</a>
+          <Screenshot lang={lang} id={it.id} alt={it.alt} caption={it.caption} compact />
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

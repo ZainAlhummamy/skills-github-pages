@@ -39,6 +39,17 @@ export const ui = {
   productOverview: { ar: 'نظرة عامة على', en: 'Overview of' },
   onThisPage: { ar: 'في هذه الصفحة', en: 'On this page' },
   placeholderTag: { ar: 'صورة مؤقتة', en: 'Placeholder' },
+  demoDataTag: { ar: 'بيانات تجريبية', en: 'Demo data' },
+  realShotNote: {
+    ar: 'لقطة شاشة من البرنامج ببيانات تجريبية.',
+    en: 'Screenshot of the software with fictional demo data.',
+  },
+  openFullSize: { ar: 'فتح الصورة بالحجم الكامل', en: 'Open the screenshot at full size' },
+  galleryHeading: { ar: 'شاهد البرنامج', en: 'See the software' },
+  galleryIntro: {
+    ar: 'لقطات شاشة حقيقية من البرنامج، ببيانات تجريبية بالكامل. اضغط على أي صورة لفتحها بالحجم الكامل.',
+    en: 'Real screenshots of the software, with entirely fictional demo data. Select any image to open it at full size.',
+  },
   ctaHeading: {
     ar: 'شاهد البرنامج بنفسك',
     en: 'See the software for yourself',

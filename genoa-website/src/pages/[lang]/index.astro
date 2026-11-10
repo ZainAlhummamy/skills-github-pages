@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroLedger from '../../components/HeroLedger.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import { hasRealScreenshot } from '../../content/screenshots';
 import CtaBand from '../../components/CtaBand.astro';
 import Icon from '../../components/Icon.astro';
 import { LANGS, type Lang } from '../../content/types';
@@ -18,6 +20,9 @@ export function getStaticPaths() {
 const lang = Astro.params.lang as Lang;
 const h = home[lang];
 const og = `/og/og-home-${lang}.png`;
+// Real screenshots for the 'inside the software' pair (shown only when both exist).
+const insideIds = ['companies-overview', hasRealScreenshot('government-vouchers-approval') ? 'government-vouchers-approval' : 'government-overview'];
+const showInside = insideIds.every(hasRealScreenshot);
 const jsonld = pageGraph({
   lang,
   pathname: path(lang),
@@ -73,7 +78,29 @@ const jsonld = pageGraph({
     </div>
   </div>
 
-  <section class="section" style="padding-top:0" aria-labelledby="tech-heading">
+  {showInside && (
+    <section class="section section-soft" aria-labelledby="inside-heading">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <h2 id="inside-heading">{t('galleryHeading', lang)}</h2>
+          <p>{t('galleryIntro', lang)}</p>
+        </div>
+        <div class="inside-grid">
+          {insideIds.map((id, i) => {
+            const pid = id.startsWith('companies') ? 'companies' : 'government';
+            return (
+              <div data-reveal style={`--i:${i}`}>
+                <h3><a href={path(lang, pid)}>{pid === 'companies' ? t('companies', lang) : t('government', lang)}</a></h3>
+                <Screenshot lang={lang} id={id} alt="" caption="" />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section" style={showInside ? undefined : 'padding-top:0'} aria-labelledby="tech-heading">
     <div class="container">
       <div class="tech-card" data-reveal>
         <span class="tech-icon"><Icon name="spark" /></span>

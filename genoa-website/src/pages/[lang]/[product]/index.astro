@@ -4,6 +4,8 @@ import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import AnswerBox from '../../../components/AnswerBox.astro';
 import Screenshot from '../../../components/Screenshot.astro';
 import HeroAgeing from '../../../components/HeroAgeing.astro';
+import ScreensGallery from '../../../components/ScreensGallery.astro';
+import { hasRealScreenshot } from '../../../content/screenshots';
 import HeroApproval from '../../../components/HeroApproval.astro';
 import KeyFacts from '../../../components/KeyFacts.astro';
 import Sections from '../../../components/Sections.astro';
@@ -30,6 +32,7 @@ const o = p.overview[lang];
 const faq = p.faq[lang];
 const teaser = faq.groups.flatMap((g) => g.faqs).slice(0, 4);
 const hasOptional = p.features.some((f) => f.optional);
+const showGallery = [`${productId}-overview`, ...p.features.map((f) => `${productId}-${f.slug}`)].filter(hasRealScreenshot).length >= 2;
 const otherId: ProductId = productId === 'companies' ? 'government' : 'companies';
 const other = products[otherId];
 const crumbs = [
@@ -77,9 +80,11 @@ const crossSell = {
       </div>
       <aside>
         <KeyFacts lang={lang} facts={o.keyFacts} />
-        <div style="margin-top:1.5rem" data-reveal>
-          <Screenshot lang={lang} id={`${productId}-overview`} alt={o.screenshotAlt} caption={o.screenshotCaption} />
-        </div>
+        {!showGallery && (
+          <div style="margin-top:1.5rem" data-reveal>
+            <Screenshot lang={lang} id={`${productId}-overview`} alt={o.screenshotAlt} caption={o.screenshotCaption} />
+          </div>
+        )}
       </aside>
     </div>
   </div>
@@ -94,6 +99,8 @@ const crossSell = {
       {hasOptional && <p class="note" style="margin-top:1.25rem">{t('optionalNote', lang)}</p>}
     </div>
   </section>
+
+  <ScreensGallery lang={lang} product={p} />
 
   <div class="section">
     <div class="container article prose">

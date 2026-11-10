@@ -88,14 +88,20 @@ CLAIMS-TO-VERIFY.md       sentences the product team must confirm
 
 ## Screenshots
 
-Every screenshot slot currently shows a generated SVG placeholder clearly labelled
-"PLACEHOLDER SCREENSHOT — صورة توضيحية مؤقتة". To swap in a real one:
+Screenshot slots: `companies-overview`, `companies-<feature-slug>`, `government-overview`,
+`government-<feature-slug>` (and `home`, currently unused). A slot without a real screenshot shows a
+generated SVG placeholder labelled "PLACEHOLDER SCREENSHOT — صورة توضيحية مؤقتة".
 
-1. Take the screenshot from a **test company / test office with test data**. Never real client data.
-2. Save as `public/screenshots/<key>.webp` (about 1600×1000). Keys: `home`, `companies-overview`,
-   `companies-<feature-slug>`, `government-overview`, `government-<feature-slug>`.
-3. Register it in `src/content/screenshots.ts`.
-4. Update that page's `screenshotAlt` / `screenshotCaption` so they no longer say "placeholder".
+To add real screenshots (from the software, with **fictional demo data only** — never client data):
+
+1. Capture them at 1440×900 and name each file after its slot, e.g. `companies-inventory.png`.
+2. Optionally add a `*-manifest.json` next to them: `[{ "file": "companies-inventory.png", "descAr": "…", "descEn": "…" }]`
+   — one plain sentence per screen, used for alt text and captions.
+3. Run `npm run screenshots -- <folder>`. Images are converted to WebP (max 1600px) into
+   `public/screenshots/` and registered in `src/content/screenshots.json`.
+4. Rebuild. Real screenshots get a window frame, open at full size on click, carry a
+   "بيانات تجريبية / Demo data" tag, and product pages gain a "شاهد البرنامج" gallery once a
+   product has two or more.
 
 ## Deploying
 
