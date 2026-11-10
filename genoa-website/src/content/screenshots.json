@@ -17,6 +17,15 @@
       "en": "Genoa's customer debt ageing report split into days-past-due buckets and reconciled with the customer account balances in the books, using demo data."
     }
   },
+  "companies-inventory": {
+    "src": "/screenshots/companies-inventory.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "شاشة المخزون الحالي في Genoa تعرض كميات الأصناف في كل مخزن مع الحد الأدنى ومتوسط الكلفة والقيمة وتنبيه المخزون المنخفض ببيانات تجريبية.",
+      "en": "Genoa's current stock screen listing item quantities per store with minimum levels, average cost, value and low-stock flags, using demo data."
+    }
+  },
   "companies-multi-currency": {
     "src": "/screenshots/companies-multi-currency.webp",
     "width": 1440,
