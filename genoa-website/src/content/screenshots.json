@@ -1,4 +1,58 @@
 {
+  "companies-accounting": {
+    "src": "/screenshots/companies-accounting.webp",
+    "width": 1440,
+    "height": 960,
+    "alt": {
+      "ar": "قيد يومية مرحّل ومتوازن في Genoa أنشأته فاتورة مبيعات تلقائياً، يقيّد ذمة العميل والمبيعات وكلفة البضاعة المباعة والمخزون مع المبلغ كتابةً.",
+      "en": "A posted, balanced journal entry in Genoa generated automatically by a sales invoice, recording the customer receivable, sales, cost of goods sold and inventory, with the amount in words."
+    }
+  },
+  "companies-customer-supplier-ledgers": {
+    "src": "/screenshots/companies-customer-supplier-ledgers.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "تقرير أعمار ديون العملاء في Genoa موزعاً على فئات الأيام بعد الاستحقاق، مع مطابقته لأرصدة حسابات العملاء في الدفاتر ببيانات تجريبية.",
+      "en": "Genoa's customer debt ageing report split into days-past-due buckets and reconciled with the customer account balances in the books, using demo data."
+    }
+  },
+  "companies-multi-currency": {
+    "src": "/screenshots/companies-multi-currency.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "فاتورة مبيعات مسعّرة بالدولار الأمريكي في Genoa تعرض الأسعار والإجماليات بالدولار مع سعر الصرف والمعادل بالدينار العراقي.",
+      "en": "A sales invoice priced in US dollars in Genoa, showing dollar prices and totals alongside the exchange rate and the Iraqi dinar equivalent."
+    }
+  },
+  "companies-overview": {
+    "src": "/screenshots/companies-overview.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "لوحة التحكم الرئيسية في Genoa لشركة تجارية تجريبية تعرض النقد والذمم المدينة والدائنة وصافي ربح الشهر والتنبيهات والمستندات بانتظار المراجعة.",
+      "en": "Genoa's main dashboard for a demo trading company, showing cash, receivables, payables, this month's net profit, alerts and documents awaiting review."
+    }
+  },
+  "companies-sales-purchasing": {
+    "src": "/screenshots/companies-sales-purchasing.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "فاتورة مبيعات آجلة معتمدة ومدفوعة جزئياً في Genoa مع أصنافها والمبلغ المتبقي وسند القبض والقيد وسند صرف المخزن المرتبطين بها.",
+      "en": "An approved, partly paid credit sales invoice in Genoa with its lines, the remaining balance, and the linked receipt, journal entry and stock issue."
+    }
+  },
+  "companies-unified-accounting-system": {
+    "src": "/screenshots/companies-unified-accounting-system.webp",
+    "width": 1440,
+    "height": 960,
+    "alt": {
+      "ar": "شجرة دليل الحسابات وفق النظام المحاسبي الموحد في Genoa بمستوياتها الخمسة، من الموجودات حتى حسابات مخزون كل مخزن.",
+      "en": "Genoa's chart of accounts tree following the Iraqi Unified Accounting System, from the asset class down to the inventory account of each store, five levels deep."
+    }
+  },
   "government-budgets": {
     "src": "/screenshots/government-budgets.webp",
     "width": 1440,
