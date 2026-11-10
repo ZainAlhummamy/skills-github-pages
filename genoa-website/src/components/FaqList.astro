@@ -1,13 +1,28 @@
 ---
 import type { Faq } from '../content/types';
-interface Props { faqs: Faq[]; idPrefix?: string; }
-const { faqs, idPrefix = 'q' } = Astro.props;
+interface Props {
+  faqs: Faq[];
+  idPrefix?: string;
+  /** Render as accordions (<details>); the first one starts open. Content stays in the HTML for crawlers. */
+  collapsible?: boolean;
+}
+const { faqs, idPrefix = 'q', collapsible = false } = Astro.props;
 ---
 <div class="faq-list">
-  {faqs.map((f, i) => (
-    <article class="faq-item" aria-labelledby={`${idPrefix}-${i + 1}`}>
-      <h3 id={`${idPrefix}-${i + 1}`}>{f.q}</h3>
-      {f.a.map((p) => <p>{p}</p>)}
-    </article>
-  ))}
+  {faqs.map((f, i) =>
+    collapsible ? (
+      <details class="faq-item faq-acc" open={i === 0} data-reveal style={`--i:${i % 4}`}>
+        <summary>
+          <h3 id={`${idPrefix}-${i + 1}`}>{f.q}</h3>
+          <span class="chev" aria-hidden="true"></span>
+        </summary>
+        <div class="faq-body">{f.a.map((p) => <p>{p}</p>)}</div>
+      </details>
+    ) : (
+      <article class="faq-item" aria-labelledby={`${idPrefix}-${i + 1}`} data-reveal style={`--i:${i % 4}`}>
+        <h3 id={`${idPrefix}-${i + 1}`}>{f.q}</h3>
+        {f.a.map((p) => <p>{p}</p>)}
+      </article>
+    ),
+  )}
 </div>

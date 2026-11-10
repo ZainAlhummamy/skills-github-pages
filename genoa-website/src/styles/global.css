@@ -987,3 +987,819 @@ li + li {
     scroll-behavior: auto !important;
   }
 }
+
+/* =====================================================================
+   Motion & accounting visual language
+   - Only transform/opacity are animated (composited, no layout shift).
+   - Everything is disabled under prefers-reduced-motion.
+   - Scroll reveal is progressive: content is only hidden after the
+     script has run, and never above the fold.
+   ===================================================================== */
+
+:root {
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-pop: cubic-bezier(0.3, 1.45, 0.5, 1);
+  --amber: #b7791f;
+  interpolate-size: allow-keywords;
+}
+
+/* ---- Ledger-paper hero background ---- */
+.page-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 33px, rgb(23 70 162 / 7%) 33px 34px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 95%);
+  mask-image: linear-gradient(to bottom, #000 35%, transparent 95%);
+  pointer-events: none;
+}
+.page-hero::after {
+  /* the double margin rule of an accounting ledger */
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: max(0.5rem, calc((100% - var(--container)) / 2 - 2.25rem));
+  width: 6px;
+  border-inline: 1px solid rgb(180 35 24 / 22%);
+  z-index: -1;
+  pointer-events: none;
+}
+.page-hero[data-product='government']::before {
+  background-image: repeating-linear-gradient(to bottom, transparent 0 33px, rgb(11 110 99 / 8%) 33px 34px);
+}
+
+/* ---- Double rule under section headings (an accountant's "final total") ---- */
+:is(.section-head, .article section) > h2::after,
+h2.ruled::after {
+  content: '';
+  display: block;
+  width: 3.25rem;
+  height: 6px;
+  margin-top: 0.55rem;
+  border-block: 2px solid var(--brand);
+  transform-origin: left center;
+}
+[dir='rtl'] :is(.section-head, .article section) > h2::after,
+[dir='rtl'] h2.ruled::after {
+  transform-origin: right center;
+}
+[data-product='government'] :is(.section-head, .article section) > h2::after,
+[data-product='government'] h2.ruled::after {
+  border-color: var(--gov);
+}
+
+/* ---- Buttons ---- */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.18s var(--ease-out), box-shadow 0.2s, background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgb(15 27 45 / 14%);
+}
+.btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+.btn-primary::after,
+.btn-wa::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 24%) 50%, transparent 70%);
+  transform: translateX(-130%);
+  transition: transform 0.7s var(--ease-out);
+  pointer-events: none;
+}
+.btn-primary:hover::after,
+.btn-wa:hover::after {
+  transform: translateX(130%);
+}
+
+/* ---- Cards ---- */
+.card {
+  transition: transform 0.25s var(--ease-out), border-color 0.2s, box-shadow 0.25s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgb(15 27 45 / 10%);
+}
+.card .icon {
+  transition: background-color 0.25s, color 0.25s, transform 0.3s var(--ease-pop);
+}
+.card:hover .icon {
+  background: var(--brand);
+  color: #fff;
+  transform: rotate(-6deg) scale(1.06);
+}
+.card[data-product='government']:hover .icon {
+  background: var(--gov);
+}
+.card .more svg {
+  transition: transform 0.25s var(--ease-out);
+}
+.card:hover .more svg {
+  transform: translateX(4px);
+}
+[dir='rtl'] .card:hover .more svg.flip-rtl {
+  transform: scaleX(-1) translateX(4px);
+}
+.product-card {
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s;
+}
+.product-card:hover {
+  box-shadow: 0 14px 34px rgb(15 27 45 / 8%);
+}
+.module-links a {
+  transition: background-color 0.15s, transform 0.2s var(--ease-out);
+}
+.module-links a:hover {
+  transform: translateX(3px);
+}
+[dir='rtl'] .module-links a:hover {
+  transform: translateX(-3px);
+}
+.principles > div {
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s, border-color 0.2s;
+  border-top: 3px solid transparent;
+}
+.principles > div:hover {
+  transform: translateY(-3px);
+  border-top-color: var(--brand);
+  box-shadow: 0 12px 28px rgb(15 27 45 / 8%);
+}
+.compare tbody tr {
+  transition: background-color 0.15s;
+}
+.compare tbody tr:hover {
+  background: #f8fafd;
+}
+.answer-box {
+  border-inline-start-width: 5px;
+}
+
+/* ---- Home highlights (confirmed facts only) ---- */
+.highlights {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.highlights li {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--line);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  box-shadow: 0 1px 2px rgb(15 27 45 / 5%);
+}
+.highlights svg {
+  width: 16px;
+  height: 16px;
+  color: var(--wa);
+  flex: none;
+}
+
+/* ---- Feature hero icon ---- */
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+.hero-meta .eyebrow {
+  margin: 0;
+}
+.hero-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(135deg, var(--brand), var(--brand-ink));
+  box-shadow: 0 8px 20px rgb(23 70 162 / 25%);
+}
+[data-product='government'] .hero-icon {
+  background: linear-gradient(135deg, var(--gov), var(--gov-ink));
+  box-shadow: 0 8px 20px rgb(11 110 99 / 25%);
+}
+.hero-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* ---- Hero illustrations ---- */
+.illus {
+  position: relative;
+  margin: 0;
+  padding-bottom: 7.25rem;
+  padding-inline-end: 1.25rem;
+}
+.sheet {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgb(15 27 45 / 6%), 0 22px 48px rgb(15 27 45 / 11%);
+  padding: 1.1rem 1.25rem 1.4rem;
+  font-size: 0.92rem;
+}
+.sheet-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px dashed #cfd7e3;
+}
+.sheet-title {
+  font-weight: 700;
+  color: var(--ink);
+}
+.sheet-title small {
+  font-weight: 400;
+  color: var(--muted);
+}
+.head-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--muted);
+}
+.tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  direction: ltr;
+  white-space: nowrap;
+}
+.tag-genoa {
+  background: var(--brand-soft);
+  color: var(--brand-ink);
+}
+.tag-gov {
+  background: var(--gov-soft);
+  color: var(--gov-ink);
+}
+.ledger {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  column-gap: 0.9rem;
+  row-gap: 0.6rem;
+  align-items: center;
+}
+.ledger .lh {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--line);
+}
+.ledger .acc {
+  color: var(--ink-2);
+}
+.ledger .acc.total {
+  font-weight: 700;
+  color: var(--ink);
+}
+.ledger .cell {
+  height: 12px;
+  border-radius: 6px;
+  background: var(--soft);
+  overflow: hidden;
+}
+.ledger .rule2 {
+  grid-column: 1 / -1;
+  border-top: 3px double var(--ink);
+  margin-top: 0.15rem;
+}
+.bar {
+  display: block;
+  height: 100%;
+  width: var(--w);
+  border-radius: 6px;
+  transform-origin: left center;
+}
+[dir='rtl'] .bar {
+  transform-origin: right center;
+}
+.bar.dr {
+  background: var(--brand);
+}
+.bar.cr {
+  background: var(--gov);
+}
+.bar.tot {
+  background: var(--ink);
+}
+.stamp {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.25rem 0.75rem;
+  border: 2px solid currentColor;
+  border-radius: 8px;
+  background: rgb(255 255 255 / 90%);
+  transform: rotate(-8deg);
+  letter-spacing: 0.02em;
+}
+.stamp svg {
+  width: 16px;
+  height: 16px;
+}
+.stamp-ok {
+  color: var(--wa);
+  inset-block-end: -1rem;
+  inset-inline-start: 1.25rem;
+}
+.stamp-gov {
+  color: var(--brand-ink);
+  inset-block-end: 0.6rem;
+  inset-inline-start: 50%;
+  margin-inline-start: -2.6rem;
+}
+.sheet-mini:has(.stamp-gov) {
+  padding-bottom: 3.1rem;
+}
+.illus-ageing {
+  padding-bottom: 12.25rem;
+}
+.illus-ledger {
+  padding-bottom: 9.75rem;
+}
+.stamp-post {
+  color: var(--brand-ink);
+  inset-block-start: 3.2rem;
+  inset-inline-end: 1.4rem;
+}
+.sheet-mini {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  width: min(64%, 300px);
+  padding: 0.9rem 1rem 1.1rem;
+  font-size: 0.85rem;
+}
+.chain {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  color: var(--ink-2);
+  font-size: 0.8rem;
+}
+.chain::before,
+.chain::after {
+  content: '';
+  position: absolute;
+  top: 11px;
+  inset-inline: 14px;
+  height: 2px;
+  background: var(--line);
+}
+.chain::after {
+  background: var(--gov);
+  transform-origin: left center;
+}
+[dir='rtl'] .chain::after {
+  transform-origin: right center;
+}
+.chain li {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0;
+}
+.dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--gov);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 0 4px #fff;
+}
+.dot svg {
+  width: 14px;
+  height: 14px;
+}
+.dot.ok {
+  background: var(--wa);
+  box-shadow: none;
+}
+.chain.gov {
+  margin-top: 1.1rem;
+}
+.chain-note {
+  margin: 0.4rem 0 0;
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+}
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  font-weight: 700;
+  color: var(--ink-2);
+}
+.fields {
+  display: grid;
+  gap: 0.55rem;
+}
+.fields div {
+  display: grid;
+  grid-template-columns: 32% 1fr;
+  gap: 0.75rem;
+}
+.fields i,
+.log i,
+.tree i {
+  display: block;
+  height: 10px;
+  border-radius: 5px;
+  background: #e3e8f0;
+  width: var(--w);
+  transform-origin: left center;
+}
+[dir='rtl'] :is(.fields, .log, .tree) i {
+  transform-origin: right center;
+}
+.fields i.v {
+  background: #cbd5e3;
+}
+.ageing {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.9rem;
+  align-items: end;
+  height: 150px;
+  border-bottom: 2px solid var(--ink);
+  padding-top: 0.25rem;
+}
+.ageing .col {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.ageing .col i {
+  display: block;
+  width: 100%;
+  height: var(--h);
+  background: var(--c);
+  border-radius: 8px 8px 3px 3px;
+  transform-origin: center bottom;
+}
+.ageing-labels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.9rem;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.4rem;
+}
+.tree {
+  list-style: none;
+  margin: 0 0 0.9rem;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+.tree li {
+  margin: 0;
+  padding-inline-start: calc(var(--lvl) * 16px);
+}
+.tree i.lvl0 {
+  background: #b9c6d9;
+}
+.seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--brand-ink);
+  background: var(--brand-soft);
+  border: 1px solid #c8d6f2;
+  border-radius: 8px;
+  padding: 0.2rem 0.55rem;
+}
+.seal svg {
+  width: 14px;
+  height: 14px;
+  color: var(--wa);
+}
+.log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+.log li {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.log svg {
+  width: 16px;
+  height: 16px;
+  color: var(--gov);
+  flex: none;
+}
+.illus-note {
+  position: absolute;
+  inset-block-end: 0.1rem;
+  inset-inline-start: 0;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+@media (max-width: 520px) {
+  .illus {
+    padding-inline-end: 0;
+    padding-bottom: 8.5rem;
+  }
+  .sheet-mini {
+    width: 78%;
+  }
+  .illus-ageing {
+    padding-bottom: 13rem;
+  }
+  .illus-ledger {
+    padding-bottom: 10.5rem;
+  }
+}
+
+/* ---- FAQ accordion (FAQ pages) ---- */
+.faq-acc {
+  padding: 0;
+}
+.faq-acc > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+}
+.faq-acc > summary::-webkit-details-marker {
+  display: none;
+}
+.faq-acc > summary h3 {
+  margin: 0;
+}
+.faq-acc > summary:hover h3 {
+  color: var(--brand-ink);
+}
+.faq-acc .chev {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--soft);
+  position: relative;
+  transition: transform 0.3s var(--ease-out), background-color 0.2s;
+}
+.faq-acc .chev::before,
+.faq-acc .chev::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 2px;
+  margin: -1px 0 0 -6px;
+  background: var(--ink-2);
+  border-radius: 2px;
+}
+.faq-acc .chev::after {
+  transform: rotate(90deg);
+  transition: transform 0.3s var(--ease-out);
+}
+.faq-acc[open] .chev {
+  background: var(--brand-soft);
+}
+.faq-acc[open] .chev::after {
+  transform: rotate(0deg);
+}
+.faq-acc .faq-body {
+  padding: 0 1.25rem 1.1rem;
+}
+.faq-acc[open] {
+  border-color: #c5d2e6;
+  box-shadow: 0 8px 22px rgb(15 27 45 / 6%);
+}
+.faq-acc::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition: block-size 0.35s var(--ease-out), content-visibility 0.35s allow-discrete;
+}
+.faq-acc[open]::details-content {
+  block-size: auto;
+}
+
+/* ---- Reading progress + header shadow (CSS scroll-driven, no JS) ---- */
+.scroll-progress {
+  display: none;
+}
+.site-header::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: -1px;
+  height: 14px;
+  transform: translateY(100%);
+  background: linear-gradient(to bottom, rgb(15 27 45 / 9%), transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---- CTA band ledger lines ---- */
+.cta-band {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(800px 300px at 0% 0%, rgb(43 179 163 / 18%), transparent 60%), var(--ink);
+}
+.cta-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 33px, rgb(255 255 255 / 5%) 33px 34px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Hero illustration choreography (runs once on load) */
+  .illus .bar,
+  .illus .fields i {
+    animation: grow-x 0.8s var(--d, 0s) both var(--ease-out);
+  }
+  .illus .tree i {
+    animation: grow-x 0.6s var(--d, 0s) both var(--ease-out);
+  }
+  .illus .ageing .col i {
+    animation: grow-y 0.9s var(--d, 0s) both var(--ease-out);
+  }
+  .illus .stamp {
+    animation: stamp-in 0.55s var(--d, 0s) both var(--ease-pop);
+  }
+  .illus .sheet-mini {
+    animation: float-in 0.7s var(--d, 0s) both var(--ease-out);
+  }
+  .illus .chain .dot,
+  .illus .seal {
+    animation: pop 0.45s var(--d, 0s) both var(--ease-pop);
+  }
+  .illus .chain::after {
+    animation: grow-x 1.3s 1.2s both linear;
+  }
+  .illus .chain.gov::after {
+    animation: grow-x 1s 0.9s both linear;
+  }
+  .illus .check-row,
+  .illus .log li {
+    animation: float-in 0.5s var(--d, 0s) both var(--ease-out);
+  }
+  .illus .sheet:not(.sheet-mini) {
+    animation: rise 0.7s both var(--ease-out);
+  }
+  .highlights li {
+    animation: float-in 0.5s calc(0.5s + var(--i, 0) * 0.1s) both var(--ease-out);
+  }
+  .hero-icon {
+    animation: pop 0.5s 0.1s both var(--ease-pop);
+  }
+
+  /* Scroll reveal (classes added by the inline script in BaseLayout) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  .reveal.revealed {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+  .reveal > h2::after,
+  .reveal :is(.section-head, section) > h2::after {
+    transform: scaleX(0);
+  }
+  .reveal.revealed > h2::after,
+  .reveal.revealed :is(.section-head, section) > h2::after {
+    transform: scaleX(1);
+    transition: transform 0.7s 0.25s var(--ease-out);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .scroll-progress {
+      display: block;
+      position: fixed;
+      top: 0;
+      inset-inline: 0;
+      height: 3px;
+      z-index: 70;
+      background: linear-gradient(90deg, var(--brand), #2bb3a3);
+      transform-origin: left center;
+      animation: grow-x linear both;
+      animation-timeline: scroll(root);
+    }
+    [dir='rtl'] .scroll-progress {
+      transform-origin: right center;
+      background: linear-gradient(270deg, var(--brand), #2bb3a3);
+    }
+    .site-header::after {
+      animation: fade-in linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 120px;
+    }
+  }
+}
+
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes grow-y {
+  from {
+    transform: scaleY(0);
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+}
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+@keyframes rise {
+  from {
+    transform: translateY(10px);
+  }
+}
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes stamp-in {
+  0% {
+    opacity: 0;
+    transform: scale(1.9) rotate(-16deg);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(0.94) rotate(-7deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(-8deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover,
+  .card:hover,
+  .principles > div:hover,
+  .module-links a:hover {
+    transform: none;
+  }
+}

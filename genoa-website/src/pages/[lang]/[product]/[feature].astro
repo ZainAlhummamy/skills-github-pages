@@ -54,8 +54,11 @@ const toc = [
   <section class="page-hero" data-product={productId}>
     <div class="container">
       <Breadcrumbs lang={lang} items={crumbs} />
-      <span class="eyebrow">{p.brand}</span>
-      {f.optional && <span class="badge-optional">{t('optionalBadge', lang)}</span>}
+      <div class="hero-meta">
+        <span class="hero-icon" aria-hidden="true"><Icon name={f.icon} /></span>
+        <span class="eyebrow">{p.brand}</span>
+        {f.optional && <span class="badge-optional">{t('optionalBadge', lang)}</span>}
+      </div>
       <h1>{c.h1}</h1>
       <AnswerBox lang={lang} text={c.answer} />
       {f.optional && <p class="note" style="margin-top:1rem;max-width:72ch">{t('optionalNote', lang)}</p>}
@@ -66,12 +69,12 @@ const toc = [
     <div class="container content-grid">
       <div class="article">
         <KeyFacts lang={lang} facts={c.keyFacts} />
-        <div style="margin-block:2rem">
+        <div style="margin-block:2rem" data-reveal>
           <Screenshot lang={lang} id={`${productId}-${f.slug}`} alt={c.screenshotAlt} caption={c.screenshotCaption} />
         </div>
         <div class="prose">
           <Sections sections={c.sections} />
-          <section aria-labelledby="feature-faq">
+          <section aria-labelledby="feature-faq" data-reveal>
             <h2 id="feature-faq">{faqHeading}</h2>
             <FaqList faqs={c.faqs} />
             <p style="margin-top:1rem"><a href={path(lang, productId, 'faq')}>{t('allQuestions', lang)}: {p.brand}</a></p>
@@ -94,7 +97,7 @@ const toc = [
 
   <section class="section section-soft" data-product={productId} aria-labelledby="related">
     <div class="container">
-      <h2 id="related">{t('relatedFeatures', lang)}</h2>
+      <h2 id="related" class="ruled" data-reveal>{t('relatedFeatures', lang)}</h2>
       <FeatureCards lang={lang} product={p} slugs={f.related} />
     </div>
   </section>

@@ -3,6 +3,8 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import AnswerBox from '../../../components/AnswerBox.astro';
 import Screenshot from '../../../components/Screenshot.astro';
+import HeroAgeing from '../../../components/HeroAgeing.astro';
+import HeroApproval from '../../../components/HeroApproval.astro';
 import KeyFacts from '../../../components/KeyFacts.astro';
 import Sections from '../../../components/Sections.astro';
 import FeatureCards from '../../../components/FeatureCards.astro';
@@ -63,7 +65,7 @@ const crossSell = {
             <a class="btn btn-wa" href={whatsappLink(t('whatsappPrefill', lang))} rel="noopener" target="_blank"><Icon name="whatsapp" />{t('whatsapp', lang)}</a>
           </div>
         </div>
-        <Screenshot lang={lang} id={`${productId}-overview`} alt={o.screenshotAlt} caption={o.screenshotCaption} eager />
+        {productId === 'companies' ? <HeroAgeing lang={lang} /> : <HeroApproval lang={lang} />}
       </div>
     </div>
   </section>
@@ -75,13 +77,16 @@ const crossSell = {
       </div>
       <aside>
         <KeyFacts lang={lang} facts={o.keyFacts} />
+        <div style="margin-top:1.5rem" data-reveal>
+          <Screenshot lang={lang} id={`${productId}-overview`} alt={o.screenshotAlt} caption={o.screenshotCaption} />
+        </div>
       </aside>
     </div>
   </div>
 
   <section class="section section-soft" data-product={productId} aria-labelledby="modules-heading">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head" data-reveal>
         <h2 id="modules-heading">{o.modulesHeading}</h2>
         <p>{o.modulesIntro}</p>
       </div>
@@ -98,7 +103,7 @@ const crossSell = {
 
   <section class="section section-soft" aria-labelledby="faq-teaser">
     <div class="container prose">
-      <h2 id="faq-teaser">{o.faqTeaserHeading}</h2>
+      <h2 id="faq-teaser" class="ruled" data-reveal>{o.faqTeaserHeading}</h2>
       <FaqList faqs={teaser} idPrefix="teaser" />
       <p style="margin-top:1.25rem"><a class="btn btn-ghost" href={path(lang, productId, 'faq')}>{t('allQuestions', lang)}: {p.brand}</a></p>
     </div>
@@ -106,7 +111,7 @@ const crossSell = {
 
   <section class="section" aria-labelledby="other-product">
     <div class="container">
-      <div class="product-card" data-product={otherId}>
+      <div class="product-card" data-product={otherId} data-reveal>
         <h2 id="other-product">{crossSell}</h2>
         <p>{other.overview[lang].answer}</p>
         <a class="btn btn-primary" href={path(lang, otherId)}>{t('learnMore', lang)}: {other.brand}</a>
