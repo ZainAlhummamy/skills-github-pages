@@ -252,7 +252,7 @@ export const security: L<ArticleContent> = {
       {
         heading: 'هل يحتوي هذا الموقع على بيانات زبائننا؟',
         body: [
-          'لا. هذا الموقع صفحات ثابتة لا تتصل بأي قاعدة بيانات، ولا يحتوي على أسماء زبائن أو أرقام عنهم أو شهادات. صور الشاشات الحالية توضيحية مؤقتة، وأي لقطة شاشة حقيقية تُضاف لاحقاً ستستخدم بيانات تجريبية فقط.',
+          'لا. هذا الموقع صفحات ثابتة لا تتصل بأي قاعدة بيانات، ولا يحتوي على أسماء زبائن أو أرقام عنهم أو شهادات. لقطات الشاشة المعروضة مأخوذة من البرنامج نفسه ببيانات تجريبية بالكامل، وما لم تتوفر له لقطة بعد يظهر كصورة مؤقتة معلَّمة بوضوح.',
           'نموذج طلب العرض التوضيحي لا يحفظ بياناتك على هذا الموقع، بل يرسلها إلينا لنتواصل معك. ولا يستخدم الموقع أدوات تتبّع أو إعلانات.',
         ],
       },
@@ -319,7 +319,7 @@ export const security: L<ArticleContent> = {
       {
         heading: 'Does this website hold any customer data?',
         body: [
-          'No. This website is a set of static pages that does not connect to any database, and it contains no customer names, customer figures or testimonials. The current screenshots are temporary placeholders, and any real screenshot added later will use test data only.',
+          'No. This website is a set of static pages that does not connect to any database, and it contains no customer names, customer figures or testimonials. The screenshots shown are taken from the software itself with entirely fictional demo data, and any slot without one yet shows a clearly marked placeholder.',
           'The demo request form does not store your details on this website; it sends them to us so we can contact you. The website uses no tracking tools or advertising.',
         ],
       },
@@ -378,7 +378,7 @@ export const about: L<ArticleContent> = {
       {
         heading: 'ما الذي لن تجده في هذا الموقع؟',
         body: [
-          'لن تجد أسماء زبائن أو شهادات أو أرقاماً عن عدد المستخدمين. نفضّل أن نعرض البرنامج نفسه في عرض توضيحي على أن ننشر ادعاءات لا تستطيع التحقق منها. صور الشاشات الحالية توضيحية مؤقتة، وستُستبدل بلقطات حقيقية ببيانات تجريبية.',
+          'لن تجد أسماء زبائن أو شهادات أو أرقاماً عن عدد المستخدمين. نفضّل أن نعرض البرنامج نفسه في عرض توضيحي على أن ننشر ادعاءات لا تستطيع التحقق منها. لقطات الشاشة في هذا الموقع مأخوذة من البرنامج نفسه ببيانات تجريبية بالكامل.',
         ],
       },
       {
@@ -423,7 +423,7 @@ export const about: L<ArticleContent> = {
       {
         heading: 'What you will not find on this website',
         body: [
-          'You will not find customer names, testimonials or user counts here. We would rather show you the software itself in a demo than publish claims you cannot check. The current screenshots are temporary placeholders and will be replaced with real screenshots that use test data.',
+          'You will not find customer names, testimonials or user counts here. We would rather show you the software itself in a demo than publish claims you cannot check. The screenshots on this site are taken from the software itself, with entirely fictional demo data.',
         ],
       },
       {
