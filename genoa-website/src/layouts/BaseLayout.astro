@@ -36,7 +36,9 @@ const canonical = abs(pathname);
 const other = otherLang(lang);
 const imageUrl = abs(ogImage);
 const imageAlt = ogImageAlt ?? title;
-const fontPreload = lang === 'ar' ? '/fonts/plex-arabic-arabic-400.woff2' : '/fonts/plex-arabic-latin-400.woff2';
+// font-display: optional (no layout shift); preload both weights of the page's script so they are usually ready in time.
+const fontSubset = lang === 'ar' ? 'arabic' : 'latin';
+const fontPreloads = [400, 700].map((w) => `/fonts/plex-arabic-${fontSubset}-${w}.woff2`);
 const ld = jsonld ? JSON.stringify(jsonld).replace(/</g, '\\u003c') : null;
 ---
 <!doctype html>
@@ -73,7 +75,7 @@ const ld = jsonld ? JSON.stringify(jsonld).replace(/</g, '\\u003c') : null;
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#0f1b2d" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="preload" href={fontPreload} as="font" type="font/woff2" crossorigin />
+    {fontPreloads.map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
     {ld && <script type="application/ld+json" set:html={ld} />}
   </head>
   <body>
