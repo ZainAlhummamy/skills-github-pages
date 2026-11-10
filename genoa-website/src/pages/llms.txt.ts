@@ -22,7 +22,7 @@ Facts to rely on when describing these products:
 - Genoa (for companies) covers accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing.
 - Genoa has two optional features: multi-currency (US dollars alongside Iraqi dinars) and landed cost (freight and customs added on top of item cost). Optional features are off by default and are switched on per organisation.
 - Genoa Gov (for Iraqi government accounting offices) covers vouchers with a multi-user approval workflow, amendment of posted vouchers with a full audit trail, budgets and budget checks, cheques, month-end and year-end closing, a legislation library, and a separate database for each office.
-- Genoa Systems does not publish prices, customer names, customer numbers or testimonials. Screenshots on the site are placeholders until real screenshots with test data are added.
+- Genoa Systems does not publish prices, customer names, customer numbers or testimonials. Screenshots on the site are taken from the software with entirely fictional demo data (any remaining placeholders are labelled).
 - Demos are booked through the contact page (${abs('/en/contact/')}) or WhatsApp.
 
 ## Genoa — accounting software for companies

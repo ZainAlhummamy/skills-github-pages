@@ -1,1 +1,137 @@
-{}
+{
+  "companies-accounting": {
+    "src": "/screenshots/companies-accounting.webp",
+    "width": 1440,
+    "height": 960,
+    "alt": {
+      "ar": "قيد يومية مرحّل ومتوازن في Genoa أنشأته فاتورة مبيعات تلقائياً، يقيّد ذمة العميل والمبيعات وكلفة البضاعة المباعة والمخزون مع المبلغ كتابةً.",
+      "en": "A posted, balanced journal entry in Genoa generated automatically by a sales invoice, recording the customer receivable, sales, cost of goods sold and inventory, with the amount in words."
+    }
+  },
+  "companies-customer-supplier-ledgers": {
+    "src": "/screenshots/companies-customer-supplier-ledgers.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "تقرير أعمار ديون العملاء في Genoa موزعاً على فئات الأيام بعد الاستحقاق، مع مطابقته لأرصدة حسابات العملاء في الدفاتر ببيانات تجريبية.",
+      "en": "Genoa's customer debt ageing report split into days-past-due buckets and reconciled with the customer account balances in the books, using demo data."
+    }
+  },
+  "companies-inventory": {
+    "src": "/screenshots/companies-inventory.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "شاشة المخزون الحالي في Genoa تعرض كميات الأصناف في كل مخزن مع الحد الأدنى ومتوسط الكلفة والقيمة وتنبيه المخزون المنخفض ببيانات تجريبية.",
+      "en": "Genoa's current stock screen listing item quantities per store with minimum levels, average cost, value and low-stock flags, using demo data."
+    }
+  },
+  "companies-multi-currency": {
+    "src": "/screenshots/companies-multi-currency.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "فاتورة مبيعات مسعّرة بالدولار الأمريكي في Genoa تعرض الأسعار والإجماليات بالدولار مع سعر الصرف والمعادل بالدينار العراقي.",
+      "en": "A sales invoice priced in US dollars in Genoa, showing dollar prices and totals alongside the exchange rate and the Iraqi dinar equivalent."
+    }
+  },
+  "companies-overview": {
+    "src": "/screenshots/companies-overview.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "لوحة التحكم الرئيسية في Genoa لشركة تجارية تجريبية تعرض النقد والذمم المدينة والدائنة وصافي ربح الشهر والتنبيهات والمستندات بانتظار المراجعة.",
+      "en": "Genoa's main dashboard for a demo trading company, showing cash, receivables, payables, this month's net profit, alerts and documents awaiting review."
+    }
+  },
+  "companies-sales-purchasing": {
+    "src": "/screenshots/companies-sales-purchasing.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "فاتورة مبيعات آجلة معتمدة ومدفوعة جزئياً في Genoa مع أصنافها والمبلغ المتبقي وسند القبض والقيد وسند صرف المخزن المرتبطين بها.",
+      "en": "An approved, partly paid credit sales invoice in Genoa with its lines, the remaining balance, and the linked receipt, journal entry and stock issue."
+    }
+  },
+  "companies-unified-accounting-system": {
+    "src": "/screenshots/companies-unified-accounting-system.webp",
+    "width": 1440,
+    "height": 960,
+    "alt": {
+      "ar": "شجرة دليل الحسابات وفق النظام المحاسبي الموحد في Genoa بمستوياتها الخمسة، من الموجودات حتى حسابات مخزون كل مخزن.",
+      "en": "Genoa's chart of accounts tree following the Iraqi Unified Accounting System, from the asset class down to the inventory account of each store, five levels deep."
+    }
+  },
+  "government-budgets": {
+    "src": "/screenshots/government-budgets.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "جدول تخصيصات سنة ٢٠٢٦ في Genoa Gov ببيانات تجريبية: تخصيص وزارة المالية والإضافة والتنزيل والتخصيص المعدَّل والمصروف والمتبقي ونسبة الإنجاز لكل حساب.",
+      "en": "The 2026 allocations table in Genoa Gov with demo data, showing each expenditure line's allocation, additions, reductions, revised allocation, spending, remaining allocation and share spent."
+    }
+  },
+  "government-cheques": {
+    "src": "/screenshots/government-cheques.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "تقرير الصكوك الصادرة وغير المسحوبة في Genoa Gov ببيانات تجريبية، يربط كل صك بمستند الصرف الذي صدر عليه والمستفيد والمبلغ وعمره بالأيام.",
+      "en": "The issued-but-uncleared cheques report in Genoa Gov with demo data, linking each cheque to its payment voucher, payee, amount and age in days."
+    }
+  },
+  "government-legislation-library": {
+    "src": "/screenshots/government-legislation-library.webp",
+    "width": 1440,
+    "height": 1060,
+    "alt": {
+      "ar": "المكتبة التشريعية في Genoa Gov ببيانات تجريبية: تعليمات وأدلة وتعاميم نموذجية مع أنواعها وتواريخها والجهات المصدرة وحالتها، ومنها وثيقة ملغاة بتعليمات أحدث.",
+      "en": "The legislation library in Genoa Gov with demo data, listing sample instructions, guides and circulars with their type, date, issuer and status, including one repealed by newer instructions."
+    }
+  },
+  "government-office-databases": {
+    "src": "/screenshots/government-office-databases.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "صفحة إدارة المنصة في Genoa Gov تعرض الوحدات الإنفاقية التجريبية، لكل منها قاعدة بياناتها المستقلة وحالتها وإصدارها وآخر تحديث، دون عرض أي من بياناتها المحاسبية.",
+      "en": "The Genoa Gov platform admin page listing the demo offices, each with its own separate database, status, release and last update, without showing any of their accounting data."
+    }
+  },
+  "government-overview": {
+    "src": "/screenshots/government-overview.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "لوحة معلومات الوحدة الإنفاقية في Genoa Gov ببيانات تجريبية: المتاح من التخصيصات وأرصدة المصارف والسلف المفتوحة والمستندات بانتظار الإجراء وتنفيذ الموازنة.",
+      "en": "The Genoa Gov office dashboard with demo data, showing available allocations, bank book balances, open advances, vouchers awaiting action and budget execution."
+    }
+  },
+  "government-period-closing": {
+    "src": "/screenshots/government-period-closing.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "شاشة إغلاق الشهر في Genoa Gov ببيانات تجريبية تعرض شهر تشرين الأول مغلقاً بعد استيفاء فحوصه: لا مستندات غير مرحَّلة، وشهادات مطابقة المصارف صادرة، والتدقيق الإلكتروني ناجح.",
+      "en": "The month-close screen in Genoa Gov with demo data, showing October closed after all its checks passed: no unposted vouchers, bank reconciliation certificates issued and the data audit passed."
+    }
+  },
+  "government-voucher-amendments": {
+    "src": "/screenshots/government-voucher-amendments.webp",
+    "width": 1440,
+    "height": 1100,
+    "alt": {
+      "ar": "مستند صرف مرحَّل عُدِّل مبلغه في Genoa Gov ببيانات تجريبية، مع سجل التعديلات الذي يعرض الإصدار الأصلي والإصدار المعدَّل وسبب التعديل ومن نفّذ كل خطوة.",
+      "en": "A posted payment voucher whose amount was amended in Genoa Gov with demo data, with its amendment history showing the original and amended versions, the reason and who took each step."
+    }
+  },
+  "government-vouchers-approval": {
+    "src": "/screenshots/government-vouchers-approval.webp",
+    "width": 1440,
+    "height": 900,
+    "alt": {
+      "ar": "شاشة مستند صرف مصادق عليه في Genoa Gov ببيانات تجريبية، تعرض سلسلة المنظم والمدقق وآمر الصرف وخطوة الترحيل التالية.",
+      "en": "An approved payment voucher in Genoa Gov with demo data, showing its maker, auditor and authorizing-officer chain and the posting step that comes next."
+    }
+  }
+}
