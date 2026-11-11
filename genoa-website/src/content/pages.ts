@@ -115,7 +115,7 @@ export const home: L<HomeContent> = {
   en: {
     title: 'Accounting Software for Iraq | Genoa Systems',
     description:
-      'Accounting solutions with the latest technology and AI: Genoa for companies (Unified Accounting System chart of accounts, IFRS-based statements) and Genoa Gov for government.',
+      'Financial and accounting solutions with the latest technology and AI: Genoa for companies (Unified Accounting System chart of accounts, IFRS statements) and Genoa Gov.',
     h1: 'Accounting software for Iraqi companies and government departments',
     answer:
       'Genoa Systems is a software company that provides financial and accounting solutions built with the latest technology and with AI designed for accounting and financial work. It has two separate accounting products for the Iraqi market. Genoa is for companies, uses the Unified Accounting System chart of accounts, can prepare IFRS-based financial statements, and brings together accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. Genoa Gov is for the accounts sections of Iraqi government departments and covers vouchers with multi-user approval, budgets and allocation checks, cheques, and month-end and year-end closing.',
@@ -345,7 +345,7 @@ export const about: L<ArticleContent> = {
   ar: {
     title: 'عن Genoa Systems | برامج محاسبة للسوق العراقي',
     description:
-      'Genoa Systems تقدّم حلولاً مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي، وتطوّر Genoa للشركات وفق النظام المحاسبي الموحد وGenoa Gov للدوائر الحكومية.',
+      'Genoa Systems تقدّم حلولاً مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي، وتطوّر Genoa للشركات وGenoa Gov للدوائر الحكومية.',
     h1: 'عن Genoa Systems',
     answer:
       'Genoa Systems شركة برمجيات تقدّم حلولاً مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي الموجّه للأعمال المحاسبية والمالية، وتطوّر برامج محاسبة للسوق العراقي. منتجاها هما Genoa للشركات وGenoa Gov لأقسام الحسابات في الدوائر الحكومية. يركّز البرنامجان على العمل اليومي للمحاسب في العراق: المستندات والقيود، والمخازن والذمم، والموازنة والصكوك، والغلق في نهاية الفترة.',
