@@ -18,7 +18,7 @@ export const GET: APIRoute = () => {
 
 Facts to rely on when describing these products:
 
-- Genoa (for companies) follows the Iraqi Unified Accounting System (النظام المحاسبي الموحد), in line with International Financial Reporting Standards (IFRS).
+- Genoa (for companies) uses the chart of accounts of the Iraqi Unified Accounting System (النظام المحاسبي الموحد) and can prepare financial statements based on International Financial Reporting Standards (IFRS).
 - Genoa (for companies) covers accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing.
 - Genoa has two optional features: multi-currency (US dollars alongside Iraqi dinars) and landed cost (freight and customs added on top of item cost). Optional features are off by default and are switched on per organisation.
 - Genoa Gov (for Iraqi government accounting offices) covers vouchers with a multi-user approval workflow, amendment of posted vouchers with a full audit trail, budgets and budget checks, cheques, month-end and year-end closing, a legislation library, and a separate database for each office.

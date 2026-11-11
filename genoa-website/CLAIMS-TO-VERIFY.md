@@ -6,7 +6,19 @@ such as "a credit sale shows up in the customer's ledger". **The product team sh
 confirm each one or delete it** (edit the location shown; every location applies to both
 the Arabic and English versions, and the Arabic says the same thing).
 
-Highest-priority items are marked ⚠️ — they describe processes or policies, not features.
+Highest-priority items were marked ⚠️ — they describe processes or policies, not features.
+
+## Settled by the owner, 11 Nov 2026
+
+The five ⚠️ items were answered before launch:
+
+- ✅ **IFRS wording** — reworded everywhere. Genoa uses the Unified Accounting System's chart of accounts and can prepare IFRS-based financial statements (approved wording in `CONTENT-GUIDE.md` §1); the site no longer says it follows the Unified Accounting System "in line with IFRS".
+- ✅ **AI** — the company-level sentence and the two AI FAQs stay as written. Still open: which AI capabilities exist and in which product, so they can be described concretely (concrete descriptions are what AI assistants quote).
+- ✅ **Backups** (`security.answer`, `security.sections[4]`) — confirmed: a written backup plan is agreed with each organisation at setup.
+- ✅ **Demos** (`contact.nextSteps[1]`) — confirmed: demos use test data.
+- ✅ **Privacy** (`contact.privacy`) — true while `FORM_ENDPOINT` is empty, as it is at launch. Reword it if a form service is ever set.
+
+The items below without a ✅ are lower-risk inferences, to review after launch.
 
 ## Found while taking real screenshots (Genoa app, `UAS` repo)
 
@@ -15,24 +27,19 @@ Highest-priority items are marked ⚠️ — they describe processes or policies
 - **Chart of accounts screenshot.** Codes follow the app's own unified chart (`Services/UnifiedChart.cs`: 131 inventory, 132 receivables, 134 cash, 23 current liabilities, 26 equity). The demo company's 134-account tree was imported through the app's Excel import for the screenshot.
 
 ## Unified Accounting System / IFRS and AI (added on request)
-
-Both statements come from you and are used with your exact wording. Three things to confirm:
-
-- ⚠️ **IFRS wording.** The site says "Genoa follows the Iraqi Unified Accounting System, in line with IFRS" (يعتمد النظام المحاسبي الموحد وفقاً لمعايير IFRS). The Iraqi Unified Accounting System and IFRS are separate frameworks, so ask your accountant/auditor to confirm this phrasing describes what Genoa actually does (for example: a UAS chart of accounts plus IFRS-based statements).
-- ⚠️ **AI specifics.** The site uses only the company-level sentence about "latest technology and AI designed for accounting and financial work", plus FAQs ("Does Genoa / Genoa Gov use AI?") that point to a demo. Tell us which AI capabilities exist and in which product, so we can describe them concretely — concrete descriptions are what AI assistants quote.
 - **Genoa Gov.** The Unified Accounting System / IFRS wording was added to Genoa (companies) only, because Iraqi government accounts work under the government accounting system rather than the Unified Accounting System. If Genoa Gov should also mention a standard, give the exact wording.
 - New page `companies.features[unified-accounting-system]` — general description of the Unified Accounting System (sections[0]): "a standard, coded chart of accounts, rules for recording transactions, and formats for financial statements"; IFRS description (sections[1]): "issued by the IASB … rules for recognising, measuring and disclosing items"; sections[2]: "all modules stay within the same accounting framework"; sections[1]: IFRS "matter more and more when dealing with banks and investors" (general statement).
-- `companies.features[accounting].sections[1]`: "Accounting in Genoa is built on a chart of accounts and journal entries, following the Unified Accounting System in line with IFRS."
+- `companies.features[accounting].sections[1]`: "Accounting in Genoa is built on a chart of accounts and journal entries under the Unified Accounting System, and it can prepare IFRS-based financial statements."
 
 ## Shared pages (`src/content/pages.ts`)
 
-- ⚠️ `security.answer` and `security.sections[4]`: "For backups in both Genoa and Genoa Gov, we agree a plan with each organisation at setup: what is backed up, how often, where copies are kept, and how restores are tested." / "When an organisation starts using Genoa or Genoa Gov, we agree a written backup plan with them." — Replace with your actual backup arrangement (who runs backups, frequency, retention, off-site copy, restore testing).
+- ✅ (confirmed 11 Nov 2026) `security.answer` and `security.sections[4]`: "For backups in both Genoa and Genoa Gov, we agree a plan with each organisation at setup: what is backed up, how often, where copies are kept, and how restores are tested." / "When an organisation starts using Genoa or Genoa Gov, we agree a written backup plan with them." — Replace with your actual backup arrangement (who runs backups, frequency, retention, off-site copy, restore testing).
 - `security.sections[1]`: "The person who prepares a voucher is not the only person who approves it." (inferred from the multi-user approval workflow)
 - `security.sections[2]`: "An amendment does not erase what came before it." (inferred from "full audit trail")
 - `security.sections[3]`: "Closing fixes a period's figures once they have been reviewed, so reports and final accounts are built on figures that do not change without the accounts section knowing." (inferred from month/year closing)
 - `security.sections[5]`: "The website uses no tracking tools or advertising." — true of this build. Update it if analytics are added.
-- ⚠️ `contact.privacy`: "This website does not store your details or share them with anyone." — true while `FORM_ENDPOINT` is empty (the form only opens WhatsApp). If you set a form service (Formspree etc.), reword it to name that service.
-- ⚠️ `contact.nextSteps[1]`: "We show you the software with test data, focusing on the modules you care about." — confirm demos use test data.
+- ✅ (confirmed 11 Nov 2026) `contact.privacy`: "This website does not store your details or share them with anyone." — true while `FORM_ENDPOINT` is empty (the form only opens WhatsApp). If you set a form service (Formspree etc.), reword it to name that service.
+- ✅ (confirmed 11 Nov 2026) `contact.nextSteps[1]`: "We show you the software with test data, focusing on the modules you care about." — confirm demos use test data.
 - `contact.nextSteps[2]`: "We … explain what is needed to get started in your organisation."
 - `about.sections[4]`: "Genoa Systems serves companies and government departments in Iraq." — add a city/address if you want it public (it would also go into `Organization.address` in JSON-LD).
 
