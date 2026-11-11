@@ -184,7 +184,7 @@ export const companies: Product = {
           description:
             "يعتمد Genoa للشركات العراقية دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفق معايير IFRS، مع المخازن والمبيعات والذمم.",
           h1: "النظام المحاسبي الموحد وقوائم IFRS المالية في برنامج Genoa",
-          navLabel: "النظام المحاسبي الموحد وIFRS",
+          navLabel: "النظام المحاسبي الموحد وقوائم IFRS",
           cardSummary: "يعتمد Genoa دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS).",
           answer:
             "يعتمد برنامج Genoa للشركات دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS)؛ وهما إطاران منفصلان. فيعمل المحاسب في Genoa بدليل الحسابات الذي يعرفه في العراق، ويُستخدم دليل الحسابات نفسه في البرنامج الذي يضم الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين.",
@@ -247,11 +247,11 @@ export const companies: Product = {
           ],
         },
         en: {
-          title: "Unified Accounting System and IFRS Software | Genoa",
+          title: "Unified Accounting System and IFRS Statements | Genoa",
           description:
             "Genoa uses the Iraqi Unified Accounting System chart of accounts and can prepare IFRS-based financial statements, alongside inventory, sales and ledgers.",
           h1: "The Unified Accounting System and IFRS Statements in Genoa",
-          navLabel: "Unified Accounting System and IFRS",
+          navLabel: "Unified Accounting System and IFRS statements",
           cardSummary:
             "Genoa uses the chart of accounts of the Iraqi Unified Accounting System and can prepare financial statements based on International Financial Reporting Standards (IFRS).",
           answer:
@@ -1273,7 +1273,7 @@ export const companies: Product = {
               q: "هل يعمل برنامج Genoa بالنظام المحاسبي الموحد ومعايير IFRS؟",
               a: [
                 "يعتمد Genoa دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS)؛ وهما إطاران منفصلان.",
-                "ويُستخدم دليل الحسابات نفسه في الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين، لأنها كلها في برنامج واحد. وتجد التفاصيل في صفحة النظام المحاسبي الموحد وIFRS.",
+                "ويُستخدم دليل الحسابات نفسه في الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين، لأنها كلها في برنامج واحد. وتجد التفاصيل في صفحة النظام المحاسبي الموحد وقوائم IFRS.",
               ],
             },
             {
@@ -1398,7 +1398,7 @@ export const companies: Product = {
               q: "Does Genoa work with the Unified Accounting System and IFRS?",
               a: [
                 "Genoa uses the chart of accounts of the Iraqi Unified Accounting System and can prepare financial statements based on International Financial Reporting Standards (IFRS); these are two separate frameworks.",
-                "The same chart of accounts is used across accounting, inventory, sales and purchasing, and customer and supplier ledgers, because they are all in one product. The Unified Accounting System and IFRS page has the details.",
+                "The same chart of accounts is used across accounting, inventory, sales and purchasing, and customer and supplier ledgers, because they are all in one product. The Unified Accounting System and IFRS statements page has the details.",
               ],
             },
             {
