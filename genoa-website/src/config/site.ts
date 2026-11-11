@@ -36,12 +36,17 @@ export const site = {
   formEndpoint: env('FORM_ENDPOINT') ?? '',
 
   /**
-   * Staging switch. SITE_NOINDEX=true makes every page "noindex, nofollow" and
-   * robots.txt "Disallow: /", so a preview deploy is not indexed. Leave unset in production.
+   * Staging switch. SITE_NOINDEX=true makes every page "noindex, nofollow" and adds an
+   * X-Robots-Tag noindex header (astro.config.mjs), so a preview deploy is not indexed; robots.txt
+   * keeps crawlers allowed so they can see it. Leave unset in production (the build fails there).
    */
   noindex: env('SITE_NOINDEX') === 'true',
 
-  /** Social / directory profiles for Organization.sameAs. Add real URLs only. */
+  /**
+   * Social / directory profiles for Organization.sameAs. Add real URLs only.
+   * TODO(owner): the company's official profiles (LinkedIn, Facebook, X, Instagram, ...). Assistants use these to
+   * tie the profiles to this site; leave empty rather than guess.
+   */
   sameAs: [] as string[],
 
   /** Country served. */

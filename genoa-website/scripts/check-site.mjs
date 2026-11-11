@@ -36,6 +36,8 @@ const metaContent = (html, key, val) => {
 
 const pages = new Map();
 let siteOrigin;
+// JSON-LD entities by @id: the url each page gives it, and the first page that did.
+const entityUrls = new Map();
 
 for (const file of htmlFiles) {
   const p = toUrlPath(file);
@@ -97,7 +99,14 @@ for (const file of htmlFiles) {
   for (const b of blocks) {
     try {
       const data = JSON.parse(b);
-      for (const n of data['@graph'] ?? [data]) [].concat(n['@type']).forEach((t) => types.add(t));
+      for (const n of data['@graph'] ?? [data]) {
+        [].concat(n['@type']).forEach((t) => types.add(t));
+        if (n['@id'] && n.url) {
+          const urls = entityUrls.get(n['@id']) ?? new Map();
+          if (!urls.has(n.url)) urls.set(n.url, p);
+          entityUrls.set(n['@id'], urls);
+        }
+      }
     } catch (e) {
       err(p, `invalid JSON-LD: ${e.message}`);
     }
@@ -131,6 +140,12 @@ const dupes = (key) => {
 dupes('title');
 dupes('description');
 
+// One entity, one URL: an @id names the same thing on every page, in both languages, so its url must not change from
+// page to page, or search engines and assistants get two addresses for one company or product.
+for (const [id, urls] of entityUrls) {
+  if (urls.size > 1) err(id, `JSON-LD url differs across pages: ${[...urls].map(([u, p]) => `${u} (on ${p})`).join(', ')}`);
+}
+
 // hreflang reciprocity
 for (const [p, d] of pages) {
   for (const [hl, href] of Object.entries(d.hreflangs)) {
@@ -154,13 +169,80 @@ if (existsSync(join(dist, 'sitemap.xml'))) {
 const robots = existsSync(join(dist, 'robots.txt')) ? readFileSync(join(dist, 'robots.txt'), 'utf8') : '';
 if (!/^Sitemap: https?:\/\//m.test(robots)) err('/robots.txt', 'no absolute Sitemap line');
 
-// Placeholders still in use
+// Placeholders still in use (the values src/config/site.ts falls back to)
+const PLACEHOLDER = { siteUrl: 'https://genoa-systems.example', whatsapp: '9647000000000', email: 'info@genoa-systems.example' };
 const all = htmlFiles.map((f) => readFileSync(f, 'utf8')).join('\n');
 const placeholderNotes = [];
-if (all.includes('href="https://genoa-systems.example/')) placeholderNotes.push('SITE_URL is a placeholder (https://genoa-systems.example)');
-if (all.includes('info@genoa-systems.example')) placeholderNotes.push('CONTACT_EMAIL is a placeholder (info@genoa-systems.example)');
-if (all.includes('wa.me/9647000000000')) placeholderNotes.push('WHATSAPP_NUMBER is a placeholder (9647000000000)');
+if (all.includes(`href="${PLACEHOLDER.siteUrl}/`)) placeholderNotes.push(`SITE_URL is a placeholder (${PLACEHOLDER.siteUrl})`);
+if (all.includes(PLACEHOLDER.email)) placeholderNotes.push(`CONTACT_EMAIL is a placeholder (${PLACEHOLDER.email})`);
+if (all.includes(`wa.me/${PLACEHOLDER.whatsapp}`)) placeholderNotes.push(`WHATSAPP_NUMBER is a placeholder (${PLACEHOLDER.whatsapp})`);
 if (all.includes('content="noindex, nofollow"')) placeholderNotes.push('SITE_NOINDEX=true: STAGING build, search engines are blocked (unset it for production)');
+
+// Cloudflare's own addresses for the site (its production and preview deployments) copy the real domain: _headers must
+// keep them out of search (DEPLOY.md, "Duplicate addresses").
+{
+  const headers = existsSync(join(dist, '_headers')) ? readFileSync(join(dist, '_headers'), 'utf8') : '';
+  for (const host of ['https://:project.pages.dev/*', 'https://:version.:project.pages.dev/*']) {
+    const rule = new RegExp(`^${host.replace(/[.*]/g, '\\$&')}\\s*\\n(\\s+.*\\n)*?\\s+X-Robots-Tag:\\s*noindex`, 'm');
+    if (!rule.test(headers)) err('/_headers', `no X-Robots-Tag: noindex for ${host}`);
+  }
+}
+
+// A staging build (SITE_NOINDEX=true) lets crawlers in, so they read the noindex on every page and in every response's
+// X-Robots-Tag and drop the staging URLs they saw before; "Disallow: /" in robots.txt would hide the noindex from them.
+if (all.includes('content="noindex, nofollow"')) {
+  if (/^Disallow:\s*\/\s*$/m.test(robots)) err('/robots.txt', 'staging build disallows crawling, so crawlers never see the noindex');
+  const headers = existsSync(join(dist, '_headers')) ? readFileSync(join(dist, '_headers'), 'utf8') : '';
+  if (!/^\/\*\s*\n(\s+.*\n)*?\s+X-Robots-Tag:\s*noindex/m.test(headers)) err('/_headers', 'staging build sends no X-Robots-Tag: noindex for /*');
+}
+
+// Production guard (DEPLOY.md, "Production builds"). On Cloudflare Pages' production branch (CF_PAGES_BRANCH=main), or
+// with PRODUCTION=true, what is only a note for a preview build fails the build, so the site can never be launched with
+// placeholders, the staging switch, or pages hidden from search. Preview builds are unchanged.
+const production = process.env.CF_PAGES_BRANCH === 'main' || process.env.PRODUCTION === 'true';
+if (production) {
+  const env = (key) => (process.env[key] ?? '').trim();
+  const fail = (msg) => err('production build', msg);
+  // The address the site is staged on: never the production address, unless the owner decides it is (then take it off).
+  const stagingHosts = ['site.genoasystem.com'];
+  // Cloudflare's own addresses, the staging address, and the names reserved for examples and tests (RFC 2606, 6761).
+  const notProductionHost = (host) =>
+    host.endsWith('.pages.dev') || stagingHosts.includes(host) || host === 'localhost' || /\.(example|test|invalid|localhost)$/.test(host);
+
+  const siteUrl = env('SITE_URL');
+  if (!siteUrl) fail('SITE_URL is not set');
+  else {
+    let host;
+    try {
+      host = new URL(siteUrl).hostname;
+    } catch {
+      fail(`SITE_URL is not a URL: ${siteUrl}`);
+    }
+    if (siteUrl.endsWith('/')) fail(`SITE_URL ends with a slash: ${siteUrl} (give the origin alone, e.g. https://www.example.iq)`);
+    if (siteUrl.replace(/\/$/, '') === PLACEHOLDER.siteUrl) fail(`SITE_URL is the placeholder ${PLACEHOLDER.siteUrl}`);
+    else if (host && notProductionHost(host)) fail(`SITE_URL host ${host} is not a production address`);
+  }
+  for (const [key, placeholder] of [['WHATSAPP_NUMBER', PLACEHOLDER.whatsapp], ['CONTACT_EMAIL', PLACEHOLDER.email]]) {
+    if (!env(key)) fail(`${key} is not set`);
+    else if (env(key) === placeholder) fail(`${key} is the placeholder ${placeholder}`);
+  }
+  if (env('SITE_NOINDEX')) fail(`SITE_NOINDEX is set ("${env('SITE_NOINDEX')}"): it hides the site from search; remove it from the production environment`);
+
+  // No page hidden from search, by its meta tag or by a header for every host. The 404 page is noindex on purpose; a
+  // header rule for one host (the *.pages.dev addresses in public/_headers) leaves the production host alone.
+  const hidden = htmlFiles
+    .map((f) => [toUrlPath(f), metaContent(readFileSync(f, 'utf8'), 'name', 'robots') ?? ''])
+    .filter(([p, robots]) => p !== '/404.html' && /noindex/i.test(robots));
+  if (hidden.length) fail(`${hidden.length} page(s) carry robots noindex, e.g. ${hidden.slice(0, 3).map(([p, r]) => `${p} ("${r}")`).join(', ')}`);
+  if (existsSync(join(dist, '_headers'))) {
+    let rule = '';
+    for (const line of readFileSync(join(dist, '_headers'), 'utf8').split('\n')) {
+      if (/^\s*(#|$)/.test(line)) continue;
+      if (/^\S/.test(line)) rule = line.trim();
+      else if (/^\s+X-Robots-Tag:.*noindex/i.test(line) && rule.startsWith('/')) fail(`_headers sends X-Robots-Tag noindex for ${rule} on every host`);
+    }
+  }
+}
 
 console.log(`\nchecked ${pages.size} pages (${[...pages.keys()].filter((p) => p.startsWith('/ar/')).length} Arabic, ${[...pages.keys()].filter((p) => p.startsWith('/en/')).length} English)`);
 if (warnings.length) console.log(`\n${warnings.length} warning(s):\n  ` + warnings.join('\n  '));
