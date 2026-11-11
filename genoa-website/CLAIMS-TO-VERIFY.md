@@ -10,7 +10,7 @@ Highest-priority items were marked ⚠️ — they describe processes or policie
 
 ## Settled by the owner, 11 Nov 2026
 
-The five ⚠️ items were answered before launch:
+The five ⚠️ items put to the owner on 11 Nov 2026 were answered. One ⚠️ item is **still open**: landed cost (next section), found later while taking real screenshots.
 
 - ✅ **IFRS wording** — reworded everywhere. Genoa uses the Unified Accounting System's chart of accounts and can prepare IFRS-based financial statements (approved wording in `CONTENT-GUIDE.md` §1); the site no longer says it follows the Unified Accounting System "in line with IFRS".
 - ✅ **AI** — the company-level sentence and the two AI FAQs stay as written. Still open: which AI capabilities exist and in which product, so they can be described concretely (concrete descriptions are what AI assistants quote).
@@ -18,7 +18,7 @@ The five ⚠️ items were answered before launch:
 - ✅ **Demos** (`contact.nextSteps[1]`) — confirmed: demos use test data.
 - ✅ **Privacy** (`contact.privacy`) — true while `FORM_ENDPOINT` is empty, as it is at launch. Reword it if a form service is ever set.
 
-The items below without a ✅ are lower-risk inferences, to review after launch.
+Still open before launch: ⚠️ **landed cost** (next section). The other items below without a ✅ are lower-risk inferences, to review after launch.
 
 ## Found while taking real screenshots (Genoa app, `UAS` repo)
 
