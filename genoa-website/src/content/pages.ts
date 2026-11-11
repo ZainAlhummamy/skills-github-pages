@@ -78,7 +78,7 @@ export const home: L<HomeContent> = {
       items: [
         {
           title: 'النظام المحاسبي الموحد وقوائم IFRS',
-          body: 'يعتمد Genoa دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS)، فيعمل المحاسب بالإطار الذي يعرفه.',
+          body: 'يعتمد Genoa دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS)، فيعمل المحاسب بدليل الحسابات الذي يعرفه.',
         },
         {
           title: 'ما لا تحتاجه يبقى معطّلاً',
@@ -163,7 +163,7 @@ export const home: L<HomeContent> = {
       items: [
         {
           title: 'Unified Accounting System and IFRS statements',
-          body: 'Genoa uses the chart of accounts of the Iraqi Unified Accounting System and can prepare financial statements based on International Financial Reporting Standards (IFRS), so accountants work in a framework they know.',
+          body: 'Genoa uses the chart of accounts of the Iraqi Unified Accounting System and can prepare financial statements based on International Financial Reporting Standards (IFRS), so accountants work with a chart of accounts they know.',
         },
         {
           title: 'What you do not need stays off',
