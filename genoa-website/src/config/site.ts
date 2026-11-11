@@ -36,8 +36,9 @@ export const site = {
   formEndpoint: env('FORM_ENDPOINT') ?? '',
 
   /**
-   * Staging switch. SITE_NOINDEX=true makes every page "noindex, nofollow" and
-   * robots.txt "Disallow: /", so a preview deploy is not indexed. Leave unset in production.
+   * Staging switch. SITE_NOINDEX=true makes every page "noindex, nofollow" and adds an
+   * X-Robots-Tag noindex header (astro.config.mjs), so a preview deploy is not indexed; robots.txt
+   * keeps crawlers allowed so they can see it. Leave unset in production (the build fails there).
    */
   noindex: env('SITE_NOINDEX') === 'true',
 

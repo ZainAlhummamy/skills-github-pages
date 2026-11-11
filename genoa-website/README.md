@@ -34,7 +34,7 @@ Set these as environment variables at build time (or edit `src/config/site.ts`).
 | `WHATSAPP_NUMBER` | Digits only, international format, e.g. `9647XXXXXXXXX` | `9647000000000` |
 | `CONTACT_EMAIL` | Public sales e-mail | `info@genoa-systems.example` |
 | `FORM_ENDPOINT` | Optional. Form POST target (Formspree, Basin, own API). Empty = form composes a WhatsApp message, nothing is stored | empty |
-| `SITE_NOINDEX` | Staging only. `true` = `noindex, nofollow` on every page and `Disallow: /` in robots.txt. Never set in production | unset |
+| `SITE_NOINDEX` | Staging only. `true` = `noindex, nofollow` on every page and an `X-Robots-Tag: noindex` header; robots.txt still allows crawling so the noindex is seen. Never set in production | unset |
 
 Also before launch:
 

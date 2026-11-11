@@ -28,7 +28,7 @@ They are read **during the build**, so changing one requires a redeploy.
 | `WHATSAPP_NUMBER` | **required** | `9647XXXXXXXXX` | Digits only, international format. WhatsApp buttons and the demo form. |
 | `CONTACT_EMAIL` | **required** | `sales@genoa.iq` | Public e-mail on the contact page and in JSON-LD. |
 | `FORM_ENDPOINT` | optional | `https://formspree.io/f/xxxx` | POST target for the demo form. Empty = the form opens WhatsApp with a pre-filled message and nothing is stored. If set, the privacy sentence in `src/content/pages.ts` (`contact.privacy`) must be updated to name the service. |
-| `SITE_NOINDEX` | **never** | `true` | Staging only: every page gets `noindex, nofollow` and robots.txt becomes `Disallow: /`. Use for preview/staging deploys. |
+| `SITE_NOINDEX` | **never** | `true` | Staging only: every page gets `noindex, nofollow`, and every response an `X-Robots-Tag: noindex, nofollow` header (added to `dist/_headers`). robots.txt still allows crawling, so crawlers see the noindex and drop staging URLs they saw before. Use for preview/staging deploys. |
 | `NODE_VERSION` | host-dependent | `22.23.4` | Only if the host does not read `.nvmrc`. |
 | `PRODUCTION` | optional | `true` | Marks a production build on a host other than Cloudflare Pages (see below). Cloudflare Pages needs nothing: it sets `CF_PAGES_BRANCH`, and `main` is production. |
 
@@ -129,7 +129,7 @@ curl -sI https://DOMAIN/ | grep -iE '^(HTTP|location)'                 # 301 →
 curl -s  https://DOMAIN/ar/ | grep -o '<link rel="canonical"[^>]*>'   # https://DOMAIN/ar/
 curl -s  https://DOMAIN/ar/ | grep -o '<meta name="robots"[^>]*>'     # production: index, follow …
 curl -s  https://DOMAIN/ar/ | grep -c 'genoa-systems.example'          # must print 0
-curl -s  https://DOMAIN/robots.txt | head -8                           # Allow + Sitemap (staging: Disallow)
+curl -s  https://DOMAIN/robots.txt | head -8                           # Allow + Sitemap (staging too)
 curl -sI https://DOMAIN/sitemap.xml | head -1                          # 200
 curl -s  https://DOMAIN/llms.txt | head -3                             # "# Genoa Systems"
 curl -sI https://DOMAIN/no-such-page/ | head -1                        # 404

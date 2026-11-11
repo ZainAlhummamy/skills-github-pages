@@ -25,7 +25,16 @@ const aiAgents = [
 
 export const GET: APIRoute = () => {
   if (site.noindex) {
-    const staging = ['# STAGING build (SITE_NOINDEX=true): crawling disabled.', 'User-agent: *', 'Disallow: /', '', `Sitemap: ${abs('/sitemap.xml')}`, ''].join('\n');
+    // Crawlers stay allowed: they must fetch the pages to read the noindex (meta tag and X-Robots-Tag header), which is
+    // what removes staging URLs they saw before. "Disallow: /" would hide the noindex and leave those URLs listed.
+    const staging = [
+      '# STAGING build (SITE_NOINDEX=true): every page is noindex, by its meta tag and an X-Robots-Tag header.',
+      'User-agent: *',
+      'Allow: /',
+      '',
+      `Sitemap: ${abs('/sitemap.xml')}`,
+      '',
+    ].join('\n');
     return new Response(staging, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
   }
   const body = [

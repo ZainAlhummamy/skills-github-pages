@@ -178,6 +178,14 @@ if (all.includes(PLACEHOLDER.email)) placeholderNotes.push(`CONTACT_EMAIL is a p
 if (all.includes(`wa.me/${PLACEHOLDER.whatsapp}`)) placeholderNotes.push(`WHATSAPP_NUMBER is a placeholder (${PLACEHOLDER.whatsapp})`);
 if (all.includes('content="noindex, nofollow"')) placeholderNotes.push('SITE_NOINDEX=true: STAGING build, search engines are blocked (unset it for production)');
 
+// A staging build (SITE_NOINDEX=true) lets crawlers in, so they read the noindex on every page and in every response's
+// X-Robots-Tag and drop the staging URLs they saw before; "Disallow: /" in robots.txt would hide the noindex from them.
+if (all.includes('content="noindex, nofollow"')) {
+  if (/^Disallow:\s*\/\s*$/m.test(robots)) err('/robots.txt', 'staging build disallows crawling, so crawlers never see the noindex');
+  const headers = existsSync(join(dist, '_headers')) ? readFileSync(join(dist, '_headers'), 'utf8') : '';
+  if (!/^\/\*\s*\n(\s+.*\n)*?\s+X-Robots-Tag:\s*noindex/m.test(headers)) err('/_headers', 'staging build sends no X-Robots-Tag: noindex for /*');
+}
+
 // Production guard (DEPLOY.md, "Production builds"). On Cloudflare Pages' production branch (CF_PAGES_BRANCH=main), or
 // with PRODUCTION=true, what is only a note for a preview build fails the build, so the site can never be launched with
 // placeholders, the staging switch, or pages hidden from search. Preview builds are unchanged.
