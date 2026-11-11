@@ -30,17 +30,19 @@ They are read **during the build**, so changing one requires a redeploy.
 | `FORM_ENDPOINT` | optional | `https://formspree.io/f/xxxx` | POST target for the demo form. Empty = the form opens WhatsApp with a pre-filled message and nothing is stored. If set, the privacy sentence in `src/content/pages.ts` (`contact.privacy`) must be updated to name the service. |
 | `SITE_NOINDEX` | **never** | `true` | Staging only: every page gets `noindex, nofollow`, and every response an `X-Robots-Tag: noindex, nofollow` header (added to `dist/_headers`). robots.txt still allows crawling, so crawlers see the noindex and drop staging URLs they saw before. Use for preview/staging deploys. |
 | `NODE_VERSION` | host-dependent | `22.23.4` | Only if the host does not read `.nvmrc`. |
-| `PRODUCTION` | optional | `true` | Marks a production build on a host other than Cloudflare Pages (see below). Cloudflare Pages needs nothing: it sets `CF_PAGES_BRANCH`, and `main` is production. |
+| `PRODUCTION` | **required on other hosts** | `true` | Marks a production build on a host other than Cloudflare Pages (see below); `true`, `1` or `yes`, any case. Cloudflare Pages needs nothing: it sets `CF_PAGES_BRANCH`, and `main` is production. |
 
 ### Production builds
 
 A build is a **production build** when `CF_PAGES_BRANCH=main` (Cloudflare Pages sets this on
-the production branch) or `PRODUCTION=true`. `scripts/check-site.mjs` then **fails the build** if:
+the production branch) or `PRODUCTION=true` (also `1` or `yes`, any case). `scripts/check-site.mjs` then **fails the build** if:
 
 - `SITE_URL` is unset, the placeholder, ends with `/`, or its host is a `*.pages.dev`
   address, `site.genoasystem.com` (the staging address), `localhost`, or a reserved
   `.example`, `.test`, `.invalid` or `.localhost` name;
-- `WHATSAPP_NUMBER` or `CONTACT_EMAIL` is unset or the placeholder;
+- `WHATSAPP_NUMBER` is unset, the placeholder, or not digits only;
+- `CONTACT_EMAIL` is unset, the placeholder, not an e-mail address, or at a reserved
+  `.example`, `.test`, `.invalid` or `.localhost` domain;
 - `SITE_NOINDEX` is set to anything;
 - any built page other than `404.html` carries a robots `noindex`, or `_headers` sends
   `X-Robots-Tag: noindex` for a path on every host.
@@ -82,11 +84,12 @@ preserve path and query). Leave preview addresses unredirected.
 
 - Base directory `genoa-website`, build command `npm run build`, publish directory `dist` (that is, `genoa-website/dist`).
 - Node comes from `.nvmrc`. `_redirects` and `_headers` are applied automatically.
-- Set the variables for Production; for Deploy Previews add `SITE_NOINDEX=true`.
+- Set the variables for Production, plus `PRODUCTION=true`; for Deploy Previews add `SITE_NOINDEX=true` instead.
 
 ### Vercel
 
 - Root Directory `genoa-website`, framework Astro, build `npm run build`, output `dist`, Node 22.x.
+- Production environment variables: the ones above, plus `PRODUCTION=true`.
 - Vercel ignores `_redirects` and `_headers`. Add `genoa-website/vercel.json`:
 
 ```json
@@ -129,6 +132,7 @@ GitHub Skills course workflows react to Pages builds. Prefer Cloudflare Pages or
 
 - Do not edit the copy in `src/content/`. Several sentences are pending the owner's review (`CLAIMS-TO-VERIFY.md`).
 - Do not skip or weaken `scripts/check-site.mjs`. If the build fails, fix the cause.
+- Do not give a URL pattern two rules in `public/_headers`: a host may keep only one of them. Put its headers in one rule (the build fails otherwise).
 - Do not run `npm run og` or `npm run lighthouse` in CI. They need a local Chrome; the OG images are already committed.
 - Do not add analytics, tag managers or chat widgets without the owner's approval. The security page and contact form state that the site uses no tracking.
 - Do not touch the repository-root `.github/` workflows (unrelated GitHub Skills course).

@@ -1,5 +1,5 @@
 // @ts-check
-import { appendFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 
@@ -16,10 +16,12 @@ const stagingNoindexHeader = {
   hooks: {
     'astro:build:done': ({ dir }) => {
       if ((process.env.SITE_NOINDEX ?? '').trim() !== 'true') return;
-      appendFileSync(
-        fileURLToPath(new URL('_headers', dir)),
-        '\n# STAGING build (SITE_NOINDEX=true): every response is noindex.\n/*\n  X-Robots-Tag: noindex, nofollow\n',
-      );
+      // Into the existing "/*" rule: a second "/*" rule may replace the first, dropping its security headers.
+      const file = fileURLToPath(new URL('_headers', dir));
+      const headers = readFileSync(file, 'utf8');
+      const staged = headers.replace(/^\/\*[ \t]*$/m, '# STAGING build (SITE_NOINDEX=true): every response is noindex.\n/*\n  X-Robots-Tag: noindex, nofollow');
+      if (staged === headers) throw new Error('dist/_headers has no "/*" rule to add the staging X-Robots-Tag to');
+      writeFileSync(file, staged);
     },
   },
 };

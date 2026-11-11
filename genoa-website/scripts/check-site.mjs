@@ -178,36 +178,55 @@ if (all.includes(PLACEHOLDER.email)) placeholderNotes.push(`CONTACT_EMAIL is a p
 if (all.includes(`wa.me/${PLACEHOLDER.whatsapp}`)) placeholderNotes.push(`WHATSAPP_NUMBER is a placeholder (${PLACEHOLDER.whatsapp})`);
 if (all.includes('content="noindex, nofollow"')) placeholderNotes.push('SITE_NOINDEX=true: STAGING build, search engines are blocked (unset it for production)');
 
+// dist/_headers as Cloudflare Pages and Netlify read it: rules, each a URL pattern followed by its indented
+// "Name: value" lines. Checked one rule at a time, so one rule's headers never stand in for another's.
+const headerRules = [];
+if (existsSync(join(dist, '_headers'))) {
+  for (const line of readFileSync(join(dist, '_headers'), 'utf8').split('\n')) {
+    if (/^\s*(#|$)/.test(line)) continue;
+    if (/^\S/.test(line)) headerRules.push({ pattern: line.trim(), headers: [] });
+    else if (headerRules.length) {
+      const m = line.match(/^\s+([^:]+):\s*(.*)$/);
+      if (m) headerRules.at(-1).headers.push([m[1].trim().toLowerCase(), m[2].trim()]);
+    }
+  }
+}
+const sendsNoindex = (rule) => rule.headers.some(([name, value]) => name === 'x-robots-tag' && /\b(noindex|none)\b/i.test(value));
+// One rule per pattern: a host may keep only one of two rules with the same pattern, dropping the other's headers.
+{
+  const seen = new Set();
+  for (const { pattern } of headerRules) {
+    if (seen.has(pattern)) err('/_headers', `${pattern} has more than one rule; put its headers in one`);
+    seen.add(pattern);
+  }
+}
+
 // Cloudflare's own addresses for the site (its production and preview deployments) copy the real domain: _headers must
 // keep them out of search (DEPLOY.md, "Duplicate addresses").
-{
-  const headers = existsSync(join(dist, '_headers')) ? readFileSync(join(dist, '_headers'), 'utf8') : '';
-  for (const host of ['https://:project.pages.dev/*', 'https://:version.:project.pages.dev/*']) {
-    const rule = new RegExp(`^${host.replace(/[.*]/g, '\\$&')}\\s*\\n(\\s+.*\\n)*?\\s+X-Robots-Tag:\\s*noindex`, 'm');
-    if (!rule.test(headers)) err('/_headers', `no X-Robots-Tag: noindex for ${host}`);
-  }
+for (const host of ['https://:project.pages.dev/*', 'https://:version.:project.pages.dev/*']) {
+  if (!headerRules.some((r) => r.pattern === host && sendsNoindex(r))) err('/_headers', `no X-Robots-Tag: noindex for ${host}`);
 }
 
 // A staging build (SITE_NOINDEX=true) lets crawlers in, so they read the noindex on every page and in every response's
 // X-Robots-Tag and drop the staging URLs they saw before; "Disallow: /" in robots.txt would hide the noindex from them.
 if (all.includes('content="noindex, nofollow"')) {
   if (/^Disallow:\s*\/\s*$/m.test(robots)) err('/robots.txt', 'staging build disallows crawling, so crawlers never see the noindex');
-  const headers = existsSync(join(dist, '_headers')) ? readFileSync(join(dist, '_headers'), 'utf8') : '';
-  if (!/^\/\*\s*\n(\s+.*\n)*?\s+X-Robots-Tag:\s*noindex/m.test(headers)) err('/_headers', 'staging build sends no X-Robots-Tag: noindex for /*');
+  if (!headerRules.some((r) => r.pattern === '/*' && sendsNoindex(r))) err('/_headers', 'staging build sends no X-Robots-Tag: noindex for /*');
 }
 
 // Production guard (DEPLOY.md, "Production builds"). On Cloudflare Pages' production branch (CF_PAGES_BRANCH=main), or
-// with PRODUCTION=true, what is only a note for a preview build fails the build, so the site can never be launched with
-// placeholders, the staging switch, or pages hidden from search. Preview builds are unchanged.
-const production = process.env.CF_PAGES_BRANCH === 'main' || process.env.PRODUCTION === 'true';
+// with PRODUCTION=true (any case; 1 and yes too), what is only a note for a preview build fails the build, so the site
+// can never be launched with placeholders, the staging switch, or pages hidden from search. Preview builds are unchanged.
+const env = (key) => (process.env[key] ?? '').trim();
+const production = env('CF_PAGES_BRANCH') === 'main' || /^(true|1|yes)$/i.test(env('PRODUCTION'));
 if (production) {
-  const env = (key) => (process.env[key] ?? '').trim();
   const fail = (msg) => err('production build', msg);
   // The address the site is staged on: never the production address, unless the owner decides it is (then take it off).
   const stagingHosts = ['site.genoasystem.com'];
-  // Cloudflare's own addresses, the staging address, and the names reserved for examples and tests (RFC 2606, 6761).
-  const notProductionHost = (host) =>
-    host.endsWith('.pages.dev') || stagingHosts.includes(host) || host === 'localhost' || /\.(example|test|invalid|localhost)$/.test(host);
+  // Names reserved for examples and tests (RFC 2606, 6761): never a real address, for the site or for e-mail.
+  const reserved = (host) => host === 'localhost' || /\.(example|test|invalid|localhost)$/i.test(host);
+  // Cloudflare's own addresses and the staging address are not the production site either.
+  const notProductionHost = (host) => reserved(host) || host.endsWith('.pages.dev') || stagingHosts.includes(host);
 
   const siteUrl = env('SITE_URL');
   if (!siteUrl) fail('SITE_URL is not set');
@@ -222,25 +241,29 @@ if (production) {
     if (siteUrl.replace(/\/$/, '') === PLACEHOLDER.siteUrl) fail(`SITE_URL is the placeholder ${PLACEHOLDER.siteUrl}`);
     else if (host && notProductionHost(host)) fail(`SITE_URL host ${host} is not a production address`);
   }
-  for (const [key, placeholder] of [['WHATSAPP_NUMBER', PLACEHOLDER.whatsapp], ['CONTACT_EMAIL', PLACEHOLDER.email]]) {
-    if (!env(key)) fail(`${key} is not set`);
-    else if (env(key) === placeholder) fail(`${key} is the placeholder ${placeholder}`);
-  }
+
+  const whatsapp = env('WHATSAPP_NUMBER');
+  if (!whatsapp) fail('WHATSAPP_NUMBER is not set');
+  else if (whatsapp === PLACEHOLDER.whatsapp) fail(`WHATSAPP_NUMBER is the placeholder ${PLACEHOLDER.whatsapp}`);
+  else if (!/^\d+$/.test(whatsapp)) fail(`WHATSAPP_NUMBER must be digits only, in international format (964...): ${whatsapp}`);
+
+  const email = env('CONTACT_EMAIL');
+  const emailHost = email.split('@')[1] ?? '';
+  if (!email) fail('CONTACT_EMAIL is not set');
+  else if (email === PLACEHOLDER.email) fail(`CONTACT_EMAIL is the placeholder ${PLACEHOLDER.email}`);
+  else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) fail(`CONTACT_EMAIL is not an e-mail address: ${email}`);
+  else if (reserved(emailHost)) fail(`CONTACT_EMAIL is at ${emailHost}, a name reserved for examples and tests`);
+
   if (env('SITE_NOINDEX')) fail(`SITE_NOINDEX is set ("${env('SITE_NOINDEX')}"): it hides the site from search; remove it from the production environment`);
 
   // No page hidden from search, by its meta tag or by a header for every host. The 404 page is noindex on purpose; a
   // header rule for one host (the *.pages.dev addresses in public/_headers) leaves the production host alone.
   const hidden = htmlFiles
     .map((f) => [toUrlPath(f), metaContent(readFileSync(f, 'utf8'), 'name', 'robots') ?? ''])
-    .filter(([p, robots]) => p !== '/404.html' && /noindex/i.test(robots));
+    .filter(([p, robots]) => p !== '/404.html' && /\b(noindex|none)\b/i.test(robots));
   if (hidden.length) fail(`${hidden.length} page(s) carry robots noindex, e.g. ${hidden.slice(0, 3).map(([p, r]) => `${p} ("${r}")`).join(', ')}`);
-  if (existsSync(join(dist, '_headers'))) {
-    let rule = '';
-    for (const line of readFileSync(join(dist, '_headers'), 'utf8').split('\n')) {
-      if (/^\s*(#|$)/.test(line)) continue;
-      if (/^\S/.test(line)) rule = line.trim();
-      else if (/^\s+X-Robots-Tag:.*noindex/i.test(line) && rule.startsWith('/')) fail(`_headers sends X-Robots-Tag noindex for ${rule} on every host`);
-    }
+  for (const rule of headerRules) {
+    if (rule.pattern.startsWith('/') && sendsNoindex(rule)) fail(`_headers sends X-Robots-Tag noindex for ${rule.pattern} on every host`);
   }
 }
 
