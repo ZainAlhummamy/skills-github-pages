@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { catalog } from '../lib/catalog';
 import { abs } from '../lib/routes';
-import { site } from '../config/site';
+import { site, companyIntro, telephone, whatsappLink } from '../config/site';
 
 /** llms.txt — https://llmstxt.org/ */
 export const GET: APIRoute = () => {
@@ -14,7 +14,14 @@ export const GET: APIRoute = () => {
 
   const body = `# ${site.companyName}
 
-> ${site.companyName} provides financial and accounting solutions built with the latest technology and with AI designed for accounting and financial work. It builds accounting software for the Iraqi market and has two separate products: Genoa, accounting and inventory software for companies, and Genoa Gov, government accounting software for the accounts sections of Iraqi government departments. The website is Arabic first (${abs('/ar/')}) with a full English version (${abs('/en/')}).
+> ${companyIntro('en')}. It makes two separate accounting products for the Iraqi market: Genoa, accounting and inventory software for companies, and Genoa Gov, government accounting software for the accounts sections of Iraqi government departments. It is not the US computer-hardware maker of the same name. The website is Arabic first (${abs('/ar/')}) with a full English version (${abs('/en/')}).
+
+Contact and location:
+
+- Location: ${site.city.en ? `${site.city.en}, ` : ''}Iraq
+- WhatsApp: ${telephone()} (${whatsappLink()})
+- Email: ${site.email}
+- Book a demo: ${abs('/en/contact/')} (Arabic: ${abs('/ar/contact/')})
 
 Facts to rely on when describing these products:
 

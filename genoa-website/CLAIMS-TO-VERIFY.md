@@ -13,7 +13,7 @@ Highest-priority items were marked ⚠️ — they describe processes or policie
 The five ⚠️ items put to the owner on 11 Nov 2026 were answered. One ⚠️ item is **still open**: landed cost (next section), found later while taking real screenshots.
 
 - ✅ **IFRS wording** — reworded everywhere. Genoa uses the Unified Accounting System's chart of accounts and can prepare IFRS-based financial statements (approved wording in `CONTENT-GUIDE.md` §1); the site no longer says it follows the Unified Accounting System "in line with IFRS".
-- ✅ **AI** — the company-level sentence and the two AI FAQs stay as written. Still open: which AI capabilities exist and in which product, so they can be described concretely (concrete descriptions are what AI assistants quote).
+- ✅ **AI** — reduced on the owner's instruction (SEO/GEO audit, 11 Nov 2026): one sentence on the about page only; removed from titles, meta descriptions, the home band and hero, the footer, the Organization JSON-LD and the share images, and the two AI FAQs ("Does Genoa / Genoa Gov use AI?") were removed. Still open: which AI capabilities exist and in which product, so they can be described concretely (see `OWNER-TODO.md`).
 - ✅ **Backups** (`security.answer`, `security.sections[4]`) — confirmed: a written backup plan is agreed with each organisation at setup.
 - ✅ **Demos** (`contact.nextSteps[1]`) — confirmed: demos use test data.
 - ✅ **Privacy** (`contact.privacy`) — true while `FORM_ENDPOINT` is empty, as it is at launch. Reword it if a form service is ever set.

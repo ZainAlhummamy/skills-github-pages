@@ -4,7 +4,8 @@
  * BreadcrumbList and FAQPage nodes where relevant. Nodes reference each other
  * by stable @id so assistants and search engines can join them across pages.
  */
-import { site, placeholdersInUse } from '../config/site';
+import { site, placeholdersInUse, companyIntro, telephone } from '../config/site';
+import { modifiedOn } from './dates';
 import { products } from '../content';
 import type { Faq, Lang, ProductId } from '../content/types';
 import { abs, path } from './routes';
@@ -18,7 +19,9 @@ export const ids = {
 };
 
 export const organizationNode = (lang: Lang): Node => {
-  const contactConfigured = !placeholdersInUse().includes('CONTACT_EMAIL');
+  const pending = placeholdersInUse();
+  const email = pending.includes('CONTACT_EMAIL') ? undefined : site.email;
+  const phone = pending.includes('WHATSAPP_NUMBER') ? undefined : telephone();
   return {
     '@type': 'Organization',
     '@id': ids.org,
@@ -31,26 +34,36 @@ export const organizationNode = (lang: Lang): Node => {
       width: 512,
       height: 512,
     },
+    // Leads with what sets this Genoa Systems apart from the defunct US hardware maker of the same name.
     description:
       lang === 'ar'
-        ? 'Genoa Systems شركة برمجيات تقدّم حلولاً مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي الموجّه للأعمال المحاسبية والمالية، وتطوّر برامج محاسبة للسوق العراقي: Genoa للشركات بدليل حسابات النظام المحاسبي الموحد وقوائم مالية وفق IFRS، وGenoa Gov لأقسام الحسابات في الدوائر الحكومية.'
-        : 'Genoa Systems is a software company that provides financial and accounting solutions built with the latest technology and with AI designed for accounting and financial work. It builds accounting software for the Iraqi market: Genoa for companies, using the Unified Accounting System chart of accounts with IFRS-based financial statements, and Genoa Gov for the accounts sections of government departments.',
+        ? `${companyIntro('ar')}. تطوّر برنامجين محاسبيين منفصلين للسوق العراقي: Genoa، برنامج محاسبة ومخازن للشركات يعتمد دليل حسابات النظام المحاسبي الموحد ويمكنه إعداد القوائم المالية وفق IFRS، وGenoa Gov، برنامج محاسبة حكومية لأقسام الحسابات في الدوائر الحكومية.`
+        : `${companyIntro('en')}. It makes two separate accounting products for the Iraqi market: Genoa, accounting and inventory software for companies that uses the Unified Accounting System chart of accounts and can prepare IFRS-based financial statements, and Genoa Gov, government accounting software for the accounts sections of government departments.`,
+    // TODO(owner): the city (src/config/site.ts, city). Until then the address names the country only.
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: site.areaServed.code,
+      ...(site.city[lang] ? { addressLocality: site.city[lang] } : {}),
+    },
+    ...(phone ? { telephone: phone } : {}),
     areaServed: { '@type': 'Country', name: site.areaServed.en, identifier: site.areaServed.code },
     knowsAbout:
       lang === 'ar'
-        ? ['المحاسبة', 'المحاسبة الحكومية', 'إدارة المخازن', 'برامج المحاسبة في العراق', 'النظام المحاسبي الموحد', 'المعايير الدولية لإعداد التقارير المالية (IFRS)', 'الذكاء الاصطناعي في المحاسبة والمالية']
-        : ['Accounting software', 'Government accounting', 'Inventory management', 'Accounting in Iraq', 'Iraqi Unified Accounting System', 'International Financial Reporting Standards (IFRS)', 'AI for accounting and finance'],
-    ...(contactConfigured
+        ? ['المحاسبة', 'المحاسبة الحكومية', 'إدارة المخازن', 'برامج المحاسبة في العراق', 'النظام المحاسبي الموحد', 'المعايير الدولية لإعداد التقارير المالية (IFRS)']
+        : ['Accounting software', 'Government accounting', 'Inventory management', 'Accounting in Iraq', 'Iraqi Unified Accounting System', 'International Financial Reporting Standards (IFRS)'],
+    ...(email || phone
       ? {
           contactPoint: {
             '@type': 'ContactPoint',
             contactType: 'sales',
-            email: site.email,
+            ...(email ? { email } : {}),
+            ...(phone ? { telephone: phone } : {}),
             availableLanguage: ['ar', 'en'],
             areaServed: site.areaServed.code,
           },
         }
       : {}),
+    // TODO(owner): official LinkedIn, Facebook and Google Business Profile URLs (src/config/site.ts, sameAs).
     ...(site.sameAs.length ? { sameAs: site.sameAs } : {}),
   };
 };
@@ -75,8 +88,9 @@ export const softwareNode = (productId: ProductId, lang: Lang): Node => {
     '@type': 'SoftwareApplication',
     '@id': ids.product(productId),
     name: p.brand,
-    // One address for the product on every page, in both languages: its page in the default language (x-default, Arabic).
-    url: abs(path('ar', productId)),
+    // The product's page in the language of the page this node is on (/ar/companies/ or /en/companies/). The same
+    // @id keeps one url per language; check-site.mjs fails the build otherwise.
+    url: abs(path(lang, productId)),
     description: o.answer,
     applicationCategory: 'BusinessApplication',
     applicationSubCategory:
@@ -103,6 +117,9 @@ export const softwareNode = (productId: ProductId, lang: Lang): Node => {
     publisher: { '@id': ids.org },
     creator: { '@id': ids.org },
     image: abs(`/og/og-${productId}-${lang}.png`),
+    // TODO(owner): operatingSystem (e.g. "Web browser" for a web app, or "Windows"), once the deployment model is
+    // confirmed. inLanguage is left off here on purpose: on a SoftwareApplication it states the software's own
+    // language, which is not confirmed for English (the page's language is on the WebPage node).
   };
 };
 
@@ -155,11 +172,14 @@ export const pageGraph = (i: PageGraphInput) => {
     ? faqNode(url, i.faqPage, i.lang, true)
     : { '@type': i.pageType ?? 'WebPage', '@id': `${url}#webpage` };
 
+  const modified = modifiedOn(i.pathname);
   Object.assign(page, {
     url,
     name: i.title,
     description: i.description,
     inLanguage: i.lang,
+    // The date this page's own text last changed (src/content/page-dates.json), never the build date.
+    ...(modified ? { dateModified: modified } : {}),
     isPartOf: { '@id': ids.website },
     publisher: { '@id': ids.org },
     primaryImageOfPage: { '@type': 'ImageObject', url: i.image },

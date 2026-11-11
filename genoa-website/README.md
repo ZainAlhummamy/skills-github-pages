@@ -22,8 +22,18 @@ npm run dev          # http://localhost:4321/ar/  (live reload)
 npm run build        # builds dist/ and runs the SEO checker (fails on errors)
 npm run preview      # serves dist/ on http://localhost:4321
 npm run lighthouse   # needs `npm run preview` running; writes reports/lighthouse/summary.md
-npm run og           # regenerates Open Graph images + icons (needs Playwright)
+npm run og           # regenerates Open Graph images + icons, favicon.ico too (needs Playwright)
+npm run dates        # after a copy change: records which pages changed (src/content/page-dates.json)
+npm run screenshot-sizes  # after importing screenshots: writes the 720w/1080w copies used by srcset
 ```
+
+**Content dates.** The sitemap's `<lastmod>` and each page's JSON-LD `dateModified` are the day that page's text
+last changed, never the build date. They come from `src/content/page-dates.json`, which holds a fingerprint of each
+page's title, description and main text. After changing copy: `npm run build && npm run dates && npm run build`, and
+commit `page-dates.json` with the change; the build warns while a page's text no longer matches its fingerprint.
+
+**Owner TODO.** Facts only the owner can give (city, official profiles, buyer FAQ answers, deployment model, …) are
+listed in `OWNER-TODO.md`; the build prints the ones it can detect.
 
 `LH_PAGES=key npm run lighthouse` audits 8 representative pages instead of all 44.
 

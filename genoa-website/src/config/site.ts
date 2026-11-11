@@ -43,15 +43,37 @@ export const site = {
   noindex: env('SITE_NOINDEX') === 'true',
 
   /**
-   * Social / directory profiles for Organization.sameAs. Add real URLs only.
-   * TODO(owner): the company's official profiles (LinkedIn, Facebook, X, Instagram, ...). Assistants use these to
-   * tie the profiles to this site; leave empty rather than guess.
+   * Official profiles for Organization.sameAs. Real URLs only; leave empty rather than guess.
+   * TODO(owner): the company's LinkedIn page, Facebook page and Google Business Profile URLs (and any other official
+   * profile). They tell search engines and assistants that this Genoa Systems is the Iraqi software company, not
+   * the unrelated, defunct US hardware maker of the same name.
    */
   sameAs: [] as string[],
+
+  /**
+   * City the company is based in, for the "based in …" sentence (about, footer, llms.txt) and the Organization
+   * address (addressLocality).
+   * TODO(owner): e.g. { ar: 'بغداد', en: 'Baghdad' }. While empty, the copy says "Iraqi" without a city and the
+   * address carries the country only.
+   */
+  city: { ar: '', en: '' },
 
   /** Country served. */
   areaServed: { ar: 'العراق', en: 'Iraq', code: 'IQ' },
 } as const;
+
+/** The company's phone number for Organization.telephone: the WhatsApp number, in E.164 form (+964…). */
+export const telephone = () => `+${site.whatsapp}`;
+
+/**
+ * How the company is introduced wherever it first appears (about, footer, JSON-LD, llms.txt). It says first that
+ * Genoa Systems is an Iraqi accounting-software company, which a defunct US hardware maker of the same name does
+ * not share.
+ */
+export const companyIntro = (lang: 'ar' | 'en'): string =>
+  lang === 'ar'
+    ? `${site.companyName} شركة عراقية لبرمجيات المحاسبة${site.city.ar ? `، مقرّها في ${site.city.ar}` : ''}`
+    : `${site.companyName} is an Iraqi accounting-software company${site.city.en ? ` based in ${site.city.en}` : ''}`;
 
 export const placeholdersInUse = (): string[] => {
   const out: string[] = [];

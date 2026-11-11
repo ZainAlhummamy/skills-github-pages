@@ -11,13 +11,13 @@ export const companies: Product = {
 
   overview: {
     ar: {
-      title: "برنامج محاسبة ومخازن للشركات العراقية | Genoa",
+      title: "برنامج محاسبي عراقي للشركات مع إدارة المخازن | Genoa",
       description:
         "برنامج Genoa نظام محاسبي للشركات العراقية بدليل حسابات النظام المحاسبي الموحد وقوائم مالية وفق IFRS، يضم الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين.",
       h1: "برنامج Genoa للمحاسبة والمخازن للشركات العراقية",
       productName: "Genoa",
       answer:
-        "برنامج Genoa نظام محاسبي للشركات العراقية التي تشتري المواد وتخزنها وتبيعها، ويعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS). يضم البرنامج الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الذمم. ويوفر ميزتين اختياريتين هما تعدد العملات (الدولار الأمريكي إلى جانب الدينار العراقي) والكلفة الواصلة (إضافة الشحن والكمارك إلى كلفة المادة). والميزتان معطّلتان افتراضياً، وتُفعَّلان لكل شركة على حدة حسب حاجتها.",
+        "Genoa برنامج محاسبي عراقي للشركات التي تشتري المواد وتخزنها وتبيعها، ويعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS). يضم البرنامج الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الذمم. ويوفر ميزتين اختياريتين هما تعدد العملات (الدولار الأمريكي إلى جانب الدينار العراقي) والكلفة الواصلة (إضافة الشحن والكمارك إلى كلفة المادة). والميزتان معطّلتان افتراضياً، وتُفعَّلان لكل شركة على حدة حسب حاجتها.",
       whatIs: {
         heading: "ما هو Genoa؟",
         body: [
@@ -493,7 +493,7 @@ export const companies: Product = {
           title: "برنامج مخازن لمتابعة المواد والمخزون | Genoa",
           description:
             "وحدة المخازن في برنامج Genoa تتابع المواد التي تشتريها الشركة العراقية وتخزنها وتبيعها، وتعمل مع المبيعات والمشتريات والحسابات في برنامج واحد.",
-          h1: "المخازن في برنامج Genoa: متابعة المواد والمخزون",
+          h1: "برنامج إدارة المخازن في Genoa: متابعة المواد والمخزون",
           navLabel: "المخازن",
           cardSummary:
             "متابعة المواد التي تشتريها الشركة وتخزنها وتبيعها، في البرنامج نفسه مع المبيعات والحسابات.",
@@ -1258,7 +1258,7 @@ export const companies: Product = {
             {
               q: "ما هو برنامج Genoa ولمن هو؟",
               a: [
-                "برنامج Genoa نظام محاسبي للشركات العراقية التي تشتري المواد وتخزنها وتبيعها.",
+                "Genoa برنامج محاسبي عراقي للشركات التي تشتري المواد وتخزنها وتبيعها.",
                 "وهو موجّه لتجار الجملة والموزعين والمستوردين والمحلات والمعارض التي تحتفظ بمخزون، وللشركات التي تتعامل بالدينار والدولار معاً.",
               ],
             },
@@ -1274,13 +1274,6 @@ export const companies: Product = {
               a: [
                 "يعتمد Genoa دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS)؛ وهما إطاران منفصلان.",
                 "ويُستخدم دليل الحسابات نفسه في الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين، لأنها كلها في برنامج واحد. وتجد التفاصيل في صفحة النظام المحاسبي الموحد وقوائم IFRS.",
-              ],
-            },
-            {
-              q: "هل يستخدم برنامج Genoa الذكاء الاصطناعي؟",
-              a: [
-                "تقدّم Genoa Systems حلولاً مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي الموجّه للأعمال المحاسبية والمالية.",
-                "لمعرفة ما يتوفر من هذه الحلول في Genoa وكيف يناسب عمل شركتك، احجز عرضاً توضيحياً.",
               ],
             },
             {
@@ -1359,6 +1352,19 @@ export const companies: Product = {
             },
           ],
         },
+        {
+          // TODO(owner): the answers. A question with no answer (a: []) is left out of the page, its FAQPage
+          // JSON-LD and llms-full.txt (src/content/index.ts), so these appear as soon as they are answered.
+          heading: "التشغيل والدعم ونقل البيانات",
+          faqs: [
+            { q: "هل البرنامج سحابي أم يُنصَّب على أجهزتنا؟", a: [] },
+            { q: "هل يحتاج إلى إنترنت؟", a: [] },
+            { q: "كم مستخدماً أو فرعاً يدعم؟", a: [] },
+            { q: "هل يوجد تدريب ودعم فني؟", a: [] },
+            { q: "هل يمكن نقل بياناتنا من برنامج محاسبي آخر؟", a: [] },
+            { q: "هل تُطبع الفواتير والتقارير بالعربية؟", a: [] },
+          ],
+        },
       ],
     },
     en: {
@@ -1399,13 +1405,6 @@ export const companies: Product = {
               a: [
                 "Genoa uses the chart of accounts of the Iraqi Unified Accounting System and can prepare financial statements based on International Financial Reporting Standards (IFRS); these are two separate frameworks.",
                 "The same chart of accounts is used across accounting, inventory, sales and purchasing, and customer and supplier ledgers, because they are all in one product. The Unified Accounting System and IFRS statements page has the details.",
-              ],
-            },
-            {
-              q: "Does Genoa use artificial intelligence?",
-              a: [
-                "Genoa Systems provides financial and accounting solutions built with the latest technology and with AI designed for accounting and financial work.",
-                "To find out which of these solutions are available in Genoa and how they fit your company, book a demo.",
               ],
             },
             {
@@ -1482,6 +1481,19 @@ export const companies: Product = {
                 "If you have questions specific to your company, raise them during your demo or contact the Genoa team.",
               ],
             },
+          ],
+        },
+        {
+          // TODO(owner): the answers. A question with no answer (a: []) is left out of the page, its FAQPage
+          // JSON-LD and llms-full.txt (src/content/index.ts), so these appear as soon as they are answered.
+          heading: "Setup, support and moving your data",
+          faqs: [
+            { q: "Is the software cloud-based, or installed on our own computers?", a: [] },
+            { q: "Does it need an internet connection?", a: [] },
+            { q: "How many users or branches does it support?", a: [] },
+            { q: "Is there training and technical support?", a: [] },
+            { q: "Can we move our data from another accounting program?", a: [] },
+            { q: "Are invoices and reports printed in Arabic?", a: [] },
           ],
         },
       ],

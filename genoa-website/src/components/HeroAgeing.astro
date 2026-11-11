@@ -27,7 +27,8 @@ const tree = [
   { l: 0, w: '62%' }, { l: 1, w: '70%' }, { l: 1, w: '54%' }, { l: 0, w: '58%' }, { l: 1, w: '66%' },
 ];
 ---
-<figure class="illus illus-ageing" role="img" aria-label={T.label}>
+{/* A div, not a figure: a figure with a caption may not take role="img" (aria-allowed-role). */}
+<div class="illus illus-ageing" role="img" aria-label={T.label}>
   <div class="sheet" aria-hidden="true">
     <div class="sheet-head"><span class="sheet-title">{T.title} <small>({T.unit})</small></span><span class="tag tag-genoa">Genoa</span></div>
     <div class="ageing">
@@ -42,5 +43,5 @@ const tree = [
     </ul>
     <span class="seal" style="--d:2s"><Icon name="check" />{T.uas}</span>
   </div>
-  <figcaption class="illus-note" aria-hidden="true">{T.note}</figcaption>
-</figure>
+  <span class="illus-note" aria-hidden="true">{T.note}</span>
+</div>

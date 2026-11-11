@@ -20,7 +20,8 @@ const T = {
   },
 }[lang];
 ---
-<figure class="illus illus-ledger" role="img" aria-label={T.label}>
+{/* A div, not a figure: a figure with a caption may not take role="img" (aria-allowed-role). */}
+<div class="illus illus-ledger" role="img" aria-label={T.label}>
   <div class="sheet" aria-hidden="true">
     <div class="sheet-head"><span class="sheet-title">{T.entry}</span><span class="tag tag-genoa">Genoa</span></div>
     <div class="ledger">
@@ -40,5 +41,5 @@ const T = {
     </ol>
     <span class="stamp stamp-gov" style="--d:2.6s">{T.approved}</span>
   </div>
-  <figcaption class="illus-note" aria-hidden="true">{T.note}</figcaption>
-</figure>
+  <span class="illus-note" aria-hidden="true">{T.note}</span>
+</div>

@@ -3,7 +3,7 @@ import type { Lang } from '../content/types';
 import { productList } from '../content';
 import { t, otherLang } from '../i18n/ui';
 import { path, swapLang } from '../lib/routes';
-import { site } from '../config/site';
+import { site, companyIntro } from '../config/site';
 import Logo from './Logo.astro';
 interface Props { lang: Lang; pathname: string; hasAlternate?: boolean; }
 const { lang, pathname, hasAlternate = true } = Astro.props;
@@ -15,7 +15,7 @@ const year = new Date().getFullYear();
     <div class="footer-grid">
       <div>
         <Logo lang={lang} />
-        <p>{t('footerTagline', lang)}</p>
+        <p>{lang === 'ar' ? `${companyIntro('ar')}، ${t('footerTagline', lang)}` : `${companyIntro('en')}. ${t('footerTagline', lang)}`}</p>
       </div>
       {productList.map((p) => (
         <nav aria-labelledby={`footer-${p.id}`}>

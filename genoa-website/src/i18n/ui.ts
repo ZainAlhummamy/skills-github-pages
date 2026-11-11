@@ -59,8 +59,9 @@ export const ui = {
     en: 'Book a demo and we will walk you through the screens that matter to you, or send us your question on WhatsApp.',
   },
   footerTagline: {
-    ar: 'حلول مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي للشركات وللدوائر الحكومية في العراق.',
-    en: 'Financial and accounting solutions with the latest technology and AI, for companies and government departments in Iraq.',
+    // Follows the company introduction (companyIntro, src/config/site.ts) in the footer.
+    ar: 'تطوّر Genoa للشركات وGenoa Gov للدوائر الحكومية.',
+    en: 'It makes Genoa for companies and Genoa Gov for government departments.',
   },
   footerProducts: { ar: 'المنتجات', en: 'Products' },
   footerCompany: { ar: 'الشركة', en: 'Company' },

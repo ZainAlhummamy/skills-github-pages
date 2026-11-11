@@ -4,6 +4,7 @@
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { builtPages, fingerprint } from './lib/page-fingerprint.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
@@ -36,7 +37,7 @@ const metaContent = (html, key, val) => {
 
 const pages = new Map();
 let siteOrigin;
-// JSON-LD entities by @id: the url each page gives it, and the first page that did.
+// JSON-LD entities by @id and page language: the url each page gives it, and the first page that did.
 const entityUrls = new Map();
 
 for (const file of htmlFiles) {
@@ -102,9 +103,14 @@ for (const file of htmlFiles) {
       for (const n of data['@graph'] ?? [data]) {
         [].concat(n['@type']).forEach((t) => types.add(t));
         if (n['@id'] && n.url) {
-          const urls = entityUrls.get(n['@id']) ?? new Map();
+          const key = `${n['@id']} (${lang} pages)`;
+          const urls = entityUrls.get(key) ?? new Map();
           if (!urls.has(n.url)) urls.set(n.url, p);
-          entityUrls.set(n['@id'], urls);
+          entityUrls.set(key, urls);
+        }
+        // A product's url is its page in the language of the page it is described on.
+        if ([].concat(n['@type']).includes('SoftwareApplication') && n.url && !new URL(n.url).pathname.startsWith(`/${lang}/`)) {
+          err(p, `SoftwareApplication ${n['@id']} url ${n.url} is not a /${lang}/ page`);
         }
       }
     } catch (e) {
@@ -140,8 +146,9 @@ const dupes = (key) => {
 dupes('title');
 dupes('description');
 
-// One entity, one URL: an @id names the same thing on every page, in both languages, so its url must not change from
-// page to page, or search engines and assistants get two addresses for one company or product.
+// One entity, one URL per language: an @id names the same thing on every page, so its url must not change from page
+// to page within a language, or search engines and assistants get two addresses for one company or product. (The
+// company's url is the site root in both languages; a product's is its page in the page's language.)
 for (const [id, urls] of entityUrls) {
   if (urls.size > 1) err(id, `JSON-LD url differs across pages: ${[...urls].map(([u, p]) => `${u} (on ${p})`).join(', ')}`);
 }
@@ -266,9 +273,36 @@ if (production) {
   }
 }
 
+// Content dates (src/content/page-dates.json): the sitemap's <lastmod> and each page's dateModified say when its text
+// last changed. A page whose text no longer matches its recorded fingerprint still shows its old date until
+// `npm run dates` records the change.
+const datesFile = join(root, 'src/content/page-dates.json');
+const dates = existsSync(datesFile) ? JSON.parse(readFileSync(datesFile, 'utf8')) : {};
+const undated = [...builtPages(dist)]
+  .filter(([p, file]) => dates[p]?.hash !== fingerprint(readFileSync(file, 'utf8')))
+  .map(([p]) => p);
+if (undated.length) {
+  warn('src/content/page-dates.json', `${undated.length} page(s) changed since their recorded date, or have none: run \`npm run dates\`, rebuild and commit it (${undated.slice(0, 4).join(', ')}${undated.length > 4 ? ', …' : ''})`);
+}
+
+// Facts only the owner can give (see OWNER-TODO.md). Notes, not failures: the site is correct without them.
+const ownerNotes = [];
+{
+  const home = readFileSync(join(dist, 'en/index.html'), 'utf8');
+  const graph = [...home.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap((m) => JSON.parse(m[1])['@graph'] ?? []);
+  const org = graph.find((n) => n['@type'] === 'Organization') ?? {};
+  if (!org.address?.addressLocality) ownerNotes.push('the company\'s city (src/config/site.ts, city)');
+  if (!org.sameAs?.length) ownerNotes.push('official LinkedIn / Facebook / Google Business Profile URLs (src/config/site.ts, sameAs)');
+  const software = readFileSync(join(dist, 'en/companies/index.html'), 'utf8');
+  if (!software.includes('"operatingSystem"')) ownerNotes.push('the deployment model, for SoftwareApplication.operatingSystem (src/lib/seo.ts)');
+  const placeholders = htmlFiles.filter((f) => readFileSync(f, 'utf8').includes('src="/placeholders/')).map(toUrlPath);
+  if (placeholders.length) ownerNotes.push(`real screenshots for ${placeholders.join(', ')}`);
+}
+
 console.log(`\nchecked ${pages.size} pages (${[...pages.keys()].filter((p) => p.startsWith('/ar/')).length} Arabic, ${[...pages.keys()].filter((p) => p.startsWith('/en/')).length} English)`);
 if (warnings.length) console.log(`\n${warnings.length} warning(s):\n  ` + warnings.join('\n  '));
 if (placeholderNotes.length) console.log(`\nBefore launch, set: \n  ` + placeholderNotes.join('\n  '));
+if (ownerNotes.length) console.log(`\nOwner TODO (OWNER-TODO.md): \n  ` + ownerNotes.join('\n  '));
 if (errors.length) {
   console.error(`\n${errors.length} error(s):\n  ` + errors.join('\n  '));
   process.exit(1);

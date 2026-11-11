@@ -1,0 +1,178 @@
+{
+  "/ar/": {
+    "hash": "036a0a1e78baa73d",
+    "modified": "2026-11-11"
+  },
+  "/ar/about/": {
+    "hash": "1ccd3f7def1edae4",
+    "modified": "2026-11-11"
+  },
+  "/ar/companies/": {
+    "hash": "3695c3f0053547c7",
+    "modified": "2026-11-11"
+  },
+  "/ar/companies/accounting/": {
+    "hash": "b09bb57322dff27a",
+    "modified": "2026-11-11"
+  },
+  "/ar/companies/customer-supplier-ledgers/": {
+    "hash": "acbaa37ecb840c72",
+    "modified": "2026-11-11"
+  },
+  "/ar/companies/faq/": {
+    "hash": "f2617ff23356eb3f",
+    "modified": "2026-11-11"
+  },
+  "/ar/companies/inventory/": {
+    "hash": "ba5b8b9401889b52",
+    "modified": "2026-11-11"
+  },
+  "/ar/companies/landed-cost/": {
+    "hash": "04a54380289e1a38",
+    "modified": "2026-11-10"
+  },
+  "/ar/companies/multi-currency/": {
+    "hash": "4dc0a7fdada68da0",
+    "modified": "2026-11-11"
+  },
+  "/ar/companies/sales-purchasing/": {
+    "hash": "6e68a8008de9ba91",
+    "modified": "2026-11-11"
+  },
+  "/ar/companies/unified-accounting-system/": {
+    "hash": "b3ff9f170ef418f5",
+    "modified": "2026-11-11"
+  },
+  "/ar/contact/": {
+    "hash": "1b0822304219ff2d",
+    "modified": "2026-11-11"
+  },
+  "/ar/government/": {
+    "hash": "2b3efe83097fb7b9",
+    "modified": "2026-11-11"
+  },
+  "/ar/government/budgets/": {
+    "hash": "c5661bde9e2f2d74",
+    "modified": "2026-11-11"
+  },
+  "/ar/government/cheques/": {
+    "hash": "7a128fc376a2fcc8",
+    "modified": "2026-11-11"
+  },
+  "/ar/government/faq/": {
+    "hash": "ca6ef3db9ed10e52",
+    "modified": "2026-11-11"
+  },
+  "/ar/government/legislation-library/": {
+    "hash": "d0a6a794c289a15e",
+    "modified": "2026-11-11"
+  },
+  "/ar/government/office-databases/": {
+    "hash": "9adc548a641e9a0c",
+    "modified": "2026-11-11"
+  },
+  "/ar/government/period-closing/": {
+    "hash": "603b9b7abe62925d",
+    "modified": "2026-11-11"
+  },
+  "/ar/government/voucher-amendments/": {
+    "hash": "cb4ad69e49ac1c9d",
+    "modified": "2026-11-11"
+  },
+  "/ar/government/vouchers-approval/": {
+    "hash": "e1a9a003e25fca01",
+    "modified": "2026-11-11"
+  },
+  "/ar/security-backups/": {
+    "hash": "88367c944b31ced5",
+    "modified": "2026-11-11"
+  },
+  "/en/": {
+    "hash": "7d42b181cc60cdda",
+    "modified": "2026-11-11"
+  },
+  "/en/about/": {
+    "hash": "0ec1520d48c5a8b8",
+    "modified": "2026-11-11"
+  },
+  "/en/companies/": {
+    "hash": "a7783a506dc51e8d",
+    "modified": "2026-11-11"
+  },
+  "/en/companies/accounting/": {
+    "hash": "47053547baf04b6f",
+    "modified": "2026-11-11"
+  },
+  "/en/companies/customer-supplier-ledgers/": {
+    "hash": "b49ce4ebe2b51c6a",
+    "modified": "2026-11-11"
+  },
+  "/en/companies/faq/": {
+    "hash": "5dfd12f29aa15c30",
+    "modified": "2026-11-11"
+  },
+  "/en/companies/inventory/": {
+    "hash": "7a8ab31fa91e476f",
+    "modified": "2026-11-11"
+  },
+  "/en/companies/landed-cost/": {
+    "hash": "de8135e89d67c72a",
+    "modified": "2026-11-10"
+  },
+  "/en/companies/multi-currency/": {
+    "hash": "ee6ff46dd23a9777",
+    "modified": "2026-11-11"
+  },
+  "/en/companies/sales-purchasing/": {
+    "hash": "ad91490ade832349",
+    "modified": "2026-11-11"
+  },
+  "/en/companies/unified-accounting-system/": {
+    "hash": "dbf1482165592c86",
+    "modified": "2026-11-11"
+  },
+  "/en/contact/": {
+    "hash": "1ce3ab78854f6a2e",
+    "modified": "2026-11-11"
+  },
+  "/en/government/": {
+    "hash": "97a10d43e3af908e",
+    "modified": "2026-11-11"
+  },
+  "/en/government/budgets/": {
+    "hash": "98881ace8ceef80a",
+    "modified": "2026-11-11"
+  },
+  "/en/government/cheques/": {
+    "hash": "858679726abd9644",
+    "modified": "2026-11-11"
+  },
+  "/en/government/faq/": {
+    "hash": "fba9e5690616fd44",
+    "modified": "2026-11-11"
+  },
+  "/en/government/legislation-library/": {
+    "hash": "458ee3e67e83de15",
+    "modified": "2026-11-11"
+  },
+  "/en/government/office-databases/": {
+    "hash": "e8d1518824fd61d7",
+    "modified": "2026-11-11"
+  },
+  "/en/government/period-closing/": {
+    "hash": "0a7b62aeaf22850e",
+    "modified": "2026-11-11"
+  },
+  "/en/government/voucher-amendments/": {
+    "hash": "03c70509cbc4a5fd",
+    "modified": "2026-11-11"
+  },
+  "/en/government/vouchers-approval/": {
+    "hash": "aa757bfeef1272ea",
+    "modified": "2026-11-11"
+  },
+  "/en/security-backups/": {
+    "hash": "ba9ec8c8d5ca5c2f",
+    "modified": "2026-11-11"
+  }
+}
