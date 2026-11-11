@@ -442,8 +442,11 @@ export interface ContactContent extends PageMeta {
     organisation: string;
     orgType: string;
     orgTypes: { value: string; label: string }[];
+    /** First option of a required list: no choice yet, so the form cannot be sent without one. */
+    orgTypeNone: string;
     product: string;
     products: { value: string; label: string }[];
+    productNone: string;
     governorate: string;
     governorateNone: string;
     phone: string;
@@ -457,7 +460,10 @@ export interface ContactContent extends PageMeta {
   privacy: string;
   noscript: string;
   statusOpening: string;
-  statusMissing: string;
+  /** Text alternative of the error icon that starts each field's error message. */
+  errorLabel: string;
+  /** Shown under a field once it has been left empty or wrong (and in the browser's own message). */
+  errors: { name: string; organisation: string; orgType: string; product: string; phone: string; email: string };
   waMessageIntro: string;
   directHeading: string;
   directBody: string;
@@ -494,12 +500,14 @@ export const contact: L<ContactContent> = {
         { value: 'government', label: 'دائرة حكومية' },
         { value: 'other', label: 'أخرى' },
       ],
+      orgTypeNone: 'اختر نوع الجهة',
       product: 'البرنامج الذي يهمّك',
       products: [
         { value: 'genoa', label: 'Genoa للشركات' },
         { value: 'genoa-gov', label: 'Genoa Gov للدوائر الحكومية' },
         { value: 'unsure', label: 'لست متأكداً بعد' },
       ],
+      productNone: 'اختر البرنامج',
       governorate: 'المحافظة',
       governorateNone: 'اختر المحافظة',
       phone: 'رقم الهاتف أو واتساب',
@@ -515,7 +523,15 @@ export const contact: L<ContactContent> = {
     noscript:
       'يحتاج إرسال النموذج إلى تفعيل JavaScript. يمكنك بدلاً من ذلك مراسلتنا مباشرة على واتساب أو البريد الإلكتروني.',
     statusOpening: 'جارٍ فتح واتساب مع رسالة جاهزة. اضغط «إرسال» في واتساب لإكمال الطلب.',
-    statusMissing: 'يرجى ملء الحقول المطلوبة.',
+    errorLabel: 'خطأ',
+    errors: {
+      name: 'اكتب اسمك الكامل.',
+      organisation: 'اكتب اسم الشركة أو الدائرة.',
+      orgType: 'اختر نوع الجهة.',
+      product: 'اختر البرنامج الذي يهمّك.',
+      phone: 'اكتب رقم الهاتف أو واتساب، مثل 07XX XXX XXXX.',
+      email: 'اكتب بريداً إلكترونياً صحيحاً، مثل name@example.com، أو اترك الحقل فارغاً.',
+    },
     waMessageIntro: 'طلب عرض توضيحي من موقع Genoa',
     directHeading: 'تفضّل التواصل المباشر؟',
     directBody: 'راسلنا على واتساب أو البريد الإلكتروني، واذكر اسم جهتك والبرنامج الذي يهمّك.',
@@ -544,12 +560,14 @@ export const contact: L<ContactContent> = {
         { value: 'government', label: 'Government department' },
         { value: 'other', label: 'Other' },
       ],
+      orgTypeNone: 'Choose the type of organisation',
       product: 'Product you are interested in',
       products: [
         { value: 'genoa', label: 'Genoa for companies' },
         { value: 'genoa-gov', label: 'Genoa Gov for government' },
         { value: 'unsure', label: 'Not sure yet' },
       ],
+      productNone: 'Choose a product',
       governorate: 'Governorate',
       governorateNone: 'Choose a governorate',
       phone: 'Phone or WhatsApp number',
@@ -565,7 +583,15 @@ export const contact: L<ContactContent> = {
     noscript:
       'Sending this form needs JavaScript. You can message us directly on WhatsApp or by email instead.',
     statusOpening: 'Opening WhatsApp with a ready-made message. Press “Send” in WhatsApp to complete your request.',
-    statusMissing: 'Please fill in the required fields.',
+    errorLabel: 'Error',
+    errors: {
+      name: 'Enter your full name.',
+      organisation: 'Enter the name of your company or department.',
+      orgType: 'Choose the type of organisation.',
+      product: 'Choose the product you are interested in.',
+      phone: 'Enter a phone or WhatsApp number, like 07XX XXX XXXX.',
+      email: 'Enter a valid email address, like name@example.com, or leave it empty.',
+    },
     waMessageIntro: 'Demo request from the Genoa website',
     directHeading: 'Prefer to contact us directly?',
     directBody: 'Message us on WhatsApp or by email and tell us your organisation and the product you are interested in.',

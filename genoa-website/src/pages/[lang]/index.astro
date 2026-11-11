@@ -20,6 +20,8 @@ export function getStaticPaths() {
 const lang = Astro.params.lang as Lang;
 const h = home[lang];
 const og = `/og/og-home-${lang}.png`;
+// Comparison table column headings (product names, the same in both languages).
+const columns = ['Genoa', 'Genoa Gov'];
 // Real screenshots for the 'inside the software' pair (shown only when both exist).
 const insideIds = ['companies-overview', hasRealScreenshot('government-vouchers-approval') ? 'government-vouchers-approval' : 'government-overview'];
 const showInside = insideIds.every(hasRealScreenshot);
@@ -120,12 +122,13 @@ const jsonld = pageGraph({
         <p>{h.compare.intro}</p>
       </div>
       <div class="table-wrap" data-reveal role="region" aria-labelledby="compare-heading" tabindex="0">
-        <table class="compare">
+        {/* --label-n: the column headings, shown in each cell when a narrow table is stacked as cards. */}
+        <table class="compare" style={`--label-2: "${columns[0]}"; --label-3: "${columns[1]}"`}>
           <thead>
             <tr>
               <td></td>
-              <th scope="col">Genoa</th>
-              <th scope="col">Genoa Gov</th>
+              <th scope="col">{columns[0]}</th>
+              <th scope="col">{columns[1]}</th>
             </tr>
           </thead>
           <tbody>

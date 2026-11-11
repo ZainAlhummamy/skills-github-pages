@@ -6,7 +6,11 @@ software for Iraqi government departments), built for SEO and GEO — being foun
 by Google and quoted by AI assistants such as ChatGPT, Gemini and Perplexity.
 
 - Framework: [Astro](https://astro.build) static output (no server, no database, no client data).
-- Zero JavaScript framework on the client. The only script is a ~1 KB inline handler on the contact page.
+- Zero JavaScript framework on the client. Small scripts only: the header menu (it shows the links inline when they
+  fit, else as a popover; browsers without the Popover API also load a ~11 KB polyfill, others never do), the FAQ
+  toggles, the contact form's error messages and WhatsApp handoff, and the scroll reveal. Without scripts the pages
+  still read in full: the menu stays collapsed behind its button, which opens it in any browser with the Popover API
+  (every link is also in the footer), and every FAQ answer shows.
 - Arabic is the default at `/ar/` (RTL); full English at `/en/`; `hreflang` between every pair.
 - Self-hosted IBM Plex Sans Arabic (4 woff2 files, Arabic + Latin subsets, 400/700).
 

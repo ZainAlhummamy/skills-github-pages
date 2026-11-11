@@ -51,6 +51,8 @@ const robots = site.noindex
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* Follow the phone's own text-size setting (where supported); the layout is checked up to 200%. */}
+    <meta name="text-scale" content="scale" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
@@ -82,6 +84,8 @@ const robots = site.noindex
     <meta name="format-detection" content="telephone=no" />
     {fontPreloads.map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
     {ld && <script type="application/ld+json" set:html={ld} />}
+    {/* Without scripts the FAQ toggles cannot open their answers, so show every answer. */}
+    <noscript><style is:inline>.faq-acc .faq-body[hidden] { display: block !important; content-visibility: visible !important; padding-block-end: 1.1rem !important; }</style></noscript>
   </head>
   <body>
     <div class="scroll-progress" aria-hidden="true"></div>

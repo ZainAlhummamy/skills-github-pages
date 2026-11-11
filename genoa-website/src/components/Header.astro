@@ -17,42 +17,90 @@ const isCurrent = (href: string) => pathname === href;
 const inSection = (href: string) => pathname !== href && pathname.startsWith(href);
 const altHref = hasAlternate ? swapLang(pathname, other) : path(other);
 ---
+<!--
+  One navigation for every width. The links are a popover opened by the menu button (light dismiss and
+  Escape come with it); the script below shows them inline instead whenever the whole row fits, so a
+  longer translation or larger text moves the switch point by itself. Without the script the menu stays
+  collapsed at every width.
+-->
 <header class="site-header">
   <div class="container header-inner">
     <Logo lang={lang} />
-    {['nav', 'menu'].map((kind) => {
-      const list = (
-        <ul class="nav-list">
-          {links.map((l) => (
-            <li>
-              <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined} data-section={inSection(l.href) ? 'true' : undefined}>
-                {l.label}
-              </a>
-            </li>
-          ))}
+    <nav class="site-nav" aria-label={t('mainNav', lang)}>
+      <button class="menu-button" type="button" popovertarget="site-menu" popovertargetaction="toggle" aria-controls="site-menu">
+        <Icon name="menu" /><span>{t('menu', lang)}</span>
+      </button>
+      <ul id="site-menu" class="nav-list site-menu" popover="auto">
+        {links.map((l) => (
           <li>
-            <a class="lang-switch" href={altHref} hreflang={other} lang={other} title={t('switchLangLabel', lang)}>
-              {t('switchLang', lang)}
+            <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined} data-section={inSection(l.href) ? 'true' : undefined}>
+              {l.label}
             </a>
           </li>
-          <li>
-            <a class="btn btn-primary" href={path(lang, 'contact')} aria-current={isCurrent(path(lang, 'contact')) ? 'page' : undefined}>
-              {t('bookDemo', lang)}
-            </a>
-          </li>
-        </ul>
-      );
-      return kind === 'nav' ? (
-        <nav class="nav" aria-label={t('mainNav', lang)}>{list}</nav>
-      ) : (
-        <details class="menu">
-          <summary><Icon name="menu" /><span>{t('menu', lang)}</span></summary>
-          <nav class="menu-panel" aria-label={t('mainNav', lang)}>{list}</nav>
-        </details>
-      );
-    })}
+        ))}
+        <li>
+          <a class="lang-switch" href={altHref} hreflang={other} lang={other} title={t('switchLangLabel', lang)}>
+            {t('switchLang', lang)}
+          </a>
+        </li>
+        <li>
+          <a class="btn btn-primary" href={path(lang, 'contact')} aria-current={isCurrent(path(lang, 'contact')) ? 'page' : undefined}>
+            {t('bookDemo', lang)}
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </header>
 <style>
-  .menu summary :global(svg) { width: 22px; height: 22px; }
+  .menu-button :global(svg) { width: 22px; height: 22px; }
 </style>
+<script>
+  // Browsers without the Popover API (for example Safari before 17) get the polyfill, and only they load it.
+  if (!Object.prototype.hasOwnProperty.call(HTMLElement.prototype, 'popover')) {
+    import('@oddbird/popover-polyfill');
+  }
+
+  const header = document.querySelector<HTMLElement>('.site-header');
+  const inner = header?.querySelector<HTMLElement>('.header-inner');
+  const nav = header?.querySelector<HTMLElement>('.site-nav');
+  const menu = document.getElementById('site-menu');
+
+  if (header && inner && nav && menu) {
+    // setAttribute/removeAttribute and this selector, not the popover property or :popover-open alone, so the
+    // polyfill (which marks an open popover with the class ":popover-open") works the same.
+    const isOpen = () => menu.matches(':is(:popover-open, .\\:popover-open)');
+    let collapsedWidth = 0;
+
+    const layout = () => {
+      const width = header.clientWidth;
+      const wasWide = header.classList.contains('is-wide');
+      // While collapsed, measure again only when there is more room than when it collapsed: measuring on
+      // every shrink would switch the layout back and forth.
+      if (!wasWide && width <= collapsedWidth) return;
+      const wasOpen = isOpen();
+      header.classList.add('is-measuring', 'is-wide');
+      const wide = inner.scrollWidth <= inner.clientWidth;
+      header.classList.toggle('is-wide', wide);
+      if (wide) {
+        menu.removeAttribute('popover');
+      } else {
+        collapsedWidth = width;
+        if (!menu.hasAttribute('popover')) menu.setAttribute('popover', 'auto');
+        // Taking the attribute off closed an open menu; a still-collapsed layout keeps it open.
+        if (wasOpen && !isOpen()) menu.showPopover();
+      }
+      requestAnimationFrame(() => header.classList.remove('is-measuring'));
+    };
+
+    const observer = new ResizeObserver(layout);
+    observer.observe(header);
+    observer.observe(menu);
+
+    // Tabbing out of the open menu closes it, so it never covers the link that receives focus next.
+    nav.addEventListener('focusout', (event) => {
+      const next = event.relatedTarget;
+      if (next instanceof Node && !nav.contains(next) && menu.hasAttribute('popover') && isOpen()) menu.hidePopover();
+    });
+  }
+</script>

@@ -1,0 +1,12 @@
+---
+/* A form field's error message: hidden until its field is :user-invalid (CSS), then linked to the field by the
+   contact page's script. It starts with an icon whose text alternative says it is an error, so the state is not
+   shown by colour alone. */
+import type { Lang } from '../content/types';
+import { contact } from '../content/pages';
+import Icon from './Icon.astro';
+interface Props { id: string; text: string; }
+const { id, text } = Astro.props;
+const lang = (Astro.params.lang ?? 'ar') as Lang;
+---
+<p id={id} class="error-msg"><Icon name="alert" label={contact[lang].errorLabel} /><span>{text}</span></p>

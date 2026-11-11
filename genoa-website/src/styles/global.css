@@ -97,8 +97,9 @@ a:hover {
   color: var(--brand-ink);
 }
 
+/* Dark amber: at least 3:1 against every background on the site, light (4.3:1 or more) and dark (3.4:1 or more). */
 :focus-visible {
-  outline: 3px solid #f0a500;
+  outline: 3px solid #b45309;
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -212,7 +213,7 @@ li + li {
   width: 32px;
   height: 32px;
 }
-.nav {
+.site-nav {
   margin-inline-start: auto;
 }
 .nav-list {
@@ -236,63 +237,110 @@ li + li {
   text-decoration: none;
   font-weight: 500;
 }
-.nav-list a:hover,
-.nav-list a[aria-current='page'],
-.nav-list a[data-section='true'] {
+.nav-list a:hover {
   color: var(--brand-ink);
   background: var(--brand-soft);
+}
+/* The current page (or section) is marked by more than colour: bold text and a brand underline (8.6:1 on white). */
+.nav-list a:not(.btn):is([aria-current='page'], [data-section='true']) {
+  color: var(--brand-ink);
+  font-weight: 700;
+  text-decoration-line: underline;
+  text-decoration-thickness: 3px;
+  text-decoration-color: var(--brand);
+  text-underline-offset: 0.45em;
+}
+.nav-list a.btn[aria-current='page'] {
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
 }
 .lang-switch {
   font-weight: 700;
   border: 1px solid var(--line);
 }
-.menu {
+
+/* Collapsed layout (the default, and the only one without script): the links are a popover under the menu button. */
+.menu-button {
+  anchor-name: --menu-button;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.site-menu[popover] {
+  position: fixed;
+  inset: auto;
+  /* Browsers without anchor positioning keep this offset (about the header height). */
+  inset-block-start: 4.75rem;
+  inset-block-start: anchor(--menu-button bottom);
+  inset-inline-end: 1rem;
+  inline-size: min(88dvw, 20rem);
+  max-inline-size: calc(100dvw - 2rem);
+  block-size: fit-content;
+  max-block-size: calc(100dvh - 6rem);
+  margin: 0.5rem 0 0;
+  overflow: auto;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0.5rem;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+/* Also hides the list before the polyfill has loaded, in browsers without the Popover API. */
+.site-header:not(.is-wide) .site-menu[popover]:not(:is(:popover-open, .\:popover-open)) {
   display: none;
 }
+.site-menu[popover] a {
+  width: 100%;
+}
+/* Larger text: the logo and the menu button may need two rows. */
+.site-header:not(.is-wide) .header-inner {
+  flex-wrap: wrap;
+}
 
-@media (max-width: 960px) {
-  .nav {
-    display: none;
-  }
-  .menu {
-    display: block;
-    margin-inline-start: auto;
-    position: relative;
-  }
-  .menu > summary {
-    list-style: none;
-    cursor: pointer;
-    min-height: 44px;
-    min-width: 44px;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.4rem 0.8rem;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    font-weight: 700;
-  }
-  .menu > summary::-webkit-details-marker {
-    display: none;
-  }
-  .menu-panel {
-    position: absolute;
-    inset-inline-end: 0;
-    top: calc(100% + 0.5rem);
-    width: min(88vw, 320px);
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 0.5rem;
-  }
-  .menu-panel .nav-list {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .menu-panel .nav-list a {
-    width: 100%;
-  }
+/* Inline layout, chosen by the script when the whole row fits. */
+.site-header.is-wide .header-inner > * {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.site-header.is-wide .menu-button {
+  display: none;
+}
+.site-header.is-wide .site-menu {
+  position: static;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  inline-size: auto;
+  max-inline-size: none;
+  block-size: auto;
+  max-block-size: none;
+  overflow: visible;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.site-header.is-wide .site-menu a {
+  width: auto;
+}
+.site-header.is-measuring * {
+  transition: none !important;
 }
 
 /* ---------- Buttons ---------- */
@@ -564,6 +612,8 @@ li + li {
   border-top-color: var(--gov);
 }
 .product-card .tag {
+  /* Wraps when the text is enlarged rather than widening the card. */
+  white-space: normal;
   font-weight: 700;
   color: var(--brand-ink);
   font-size: 0.95rem;
@@ -583,6 +633,8 @@ li + li {
 }
 .module-links a {
   display: flex;
+  /* With enlarged text the "optional" badge moves under the label instead of widening the card. */
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.6rem;
   min-height: 44px;
@@ -651,17 +703,29 @@ li + li {
   height: 30px;
 }
 
-/* Comparison table */
+/* Comparison table: a table where it fits, a stack of cards (one per row) when the wrapper is narrow. */
 .table-wrap {
   overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: #fff;
+  container-type: inline-size;
 }
 .compare {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   min-width: 560px;
+}
+.compare thead {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+}
+.compare tbody th {
+  position: sticky;
+  inset-inline-start: 0;
+  background: #fff;
 }
 .compare th,
 .compare td {
@@ -681,6 +745,51 @@ li + li {
 }
 .compare tr:last-child > * {
   border-bottom: 0;
+}
+@container (width < 600px) {
+  .compare,
+  .compare thead,
+  .compare tbody,
+  .compare tr,
+  .compare th,
+  .compare td {
+    display: block;
+  }
+  .compare {
+    min-width: 0;
+  }
+  /* Hidden from layout and from screen readers: each cell names its column itself (below). */
+  .compare thead {
+    display: none;
+  }
+  .compare tbody th {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 2;
+    width: auto;
+    color: var(--ink);
+    background: var(--soft);
+  }
+  .compare tbody tr:not(:last-child) {
+    border-bottom: 1px solid var(--line);
+  }
+  .compare td {
+    border-bottom: 0;
+  }
+  .compare td::before {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-weight: 700;
+    unicode-bidi: isolate;
+  }
+  .compare td:nth-child(2)::before {
+    content: var(--label-2);
+    color: var(--brand-ink);
+  }
+  .compare td:nth-child(3)::before {
+    content: var(--label-3);
+    color: var(--gov-ink);
+  }
 }
 
 /* Principles */
@@ -869,6 +978,15 @@ li + li {
   display: grid;
   gap: 1rem;
 }
+/* Grid items default to min-width: auto, and a text field's intrinsic width would then widen the form past the
+   screen when the text is enlarged. */
+.form-grid > *,
+.content-grid > *,
+.product-split > *,
+.module-links > li,
+.faq-list > * {
+  min-width: 0;
+}
 @media (min-width: 700px) {
   .form-grid {
     grid-template-columns: 1fr 1fr;
@@ -894,7 +1012,8 @@ li + li {
   font: inherit;
   color: var(--ink);
   background: #fff;
-  border: 1.5px solid #b7c2d3;
+  /* 3.6:1 on white: the field's edge has to be visible to find it (non-text contrast). */
+  border: 1.5px solid #7b879a;
   border-radius: 10px;
   padding: 0.55rem 0.8rem;
 }
@@ -902,12 +1021,39 @@ li + li {
   min-height: 120px;
   resize: vertical;
 }
+/* A failed send scrolls to the first invalid field: leave room for its label under the sticky header. */
+.field :is(input, select, textarea) {
+  scroll-margin-block-start: 2.75rem;
+}
+/* The site's focus ring (above) marks the focused field; the border also turns brand blue. */
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
   border-color: var(--brand);
-  outline: 3px solid rgb(23 70 162 / 25%);
-  outline-offset: 0;
+}
+/* Errors appear only after the user has left a field empty or wrong, or tried to send (:user-invalid), never on load.
+   The message starts with an icon labelled "Error", so the state is not shown by colour alone. */
+.field :is(input, select, textarea):user-invalid {
+  border-color: #b3261e;
+  background-color: #fdf3f2;
+}
+.error-msg {
+  display: none;
+  align-items: flex-start;
+  gap: 0.35rem;
+  margin: 0.35rem 0 0;
+  color: #b3261e;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.error-msg svg {
+  flex: none;
+  width: 1.15em;
+  height: 1.15em;
+  margin-top: 0.2em;
+}
+.field :user-invalid ~ .error-msg {
+  display: flex;
 }
 .field .hint {
   font-size: 0.88rem;
@@ -994,18 +1140,17 @@ li + li {
   unicode-bidi: isolate;
   display: inline-block;
 }
-
-@media (prefers-reduced-motion: reduce) {
-  * {
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
+/* An e-mail address in a button may break anywhere rather than push the button past a narrow screen. */
+.btn .ltr {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 /* =====================================================================
    Motion & accounting visual language
    - Only transform/opacity are animated (composited, no layout shift).
-   - Everything is disabled under prefers-reduced-motion.
+   - Movement (transforms, entrances, scroll-linked bars) only runs under
+     prefers-reduced-motion: no-preference; colour and shadow changes stay.
    - Scroll reveal is progressive: content is only hidden after the
      script has run, and never above the fold.
    ===================================================================== */
@@ -1075,11 +1220,9 @@ h2.ruled::after {
   transition: transform 0.18s var(--ease-out), box-shadow 0.2s, background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 .btn:hover {
-  transform: translateY(-1px);
   box-shadow: 0 8px 20px rgb(15 27 45 / 14%);
 }
 .btn:active {
-  transform: translateY(0);
   box-shadow: none;
 }
 .btn-primary::after,
@@ -1092,17 +1235,12 @@ h2.ruled::after {
   transition: transform 0.7s var(--ease-out);
   pointer-events: none;
 }
-.btn-primary:hover::after,
-.btn-wa:hover::after {
-  transform: translateX(130%);
-}
 
 /* ---- Cards ---- */
 .card {
   transition: transform 0.25s var(--ease-out), border-color 0.2s, box-shadow 0.25s;
 }
 .card:hover {
-  transform: translateY(-4px);
   box-shadow: 0 14px 34px rgb(15 27 45 / 10%);
 }
 .card .icon {
@@ -1111,19 +1249,12 @@ h2.ruled::after {
 .card:hover .icon {
   background: var(--brand);
   color: #fff;
-  transform: rotate(-6deg) scale(1.06);
 }
 .card[data-product='government']:hover .icon {
   background: var(--gov);
 }
 .card .more svg {
   transition: transform 0.25s var(--ease-out);
-}
-.card:hover .more svg {
-  transform: translateX(4px);
-}
-[dir='rtl'] .card:hover .more svg.flip-rtl {
-  transform: scaleX(-1) translateX(4px);
 }
 .product-card {
   transition: transform 0.25s var(--ease-out), box-shadow 0.25s;
@@ -1134,25 +1265,19 @@ h2.ruled::after {
 .module-links a {
   transition: background-color 0.15s, transform 0.2s var(--ease-out);
 }
-.module-links a:hover {
-  transform: translateX(3px);
-}
-[dir='rtl'] .module-links a:hover {
-  transform: translateX(-3px);
-}
 .principles > div {
   transition: transform 0.25s var(--ease-out), box-shadow 0.25s, border-color 0.2s;
   border-top: 3px solid transparent;
 }
 .principles > div:hover {
-  transform: translateY(-3px);
   border-top-color: var(--brand);
   box-shadow: 0 12px 28px rgb(15 27 45 / 8%);
 }
 .compare tbody tr {
   transition: background-color 0.15s;
 }
-.compare tbody tr:hover {
+.compare tbody tr:hover,
+.compare tbody tr:hover > th {
   background: #f8fafd;
 }
 .answer-box {
@@ -1574,28 +1699,37 @@ h2.ruled::after {
   }
 }
 
-/* ---- FAQ accordion (FAQ pages) ---- */
+/* ---- FAQ accordion (FAQ pages): <h3><button aria-expanded> + an answer hidden with hidden="until-found" ---- */
 .faq-acc {
   padding: 0;
 }
-.faq-acc > summary {
-  list-style: none;
-  cursor: pointer;
+.faq-acc h3 {
+  margin: 0;
+  font-size: 1.08rem;
+}
+.faq-toggle {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  width: 100%;
   padding: 1rem 1.25rem;
+  border: 0;
   border-radius: var(--radius);
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: start;
+  cursor: pointer;
 }
-.faq-acc > summary::-webkit-details-marker {
-  display: none;
-}
-.faq-acc > summary h3 {
-  margin: 0;
-}
-.faq-acc > summary:hover h3 {
+.faq-toggle:hover {
   color: var(--brand-ink);
+}
+.faq-toggle > span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .faq-acc .chev {
   flex: none;
@@ -1604,7 +1738,7 @@ h2.ruled::after {
   border-radius: 50%;
   background: var(--soft);
   position: relative;
-  transition: transform 0.3s var(--ease-out), background-color 0.2s;
+  transition: background-color 0.2s;
 }
 .faq-acc .chev::before,
 .faq-acc .chev::after {
@@ -1620,28 +1754,32 @@ h2.ruled::after {
 }
 .faq-acc .chev::after {
   transform: rotate(90deg);
-  transition: transform 0.3s var(--ease-out);
 }
-.faq-acc[open] .chev {
+.faq-toggle[aria-expanded='true'] .chev {
   background: var(--brand-soft);
 }
-.faq-acc[open] .chev::after {
+.faq-toggle[aria-expanded='true'] .chev::after {
   transform: rotate(0deg);
+}
+/* The plus turning into a minus is motion: only for users who have not asked for less. */
+@media (prefers-reduced-motion: no-preference) {
+  .faq-acc .chev {
+    transition: transform 0.3s var(--ease-out), background-color 0.2s;
+  }
+  .faq-acc .chev::after {
+    transition: transform 0.3s var(--ease-out);
+  }
 }
 .faq-acc .faq-body {
   padding: 0 1.25rem 1.1rem;
 }
-.faq-acc[open] {
+/* A closed answer (hidden="until-found" keeps its box for find-in-page) takes no room. */
+.faq-acc .faq-body[hidden] {
+  padding-block: 0;
+}
+.faq-acc:has(.faq-toggle[aria-expanded='true']) {
   border-color: #c5d2e6;
   box-shadow: 0 8px 22px rgb(15 27 45 / 6%);
-}
-.faq-acc::details-content {
-  block-size: 0;
-  overflow: clip;
-  transition: block-size 0.35s var(--ease-out), content-visibility 0.35s allow-discrete;
-}
-.faq-acc[open]::details-content {
-  block-size: auto;
 }
 
 /* ---- Reading progress + header shadow (CSS scroll-driven, no JS) ---- */
@@ -1749,17 +1887,27 @@ h2.ruled::after {
       background: linear-gradient(90deg, var(--brand), #2bb3a3);
       transform-origin: left center;
       animation: grow-x linear both;
+    }
+    /* animation-timeline in a rule of its own (see the header shadow below). */
+    :root .scroll-progress {
       animation-timeline: scroll(root);
     }
     [dir='rtl'] .scroll-progress {
       transform-origin: right center;
       background: linear-gradient(270deg, var(--brand), #2bb3a3);
     }
-    .site-header::after {
-      animation: fade-in linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 120px;
-    }
+  }
+}
+/* The header's shadow fades in as the page scrolls: a change of opacity, not motion, so it shows for everyone.
+   animation-timeline sits in a rule of its own, with a more specific selector, so the minifier cannot fold it into
+   the animation shorthand: browsers drop a shorthand that carries a timeline, and the effect never ran. */
+@supports (animation-timeline: scroll()) {
+  .site-header::after {
+    animation: fade-in linear both;
+  }
+  :root .site-header::after {
+    animation-timeline: scroll(root);
+    animation-range: 0 120px;
   }
 }
 
@@ -1809,12 +1957,41 @@ h2.ruled::after {
     transform: scale(1) rotate(-8deg);
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .btn:hover,
-  .card:hover,
-  .principles > div:hover,
+/* Hover movement: only for users who have not asked for less motion (the colour and shadow changes above stay). */
+@media (prefers-reduced-motion: no-preference) {
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+  .btn:active {
+    transform: translateY(0);
+  }
+  .btn-primary:hover::after,
+  .btn-wa:hover::after {
+    transform: translateX(130%);
+  }
+  .card:hover {
+    transform: translateY(-4px);
+  }
+  .card:hover .icon {
+    transform: rotate(-6deg) scale(1.06);
+  }
+  .card:hover .more svg {
+    transform: translateX(4px);
+  }
+  [dir='rtl'] .card:hover .more svg.flip-rtl {
+    transform: scaleX(-1) translateX(4px);
+  }
   .module-links a:hover {
-    transform: none;
+    transform: translateX(3px);
+  }
+  [dir='rtl'] .module-links a:hover {
+    transform: translateX(-3px);
+  }
+  .principles > div:hover {
+    transform: translateY(-3px);
+  }
+  .shot.framed .shot-link:hover {
+    transform: translateY(-3px);
   }
 }
 
@@ -1829,7 +2006,6 @@ h2.ruled::after {
   transition: transform 0.25s var(--ease-out), box-shadow 0.25s;
 }
 .shot.framed .shot-link:hover {
-  transform: translateY(-3px);
   box-shadow: 0 1px 2px rgb(15 27 45 / 6%), 0 24px 52px rgb(15 27 45 / 16%);
 }
 .shot.framed img {

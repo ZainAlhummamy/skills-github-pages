@@ -3,26 +3,60 @@ import type { Faq } from '../content/types';
 interface Props {
   faqs: Faq[];
   idPrefix?: string;
-  /** Render as accordions (<details>); the first one starts open. Content stays in the HTML for crawlers. */
+  /**
+   * Render as an accordion; the first answer starts open. Each question stays a real <h3> (a heading inside
+   * <summary> is dropped by some screen readers) with the toggle button inside it, and closed answers use
+   * hidden="until-found", so find-in-page still reaches them where supported. Content stays in the HTML.
+   */
   collapsible?: boolean;
 }
 const { faqs, idPrefix = 'q', collapsible = false } = Astro.props;
 ---
 <div class="faq-list">
-  {faqs.map((f, i) =>
-    collapsible ? (
-      <details class="faq-item faq-acc" open={i === 0} data-reveal style={`--i:${i % 4}`}>
-        <summary>
-          <h3 id={`${idPrefix}-${i + 1}`}>{f.q}</h3>
-          <span class="chev" aria-hidden="true"></span>
-        </summary>
-        <div class="faq-body">{f.a.map((p) => <p>{p}</p>)}</div>
-      </details>
+  {faqs.map((f, i) => {
+    const id = `${idPrefix}-${i + 1}`;
+    const open = i === 0;
+    return collapsible ? (
+      <div class="faq-item faq-acc" data-reveal style={`--i:${i % 4}`}>
+        <h3 id={id}>
+          <button type="button" class="faq-toggle" commandfor={`${id}-a`} command="--toggle" aria-expanded={open ? 'true' : 'false'}>
+            <span>{f.q}</span>
+            <span class="chev" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div id={`${id}-a`} class="faq-body" hidden={open ? undefined : 'until-found'}>{f.a.map((p) => <p>{p}</p>)}</div>
+      </div>
     ) : (
-      <article class="faq-item" aria-labelledby={`${idPrefix}-${i + 1}`} data-reveal style={`--i:${i % 4}`}>
-        <h3 id={`${idPrefix}-${i + 1}`}>{f.q}</h3>
+      <article class="faq-item" aria-labelledby={id} data-reveal style={`--i:${i % 4}`}>
+        <h3 id={id}>{f.q}</h3>
         {f.a.map((p) => <p>{p}</p>)}
       </article>
-    ),
-  )}
+    );
+  })}
 </div>
+<script>
+  // Accordion toggles. Browsers with invoker commands send a "command" event to the answer; others get the
+  // same toggle from a click listener.
+  const toggle = (button: Element, content: HTMLElement) => {
+    content.hidden = (content.hidden ? false : 'until-found') as unknown as boolean;
+    button.setAttribute('aria-expanded', String(!content.hidden));
+  };
+  if (Object.prototype.hasOwnProperty.call(HTMLButtonElement.prototype, 'commandForElement')) {
+    // Command events do not bubble, hence capture.
+    document.addEventListener('command', ((event: Event & { command: string; source: Element }) => {
+      if (event.command !== '--toggle' || !(event.target instanceof HTMLElement)) return;
+      toggle(event.source, event.target);
+    }) as EventListener, { capture: true });
+  } else {
+    document.addEventListener('click', (event) => {
+      const button = (event.target as Element | null)?.closest?.('button[command="--toggle"][commandfor]');
+      const content = button && document.getElementById(button.getAttribute('commandfor') ?? '');
+      if (button && content) toggle(button, content);
+    });
+  }
+  // Find-in-page opens a closed answer itself: mirror that in its button.
+  document.addEventListener('beforematch', (event) => {
+    const id = (event.target as HTMLElement).id;
+    document.querySelector(`[commandfor="${CSS.escape(id)}"]`)?.setAttribute('aria-expanded', 'true');
+  });
+</script>
