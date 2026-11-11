@@ -30,7 +30,7 @@ export const home: L<HomeContent> = {
   ar: {
     title: 'برامج محاسبة للشركات والدوائر الحكومية | Genoa Systems',
     description:
-      'حلول مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي: Genoa للشركات بالنظام المحاسبي الموحد وقوائم IFRS، وGenoa Gov للدوائر الحكومية العراقية.',
+      'حلول مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي: Genoa للشركات بدليل حسابات النظام المحاسبي الموحد وقوائم IFRS، وGenoa Gov للدوائر الحكومية العراقية.',
     h1: 'برامج محاسبة عراقية للشركات وللدوائر الحكومية',
     answer:
       'Genoa Systems شركة برمجيات تقدّم حلولاً مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي الموجّه للأعمال المحاسبية والمالية، ولها برنامجان محاسبيان منفصلان للسوق العراقي. برنامج Genoa موجّه للشركات، ويعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفق معايير IFRS، ويجمع الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمارها. برنامج Genoa Gov موجّه لأقسام الحسابات في الدوائر الحكومية العراقية، ويغطي المستندات وسلسلة المصادقة والموازنة والصكوك والغلق الشهري والسنوي.',
@@ -115,7 +115,7 @@ export const home: L<HomeContent> = {
   en: {
     title: 'Accounting Software for Iraq | Genoa Systems',
     description:
-      'Financial and accounting solutions built with the latest technology and AI: Genoa for companies (Unified Accounting System, IFRS) and Genoa Gov for government.',
+      'Accounting solutions with the latest technology and AI: Genoa for companies (Unified Accounting System chart of accounts, IFRS-based statements) and Genoa Gov for government.',
     h1: 'Accounting software for Iraqi companies and government departments',
     answer:
       'Genoa Systems is a software company that provides financial and accounting solutions built with the latest technology and with AI designed for accounting and financial work. It has two separate accounting products for the Iraqi market. Genoa is for companies, uses the Unified Accounting System chart of accounts, can prepare IFRS-based financial statements, and brings together accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. Genoa Gov is for the accounts sections of Iraqi government departments and covers vouchers with multi-user approval, budgets and allocation checks, cheques, and month-end and year-end closing.',
