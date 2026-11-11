@@ -41,13 +41,13 @@ const cards = [
     file: 'og-companies-ar', lang: 'ar', accent: '#5b8def',
     kicker: 'Genoa للشركات',
     title: 'الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين',
-    sub: 'وفق النظام المحاسبي الموحد ومعايير IFRS',
+    sub: 'دليل حسابات النظام المحاسبي الموحد، وقوائم مالية وفق IFRS',
   },
   {
     file: 'og-companies-en', lang: 'en', accent: '#5b8def',
     kicker: 'Genoa for companies',
     title: 'Accounting, inventory, sales, purchasing and ledgers with ageing',
-    sub: 'Unified Accounting System, in line with IFRS',
+    sub: 'Unified Accounting System chart of accounts, IFRS-based statements',
   },
   {
     file: 'og-government-ar', lang: 'ar', accent: '#2bb3a3',
