@@ -221,12 +221,11 @@ const env = (key) => (process.env[key] ?? '').trim();
 const production = env('CF_PAGES_BRANCH') === 'main' || /^(true|1|yes)$/i.test(env('PRODUCTION'));
 if (production) {
   const fail = (msg) => err('production build', msg);
-  // The address the site is staged on: never the production address, unless the owner decides it is (then take it off).
-  const stagingHosts = ['site.genoasystem.com'];
   // Names reserved for examples and tests (RFC 2606, 6761): never a real address, for the site or for e-mail.
   const reserved = (host) => host === 'localhost' || /\.(example|test|invalid|localhost)$/i.test(host);
-  // Cloudflare's own addresses and the staging address are not the production site either.
-  const notProductionHost = (host) => reserved(host) || host.endsWith('.pages.dev') || stagingHosts.includes(host);
+  // Cloudflare's own *.pages.dev addresses are not the production site either. (The production address is
+  // https://site.genoasystem.com, the owner's decision of 11 Nov 2026; see DEPLOY.md.)
+  const notProductionHost = (host) => reserved(host) || host.endsWith('.pages.dev');
 
   const siteUrl = env('SITE_URL');
   if (!siteUrl) fail('SITE_URL is not set');
