@@ -64,6 +64,20 @@ log ends with a "Before launch, set:" list while a placeholder is in use
 6. `public/_redirects` (`/` → `/ar/` 301) and `public/_headers` (security + cache headers) are applied automatically.
 7. Custom domain: add the apex and `www`; redirect the one that is **not** `SITE_URL` to the one that is (Cloudflare redirect rule).
 
+#### Duplicate addresses (`*.pages.dev`)
+
+Cloudflare also serves the site at `<project>.pages.dev` and each preview at
+`<hash>.<project>.pages.dev`. `public/_headers` sends `X-Robots-Tag: noindex` for both
+(`https://:project.pages.dev/*` and `https://:version.:project.pages.dev/*`), so only the real
+domain is indexed; every page's canonical tag already points at `SITE_URL`. This was chosen
+over a redirect because it lives in the repository, needs no dashboard setup, keeps each
+deploy's own address usable for checking it, and covers previews too. `check-site.mjs` fails
+the build if the rules go missing.
+
+Optional, stronger: also redirect `<project>.pages.dev` to the domain with a Cloudflare Bulk
+Redirect (Account → Bulk Redirects: source `<project>.pages.dev`, target `SITE_URL`, 301,
+preserve path and query). Leave preview addresses unredirected.
+
 ### Netlify
 
 - Base directory `genoa-website`, build command `npm run build`, publish directory `dist` (that is, `genoa-website/dist`).

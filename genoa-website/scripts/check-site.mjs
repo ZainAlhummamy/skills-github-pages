@@ -178,6 +178,16 @@ if (all.includes(PLACEHOLDER.email)) placeholderNotes.push(`CONTACT_EMAIL is a p
 if (all.includes(`wa.me/${PLACEHOLDER.whatsapp}`)) placeholderNotes.push(`WHATSAPP_NUMBER is a placeholder (${PLACEHOLDER.whatsapp})`);
 if (all.includes('content="noindex, nofollow"')) placeholderNotes.push('SITE_NOINDEX=true: STAGING build, search engines are blocked (unset it for production)');
 
+// Cloudflare's own addresses for the site (its production and preview deployments) copy the real domain: _headers must
+// keep them out of search (DEPLOY.md, "Duplicate addresses").
+{
+  const headers = existsSync(join(dist, '_headers')) ? readFileSync(join(dist, '_headers'), 'utf8') : '';
+  for (const host of ['https://:project.pages.dev/*', 'https://:version.:project.pages.dev/*']) {
+    const rule = new RegExp(`^${host.replace(/[.*]/g, '\\$&')}\\s*\\n(\\s+.*\\n)*?\\s+X-Robots-Tag:\\s*noindex`, 'm');
+    if (!rule.test(headers)) err('/_headers', `no X-Robots-Tag: noindex for ${host}`);
+  }
+}
+
 // A staging build (SITE_NOINDEX=true) lets crawlers in, so they read the noindex on every page and in every response's
 // X-Robots-Tag and drop the staging URLs they saw before; "Disallow: /" in robots.txt would hide the noindex from them.
 if (all.includes('content="noindex, nofollow"')) {

@@ -18,3 +18,11 @@
   Content-Type: text/plain; charset=utf-8
 /llms-full.txt
   Content-Type: text/plain; charset=utf-8
+
+# Cloudflare Pages: the project's own *.pages.dev addresses copy the real domain (SITE_URL).
+# Keep them, and every preview deployment, out of search; the real domain is not affected.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
