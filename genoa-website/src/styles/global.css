@@ -666,43 +666,6 @@ li + li {
   background: var(--gov-ink);
 }
 
-/* Technology and AI band (home) */
-.tech-card {
-  display: grid;
-  gap: 1.25rem;
-  align-items: start;
-  padding: clamp(1.25rem, 1rem + 1.5vw, 2.25rem);
-  border-radius: calc(var(--radius) + 4px);
-  border: 1px solid var(--line);
-  background: linear-gradient(135deg, var(--brand-soft), var(--gov-soft));
-}
-@media (min-width: 700px) {
-  .tech-card {
-    grid-template-columns: auto 1fr;
-  }
-}
-.tech-card h2 {
-  margin-bottom: 0.5rem;
-}
-.tech-card p {
-  max-width: 70ch;
-  color: var(--ink-2);
-}
-.tech-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  display: grid;
-  place-items: center;
-  background: #fff;
-  color: var(--brand);
-  box-shadow: var(--shadow);
-}
-.tech-icon svg {
-  width: 30px;
-  height: 30px;
-}
-
 /* Comparison table: a table where it fits, a stack of cards (one per row) when the wrapper is narrow. */
 .table-wrap {
   overflow-x: auto;

@@ -14,10 +14,10 @@ export const government: Product = {
       title: "برنامج محاسبة حكومية للدوائر العراقية | Genoa Gov",
       description:
         "Genoa Gov برنامج محاسبة حكومية لأقسام الحسابات في الدوائر العراقية: مصادقة متعددة المستخدمين، سجل تعديلات، تخصيصات، صكوك، وغلق شهري وسنوي.",
-      h1: "Genoa Gov: برنامج المحاسبة الحكومية للدوائر العراقية",
+      h1: "Genoa Gov: برنامج محاسبة حكومية للدوائر العراقية",
       productName: "Genoa Gov",
       answer:
-        "Genoa Gov برنامج محاسبة حكومية لأقسام الحسابات في الدوائر الحكومية العراقية. يضم مستندات الصرف والقبض والقيد مع سير عمل للتدقيق والمصادقة يشترك فيه أكثر من مستخدم، وتعديل المستندات المرحّلة مع سجل تعديلات كامل، والموازنة والتحقق من كفاية التخصيص، والصكوك، والغلق الشهري وغلق السنة المالية، ومكتبة للتشريعات. وتعمل كل دائرة في Genoa Gov بقاعدة بيانات منفصلة خاصة بها.",
+        "Genoa Gov برنامج محاسبة حكومية لأقسام الحسابات في الدوائر الحكومية العراقية. يضم مستندات القبض والقيد ومستندات الصرف (سندات الصرف)، مع سير عمل للتدقيق والمصادقة يشترك فيه أكثر من مستخدم، وتعديل المستندات المرحّلة مع سجل تعديلات كامل، والموازنة والتحقق من كفاية التخصيص، والصكوك، والغلق الشهري وغلق السنة المالية، ومكتبة للتشريعات. وتعمل كل دائرة في Genoa Gov بقاعدة بيانات منفصلة خاصة بها.",
       whatIs: {
         heading: "ما هو Genoa Gov؟",
         body: [
@@ -178,14 +178,14 @@ export const government: Product = {
       related: ['voucher-amendments', 'budgets', 'cheques'],
       content: {
         ar: {
-          title: "مستندات الصرف والتدقيق والمصادقة | Genoa Gov",
+          title: "مستندات الصرف (سندات الصرف) والمصادقة | Genoa Gov",
           description:
             "في Genoa Gov تمر مستندات الصرف والقبض والقيد بسير عمل للتدقيق والمصادقة يشترك فيه أكثر من مستخدم داخل قسم الحسابات في الدائرة الحكومية.",
           h1: "المستندات وسلسلة التدقيق والمصادقة في Genoa Gov",
           navLabel: "المستندات والمصادقة",
           cardSummary: "مستندات صرف وقبض وقيد يدققها ويصادق عليها أكثر من مستخدم.",
           answer:
-            "المستندات في Genoa Gov هي مستندات الصرف ووصولات القبض ومستندات القيد التي يُعدّها قسم الحسابات في الدائرة الحكومية العراقية. يمر كل مستند بسير عمل للتدقيق والمصادقة يشترك فيه أكثر من مستخدم. بذلك يمكن توزيع إعداد المستند وتدقيقه والمصادقة عليه بين موظفين مختلفين، بدل أن تكون كلها بيد شخص واحد.",
+            "المستندات في Genoa Gov هي مستندات الصرف (وتُسمّى أيضاً سندات الصرف) ووصولات القبض ومستندات القيد التي يُعدّها قسم الحسابات في الدائرة الحكومية العراقية. يمر كل مستند بسير عمل للتدقيق والمصادقة يشترك فيه أكثر من مستخدم. بذلك يمكن توزيع إعداد المستند وتدقيقه والمصادقة عليه بين موظفين مختلفين، بدل أن تكون كلها بيد شخص واحد.",
           keyFacts: [
             { label: "أنواع المستندات", value: "مستند صرف، وصل قبض، مستند قيد" },
             { label: "سير العمل", value: "تدقيق ومصادقة يشترك فيهما أكثر من مستخدم" },
@@ -1112,13 +1112,6 @@ export const government: Product = {
               ],
             },
             {
-              q: "هل يستخدم Genoa Gov الذكاء الاصطناعي؟",
-              a: [
-                "تقدّم Genoa Systems حلولاً مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي الموجّه للأعمال المحاسبية والمالية.",
-                "لمعرفة ما يتوفر من هذه الحلول في Genoa Gov وكيف يناسب عمل قسم الحسابات في دائرتك، احجز عرضاً توضيحياً.",
-              ],
-            },
-            {
               q: "هل بيانات كل دائرة منفصلة عن بيانات الدوائر الأخرى في Genoa Gov؟",
               a: [
                 "نعم، لكل دائرة في Genoa Gov قاعدة بيانات منفصلة خاصة بها.",
@@ -1200,6 +1193,19 @@ export const government: Product = {
             },
           ],
         },
+        {
+          // TODO(owner): the answers. A question with no answer (a: []) is left out of the page, its FAQPage
+          // JSON-LD and llms-full.txt (src/content/index.ts), so these appear as soon as they are answered.
+          heading: "التشغيل والدعم ونقل البيانات",
+          faqs: [
+            { q: "هل البرنامج سحابي أم يُنصَّب على أجهزتنا؟", a: [] },
+            { q: "هل يحتاج إلى إنترنت؟", a: [] },
+            { q: "كم مستخدماً أو فرعاً يدعم؟", a: [] },
+            { q: "هل يوجد تدريب ودعم فني؟", a: [] },
+            { q: "هل يمكن نقل بياناتنا من برنامج محاسبي آخر؟", a: [] },
+            { q: "هل تُطبع المستندات والتقارير بالعربية؟", a: [] },
+          ],
+        },
       ],
     },
     en: {
@@ -1233,13 +1239,6 @@ export const government: Product = {
               a: [
                 "Yes. Genoa Gov is designed for government accounting offices in Iraq, including the accounts sections of ministry departments and their formations.",
                 "Each department that uses it has its own separate database.",
-              ],
-            },
-            {
-              q: "Does Genoa Gov use artificial intelligence?",
-              a: [
-                "Genoa Systems provides financial and accounting solutions built with the latest technology and with AI designed for accounting and financial work.",
-                "To find out which of these solutions are available in Genoa Gov and how they fit your accounts section, book a demo.",
               ],
             },
             {
@@ -1322,6 +1321,19 @@ export const government: Product = {
                 "During the demo you can talk through how your accounts section works and the approval chain it follows.",
               ],
             },
+          ],
+        },
+        {
+          // TODO(owner): the answers. A question with no answer (a: []) is left out of the page, its FAQPage
+          // JSON-LD and llms-full.txt (src/content/index.ts), so these appear as soon as they are answered.
+          heading: "Setup, support and moving your data",
+          faqs: [
+            { q: "Is the software cloud-based, or installed on our own computers?", a: [] },
+            { q: "Does it need an internet connection?", a: [] },
+            { q: "How many users or branches does it support?", a: [] },
+            { q: "Is there training and technical support?", a: [] },
+            { q: "Can we move our data from another accounting program?", a: [] },
+            { q: "Are vouchers and reports printed in Arabic?", a: [] },
           ],
         },
       ],

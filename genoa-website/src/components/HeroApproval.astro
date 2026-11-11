@@ -18,7 +18,8 @@ const T = {
   },
 }[lang];
 ---
-<figure class="illus" role="img" aria-label={T.label}>
+{/* A div, not a figure: a figure with a caption may not take role="img" (aria-allowed-role). */}
+<div class="illus" role="img" aria-label={T.label}>
   <div class="sheet" aria-hidden="true">
     <div class="sheet-head"><span class="sheet-title">{T.voucher}</span><span class="tag tag-gov">Genoa Gov</span></div>
     <div class="fields">
@@ -37,5 +38,5 @@ const T = {
       {['72%', '56%', '64%'].map((w, i) => <li style={`--d:${1.5 + i * 0.3}s`}><Icon name="history" /><i style={`--w:${w}`}></i></li>)}
     </ul>
   </div>
-  <figcaption class="illus-note" aria-hidden="true">{T.note}</figcaption>
-</figure>
+  <span class="illus-note" aria-hidden="true">{T.note}</span>
+</div>

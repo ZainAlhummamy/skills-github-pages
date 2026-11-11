@@ -65,6 +65,10 @@ log ends with a "Before launch, set:" list while a placeholder is in use
 6. `public/_redirects` (`/` → `/ar/` 301) and `public/_headers` (security + cache headers) are applied automatically.
 7. Custom domain: add `site.genoasystem.com` (a `CNAME` from `site` to `<project>.pages.dev` in the
    `genoasystem.com` DNS). Do not attach the apex `genoasystem.com`: it serves the app.
+8. HTTPS only: in the `genoasystem.com` zone, SSL/TLS → Edge Certificates → **Always Use HTTPS** on, and
+   **HTTP Strict Transport Security** on (max-age 6 months or more). Leave *Include subdomains* and *Preload* off
+   unless every subdomain, the app included, is HTTPS-only. Check: `curl -sI http://site.genoasystem.com/` must
+   answer 301 to `https://`.
 
 #### Duplicate addresses (`*.pages.dev`)
 

@@ -10,11 +10,15 @@ Only what the product team has confirmed. Everything else is either left out or
 added to `CLAIMS-TO-VERIFY.md` for the team to confirm before launch.
 
 **Genoa Systems (the company)**
-- Provides financial and accounting solutions built with the latest technology and
-  with AI designed for accounting and financial work. Approved wording:
-  «توفير حلول مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي الموجّه للأعمال المحاسبية والمالية».
-  Use it at company level. Do not describe specific AI capabilities (what the AI does,
-  in which product) until the product team confirms them.
+- Introduce it as an Iraqi accounting-software company, always: «Genoa Systems شركة عراقية
+  لبرمجيات المحاسبة» / "Genoa Systems is an Iraqi accounting-software company", plus «مقرّها في …» /
+  "based in …" once the city is confirmed (`companyIntro` in `src/config/site.ts` writes it). A defunct US
+  hardware maker of the same name dominates search; the first sentence has to tell them apart.
+- AI (owner, 11 Nov 2026): **one sentence, on the about page only**, until concrete AI features are
+  confirmed: «وتبني Genoa Systems حلولها المالية والمحاسبية بأحدث التقنيات، مع ذكاء اصطناعي موجّه للأعمال
+  المحاسبية والمالية». Not in titles, meta descriptions, headings, the hero, the footer, JSON-LD or FAQ
+  answers. Do not describe specific AI capabilities until the product team confirms them.
+- Meta descriptions lead with the product and its audience, not with the company's slogan.
 
 **Genoa (for companies)**
 - Uses the chart of accounts of the Iraqi Unified Accounting System (النظام المحاسبي الموحد)

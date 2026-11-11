@@ -93,7 +93,7 @@ const jsonld = pageGraph({
             return (
               <div data-reveal style={`--i:${i}`}>
                 <h3><a href={path(lang, pid)}>{pid === 'companies' ? t('companies', lang) : t('government', lang)}</a></h3>
-                <Screenshot lang={lang} id={id} alt="" caption="" />
+                <Screenshot lang={lang} id={id} alt="" caption="" sizes="(min-width: 900px) min(557px, calc(50vw - 30px)), calc(100vw - 34px)" />
               </div>
             );
           })}
@@ -101,19 +101,6 @@ const jsonld = pageGraph({
       </div>
     </section>
   )}
-
-  <section class="section" style={showInside ? undefined : 'padding-top:0'} aria-labelledby="tech-heading">
-    <div class="container">
-      <div class="tech-card" data-reveal>
-        <span class="tech-icon"><Icon name="spark" /></span>
-        <div>
-          <h2 id="tech-heading">{h.tech.heading}</h2>
-          {h.tech.body.map((p) => <p>{p}</p>)}
-          <a class="btn btn-primary" href={path(lang, 'contact')}>{h.tech.cta}</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section class="section section-soft" aria-labelledby="compare-heading">
     <div class="container">

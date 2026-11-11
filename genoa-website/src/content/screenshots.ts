@@ -21,6 +21,8 @@ export interface Shot {
   placeholder: boolean;
   /** Description of a real screenshot, per language (alt text / caption). */
   alt?: Partial<Record<Lang, string>>;
+  /** Widths of the smaller copies (<src>-<w>w.webp) written by `npm run screenshot-sizes`, for srcset. */
+  widths?: number[];
 }
 
 const real = registry as Record<string, Omit<Shot, 'placeholder'>>;

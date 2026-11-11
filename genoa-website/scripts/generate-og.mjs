@@ -2,7 +2,7 @@
 // pre-installed Playwright Chromium. Run with: npm run og
 // Output is committed under public/, so builds do not need a browser.
 import { createRequire } from 'node:module';
-import { readFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
@@ -29,13 +29,13 @@ const cards = [
     file: 'og-home-ar', lang: 'ar', accent: '#5b8def',
     kicker: 'Genoa · Genoa Gov',
     title: 'برامج محاسبة عراقية للشركات وللدوائر الحكومية',
-    sub: 'حلول مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي',
+    sub: 'Genoa للحسابات والمخازن · Genoa Gov للمحاسبة الحكومية',
   },
   {
     file: 'og-home-en', lang: 'en', accent: '#5b8def',
     kicker: 'Genoa · Genoa Gov',
     title: 'Accounting software for Iraqi companies and government departments',
-    sub: 'Financial and accounting solutions with the latest technology and AI',
+    sub: 'Genoa for accounts and inventory · Genoa Gov for government accounting',
   },
   {
     file: 'og-companies-ar', lang: 'ar', accent: '#5b8def',
@@ -78,6 +78,29 @@ h1{margin-top:14px;font-size:${c.lang === 'ar' ? 58 : 56}px;line-height:1.25;fon
 <div class="brand">${logo}<span>Genoa Systems</span></div>
 <div class="kicker">${c.kicker}</div><h1>${c.title}</h1><div class="sub">${c.sub}</div></div></body></html>`;
 
+/** An ICO file holding PNG images (supported by every current browser): 6-byte header, 16-byte entries, then data. */
+function ico(images) {
+  const header = Buffer.alloc(6);
+  header.writeUInt16LE(0, 0);
+  header.writeUInt16LE(1, 2);
+  header.writeUInt16LE(images.length, 4);
+  let offset = 6 + 16 * images.length;
+  const entries = images.map(([size, png]) => {
+    const e = Buffer.alloc(16);
+    e.writeUInt8(size >= 256 ? 0 : size, 0);
+    e.writeUInt8(size >= 256 ? 0 : size, 1);
+    e.writeUInt8(0, 2);
+    e.writeUInt8(0, 3);
+    e.writeUInt16LE(1, 4);
+    e.writeUInt16LE(32, 6);
+    e.writeUInt32LE(png.length, 8);
+    e.writeUInt32LE(offset, 12);
+    offset += png.length;
+    return e;
+  });
+  return Buffer.concat([header, ...entries, ...images.map(([, png]) => png)]);
+}
+
 const browser = await chromium.launch();
 try {
   mkdirSync(pub('og'), { recursive: true });
@@ -95,6 +118,16 @@ try {
     await p.close();
     console.log('wrote', `public/${file}`);
   }
+  // favicon.ico for browsers and tools that ask for /favicon.ico: 16, 32 and 48px PNGs from favicon.svg in one ICO.
+  const pngs = [];
+  for (const size of [16, 32, 48]) {
+    const p = await browser.newPage({ viewport: { width: size, height: size }, deviceScaleFactor: 1 });
+    await p.setContent(`<html><body style="margin:0;background:transparent">${sized(favicon, size)}</body></html>`);
+    pngs.push([size, await p.screenshot({ omitBackground: true })]);
+    await p.close();
+  }
+  writeFileSync(pub('favicon.ico'), ico(pngs));
+  console.log('wrote', 'public/favicon.ico');
 } finally {
   await browser.close();
 }

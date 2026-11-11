@@ -12,12 +12,23 @@ interface Props {
   eager?: boolean;
   /** Smaller caption, used in galleries. */
   compact?: boolean;
+  /** The image's displayed width, for the browser's choice from srcset. Defaults to the article column or gallery card. */
+  sizes?: string;
 }
 const { lang, id, alt, caption, eager = false, compact = false } = Astro.props;
 const shot = screenshotFor(id);
 const realAlt = shot.alt?.[lang];
 const altText = shot.placeholder ? alt : realAlt ?? t('realShotNote', lang);
 const captionText = shot.placeholder ? caption : realAlt ? `${realAlt}` : t('realShotNote', lang);
+// Smaller copies let a phone download a 720px image instead of the 1440px original. The default sizes match the
+// layouts measured at 360 to 1920px: the article column (782px at most, 100vw minus the gutters on narrow screens)
+// and the gallery card (min(84vw, 640px)).
+const srcset = shot.widths?.length
+  ? [...shot.widths.map((w) => `${shot.src.replace(/\.webp$/, `-${w}w.webp`)} ${w}w`), `${shot.src} ${shot.width}w`].join(', ')
+  : undefined;
+const sizes = srcset
+  ? (Astro.props.sizes ?? (compact ? 'min(84vw, 640px)' : '(min-width: 1000px) min(782px, calc(100vw - 390px)), calc(100vw - 34px)'))
+  : undefined;
 ---
 <figure class:list={['shot', { framed: !shot.placeholder, compact }]}>
   {shot.placeholder ? (
@@ -25,7 +36,7 @@ const captionText = shot.placeholder ? caption : realAlt ? `${realAlt}` : t('rea
   ) : (
     <a class="shot-link" href={shot.src} target="_blank" rel="noopener" title={t('openFullSize', lang)}>
       <span class="shot-bar" aria-hidden="true"><i></i><i></i><i></i></span>
-      <img src={shot.src} alt={altText} width={shot.width} height={shot.height} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+      <img src={shot.src} srcset={srcset} sizes={sizes} alt={altText} width={shot.width} height={shot.height} loading={eager ? 'eager' : 'lazy'} decoding="async" />
     </a>
   )}
   <figcaption>
