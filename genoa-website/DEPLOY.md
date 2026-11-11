@@ -30,10 +30,27 @@ They are read **during the build**, so changing one requires a redeploy.
 | `FORM_ENDPOINT` | optional | `https://formspree.io/f/xxxx` | POST target for the demo form. Empty = the form opens WhatsApp with a pre-filled message and nothing is stored. If set, the privacy sentence in `src/content/pages.ts` (`contact.privacy`) must be updated to name the service. |
 | `SITE_NOINDEX` | **never** | `true` | Staging only: every page gets `noindex, nofollow` and robots.txt becomes `Disallow: /`. Use for preview/staging deploys. |
 | `NODE_VERSION` | host-dependent | `22.23.4` | Only if the host does not read `.nvmrc`. |
+| `PRODUCTION` | optional | `true` | Marks a production build on a host other than Cloudflare Pages (see below). Cloudflare Pages needs nothing: it sets `CF_PAGES_BRANCH`, and `main` is production. |
 
-The build log ends with a "Before launch, set:" list while any placeholder is still in
-use (`genoa-systems.example`, `9647000000000`) or while `SITE_NOINDEX=true`.
-**A production build must not print that list.**
+### Production builds
+
+A build is a **production build** when `CF_PAGES_BRANCH=main` (Cloudflare Pages sets this on
+the production branch) or `PRODUCTION=true`. `scripts/check-site.mjs` then **fails the build** if:
+
+- `SITE_URL` is unset, the placeholder, ends with `/`, or its host is a `*.pages.dev`
+  address, `site.genoasystem.com` (the staging address), `localhost`, or a reserved
+  `.example`, `.test`, `.invalid` or `.localhost` name;
+- `WHATSAPP_NUMBER` or `CONTACT_EMAIL` is unset or the placeholder;
+- `SITE_NOINDEX` is set to anything;
+- any built page other than `404.html` carries a robots `noindex`, or `_headers` sends
+  `X-Robots-Tag: noindex` for a path on every host.
+
+Fix the environment and redeploy; never weaken the check. If the owner chooses
+`site.genoasystem.com` as the production address, take it off `stagingHosts` in the script.
+
+Preview builds (any other branch, no `PRODUCTION`) are not checked this way: their build
+log ends with a "Before launch, set:" list while a placeholder is in use
+(`genoa-systems.example`, `9647000000000`) or while `SITE_NOINDEX=true`.
 
 ## Host recipes
 
@@ -131,4 +148,5 @@ Then:
 - `CLAIMS-TO-VERIFY.md` reviewed with the product team.
 - Real screenshots taken with test data, `sameAs` profile links in `src/config/site.ts`.
 
-Until all of that is done, deploy with `SITE_NOINDEX=true`.
+Until all of that is done, share preview deploys only (`SITE_NOINDEX=true`): a production
+build fails on purpose while any of it is missing (see "Production builds").
