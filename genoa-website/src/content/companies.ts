@@ -338,7 +338,7 @@ export const companies: Product = {
             { label: "الغرض", value: "مسك الدفاتر المحاسبية للشركة" },
             {
               label: "العملة",
-              value: "الدينار العراقي، مع الدولار الأمريكي عند تفعيل تعدد العملات",
+              value: "الدينار العراقي، مع فواتير بالدولار الأمريكي عند تفعيل تعدد العملات",
             },
             {
               label: "تعمل إلى جانب",
@@ -362,9 +362,9 @@ export const companies: Product = {
               ],
             },
             {
-              heading: "هل يمكن مسك الحسابات بالدينار والدولار معاً؟",
+              heading: "هل يمكن التعامل بالدولار في Genoa؟",
               body: [
-                "نعم، عند تفعيل ميزة تعدد العملات. تضيف هذه الميزة الدولار الأمريكي إلى جانب الدينار العراقي.",
+                "نعم، عند تفعيل ميزة تعدد العملات: تُسعَّر فواتير المبيعات والمشتريات بالدولار الأمريكي بسعر صرف يُدخَل مع الفاتورة، ويُحسب معادلها بالدينار العراقي، ويبقى القيد المحاسبي والدفاتر بالدينار.",
                 "تعدد العملات ميزة اختيارية، معطّلة افتراضياً، وتُفعَّل لكل شركة على حدة حسب حاجتها. والشركة التي تعمل بالدينار فقط لا تحتاج إلى تفعيلها.",
               ],
             },
@@ -416,7 +416,7 @@ export const companies: Product = {
             { label: "Purpose", value: "Keeping the company's books" },
             {
               label: "Currency",
-              value: "Iraqi dinar, with the US dollar when multi-currency is enabled",
+              value: "Iraqi dinar, with US-dollar invoices when multi-currency is enabled",
             },
             {
               label: "Works alongside",
@@ -440,9 +440,9 @@ export const companies: Product = {
               ],
             },
             {
-              heading: "Can the books be kept in both dinars and dollars?",
+              heading: "Can I work in US dollars in Genoa?",
               body: [
-                "Yes, once multi-currency is enabled. This feature adds the US dollar alongside the Iraqi dinar.",
+                "Yes, once multi-currency is enabled: sales and purchase invoices can be priced in US dollars at an exchange rate entered with the invoice, the Iraqi dinar equivalent is calculated, and the journal entry and the books stay in dinars.",
                 "Multi-currency is optional: it is off by default and switched on per organisation, according to each company's needs. A company that works only in dinars does not need to enable it.",
               ],
             },
@@ -839,9 +839,9 @@ export const companies: Product = {
               ],
             },
             {
-              heading: "ماذا لو كانت الديون بالدولار؟",
+              heading: "ماذا لو تعاملت بالدولار مع الزبائن أو المجهزين؟",
               body: [
-                "من الشائع أن تتعامل الشركات العراقية مع زبائن أو مجهزين بالدولار الأمريكي. ولهذه الحالات يوفر Genoa ميزة تعدد العملات، التي تضيف الدولار الأمريكي إلى جانب الدينار العراقي.",
+                "من الشائع أن تتعامل الشركات العراقية مع زبائن أو مجهزين بالدولار الأمريكي. ولهذه الحالات يوفر Genoa ميزة تعدد العملات: تُسعَّر الفاتورة بالدولار بسعر صرف، وتُسجَّل الذمة في الدفاتر بمعادلها بالدينار العراقي.",
                 "تعدد العملات ميزة اختيارية، معطّلة افتراضياً، وتُفعَّل لكل شركة على حدة حسب حاجتها.",
               ],
             },
@@ -909,9 +909,9 @@ export const companies: Product = {
               ],
             },
             {
-              heading: "What if debts are in dollars?",
+              heading: "What if you deal with customers or suppliers in dollars?",
               body: [
-                "It is common for Iraqi companies to deal with customers or suppliers in US dollars. For these cases, Genoa offers multi-currency, which adds the US dollar alongside the Iraqi dinar.",
+                "It is common for Iraqi companies to deal with customers or suppliers in US dollars. For these cases, Genoa offers multi-currency: the invoice is priced in dollars at an exchange rate, and the balance is recorded in the books at its Iraqi dinar equivalent.",
                 "Multi-currency is optional: it is off by default and switched on per organisation, according to each company's needs.",
               ],
             },
@@ -956,7 +956,7 @@ export const companies: Product = {
           cardSummary:
             "العمل بالدولار الأمريكي إلى جانب الدينار العراقي. ميزة اختيارية، معطّلة افتراضياً، وتُفعَّل لكل شركة على حدة.",
           answer:
-            "تعدد العملات في برنامج Genoa ميزة تتيح للشركة العمل بالدولار الأمريكي إلى جانب الدينار العراقي. وهي ميزة اختيارية، معطّلة افتراضياً، وتُفعَّل لكل شركة على حدة حسب حاجتها. وهي موجّهة للشركات العراقية التي تشتري أو تبيع أو تتعامل مع زبائنها ومجهزيها بالدولار.",
+            "تعدد العملات في برنامج Genoa ميزة تتيح تسعير الفواتير بالدولار الأمريكي بسعر صرف، مع حساب معادلها بالدينار العراقي الذي تبقى به الدفاتر. وهي ميزة اختيارية، معطّلة افتراضياً، وتُفعَّل لكل شركة على حدة حسب حاجتها. وهي موجّهة للشركات العراقية التي تشتري أو تبيع أو تتعامل مع زبائنها ومجهزيها بالدولار.",
           keyFacts: [
             { label: "العملات", value: "الدينار العراقي والدولار الأمريكي" },
             { label: "التوفر", value: "ميزة اختيارية، معطّلة افتراضياً" },
@@ -991,7 +991,7 @@ export const companies: Product = {
             {
               heading: "ما علاقة تعدد العملات بالوحدات الأخرى؟",
               body: [
-                "عند تفعيل تعدد العملات يمكن تسجيل المبالغ بالدولار الأمريكي في الحسابات وفي ذمم الزبائن والمجهزين.",
+                "عند تفعيل تعدد العملات يمكن تسعير فواتير المبيعات والمشتريات بالدولار الأمريكي، ويُحسب معادلها بالدينار العراقي بسعر الصرف، فيبقى القيد في الحسابات وفي ذمم الزبائن والمجهزين بالدينار.",
                 "وللشركات المستوردة يمكن الجمع بين تعدد العملات وميزة الكلفة الواصلة، وهي أيضاً ميزة اختيارية، معطّلة افتراضياً، وتُفعَّل لكل شركة على حدة.",
               ],
             },
@@ -1026,7 +1026,7 @@ export const companies: Product = {
           cardSummary:
             "Work in US dollars alongside Iraqi dinars. Optional, off by default and switched on per organisation.",
           answer:
-            "Multi-currency in Genoa lets a company work with the US dollar alongside the Iraqi dinar. It is an optional feature: off by default and switched on per organisation, only for companies that need it. It is meant for Iraqi companies that buy, sell or deal with customers and suppliers in dollars.",
+            "Multi-currency in Genoa lets invoices be priced in US dollars at an exchange rate, with their Iraqi dinar equivalent calculated for the books, which stay in dinars. It is an optional feature: off by default and switched on per organisation, only for companies that need it. It is meant for Iraqi companies that buy, sell or deal with customers and suppliers in dollars.",
           keyFacts: [
             { label: "Currencies", value: "Iraqi dinar and US dollar" },
             { label: "Availability", value: "Optional, off by default" },
@@ -1061,7 +1061,7 @@ export const companies: Product = {
             {
               heading: "How does multi-currency relate to the other modules?",
               body: [
-                "When multi-currency is enabled, amounts in US dollars can be recorded in accounting and in customer and supplier ledgers.",
+                "When multi-currency is enabled, sales and purchase invoices can be priced in US dollars, and their Iraqi dinar equivalent is calculated at the exchange rate, so the entry in the accounts and in customer and supplier ledgers stays in dinars.",
                 "Importers can combine it with landed cost, which is also optional, off by default and switched on per organisation.",
               ],
             },

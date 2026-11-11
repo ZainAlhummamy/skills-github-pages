@@ -20,6 +20,12 @@ The five ⚠️ items were answered before launch:
 
 The items below without a ✅ are lower-risk inferences, to review after launch.
 
+## Found while taking real screenshots (Genoa app, `UAS` repo)
+
+- ⚠️ **Landed cost.** The Genoa app has no landed-cost or freight feature in its code (no allocation of freight/customs to item cost). The closest is a purchase tax code that can be set to add to goods cost. The website still describes landed cost as a feature (from the original brief), and its screenshot slot stays a placeholder. Confirm whether landed cost exists (another branch/version?) — if not, remove or reword the landed-cost page, the home and overview mentions, and the FAQ answers.
+- **Multi-currency (corrected).** The app's «فواتير بعملة أجنبية» setting prices invoices in a foreign currency at an exchange rate; the journal entry and the books stay in Iraqi dinars (`Models/InventorySettings.cs`: "the entry stays in dinars"). Sentences that said dollar amounts are recorded in the accounts and ledgers were corrected to say this. It is off by default, as the site says.
+- **Chart of accounts screenshot.** Codes follow the app's own unified chart (`Services/UnifiedChart.cs`: 131 inventory, 132 receivables, 134 cash, 23 current liabilities, 26 equity). The demo company's 134-account tree was imported through the app's Excel import for the screenshot.
+
 ## Unified Accounting System / IFRS and AI (added on request)
 - **Genoa Gov.** The Unified Accounting System / IFRS wording was added to Genoa (companies) only, because Iraqi government accounts work under the government accounting system rather than the Unified Accounting System. If Genoa Gov should also mention a standard, give the exact wording.
 - New page `companies.features[unified-accounting-system]` — general description of the Unified Accounting System (sections[0]): "a standard, coded chart of accounts, rules for recording transactions, and formats for financial statements"; IFRS description (sections[1]): "issued by the IASB … rules for recognising, measuring and disclosing items"; sections[2]: "all modules stay within the same accounting framework"; sections[1]: IFRS "matter more and more when dealing with banks and investors" (general statement).

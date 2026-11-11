@@ -66,8 +66,8 @@ export const ui = {
   footerCompany: { ar: 'الشركة', en: 'Company' },
   footerResources: { ar: 'مصادر', en: 'Resources' },
   footerNote: {
-    ar: 'صور الشاشات في هذا الموقع توضيحية مؤقتة، ولا يحتوي الموقع على أي بيانات لزبائننا.',
-    en: 'Screenshots on this site are temporary placeholders, and the site contains no customer data.',
+    ar: 'لقطات الشاشة في هذا الموقع ببيانات تجريبية بالكامل، ولا يحتوي الموقع على أي بيانات لزبائننا.',
+    en: 'Screenshots on this site use entirely fictional demo data, and the site contains no customer data.',
   },
   sitemap: { ar: 'خريطة الموقع', en: 'Sitemap' },
   forAI: { ar: 'ملخص للمساعدات الذكية (llms.txt)', en: 'Summary for AI assistants (llms.txt)' },
