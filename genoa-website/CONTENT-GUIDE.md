@@ -17,10 +17,12 @@ added to `CLAIMS-TO-VERIFY.md` for the team to confirm before launch.
   in which product) until the product team confirms them.
 
 **Genoa (for companies)**
-- Follows the Iraqi Unified Accounting System (النظام المحاسبي الموحد), in line with
-  International Financial Reporting Standards (IFRS). Approved wording:
-  «يعتمد Genoa النظام المحاسبي الموحد وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS)».
-  Say "in line with / وفقاً لـ", never "certified" or "approved by".
+- Uses the chart of accounts of the Iraqi Unified Accounting System (النظام المحاسبي الموحد)
+  and can prepare financial statements based on International Financial Reporting Standards
+  (IFRS). Approved wording (owner, 11 Nov 2026):
+  «يعتمد Genoa دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS)».
+  The two are separate frameworks: never say Genoa follows the Unified Accounting System
+  "in line with IFRS", and never "certified" or "approved by".
 - Accounting.
 - Inventory.
 - Sales and purchasing.

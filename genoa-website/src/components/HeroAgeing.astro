@@ -7,14 +7,14 @@ interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const T = {
   ar: {
-    label: 'رسم توضيحي: أعمار ذمم الزبائن في Genoa، ودليل حسابات وفق النظام المحاسبي الموحد ومعايير IFRS',
+    label: 'رسم توضيحي: أعمار ذمم الزبائن في Genoa، ودليل حسابات وفق النظام المحاسبي الموحد',
     title: 'أعمار ذمم الزبائن', unit: 'بالأيام', buckets: ['0–30', '31–60', '61–90', 'أكثر من 90'],
-    coa: 'دليل الحسابات', uas: 'النظام المحاسبي الموحد · IFRS', note: 'رسم توضيحي',
+    coa: 'دليل الحسابات', uas: 'النظام المحاسبي الموحد', note: 'رسم توضيحي',
   },
   en: {
-    label: 'Illustration: customer debt ageing in Genoa, and a chart of accounts under the Unified Accounting System in line with IFRS',
+    label: 'Illustration: customer debt ageing in Genoa, and a chart of accounts under the Unified Accounting System',
     title: 'Customer debt ageing', unit: 'days', buckets: ['0–30', '31–60', '61–90', '90+'],
-    coa: 'Chart of accounts', uas: 'Unified Accounting System · IFRS', note: 'Illustration',
+    coa: 'Chart of accounts', uas: 'Unified Accounting System', note: 'Illustration',
   },
 }[lang];
 const cols = [

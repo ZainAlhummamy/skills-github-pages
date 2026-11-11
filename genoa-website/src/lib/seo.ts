@@ -32,8 +32,8 @@ export const organizationNode = (lang: Lang): Node => {
     },
     description:
       lang === 'ar'
-        ? 'Genoa Systems شركة برمجيات تقدّم حلولاً مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي الموجّه للأعمال المحاسبية والمالية، وتطوّر برامج محاسبة للسوق العراقي: Genoa للشركات وفق النظام المحاسبي الموحد ومعايير IFRS، وGenoa Gov لأقسام الحسابات في الدوائر الحكومية.'
-        : 'Genoa Systems is a software company that provides financial and accounting solutions built with the latest technology and with AI designed for accounting and financial work. It builds accounting software for the Iraqi market: Genoa for companies, following the Unified Accounting System in line with IFRS, and Genoa Gov for the accounts sections of government departments.',
+        ? 'Genoa Systems شركة برمجيات تقدّم حلولاً مالية ومحاسبية بأحدث التقنيات والذكاء الاصطناعي الموجّه للأعمال المحاسبية والمالية، وتطوّر برامج محاسبة للسوق العراقي: Genoa للشركات بدليل حسابات النظام المحاسبي الموحد وقوائم مالية وفق IFRS، وGenoa Gov لأقسام الحسابات في الدوائر الحكومية.'
+        : 'Genoa Systems is a software company that provides financial and accounting solutions built with the latest technology and with AI designed for accounting and financial work. It builds accounting software for the Iraqi market: Genoa for companies, using the Unified Accounting System chart of accounts with IFRS-based financial statements, and Genoa Gov for the accounts sections of government departments.',
     areaServed: { '@type': 'Country', name: site.areaServed.en, identifier: site.areaServed.code },
     knowsAbout:
       lang === 'ar'
