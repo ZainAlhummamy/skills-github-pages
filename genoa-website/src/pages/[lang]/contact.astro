@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Icon from '../../components/Icon.astro';
+import ErrorMsg from '../../components/ErrorMsg.astro';
 import { LANGS, type Lang } from '../../content/types';
 import { contact, governorates } from '../../content/pages';
 import { t } from '../../i18n/ui';
@@ -58,33 +59,39 @@ const mode = site.formEndpoint ? 'endpoint' : 'whatsapp';
           data-wa={site.whatsapp}
           data-intro={c.waMessageIntro}
           data-opening={c.statusOpening}
-          data-missing={c.statusMissing}
         >
           <div class="form-grid">
             <div class="field">
               <label for="f-name">{F.name}</label>
-              <input id="f-name" name="name" type="text" autocomplete="name" required data-label={F.name} />
+              <input id="f-name" name="name" type="text" autocomplete="name" required data-label={F.name} data-error="f-name-error" />
+              <ErrorMsg id="f-name-error" text={c.errors.name} />
             </div>
             <div class="field">
               <label for="f-org">{F.organisation}</label>
-              <input id="f-org" name="organisation" type="text" autocomplete="organization" required data-label={F.organisation} />
+              <input id="f-org" name="organisation" type="text" autocomplete="organization" required data-label={F.organisation} data-error="f-org-error" />
+              <ErrorMsg id="f-org-error" text={c.errors.organisation} />
             </div>
             <div class="field">
               <label for="f-type">{F.orgType}</label>
-              <select id="f-type" name="organisation_type" required data-label={F.orgType}>
+              <select id="f-type" name="organisation_type" required data-label={F.orgType} data-error="f-type-error">
+                <option value="" disabled selected>{F.orgTypeNone}</option>
                 {F.orgTypes.map((o) => <option value={o.value}>{o.label}</option>)}
               </select>
+              <ErrorMsg id="f-type-error" text={c.errors.orgType} />
             </div>
             <div class="field">
               <label for="f-product">{F.product}</label>
-              <select id="f-product" name="product" required data-label={F.product}>
+              <select id="f-product" name="product" required data-label={F.product} data-error="f-product-error">
+                <option value="" disabled selected>{F.productNone}</option>
                 {F.products.map((o) => <option value={o.value}>{o.label}</option>)}
               </select>
+              <ErrorMsg id="f-product-error" text={c.errors.product} />
             </div>
             <div class="field">
               <label for="f-phone">{F.phone}</label>
-              <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" required aria-describedby="f-phone-hint" data-label={F.phone} />
+              <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" required aria-describedby="f-phone-hint" data-label={F.phone} data-error="f-phone-error" />
               <p class="hint" id="f-phone-hint">{F.phoneHint}</p>
+              <ErrorMsg id="f-phone-error" text={c.errors.phone} />
             </div>
             <div class="field">
               <label for="f-gov">{F.governorate} <span class="opt">{F.optional}</span></label>
@@ -95,7 +102,8 @@ const mode = site.formEndpoint ? 'endpoint' : 'whatsapp';
             </div>
             <div class="field full">
               <label for="f-email">{F.email} <span class="opt">{F.optional}</span></label>
-              <input id="f-email" name="email" type="email" autocomplete="email" dir="ltr" data-label={F.email} />
+              <input id="f-email" name="email" type="email" autocomplete="email" autocorrect="off" autocapitalize="none" spellcheck="false" dir="ltr" data-label={F.email} data-error="f-email-error" />
+              <ErrorMsg id="f-email-error" text={c.errors.email} />
             </div>
             <div class="field full">
               <label for="f-msg">{F.message} <span class="opt">{F.optional}</span></label>
@@ -132,28 +140,108 @@ const mode = site.formEndpoint ? 'endpoint' : 'whatsapp';
     </div>
   </div>
 
-  <script is:inline>
-    (function () {
-      var f = document.getElementById('demo-form');
-      if (!f || f.getAttribute('data-mode') !== 'whatsapp') return;
-      var status = document.getElementById('form-status');
-      f.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (!f.checkValidity()) {
-          f.reportValidity();
-          status.textContent = f.getAttribute('data-missing');
-          return;
+  <script>
+    // Field errors (validate-on-leave, :user-invalid): each required or checked field has an error message, linked
+    // through data-error, that CSS shows once the field is :user-invalid. This keeps aria-invalid and
+    // aria-describedby in step with what is shown, puts the same words in the browser's own message, and reads a
+    // new error out once, through one polite live region, when the user leaves the field.
+    const form = document.querySelector<HTMLFormElement>('#demo-form');
+    if (form) {
+      const fields = [...form.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[data-error]')];
+      const errorText = (el: Element) => document.getElementById((el as HTMLElement).dataset.error ?? '');
+
+      // List the error message in aria-describedby only while it is shown: a hidden message referenced there
+      // would still be read out.
+      const linkError = (el: HTMLElement, shown: boolean) => {
+        const id = el.dataset.error;
+        if (!id) return;
+        const ids = (el.getAttribute('aria-describedby') || '').split(/\s+/).filter((x) => x && x !== id);
+        if (shown) ids.push(id);
+        if (ids.length) el.setAttribute('aria-describedby', ids.join(' '));
+        else el.removeAttribute('aria-describedby');
+      };
+
+      const announcer = document.createElement('div');
+      announcer.setAttribute('aria-live', 'polite');
+      announcer.className = 'visually-hidden';
+      document.body.append(announcer);
+      let announceTimer: number | undefined;
+      let announcedField: Element | undefined;
+      // Text as a screen reader reads it: the icon's label in, hidden text out.
+      const spoken = (node: Element) => {
+        const copy = node.cloneNode(true) as Element;
+        copy.querySelectorAll('[aria-hidden="true"]').forEach((n) => n.remove());
+        copy.querySelectorAll('[role="img"][aria-label]').forEach((n) => n.replaceWith(`${n.getAttribute('aria-label')}: `));
+        return (copy.textContent || '').replace(/\s+/g, ' ').trim();
+      };
+      const announce = (el: HTMLInputElement | HTMLSelectElement) => {
+        const error = errorText(el);
+        if (!error) return;
+        const label = el.labels?.[0] ? `${spoken(el.labels[0])}: ` : '';
+        clearTimeout(announceTimer);
+        announcer.textContent = '';
+        announcedField = el;
+        // After the screen reader has announced the field that receives focus next.
+        announceTimer = window.setTimeout(() => { announcer.textContent = label + spoken(error); }, 500);
+      };
+
+      const flagged = new WeakSet<Element>();
+      const announced = new WeakSet<Element>();
+      const sync = (el: EventTarget | null, withAnnouncement = false) => {
+        if (!(el instanceof HTMLInputElement || el instanceof HTMLSelectElement) || !el.dataset.error) return;
+        if (el.matches(':user-invalid')) {
+          if (withAnnouncement && !announced.has(el)) { announce(el); announced.add(el); }
+          el.setAttribute('aria-invalid', 'true');
+          linkError(el, true);
+          flagged.add(el);
+        } else if (flagged.has(el) || el.getAttribute('aria-invalid') !== 'true') {
+          el.setAttribute('aria-invalid', 'false');
+          linkError(el, false);
+          flagged.delete(el);
+          announced.delete(el);
+          if (announcedField === el) { clearTimeout(announceTimer); announcer.textContent = ''; }
         }
-        if (f.elements['_gotcha'] && f.elements['_gotcha'].value) return;
-        var lines = [f.getAttribute('data-intro')];
-        f.querySelectorAll('[data-label]').forEach(function (el) {
-          var v = (el.value || '').trim();
-          if (el.tagName === 'SELECT') v = el.value ? el.options[el.selectedIndex].text : '';
-          if (v) lines.push(el.getAttribute('data-label') + ': ' + v);
+      };
+
+      fields.forEach((el) => sync(el));
+      // The browser's own message says the same as the field's error, in the page's language. A new value
+      // clears it first (capture phase, before sync below), so the field is checked afresh.
+      form.addEventListener('input', (e) => { if (e.target instanceof HTMLInputElement || e.target instanceof HTMLSelectElement) e.target.setCustomValidity(''); }, true);
+      form.addEventListener('invalid', (e) => {
+        const el = e.target as HTMLInputElement | HTMLSelectElement;
+        const error = errorText(el);
+        if (error && el.validity.valid === false && !el.validity.customError) el.setCustomValidity(spoken(error));
+        // A failed send moves focus to the first invalid field, which reads its error; no announcement needed.
+        announced.add(el);
+        sync(el);
+      }, true);
+      form.addEventListener('blur', (e) => sync(e.target, true), true);
+      form.addEventListener('change', (e) => sync(e.target, true), true);
+      form.addEventListener('input', (e) => { if (e.target instanceof Element && e.target.hasAttribute('aria-invalid')) sync(e.target); });
+
+      // Sending. The browser checks the fields first: 'submit' only fires once they are all valid.
+      const status = document.getElementById('form-status');
+      const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      let sending = false;
+      form.addEventListener('submit', (e) => {
+        // One request per click: a double click must not open WhatsApp twice or post twice.
+        if (sending) { e.preventDefault(); return; }
+        sending = true;
+        button?.setAttribute('aria-disabled', 'true');
+        window.setTimeout(() => { sending = false; button?.removeAttribute('aria-disabled'); }, 4000);
+        if (form.dataset.mode !== 'whatsapp') return;
+        e.preventDefault();
+        const honeypot = form.elements.namedItem('_gotcha');
+        if (honeypot instanceof HTMLInputElement && honeypot.value) return;
+        const lines = [form.dataset.intro ?? ''];
+        form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('[data-label]').forEach((el) => {
+          let v = (el.value || '').trim();
+          if (el instanceof HTMLSelectElement) v = el.value ? el.options[el.selectedIndex].text : '';
+          if (v) lines.push(`${el.dataset.label}: ${v}`);
         });
-        status.textContent = f.getAttribute('data-opening');
-        window.open('https://wa.me/' + f.getAttribute('data-wa') + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+        if (status) status.textContent = form.dataset.opening ?? '';
+        window.open(`https://wa.me/${form.dataset.wa}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener');
       });
-    })();
+    }
   </script>
 </BaseLayout>
