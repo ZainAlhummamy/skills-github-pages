@@ -7,6 +7,7 @@ files: no server code, no database, no serverless functions, no secrets.
 
 | | |
 |---|---|
+| Production address | **`https://site.genoasystem.com`** (owner's decision, 11 Nov 2026). `genoasystem.com` itself serves the app's login: leave it alone. |
 | Repository | https://github.com/ZainAlhummamy/skills-github-pages (public) |
 | Branch | `main` |
 | App folder (root / base directory) | `genoa-website/` — everything else in the repo is an unrelated GitHub Skills course |
@@ -24,7 +25,7 @@ They are read **during the build**, so changing one requires a redeploy.
 
 | Variable | Production | Example | What it does |
 |---|---|---|---|
-| `SITE_URL` | **required** | `https://www.genoa.iq` | Final public origin, no trailing slash. Used for canonical tags, hreflang, sitemap, Open Graph, JSON-LD, robots.txt. Must match the host users actually land on (www vs apex). |
+| `SITE_URL` | **required** | `https://site.genoasystem.com` | Final public origin, no trailing slash. Used for canonical tags, hreflang, sitemap, Open Graph, JSON-LD, robots.txt. Must match the host users actually land on. |
 | `WHATSAPP_NUMBER` | **required** | `9647XXXXXXXXX` | Digits only, international format. WhatsApp buttons and the demo form. |
 | `CONTACT_EMAIL` | **required** | `sales@genoa.iq` | Public e-mail on the contact page and in JSON-LD. |
 | `FORM_ENDPOINT` | optional | `https://formspree.io/f/xxxx` | POST target for the demo form. Empty = the form opens WhatsApp with a pre-filled message and nothing is stored. If set, the privacy sentence in `src/content/pages.ts` (`contact.privacy`) must be updated to name the service. |
@@ -38,8 +39,7 @@ A build is a **production build** when `CF_PAGES_BRANCH=main` (Cloudflare Pages 
 the production branch) or `PRODUCTION=true` (also `1` or `yes`, any case). `scripts/check-site.mjs` then **fails the build** if:
 
 - `SITE_URL` is unset, the placeholder, ends with `/`, or its host is a `*.pages.dev`
-  address, `site.genoasystem.com` (the staging address), `localhost`, or a reserved
-  `.example`, `.test`, `.invalid` or `.localhost` name;
+  address, `localhost`, or a reserved `.example`, `.test`, `.invalid` or `.localhost` name;
 - `WHATSAPP_NUMBER` is unset, the placeholder, or not digits only;
 - `CONTACT_EMAIL` is unset, the placeholder, not an e-mail address, or at a reserved
   `.example`, `.test`, `.invalid` or `.localhost` domain;
@@ -47,8 +47,7 @@ the production branch) or `PRODUCTION=true` (also `1` or `yes`, any case). `scri
 - any built page other than `404.html` carries a robots `noindex`, or `_headers` sends
   `X-Robots-Tag: noindex` for a path on every host.
 
-Fix the environment and redeploy; never weaken the check. If the owner chooses
-`site.genoasystem.com` as the production address, take it off `stagingHosts` in the script.
+Fix the environment and redeploy; never weaken the check.
 
 Preview builds (any other branch, no `PRODUCTION`) are not checked this way: their build
 log ends with a "Before launch, set:" list while a placeholder is in use
@@ -64,7 +63,8 @@ log ends with a "Before launch, set:" list while a placeholder is in use
 4. Environment variables (Production): `NODE_VERSION=22.23.4`, `SITE_URL`, `WHATSAPP_NUMBER`, `CONTACT_EMAIL` (+ `FORM_ENDPOINT` if used).
 5. Environment variables (Preview): the same, plus `SITE_NOINDEX=true` and `SITE_URL=https://<project>.pages.dev`.
 6. `public/_redirects` (`/` → `/ar/` 301) and `public/_headers` (security + cache headers) are applied automatically.
-7. Custom domain: add the apex and `www`; redirect the one that is **not** `SITE_URL` to the one that is (Cloudflare redirect rule).
+7. Custom domain: add `site.genoasystem.com` (a `CNAME` from `site` to `<project>.pages.dev` in the
+   `genoasystem.com` DNS). Do not attach the apex `genoasystem.com`: it serves the app.
 
 #### Duplicate addresses (`*.pages.dev`)
 
@@ -110,9 +110,51 @@ preserve path and query). Leave preview addresses unredirected.
 }
 ```
 
-### Nginx / any static server
+### Caddy, Nginx or any static server (the VPS)
 
-Upload the contents of `dist/`, then:
+`site.genoasystem.com` was served by Caddy on the VPS when this was written. On such a host:
+
+1. Build with `PRODUCTION=true` (only Cloudflare Pages is detected by itself), the real values, and no `SITE_NOINDEX`:
+
+   ```bash
+   cd genoa-website && npm ci
+   SITE_URL=https://site.genoasystem.com WHATSAPP_NUMBER=<digits> CONTACT_EMAIL=<real inbox> PRODUCTION=true npm run build
+   ```
+
+2. Serve the contents of `dist/`. These servers ignore `_redirects` and `_headers`, so set the same rules in the
+   server's own config, as below.
+3. **Remove any `X-Robots-Tag` header the server adds for this site** (a staging setup may have one). A production
+   response must carry none; `curl -sI https://site.genoasystem.com/ar/ | grep -i x-robots` must print nothing.
+
+Caddy (a sketch, not run here: check it with `caddy validate` on the server, and adapt `root` to where `dist/` lives;
+behind a gateway Caddy, the headers belong in whichever block answers for `site.genoasystem.com`):
+
+```caddyfile
+site.genoasystem.com {
+	root * /srv/genoa-website/dist
+	encode zstd gzip
+	redir / /ar/ 301
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		X-Frame-Options SAMEORIGIN
+	}
+	header /fonts/* Cache-Control "public, max-age=31536000, immutable"
+	header /_astro/* Cache-Control "public, max-age=31536000, immutable"
+	header /og/* Cache-Control "public, max-age=604800"
+	file_server
+	handle_errors {
+		@notFound expression {err.status_code} == 404
+		handle @notFound {
+			rewrite * /404.html
+			file_server
+		}
+	}
+}
+```
+
+Nginx:
 
 ```nginx
 root /var/www/genoa/dist;
@@ -146,6 +188,7 @@ Replace `DOMAIN` with the deployed host.
 curl -sI https://DOMAIN/ | grep -iE '^(HTTP|location)'                 # 301 → /ar/
 curl -s  https://DOMAIN/ar/ | grep -o '<link rel="canonical"[^>]*>'   # https://DOMAIN/ar/
 curl -s  https://DOMAIN/ar/ | grep -o '<meta name="robots"[^>]*>'     # production: index, follow …
+curl -sI https://DOMAIN/ar/ | grep -i x-robots                         # production: prints nothing
 curl -s  https://DOMAIN/ar/ | grep -c 'genoa-systems.example'          # must print 0
 curl -s  https://DOMAIN/robots.txt | head -8                           # Allow + Sitemap (staging too)
 curl -sI https://DOMAIN/sitemap.xml | head -1                          # 200
@@ -162,7 +205,7 @@ Then:
 
 ## Before the public launch (owner decisions, not the deployer's)
 
-- Real `SITE_URL`, WhatsApp number and e-mail.
+- Real WhatsApp number and e-mail. `SITE_URL` is decided: `https://site.genoasystem.com`.
 - `CLAIMS-TO-VERIFY.md` reviewed with the product team.
 - Real screenshots taken with test data, `sameAs` profile links in `src/config/site.ts`.
 

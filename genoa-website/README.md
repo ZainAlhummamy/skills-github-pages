@@ -34,7 +34,7 @@ Set these as environment variables at build time (or edit `src/config/site.ts`).
 
 | Variable | What | Placeholder now |
 |---|---|---|
-| `SITE_URL` | Production origin, e.g. `https://www.genoa.iq` — used for canonical, hreflang, sitemap, OG, JSON-LD | `https://genoa-systems.example` |
+| `SITE_URL` | Production origin: `https://site.genoasystem.com` — used for canonical, hreflang, sitemap, OG, JSON-LD | `https://genoa-systems.example` |
 | `WHATSAPP_NUMBER` | Digits only, international format, e.g. `9647XXXXXXXXX` | `9647000000000` |
 | `CONTACT_EMAIL` | Public sales e-mail | `info@genoa-systems.example` |
 | `FORM_ENDPOINT` | Optional. Form POST target (Formspree, Basin, own API). Empty = form composes a WhatsApp message, nothing is stored | empty |
