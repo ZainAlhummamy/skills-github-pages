@@ -28,8 +28,8 @@ Still open before launch: ⚠️ **landed cost** (next section). The other items
 
 ## Unified Accounting System / IFRS and AI (added on request)
 - **Genoa Gov.** The Unified Accounting System / IFRS wording was added to Genoa (companies) only, because Iraqi government accounts work under the government accounting system rather than the Unified Accounting System. If Genoa Gov should also mention a standard, give the exact wording.
-- New page `companies.features[unified-accounting-system]` — general description of the Unified Accounting System (sections[0]): "a standard, coded chart of accounts, rules for recording transactions, and formats for financial statements"; IFRS description (sections[1]): "issued by the IASB … rules for recognising, measuring and disclosing items"; sections[2]: "all modules stay within the same accounting framework"; sections[1]: IFRS "matter more and more when dealing with banks and investors" (general statement).
-- `companies.features[accounting].sections[1]`: "Accounting in Genoa is built on a chart of accounts and journal entries under the Unified Accounting System, and it can prepare IFRS-based financial statements."
+- New page `companies.features[unified-accounting-system]` — general description of the Unified Accounting System (sections[0]): "a standard, coded chart of accounts, rules for recording transactions, and formats for financial statements"; IFRS description (sections[1]): "issued by the IASB … rules for recognising, measuring and disclosing items"; sections[2]: "all modules use the same chart of accounts"; sections[1]: IFRS "matter more and more when dealing with banks and investors" (general statement).
+- `companies.features[accounting].sections[1]`: "Accounting in Genoa is built on journal entries and the Unified Accounting System chart of accounts, and it can prepare IFRS-based financial statements."
 
 ## Shared pages (`src/content/pages.ts`)
 
