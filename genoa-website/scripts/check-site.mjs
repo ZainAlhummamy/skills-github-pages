@@ -36,6 +36,8 @@ const metaContent = (html, key, val) => {
 
 const pages = new Map();
 let siteOrigin;
+// JSON-LD entities by @id: the url each page gives it, and the first page that did.
+const entityUrls = new Map();
 
 for (const file of htmlFiles) {
   const p = toUrlPath(file);
@@ -97,7 +99,14 @@ for (const file of htmlFiles) {
   for (const b of blocks) {
     try {
       const data = JSON.parse(b);
-      for (const n of data['@graph'] ?? [data]) [].concat(n['@type']).forEach((t) => types.add(t));
+      for (const n of data['@graph'] ?? [data]) {
+        [].concat(n['@type']).forEach((t) => types.add(t));
+        if (n['@id'] && n.url) {
+          const urls = entityUrls.get(n['@id']) ?? new Map();
+          if (!urls.has(n.url)) urls.set(n.url, p);
+          entityUrls.set(n['@id'], urls);
+        }
+      }
     } catch (e) {
       err(p, `invalid JSON-LD: ${e.message}`);
     }
@@ -130,6 +139,12 @@ const dupes = (key) => {
 };
 dupes('title');
 dupes('description');
+
+// One entity, one URL: an @id names the same thing on every page, in both languages, so its url must not change from
+// page to page, or search engines and assistants get two addresses for one company or product.
+for (const [id, urls] of entityUrls) {
+  if (urls.size > 1) err(id, `JSON-LD url differs across pages: ${[...urls].map(([u, p]) => `${u} (on ${p})`).join(', ')}`);
+}
 
 // hreflang reciprocity
 for (const [p, d] of pages) {

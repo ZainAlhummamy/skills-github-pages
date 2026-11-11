@@ -41,7 +41,11 @@ export const site = {
    */
   noindex: env('SITE_NOINDEX') === 'true',
 
-  /** Social / directory profiles for Organization.sameAs. Add real URLs only. */
+  /**
+   * Social / directory profiles for Organization.sameAs. Add real URLs only.
+   * TODO(owner): the company's official profiles (LinkedIn, Facebook, X, Instagram, ...). Assistants use these to
+   * tie the profiles to this site; leave empty rather than guess.
+   */
   sameAs: [] as string[],
 
   /** Country served. */

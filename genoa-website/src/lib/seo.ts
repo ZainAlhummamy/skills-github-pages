@@ -23,7 +23,8 @@ export const organizationNode = (lang: Lang): Node => {
     '@type': 'Organization',
     '@id': ids.org,
     name: site.companyName,
-    url: abs(path(lang)),
+    // One address for the company on every page, in both languages: the site's root.
+    url: abs('/'),
     logo: {
       '@type': 'ImageObject',
       url: abs('/logo-512.png'),
@@ -74,7 +75,8 @@ export const softwareNode = (productId: ProductId, lang: Lang): Node => {
     '@type': 'SoftwareApplication',
     '@id': ids.product(productId),
     name: p.brand,
-    url: abs(path(lang, productId)),
+    // One address for the product on every page, in both languages: its page in the default language (x-default, Arabic).
+    url: abs(path('ar', productId)),
     description: o.answer,
     applicationCategory: 'BusinessApplication',
     applicationSubCategory:
