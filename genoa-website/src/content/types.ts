@@ -81,6 +81,8 @@ export interface Feature {
   optional?: boolean;
   /** True for the AI-powered features (shown with an AI badge and gathered in the home page's AI section). */
   ai?: boolean;
+  /** Slug of a guide (src/content/guides.ts) that explains this feature's subject; linked from the feature page. */
+  guide?: string;
   /** Slugs of related features in the same product (2-3), used for internal links. */
   related: string[];
   content: L<FeaturePage>;

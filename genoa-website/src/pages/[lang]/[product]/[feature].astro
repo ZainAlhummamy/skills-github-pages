@@ -11,6 +11,7 @@ import CtaBand from '../../../components/CtaBand.astro';
 import Icon from '../../../components/Icon.astro';
 import { LANGS, type Lang, type ProductId } from '../../../content/types';
 import { products, productList } from '../../../content';
+import { guides } from '../../../content/guides';
 import { t } from '../../../i18n/ui';
 import { abs, path } from '../../../lib/routes';
 import { pageGraph } from '../../../lib/seo';
@@ -25,6 +26,7 @@ const productId = Astro.params.product as ProductId;
 const p = products[productId];
 const f = p.features.find((x) => x.slug === Astro.params.feature)!;
 const c = f.content[lang];
+const guide = f.guide ? guides.find((x) => x.slug === f.guide) : undefined;
 const crumbs = [
   { name: t('home', lang), href: path(lang) },
   { name: p.overview[lang].productName, href: path(lang, productId) },
@@ -89,6 +91,7 @@ const toc = [
         </nav>
         <div class="btn-row" style="flex-direction:column">
           <a class="btn btn-primary" href={path(lang, 'contact')}>{t('bookDemo', lang)}</a>
+          {guide && <a class="btn btn-ghost" href={path(lang, 'guides', guide.slug)}><Icon name="book" />{guide.content[lang].navLabel}</a>}
           <a class="btn btn-ghost" href={path(lang, productId)}>{t('productOverview', lang)} {p.brand}</a>
           <a class="btn btn-ghost" href={path(lang, 'security-backups')}><Icon name="shield" />{t('security', lang)}</a>
         </div>

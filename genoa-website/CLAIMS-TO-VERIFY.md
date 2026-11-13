@@ -20,6 +20,31 @@ The five ⚠️ items put to the owner on 11 Nov 2026 were answered. One ⚠️ 
 
 Still open before launch: ⚠️ **landed cost** (next section). The other items below without a ✅ are lower-risk inferences, to review after launch.
 
+## Guide: the Unified Accounting System (added 13 Nov 2026)
+
+`/ar/guides/unified-accounting-system/` and its English twin (`src/content/guides.ts`) explain the system itself, so
+they state general accounting facts. They were written from published summaries (Iraqi university lecture notes and
+the Federal Board of Supreme Audit's listing of its 2026 guide), **not from the text of the system**: the primary
+documents could not be opened while writing. ⚠️ **An accountant should check every point before launch:**
+
+- Issued by the Board of Supreme Audit (today the Federal Board of Supreme Audit), which also issues its updates.
+- History: separate systems before it; a committee in the late 1970s; applied to public-sector units in the early
+  1980s and extended to private-sector companies in the mid-1980s. (One source gives 1 Jan 1982 and 1 Jan 1986, another
+  says "issued in 1985"; the page gives no exact date for that reason. Put the exact dates in if you have them.)
+- Scope: public, mixed and private-sector companies; banks and insurance companies have a unified system of their
+  own; state departments funded from the budget use the government accounting system.
+- Chart of accounts: classes 1 assets, 2 liabilities, 3 uses, 4 resources; 5 to 9 cost centres (production,
+  production services, marketing services, administrative services, capital operations); decimal coding; balance
+  sheet accounts in 1 and 2, result accounts in 3 and 4.
+- Final accounts: balance sheet (الميزانية العامة), current operations account (حساب العمليات الجارية), cash flow
+  statement (كشف التدفق النقدي), described as "the main ones include".
+- IFRS: the Board has updated the system in recent years and published a guide to applying it under IFRS for the
+  first time; editions differ in some detailed account numbers.
+- **Left out on purpose:** two-digit and three-digit account codes. The classic chart (13 inventory, 16 debtors,
+  18 cash) does not match the codes in the Genoa app (131 inventory, 132 receivables, 134 cash, 23, 26), which
+  suggests the app follows a newer edition. Say which edition Genoa uses and the page can list its accounts, which
+  would make it much stronger for search.
+
 ## AI features (added 13 Nov 2026)
 
 The owner confirmed two things, in these words: Genoa has "AI to help a user", and can "add an invoice directly from

@@ -48,7 +48,7 @@
     "modified": "2026-11-13"
   },
   "/ar/companies/unified-accounting-system/": {
-    "hash": "7d300fc806bf0b4e",
+    "hash": "acfaede333e6a977",
     "modified": "2026-11-13"
   },
   "/ar/contact/": {
@@ -90,6 +90,10 @@
   "/ar/government/vouchers-approval/": {
     "hash": "e1a9a003e25fca01",
     "modified": "2026-11-11"
+  },
+  "/ar/guides/unified-accounting-system/": {
+    "hash": "975d300fa4a3ff6e",
+    "modified": "2026-11-13"
   },
   "/ar/security-backups/": {
     "hash": "88367c944b31ced5",
@@ -144,7 +148,7 @@
     "modified": "2026-11-13"
   },
   "/en/companies/unified-accounting-system/": {
-    "hash": "92a9f25ac6796465",
+    "hash": "543799613bcb6f2e",
     "modified": "2026-11-13"
   },
   "/en/contact/": {
@@ -186,6 +190,10 @@
   "/en/government/vouchers-approval/": {
     "hash": "aa757bfeef1272ea",
     "modified": "2026-11-11"
+  },
+  "/en/guides/unified-accounting-system/": {
+    "hash": "391ff1d5dc1e8fd4",
+    "modified": "2026-11-13"
   },
   "/en/security-backups/": {
     "hash": "ba9ec8c8d5ca5c2f",

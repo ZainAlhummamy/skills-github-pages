@@ -42,6 +42,10 @@ ${group(en, ['product', 'feature', 'faq'], 'companies')}
 
 ${group(en, ['product', 'feature', 'faq'], 'government')}
 
+## Guides
+
+${group(en, ['guide'])}
+
 ## Company
 
 ${group(en, ['home', 'about', 'security', 'contact'])}

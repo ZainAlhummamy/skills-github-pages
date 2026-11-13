@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import AnswerBox from '../../../components/AnswerBox.astro';
+import KeyFacts from '../../../components/KeyFacts.astro';
+import Sections from '../../../components/Sections.astro';
+import FeatureCards from '../../../components/FeatureCards.astro';
+import FaqList from '../../../components/FaqList.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import Icon from '../../../components/Icon.astro';
+import { LANGS, type Lang } from '../../../content/types';
+import { products } from '../../../content';
+import { guides } from '../../../content/guides';
+import { t } from '../../../i18n/ui';
+import { abs, path } from '../../../lib/routes';
+import { pageGraph } from '../../../lib/seo';
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) => guides.map((g) => ({ params: { lang, guide: g.slug } })));
+}
+const lang = Astro.params.lang as Lang;
+const g = guides.find((x) => x.slug === Astro.params.guide)!;
+const c = g.content[lang];
+const pathname = path(lang, 'guides', g.slug);
+const crumbs = [
+  { name: t('home', lang), href: path(lang) },
+  { name: c.navLabel, href: pathname },
+];
+const og = `/og/og-companies-${lang}.png`;
+const jsonld = pageGraph({
+  lang,
+  pathname,
+  title: c.title,
+  description: c.description,
+  breadcrumbs: crumbs,
+  about: ['companies'],
+  faqs: c.faqs,
+  image: abs(og),
+});
+const toc = [
+  { id: 'key-facts', label: t('keyFacts', lang) },
+  ...c.sections.map((s, i) => ({ id: `section-${i + 1}`, label: s.heading })),
+  { id: 'guide-faq', label: t('faq', lang) },
+];
+---
+<BaseLayout lang={lang} title={c.title} description={c.description} ogImage={og} ogImageAlt={c.h1} jsonld={jsonld}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs lang={lang} items={crumbs} />
+      <div class="hero-meta">
+        <span class="hero-icon" aria-hidden="true"><Icon name="book" /></span>
+        <span class="eyebrow">{t('guide', lang)}</span>
+      </div>
+      <h1>{c.h1}</h1>
+      <AnswerBox lang={lang} text={c.answer} />
+    </div>
+  </section>
+
+  <div class="section">
+    <div class="container content-grid">
+      <div class="article">
+        <KeyFacts lang={lang} facts={c.keyFacts} />
+        <div class="prose" style="margin-top:2rem">
+          <Sections sections={c.sections} />
+          <section aria-labelledby="guide-faq" data-reveal>
+            <h2 id="guide-faq">{t('faq', lang)}</h2>
+            <FaqList faqs={c.faqs} />
+          </section>
+          <p class="note" style="margin-top:1.5rem">{c.sourceNote}</p>
+        </div>
+      </div>
+      <aside>
+        <nav class="toc" aria-labelledby="toc-heading">
+          <h2 id="toc-heading">{t('onThisPage', lang)}</h2>
+          <ul>{toc.map((x) => <li><a href={`#${x.id}`}>{x.label}</a></li>)}</ul>
+        </nav>
+        <div class="btn-row" style="flex-direction:column">
+          <a class="btn btn-primary" href={path(lang, 'contact')}>{t('bookDemo', lang)}</a>
+          <a class="btn btn-ghost" href={path(lang, 'companies')}>{t('productOverview', lang)} Genoa</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <section class="section section-soft" data-product="companies" aria-labelledby="related">
+    <div class="container">
+      <h2 id="related" class="ruled" data-reveal>{t('relatedFeatures', lang)}</h2>
+      <FeatureCards lang={lang} product={products.companies} slugs={g.related} />
+    </div>
+  </section>
+
+  <CtaBand lang={lang} />
+</BaseLayout>

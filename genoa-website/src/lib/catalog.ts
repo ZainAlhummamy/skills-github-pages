@@ -5,6 +5,7 @@
  */
 import { productList } from '../content';
 import { about, contact, home, security } from '../content/pages';
+import { guides } from '../content/guides';
 import type { Faq, Lang, ProductId, Section } from '../content/types';
 import { LANGS } from '../content/types';
 import { t } from '../i18n/ui';
@@ -15,7 +16,7 @@ export interface CatalogPage {
   path: string;
   title: string;
   description: string;
-  kind: 'home' | 'product' | 'feature' | 'faq' | 'security' | 'about' | 'contact';
+  kind: 'home' | 'product' | 'feature' | 'faq' | 'guide' | 'security' | 'about' | 'contact';
   product?: ProductId;
   /** Plain-text body for llms-full.txt (Markdown-ish). */
   text: () => string;
@@ -101,6 +102,25 @@ export const catalog = (lang: Lang): CatalogPage[] => {
       kind: 'faq',
       product: p.id,
       text: () => [fq.answer, ...fq.groups.map((g) => `## ${g.heading}\n\n${faqText(g.faqs)}`)].join('\n\n'),
+    });
+  }
+
+  for (const g of guides) {
+    const gc = g.content[lang];
+    out.push({
+      lang,
+      path: path(lang, 'guides', g.slug),
+      title: gc.title,
+      description: gc.description,
+      kind: 'guide',
+      text: () =>
+        [
+          gc.answer,
+          gc.keyFacts.map((k) => `- ${k.label}: ${k.value}`).join('\n'),
+          sectionsText(gc.sections),
+          `## ${t('faq', lang)}\n\n${faqText(gc.faqs)}`,
+          gc.sourceNote,
+        ].join('\n\n'),
     });
   }
 

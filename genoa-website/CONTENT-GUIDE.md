@@ -99,7 +99,7 @@ Use the vocabulary Iraqi accountants and government finance staff actually use.
 | Concept | Use | Avoid / secondary |
 |---|---|---|
 | The product (search phrases, owner 13 Nov 2026) | نظام محاسبي (titles, H1s, first sentence): «نظام محاسبي للشركات العراقية»، «نظام محاسبي حكومي» | برنامج محاسبي / برنامج محاسبة حكومية: keep in body copy too, people search both |
-| Unified Accounting System | النظام المحاسبي الموحد (always with ال in copy; «نظام محاسبي موحد» once in the page's meta description for search) | Never say Genoa "is" or "follows" it: it uses its chart of accounts |
+| Unified Accounting System | النظام المحاسبي الموحد (always with ال in copy; «نظام محاسبي موحد» appears in the guide page, `src/content/guides.ts`, which is the page for that search) | Never say Genoa "is" or "follows" it: it uses its chart of accounts |
 | Cost | كلفة (الكلفة، كلفة المادة) | تكلفة (acceptable once for search) |
 | Customs | الكمارك، الرسوم الكمركية | الجمارك (acceptable once for search) |
 | Suppliers | المجهزين / المجهز | الموردين (acceptable once for search) |
