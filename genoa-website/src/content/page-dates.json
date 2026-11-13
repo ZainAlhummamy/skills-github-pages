@@ -1,31 +1,39 @@
 {
   "/ar/": {
-    "hash": "036a0a1e78baa73d",
-    "modified": "2026-11-11"
+    "hash": "b6266b5e888b0d29",
+    "modified": "2026-11-13"
   },
   "/ar/about/": {
-    "hash": "1ccd3f7def1edae4",
-    "modified": "2026-11-11"
+    "hash": "96307f34d5533df1",
+    "modified": "2026-11-13"
   },
   "/ar/companies/": {
-    "hash": "3695c3f0053547c7",
-    "modified": "2026-11-11"
+    "hash": "72a43ae9669fcf74",
+    "modified": "2026-11-13"
   },
   "/ar/companies/accounting/": {
     "hash": "b09bb57322dff27a",
     "modified": "2026-11-11"
+  },
+  "/ar/companies/ai-assistant/": {
+    "hash": "f41264beeae2b30a",
+    "modified": "2026-11-13"
   },
   "/ar/companies/customer-supplier-ledgers/": {
     "hash": "acbaa37ecb840c72",
     "modified": "2026-11-11"
   },
   "/ar/companies/faq/": {
-    "hash": "f2617ff23356eb3f",
-    "modified": "2026-11-11"
+    "hash": "37bb9fde2d3fd97d",
+    "modified": "2026-11-13"
   },
   "/ar/companies/inventory/": {
     "hash": "ba5b8b9401889b52",
     "modified": "2026-11-11"
+  },
+  "/ar/companies/invoice-from-image/": {
+    "hash": "b5820bcb6800fa82",
+    "modified": "2026-11-13"
   },
   "/ar/companies/landed-cost/": {
     "hash": "04a54380289e1a38",
@@ -36,8 +44,8 @@
     "modified": "2026-11-11"
   },
   "/ar/companies/sales-purchasing/": {
-    "hash": "6e68a8008de9ba91",
-    "modified": "2026-11-11"
+    "hash": "8dbacd7a9e2dc516",
+    "modified": "2026-11-13"
   },
   "/ar/companies/unified-accounting-system/": {
     "hash": "b3ff9f170ef418f5",
@@ -48,8 +56,8 @@
     "modified": "2026-11-11"
   },
   "/ar/government/": {
-    "hash": "2b3efe83097fb7b9",
-    "modified": "2026-11-11"
+    "hash": "87e15e8ff3a66580",
+    "modified": "2026-11-13"
   },
   "/ar/government/budgets/": {
     "hash": "c5661bde9e2f2d74",
@@ -88,32 +96,40 @@
     "modified": "2026-11-11"
   },
   "/en/": {
-    "hash": "7d42b181cc60cdda",
-    "modified": "2026-11-11"
+    "hash": "c1c010f1d18b2c67",
+    "modified": "2026-11-13"
   },
   "/en/about/": {
-    "hash": "0ec1520d48c5a8b8",
-    "modified": "2026-11-11"
+    "hash": "df17ddd47c1a9130",
+    "modified": "2026-11-13"
   },
   "/en/companies/": {
-    "hash": "a7783a506dc51e8d",
-    "modified": "2026-11-11"
+    "hash": "8bc54dfab14be961",
+    "modified": "2026-11-13"
   },
   "/en/companies/accounting/": {
     "hash": "47053547baf04b6f",
     "modified": "2026-11-11"
+  },
+  "/en/companies/ai-assistant/": {
+    "hash": "83c206737bcdecea",
+    "modified": "2026-11-13"
   },
   "/en/companies/customer-supplier-ledgers/": {
     "hash": "b49ce4ebe2b51c6a",
     "modified": "2026-11-11"
   },
   "/en/companies/faq/": {
-    "hash": "5dfd12f29aa15c30",
-    "modified": "2026-11-11"
+    "hash": "3cdf20e1e236c81a",
+    "modified": "2026-11-13"
   },
   "/en/companies/inventory/": {
     "hash": "7a8ab31fa91e476f",
     "modified": "2026-11-11"
+  },
+  "/en/companies/invoice-from-image/": {
+    "hash": "91afa70dcd23ae00",
+    "modified": "2026-11-13"
   },
   "/en/companies/landed-cost/": {
     "hash": "de8135e89d67c72a",
@@ -124,8 +140,8 @@
     "modified": "2026-11-11"
   },
   "/en/companies/sales-purchasing/": {
-    "hash": "ad91490ade832349",
-    "modified": "2026-11-11"
+    "hash": "d21938810524322a",
+    "modified": "2026-11-13"
   },
   "/en/companies/unified-accounting-system/": {
     "hash": "dbf1482165592c86",
@@ -136,8 +152,8 @@
     "modified": "2026-11-11"
   },
   "/en/government/": {
-    "hash": "97a10d43e3af908e",
-    "modified": "2026-11-11"
+    "hash": "101487895ab3a579",
+    "modified": "2026-11-13"
   },
   "/en/government/budgets/": {
     "hash": "98881ace8ceef80a",

@@ -51,13 +51,14 @@ const toc = [
 ];
 ---
 <BaseLayout lang={lang} title={c.title} description={c.description} ogImage={og} ogImageAlt={c.h1} jsonld={jsonld}>
-  <section class="page-hero" data-product={productId}>
+  <section class="page-hero" data-product={productId} data-ai={f.ai ? 'true' : undefined}>
     <div class="container">
       <Breadcrumbs lang={lang} items={crumbs} />
       <div class="hero-meta">
         <span class="hero-icon" aria-hidden="true"><Icon name={f.icon} /></span>
         <span class="eyebrow">{p.brand}</span>
         {f.optional && <span class="badge-optional">{t('optionalBadge', lang)}</span>}
+        {f.ai && <span class="badge-ai"><Icon name="spark" />{t('aiBadge', lang)}</span>}
       </div>
       <h1>{c.h1}</h1>
       <AnswerBox lang={lang} text={c.answer} />

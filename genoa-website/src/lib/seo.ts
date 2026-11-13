@@ -49,8 +49,8 @@ export const organizationNode = (lang: Lang): Node => {
     areaServed: { '@type': 'Country', name: site.areaServed.en, identifier: site.areaServed.code },
     knowsAbout:
       lang === 'ar'
-        ? ['المحاسبة', 'المحاسبة الحكومية', 'إدارة المخازن', 'برامج المحاسبة في العراق', 'النظام المحاسبي الموحد', 'المعايير الدولية لإعداد التقارير المالية (IFRS)']
-        : ['Accounting software', 'Government accounting', 'Inventory management', 'Accounting in Iraq', 'Iraqi Unified Accounting System', 'International Financial Reporting Standards (IFRS)'],
+        ? ['المحاسبة', 'المحاسبة الحكومية', 'إدارة المخازن', 'برامج المحاسبة في العراق', 'النظام المحاسبي الموحد', 'المعايير الدولية لإعداد التقارير المالية (IFRS)', 'الذكاء الاصطناعي في المحاسبة']
+        : ['Accounting software', 'Government accounting', 'Inventory management', 'Accounting in Iraq', 'Iraqi Unified Accounting System', 'International Financial Reporting Standards (IFRS)', 'Artificial intelligence in accounting'],
     ...(email || phone
       ? {
           contactPoint: {

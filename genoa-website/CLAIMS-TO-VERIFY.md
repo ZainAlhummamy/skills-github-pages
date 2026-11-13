@@ -13,12 +13,37 @@ Highest-priority items were marked ⚠️ — they describe processes or policie
 The five ⚠️ items put to the owner on 11 Nov 2026 were answered. One ⚠️ item is **still open**: landed cost (next section), found later while taking real screenshots.
 
 - ✅ **IFRS wording** — reworded everywhere. Genoa uses the Unified Accounting System's chart of accounts and can prepare IFRS-based financial statements (approved wording in `CONTENT-GUIDE.md` §1); the site no longer says it follows the Unified Accounting System "in line with IFRS".
-- ✅ **AI** — reduced on the owner's instruction (SEO/GEO audit, 11 Nov 2026): one sentence on the about page only; removed from titles, meta descriptions, the home band and hero, the footer, the Organization JSON-LD and the share images, and the two AI FAQs ("Does Genoa / Genoa Gov use AI?") were removed. Still open: which AI capabilities exist and in which product, so they can be described concretely (see `OWNER-TODO.md`).
+- ✅ **AI** — (superseded 13 Nov 2026: two AI features confirmed, see "AI features" below.) Earlier: reduced on the owner's instruction (SEO/GEO audit, 11 Nov 2026): one sentence on the about page only; removed from titles, meta descriptions, the home band and hero, the footer, the Organization JSON-LD and the share images, and the two AI FAQs ("Does Genoa / Genoa Gov use AI?") were removed. Still open: which AI capabilities exist and in which product, so they can be described concretely (see `OWNER-TODO.md`).
 - ✅ **Backups** (`security.answer`, `security.sections[4]`) — confirmed: a written backup plan is agreed with each organisation at setup.
 - ✅ **Demos** (`contact.nextSteps[1]`) — confirmed: demos use test data.
 - ✅ **Privacy** (`contact.privacy`) — true while `FORM_ENDPOINT` is empty, as it is at launch. Reword it if a form service is ever set.
 
 Still open before launch: ⚠️ **landed cost** (next section). The other items below without a ✅ are lower-risk inferences, to review after launch.
+
+## AI features (added 13 Nov 2026)
+
+The owner confirmed two things, in these words: Genoa has "AI to help a user", and can "add an invoice directly from
+image". The pages `companies.features[ai-assistant]` and `companies.features[invoice-from-image]`
+(`src/content/companies-ai.ts`) were written from that alone. **Confirm or correct each point:**
+
+- ⚠️ **Which product.** Both features are described as part of **Genoa (companies)** only. If they are (also) in
+  Genoa Gov, say so and the pages will be added there.
+- ⚠️ **Names.** The site calls them «المساعد الذكي» / "AI assistant" and «إضافة فاتورة من صورة» / "Invoice from
+  image". Give the names used in the app if they differ.
+- ⚠️ **"The software reads the image and adds the invoice from it"** (invoice-from-image `answer`, `sections[0]`,
+  `sections[2]`, both FAQs). Confirm this is the flow, and whether the user sees a draft to review before it is saved.
+  The pages *recommend* checking the invoice against the original; they do not claim a review step exists.
+- **"Entering invoices by hand in sales and purchasing stays as it is"** (invoice-from-image `faqs[1]`): inferred.
+- **"It is part of Genoa itself … not a separate program"** (ai-assistant `answer`, `sections[0]`): inferred.
+- **"An AI assistant shortens that time, because the user gets help inside the software itself"** (ai-assistant
+  `sections[1]`): general statement about the benefit, not a measured claim.
+- **Not optional.** Neither feature carries the "optional, off by default" wording. If they are switched on per
+  organisation, set `optional: true` on them.
+- **Home page drawings** (`src/components/AiShowcase.astro`): two decorative drawings (a chat, and a paper invoice
+  becoming an invoice), labelled "Illustration", with no figures or sample text.
+- Still unknown, and so turned into "ask in the demo" questions rather than stated: what the assistant can be asked,
+  Arabic support, which invoice types and languages are read, handwriting, and where data is processed. Answers to
+  these would make both pages much stronger (see `OWNER-TODO.md`).
 
 ## Found while taking real screenshots (Genoa app, `UAS` repo)
 

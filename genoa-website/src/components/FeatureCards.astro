@@ -12,10 +12,11 @@ const features = slugs ? slugs.map((s) => product.features.find((f) => f.slug ==
     const c = f.content[lang];
     return (
       <li data-reveal style={`--i:${i % 3}`}>
-        <div class="card" data-product={product.id}>
+        <div class="card" data-product={product.id} data-ai={f.ai ? 'true' : undefined}>
           <span class="icon"><Icon name={f.icon} /></span>
           <h3><a href={path(lang, product.id, f.slug)}>{c.navLabel}</a></h3>
           {f.optional && <span><span class="badge-optional">{t('optionalBadge', lang)}</span></span>}
+          {f.ai && <span><span class="badge-ai"><Icon name="spark" />{t('aiBadge', lang)}</span></span>}
           <p>{c.cardSummary}</p>
           <span class="more" aria-hidden="true">{t('learnMore', lang)} <Icon name="arrow" class="flip-rtl" /></span>
         </div>

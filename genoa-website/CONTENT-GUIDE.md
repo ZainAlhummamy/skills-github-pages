@@ -14,10 +14,9 @@ added to `CLAIMS-TO-VERIFY.md` for the team to confirm before launch.
   لبرمجيات المحاسبة» / "Genoa Systems is an Iraqi accounting-software company", plus «مقرّها في …» /
   "based in …" once the city is confirmed (`companyIntro` in `src/config/site.ts` writes it). A defunct US
   hardware maker of the same name dominates search; the first sentence has to tell them apart.
-- AI (owner, 11 Nov 2026): **one sentence, on the about page only**, until concrete AI features are
-  confirmed: «وتبني Genoa Systems حلولها المالية والمحاسبية بأحدث التقنيات، مع ذكاء اصطناعي موجّه للأعمال
-  المحاسبية والمالية». Not in titles, meta descriptions, headings, the hero, the footer, JSON-LD or FAQ
-  answers. Do not describe specific AI capabilities until the product team confirms them.
+- AI (owner, 13 Nov 2026): Genoa (for companies) has two AI features, listed under Genoa below. The company-level
+  sentence stays on the about page: «وتبني Genoa Systems حلولها المالية والمحاسبية بأحدث التقنيات، مع ذكاء اصطناعي
+  موجّه للأعمال المحاسبية والمالية». Nothing is confirmed about AI in Genoa Gov: do not mention AI there.
 - Meta descriptions lead with the product and its audience, not with the company's slogan.
 
 **Genoa (for companies)**
@@ -33,6 +32,13 @@ added to `CLAIMS-TO-VERIFY.md` for the team to confirm before launch.
 - Customer and supplier ledgers, with ageing.
 - Multi-currency (US dollar alongside Iraqi dinar) — **optional**.
 - Landed cost (freight and customs added on top of item cost) — **optional**.
+- AI assistant (المساعد الذكي): AI that helps the user inside the software. **That is all that is confirmed.**
+- Invoice from image (إضافة فاتورة من صورة): an invoice is added directly from an image of it, with AI.
+  **That is all that is confirmed.**
+- For both AI features, do not state: what the assistant can be asked or do, which invoice types are read
+  (purchase / sales), languages, handwriting, file formats, phone or camera capture, accuracy, the AI model or
+  provider, or where data is processed. The feature pages turn these into questions for the demo. Always keep the
+  sentence that the accountant reviews and approves the work. They are not marked optional (not confirmed either way).
 - Optional features are switched on **per organisation** and are **off by default**.
   Say this every time an optional feature is described.
 
@@ -54,8 +60,8 @@ added to `CLAIMS-TO-VERIFY.md` for the team to confirm before launch.
   Unified Accounting System / IFRS wording in section 1 is the only standards claim.)
 - Deployment details we have not confirmed: cloud/on-premise, web/desktop/mobile,
   operating systems, hosting location, encryption algorithms, integrations,
-  e-invoicing, payroll, POS, barcode, API, or specific AI capabilities beyond the
-  approved company-level wording.
+  e-invoicing, payroll, POS, barcode, API, or AI capabilities beyond the two
+  confirmed features in section 1.
 - Superlatives presented as fact ("the best", "the number one", "the most secure").
   When a buyer question asks "what is the best ...", answer honestly: explain what to
   look for, then say factually what Genoa / Genoa Gov covers.

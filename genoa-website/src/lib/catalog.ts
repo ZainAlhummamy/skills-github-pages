@@ -45,6 +45,7 @@ export const catalog = (lang: Lang): CatalogPage[] => {
         h.answer,
         `## ${h.products.companies.heading}\n\n${h.products.companies.body}`,
         `## ${h.products.government.heading}\n\n${h.products.government.body}`,
+        `## ${h.ai.heading}\n\n${h.ai.intro} ${h.ai.note}`,
         `## ${h.compare.heading}\n\n${h.compare.intro}\n\n- Genoa — ${h.compare.rowLabels.for}: ${h.compare.genoa.for}. ${h.compare.rowLabels.modules}: ${h.compare.genoa.modules}. ${h.compare.rowLabels.distinctive}: ${h.compare.genoa.distinctive}.\n- Genoa Gov — ${h.compare.rowLabels.for}: ${h.compare.gov.for}. ${h.compare.rowLabels.modules}: ${h.compare.gov.modules}. ${h.compare.rowLabels.distinctive}: ${h.compare.gov.distinctive}.`,
         `## ${h.principles.heading}\n\n${h.principles.items.map((i) => `- ${i.title}: ${i.body}`).join('\n')}`,
       ].join('\n\n'),
@@ -64,7 +65,7 @@ export const catalog = (lang: Lang): CatalogPage[] => {
           o.answer,
           sectionsText([o.whatIs, o.whoFor]),
           `## ${o.modulesHeading}\n\n${o.modulesIntro}\n\n${p.features
-            .map((f) => `- ${f.content[lang].navLabel}${f.optional ? ` (${t('optionalBadge', lang)})` : ''}: ${f.content[lang].cardSummary}`)
+            .map((f) => `- ${f.content[lang].navLabel}${f.optional ? ` (${t('optionalBadge', lang)})` : ''}${f.ai ? ` (${t('aiBadge', lang)})` : ''}: ${f.content[lang].cardSummary}`)
             .join('\n')}`,
           o.keyFacts.map((k) => `- ${k.label}: ${k.value}`).join('\n'),
           sectionsText(o.sections),

@@ -20,6 +20,8 @@ export interface HomeContent extends PageMeta {
     genoa: { for: string; modules: string; distinctive: string };
     gov: { for: string; modules: string; distinctive: string };
   };
+  /** The AI section: the two AI features of Genoa (their names and summaries come from the feature pages). */
+  ai: { eyebrow: string; heading: string; intro: string; note: string };
   principles: { heading: string; items: { title: string; body: string }[] };
   security: { heading: string; body: string; link: string };
   faq: { heading: string; body: string };
@@ -31,18 +33,19 @@ export const home: L<HomeContent> = {
     description:
       'برنامج محاسبي عراقي للشركات والدوائر الحكومية: Genoa للحسابات والمخازن بدليل حسابات النظام المحاسبي الموحد وقوائم IFRS، وGenoa Gov لأقسام الحسابات الحكومية.',
     h1: 'برامج محاسبة عراقية للشركات وللدوائر الحكومية',
-    answer: `${companyIntro('ar')}، ولها برنامجان محاسبيان منفصلان. Genoa برنامج محاسبي عراقي للشركات، يعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفق معايير IFRS، ويجمع الحسابات وإدارة المخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمارها. وGenoa Gov برنامج محاسبة حكومية لأقسام الحسابات في الدوائر الحكومية العراقية، يغطي المستندات ومنها مستند الصرف (سند الصرف)، وسلسلة المصادقة والموازنة والصكوك والغلق الشهري والسنوي.`,
+    answer: `${companyIntro('ar')}، ولها برنامجان محاسبيان منفصلان. Genoa برنامج محاسبي عراقي للشركات، يعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفق معايير IFRS، ويجمع الحسابات وإدارة المخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمارها. وفيه مساعد ذكي يعمل بالذكاء الاصطناعي وإضافة فاتورة مباشرة من صورتها. وGenoa Gov برنامج محاسبة حكومية لأقسام الحسابات في الدوائر الحكومية العراقية، يغطي المستندات ومنها مستند الصرف (سند الصرف)، وسلسلة المصادقة والموازنة والصكوك والغلق الشهري والسنوي.`,
     highlights: [
       'النظام المحاسبي الموحد وقوائم IFRS',
       'سلسلة مصادقة متعددة المستخدمين',
       'سجل تدقيق كامل للتعديلات',
       'قاعدة بيانات مستقلة لكل دائرة',
       'الدينار والدولار (اختياري)',
+      'مساعد ذكي وفاتورة من صورة',
     ],
     products: {
       companies: {
         heading: 'ما هو Genoa؟',
-        body: 'Genoa برنامج محاسبة ومخازن للشركات العراقية، يعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS). يجمع في برنامج واحد الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الديون. تعدد العملات (الدولار الأمريكي إلى جانب الدينار العراقي) والكلفة الواصلة (الشحن والكمارك فوق كلفة المادة) ميزتان اختياريتان، معطّلتان افتراضياً، وتُفعَّلان لكل شركة على حدة.',
+        body: 'Genoa برنامج محاسبة ومخازن للشركات العراقية، يعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS). يجمع في برنامج واحد الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الديون. تعدد العملات (الدولار الأمريكي إلى جانب الدينار العراقي) والكلفة الواصلة (الشحن والكمارك فوق كلفة المادة) ميزتان اختياريتان، معطّلتان افتراضياً، وتُفعَّلان لكل شركة على حدة. وفي Genoa ميزتان تعملان بالذكاء الاصطناعي: مساعد ذكي يساعد المستخدم داخل البرنامج، وإضافة فاتورة مباشرة من صورتها.',
         cta: 'تعرّف على Genoa للشركات',
       },
       government: {
@@ -63,13 +66,19 @@ export const home: L<HomeContent> = {
       genoa: {
         for: 'الشركات العراقية التي تبيع وتشتري وتدير مخزوناً',
         modules: 'الحسابات، المخازن، المبيعات والمشتريات، ذمم الزبائن والمجهزين وأعمارها',
-        distinctive: 'دليل حسابات النظام المحاسبي الموحد وقوائم مالية وفق معايير IFRS، وتعدد العملات والكلفة الواصلة ميزتان اختياريتان، معطّلتان افتراضياً، وتُفعَّلان لكل شركة على حدة',
+        distinctive: 'دليل حسابات النظام المحاسبي الموحد وقوائم مالية وفق معايير IFRS، وتعدد العملات والكلفة الواصلة ميزتان اختياريتان، معطّلتان افتراضياً، وتُفعَّلان لكل شركة على حدة؛ ومساعد ذكي وإضافة فاتورة من صورة بالذكاء الاصطناعي',
       },
       gov: {
         for: 'أقسام الحسابات في الدوائر الحكومية العراقية وتشكيلاتها',
         modules: 'المستندات وسلسلة المصادقة، تعديل المستندات المرحّلة، الموازنة والتخصيصات، الصكوك، الغلق الشهري والسنوي، مكتبة التشريعات',
         distinctive: 'سجل تدقيق كامل لكل تعديل على مستند مرحَّل، وقاعدة بيانات مستقلة لكل دائرة',
       },
+    },
+    ai: {
+      eyebrow: 'الذكاء الاصطناعي في Genoa',
+      heading: 'مساعد ذكي، وفاتورة تُضاف من صورتها',
+      intro: 'في برنامج Genoa للشركات ميزتان تعملان بالذكاء الاصطناعي: مساعد ذكي يساعد المستخدم أثناء عمله داخل البرنامج، وإضافة فاتورة مباشرة من صورتها بدلاً من إدخالها يدوياً.',
+      note: 'الميزتان تعينان المستخدم، وتبقى مراجعة العمل واعتماده للمحاسب.',
     },
     principles: {
       heading: 'مبادئ واضحة في البرنامجين',
@@ -107,18 +116,19 @@ export const home: L<HomeContent> = {
     description:
       'Iraqi accounting software for companies and government: Genoa for accounts and inventory (Unified Accounting System chart of accounts, IFRS statements) and Genoa Gov.',
     h1: 'Accounting software for Iraqi companies and government departments',
-    answer: `${companyIntro('en')}, with two separate accounting products for the Iraqi market. Genoa is for companies: it uses the Unified Accounting System chart of accounts, can prepare IFRS-based financial statements, and brings together accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. Genoa Gov is for the accounts sections of Iraqi government departments and covers vouchers, including payment vouchers, with multi-user approval, budgets and allocation checks, cheques, and month-end and year-end closing.`,
+    answer: `${companyIntro('en')}, with two separate accounting products for the Iraqi market. Genoa is for companies: it uses the Unified Accounting System chart of accounts, can prepare IFRS-based financial statements, and brings together accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. It also has an AI assistant and can add an invoice directly from an image. Genoa Gov is for the accounts sections of Iraqi government departments and covers vouchers, including payment vouchers, with multi-user approval, budgets and allocation checks, cheques, and month-end and year-end closing.`,
     highlights: [
       'Unified Accounting System and IFRS statements',
       'Multi-user approval workflow',
       'Full audit trail for amendments',
       'A separate database per office',
       'Dinar and dollar (optional)',
+      'AI assistant and invoice from image',
     ],
     products: {
       companies: {
         heading: 'What is Genoa?',
-        body: 'Genoa is accounting and inventory software for Iraqi companies that uses the Unified Accounting System chart of accounts and can prepare financial statements based on International Financial Reporting Standards (IFRS). It brings accounting, inventory, sales and purchasing, and customer and supplier ledgers with debt ageing into one product. Multi-currency (US dollars alongside Iraqi dinars) and landed cost (freight and customs added on top of item cost) are optional features: they are off by default and are switched on per organisation.',
+        body: 'Genoa is accounting and inventory software for Iraqi companies that uses the Unified Accounting System chart of accounts and can prepare financial statements based on International Financial Reporting Standards (IFRS). It brings accounting, inventory, sales and purchasing, and customer and supplier ledgers with debt ageing into one product. Multi-currency (US dollars alongside Iraqi dinars) and landed cost (freight and customs added on top of item cost) are optional features: they are off by default and are switched on per organisation. Genoa also has two AI-powered features: an AI assistant that helps the user inside the software, and adding an invoice directly from an image of it.',
         cta: 'Explore Genoa for companies',
       },
       government: {
@@ -139,13 +149,19 @@ export const home: L<HomeContent> = {
       genoa: {
         for: 'Iraqi companies that buy, sell and hold stock',
         modules: 'Accounting, inventory, sales and purchasing, customer and supplier ledgers with ageing',
-        distinctive: 'The Unified Accounting System chart of accounts and IFRS-based statements; multi-currency and landed cost are optional, off by default and switched on per organisation',
+        distinctive: 'The Unified Accounting System chart of accounts and IFRS-based statements; multi-currency and landed cost are optional, off by default and switched on per organisation; an AI assistant and invoice from image',
       },
       gov: {
         for: 'Accounts sections of Iraqi government departments and their sub-units',
         modules: 'Vouchers and approval workflow, amendment of posted vouchers, budgets and allocations, cheques, month and year closing, legislation library',
         distinctive: 'A full audit trail for every amendment to a posted voucher, and a separate database for each office',
       },
+    },
+    ai: {
+      eyebrow: 'AI in Genoa',
+      heading: 'An AI assistant, and invoices added from a picture',
+      intro: 'Genoa for companies has two AI-powered features: an AI assistant that helps the user while they work inside the software, and adding an invoice directly from an image of it instead of typing it in.',
+      note: 'Both features support the user; reviewing and approving the work stays with the accountant.',
     },
     principles: {
       heading: 'Clear principles in both products',
@@ -334,8 +350,8 @@ export const about: L<ArticleContent> = {
         body: [
           'Genoa برنامج محاسبة ومخازن للشركات، يعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS)، ويجمع الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمارها، مع ميزتين اختياريتين هما تعدد العملات والكلفة الواصلة.',
           'Genoa Gov برنامج محاسبة حكومية لأقسام الحسابات في الدوائر الحكومية العراقية، يغطي المستندات وسلسلة المصادقة، وتعديل المستندات المرحّلة مع سجل تدقيق كامل، والموازنة، والصكوك، والغلق الشهري والسنوي، ومكتبة التشريعات، مع قاعدة بيانات مستقلة لكل دائرة.',
-          // The site's only sentence on AI, as agreed. TODO(owner): replace it with the concrete AI features, or remove it.
-          'وتبني Genoa Systems حلولها المالية والمحاسبية بأحدث التقنيات، مع ذكاء اصطناعي موجّه للأعمال المحاسبية والمالية.',
+          // AI: the two features the owner confirmed on 13 Nov 2026 (CONTENT-GUIDE.md section 1).
+          'وتبني Genoa Systems حلولها المالية والمحاسبية بأحدث التقنيات، مع ذكاء اصطناعي موجّه للأعمال المحاسبية والمالية. ففي Genoa مساعد ذكي يساعد المستخدم داخل البرنامج، وميزة تضيف الفاتورة مباشرة من صورتها.',
         ],
       },
       {
@@ -373,8 +389,8 @@ export const about: L<ArticleContent> = {
         body: [
           'Genoa is accounting and inventory software for companies that uses the chart of accounts of the Iraqi Unified Accounting System and can prepare financial statements based on International Financial Reporting Standards (IFRS). It brings together accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing, plus two optional features: multi-currency and landed cost.',
           'Genoa Gov is government accounting software for the accounts sections of Iraqi government departments. It covers vouchers and their approval workflow, amendment of posted vouchers with a full audit trail, budgets, cheques, month-end and year-end closing, and a legislation library, with a separate database for each office.',
-          // The site's only sentence on AI, as agreed. TODO(owner): replace it with the concrete AI features, or remove it.
-          'Genoa Systems builds its financial and accounting solutions with the latest technology, with AI designed for accounting and financial work.',
+          // AI: the two features the owner confirmed on 13 Nov 2026 (CONTENT-GUIDE.md section 1).
+          'Genoa Systems builds its financial and accounting solutions with the latest technology, with AI designed for accounting and financial work: Genoa has an AI assistant that helps the user inside the software, and a feature that adds an invoice directly from an image of it.',
         ],
       },
       {

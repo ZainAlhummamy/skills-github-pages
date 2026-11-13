@@ -31,6 +31,8 @@ export const ui = {
     ar: 'هذه ميزة اختيارية: معطّلة افتراضياً، وتُفعَّل لكل شركة على حدة عند الحاجة.',
     en: 'This is an optional feature: it is off by default and is switched on per organisation when needed.',
   },
+  aiBadge: { ar: 'ذكاء اصطناعي', en: 'AI' },
+  illustration: { ar: 'رسم توضيحي', en: 'Illustration' },
   modules: { ar: 'الوحدات', en: 'Modules' },
   learnMore: { ar: 'اعرف المزيد', en: 'Learn more' },
   relatedFeatures: { ar: 'ميزات مرتبطة', en: 'Related features' },

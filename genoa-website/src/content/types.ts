@@ -79,6 +79,8 @@ export interface Feature {
   icon: IconKey;
   /** True for features that are off by default and enabled per organisation. */
   optional?: boolean;
+  /** True for the AI-powered features (shown with an AI badge and gathered in the home page's AI section). */
+  ai?: boolean;
   /** Slugs of related features in the same product (2-3), used for internal links. */
   related: string[];
   content: L<FeaturePage>;
@@ -140,4 +142,5 @@ export type IconKey =
   | 'shield'
   | 'chart'
   | 'standard'
-  | 'spark';
+  | 'spark'
+  | 'scan';
