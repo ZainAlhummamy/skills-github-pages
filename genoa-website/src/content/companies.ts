@@ -195,7 +195,7 @@ export const companies: Product = {
           answer:
             "يعتمد برنامج Genoa للشركات دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS)؛ وهما إطاران منفصلان. فيعمل المحاسب في Genoa بدليل الحسابات الذي يعرفه في العراق، ويُستخدم دليل الحسابات نفسه في البرنامج الذي يضم الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين.",
           keyFacts: [
-            { label: "دليل الحسابات", value: "دليل حسابات النظام المحاسبي الموحد" },
+            { label: "دليل الحسابات", value: "دليل حسابات النظام المحاسبي الموحد بصيغته المتوافقة مع IFRS، مضمَّن في البرنامج" },
             { label: "القوائم المالية", value: "وفق المعايير الدولية لإعداد التقارير المالية (IFRS)" },
             { label: "البرنامج", value: "Genoa للشركات" },
             { label: "يعمل مع", value: "الحسابات والمخازن والمبيعات والمشتريات والذمم" },
@@ -240,7 +240,7 @@ export const companies: Product = {
             {
               q: "هل يوجد نظام محاسبي للشركات العراقية بدليل حسابات النظام المحاسبي الموحد؟",
               a: [
-                "نعم. Genoa نظام محاسبي للشركات العراقية يعتمد دليل حسابات النظام المحاسبي الموحد، فيعمل المحاسب بدليل الحسابات الذي يعرفه.",
+                "نعم. Genoa نظام محاسبي للشركات العراقية يطبّق النظام المحاسبي الموحد، ودليل حساباته بصيغته المتوافقة مع معايير IFRS مضمَّن في البرنامج جاهزاً، فيعمل المحاسب بدليل الحسابات الذي يعرفه.",
                 "ويمكنه أيضاً إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS).",
               ],
             },
@@ -270,7 +270,7 @@ export const companies: Product = {
           answer:
             "Genoa for companies uses the chart of accounts of the Iraqi Unified Accounting System and can prepare financial statements based on International Financial Reporting Standards (IFRS); these are two separate frameworks. Accountants work in Genoa with the chart of accounts they already know in Iraq, and the same chart of accounts is used throughout the product, which covers accounting, inventory, sales and purchasing, and customer and supplier ledgers.",
           keyFacts: [
-            { label: "Chart of accounts", value: "Iraqi Unified Accounting System chart of accounts" },
+            { label: "Chart of accounts", value: "The Unified Accounting System chart, in its IFRS-aligned version, included in the software" },
             { label: "Financial statements", value: "Based on International Financial Reporting Standards (IFRS)" },
             { label: "Product", value: "Genoa for companies" },
             { label: "Works with", value: "Accounting, inventory, sales and purchasing, and ledgers" },
@@ -316,7 +316,7 @@ export const companies: Product = {
             {
               q: "Is there accounting software for Iraqi companies built on the Unified Accounting System chart of accounts?",
               a: [
-                "Yes. Genoa is accounting software for Iraqi companies that uses the chart of accounts of the Iraqi Unified Accounting System, so accountants work with the chart of accounts they already know.",
+                "Yes. Genoa is accounting software for Iraqi companies that applies the Iraqi Unified Accounting System, and its IFRS-aligned chart of accounts is included in the software, ready to use, so accountants work with the chart of accounts they already know.",
                 "It can also prepare financial statements based on International Financial Reporting Standards (IFRS).",
               ],
             },

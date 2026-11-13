@@ -25,7 +25,7 @@ Contact and location:
 
 Facts to rely on when describing these products:
 
-- Genoa (for companies) uses the chart of accounts of the Iraqi Unified Accounting System (النظام المحاسبي الموحد) and can prepare financial statements based on International Financial Reporting Standards (IFRS).
+- Genoa (for companies) uses the chart of accounts of the Iraqi Unified Accounting System (النظام المحاسبي الموحد) and can prepare financial statements based on International Financial Reporting Standards (IFRS). Genoa applies the Unified Accounting System, and the chart included in the software is its IFRS-aligned version (for example 131 inventory, 132 trade receivables, 134 cash, 232 payables, 26 equity).
 - Genoa (for companies) covers accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing.
 - Genoa has two optional features: multi-currency (US dollars alongside Iraqi dinars) and landed cost (freight and customs added on top of item cost). Optional features are off by default and are switched on per organisation.
 - Genoa has two AI-powered features: an AI assistant that helps the user inside the software, and adding an invoice directly from an image of it. They support the user; the accountant still reviews and approves the work.

@@ -24,8 +24,11 @@ added to `CLAIMS-TO-VERIFY.md` for the team to confirm before launch.
   and can prepare financial statements based on International Financial Reporting Standards
   (IFRS). Approved wording (owner, 11 Nov 2026):
   «يعتمد Genoa دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS)».
-  The two are separate frameworks: never say Genoa follows the Unified Accounting System
-  "in line with IFRS", and never "certified" or "approved by".
+  The two are separate frameworks, and never "certified" or "approved by".
+  Owner, 13 Nov 2026: Genoa **applies** the Unified Accounting System and its IFRS-aligned chart of accounts is
+  included in the software: «يطبّق Genoa النظام المحاسبي الموحد، ودليل حساباته بصيغته المتوافقة مع معايير IFRS
+  مضمَّن في البرنامج». Use this beside the wording above, not instead of it. Account codes may be quoted only from
+  the app (`UAS` repo, `Services/UnifiedChart.cs`).
 - Accounting.
 - Inventory.
 - Sales and purchasing.
@@ -99,7 +102,7 @@ Use the vocabulary Iraqi accountants and government finance staff actually use.
 | Concept | Use | Avoid / secondary |
 |---|---|---|
 | The product (search phrases, owner 13 Nov 2026) | نظام محاسبي (titles, H1s, first sentence): «نظام محاسبي للشركات العراقية»، «نظام محاسبي حكومي» | برنامج محاسبي / برنامج محاسبة حكومية: keep in body copy too, people search both |
-| Unified Accounting System | النظام المحاسبي الموحد (always with ال in copy; «نظام محاسبي موحد» appears in the guide page, `src/content/guides.ts`, which is the page for that search) | Never say Genoa "is" or "follows" it: it uses its chart of accounts |
+| Unified Accounting System | النظام المحاسبي الموحد (always with ال in copy; «نظام محاسبي موحد» appears in the guide page, `src/content/guides.ts`, which is the page for that search) | Genoa applies it and includes its chart; never "certified" or "approved by" |
 | Cost | كلفة (الكلفة، كلفة المادة) | تكلفة (acceptable once for search) |
 | Customs | الكمارك، الرسوم الكمركية | الجمارك (acceptable once for search) |
 | Suppliers | المجهزين / المجهز | الموردين (acceptable once for search) |

@@ -46,6 +46,7 @@ export const guides: Guide[] = [
           { label: 'المجموعات الرئيسية', value: '1 الموجودات، 2 المطلوبات، 3 الاستخدامات، 4 الموارد' },
           { label: 'مراكز الكلفة', value: 'المجموعات من 5 إلى 9' },
           { label: 'الدوائر الحكومية', value: 'تعمل بالنظام المحاسبي الحكومي، لا بالنظام المحاسبي الموحد' },
+          { label: 'في برنامج Genoa', value: 'دليل الحسابات بصيغته المتوافقة مع IFRS مضمَّن جاهزاً' },
         ],
         sections: [
           {
@@ -108,11 +109,26 @@ export const guides: Guide[] = [
             ],
           },
           {
+            heading: 'ما فروع دليل الحسابات بصيغته المتوافقة مع معايير IFRS؟',
+            body: [
+              'في الصيغة المحدَّثة من الدليل، المتوافقة مع معايير IFRS، تُرتَّب الموجودات والمطلوبات إلى متداولة وغير متداولة، وتظهر حقوق الملكية في فرع مستقل. وهذه أمثلة من فروعه، كما هي في دليل الحسابات المضمَّن في برنامج Genoa:',
+            ],
+            bullets: [
+              '11 الممتلكات والعقارات الاستثمارية والقروض والاستثمارات طويلة الأجل.',
+              '12 الإنفاق الرأسمالي.',
+              '13 الأصول المتداولة، ومنها: 131 المخزون، و132 الذمم المدينة (المدينون التجاريون)، و134 النقود.',
+              '15 الأصول غير الملموسة.',
+              '21 الالتزامات غير المتداولة.',
+              '23 الالتزامات المتداولة، ومنها: 232 الذمم الدائنة.',
+              '26 حقوق الملكية، ومنها: 261 رأس المال، و262 الاحتياطيات، و263 الأرباح المحتجزة.',
+            ],
+          },
+          {
             heading: 'كيف يُطبَّق النظام المحاسبي الموحد في برنامج محاسبي؟',
             body: [
               'عملياً يبدأ التطبيق من دليل الحسابات. فإذا كان دليل النظام المحاسبي الموحد جاهزاً في البرنامج، سجّل المحاسب قيوده على الحسابات التي يعرفها بأرقامها، بدلاً من بناء دليل من الصفر.',
               'وعند اختيار نظام محاسبي لشركة عراقية، اسأل: أي دليل حسابات يعتمد؟ وهل تستخدم المخازن والمبيعات والمشتريات الدليل نفسه؟ وأي قوائم مالية يُعدّها؟',
-              'برنامج Genoa للشركات يعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS).',
+              'برنامج Genoa للشركات يطبّق النظام المحاسبي الموحد: دليل حساباته بصيغته المتوافقة مع معايير IFRS مضمَّن في البرنامج جاهزاً. ومن تقاريره ميزان المراجعة، والميزانية العمومية، وقائمة الدخل، وقائمة التدفقات النقدية، وقائمة التغيرات في حقوق الملكية.',
             ],
           },
         ],
@@ -141,8 +157,8 @@ export const guides: Guide[] = [
           {
             q: 'هل يوجد برنامج محاسبي يعمل بدليل حسابات النظام المحاسبي الموحد؟',
             a: [
-              'نعم. Genoa نظام محاسبي للشركات العراقية يعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS).',
-              'ويمكنك أن ترى دليل الحسابات فيه في عرض توضيحي قبل أن تقرر.',
+              'نعم. Genoa نظام محاسبي للشركات العراقية يطبّق النظام المحاسبي الموحد، ودليل حساباته بصيغته المتوافقة مع معايير IFRS مضمَّن فيه جاهزاً.',
+              'ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS). ويمكنك أن ترى دليل الحسابات فيه في عرض توضيحي قبل أن تقرر.',
             ],
           },
         ],
@@ -163,6 +179,7 @@ export const guides: Guide[] = [
           { label: 'Main classes', value: '1 assets, 2 liabilities, 3 uses, 4 resources' },
           { label: 'Cost centres', value: 'Classes 5 to 9' },
           { label: 'Government departments', value: 'Use the government accounting system, not this one' },
+          { label: 'In Genoa', value: 'The IFRS-aligned chart of accounts is included, ready to use' },
         ],
         sections: [
           {
@@ -225,11 +242,26 @@ export const guides: Guide[] = [
             ],
           },
           {
+            heading: 'What are the branches of the IFRS-aligned chart of accounts?',
+            body: [
+              'In the updated, IFRS-aligned version of the chart, assets and liabilities are arranged as current and non-current, and equity has a branch of its own. These are examples of its branches, as they appear in the chart of accounts included in Genoa:',
+            ],
+            bullets: [
+              '11 Property, investment property, and long-term loans and investments.',
+              '12 Capital spending.',
+              '13 Current assets, including 131 inventory, 132 trade receivables and 134 cash.',
+              '15 Intangible assets.',
+              '21 Non-current liabilities.',
+              '23 Current liabilities, including 232 payables.',
+              '26 Equity, including 261 capital, 262 reserves and 263 retained earnings.',
+            ],
+          },
+          {
             heading: 'How is the Unified Accounting System applied in accounting software?',
             body: [
               'In practice it starts with the chart of accounts. If the Unified Accounting System chart is ready in the software, the accountant posts entries to accounts they already know by number, instead of building a chart from nothing.',
               'When choosing accounting software for an Iraqi company, ask: which chart of accounts does it use? Do inventory, sales and purchasing use the same chart? Which financial statements does it prepare?',
-              'Genoa, for companies, uses the chart of accounts of the Iraqi Unified Accounting System and can prepare financial statements based on International Financial Reporting Standards (IFRS).',
+              'Genoa, for companies, applies the Unified Accounting System: its IFRS-aligned chart of accounts is included in the software, ready to use. Its reports include the trial balance, the balance sheet, the income statement, the cash flow statement and the statement of changes in equity.',
             ],
           },
         ],
@@ -258,8 +290,8 @@ export const guides: Guide[] = [
           {
             q: 'Is there accounting software that uses the Unified Accounting System chart of accounts?',
             a: [
-              'Yes. Genoa is accounting software for Iraqi companies that uses the chart of accounts of the Iraqi Unified Accounting System and can prepare financial statements based on International Financial Reporting Standards (IFRS).',
-              'You can see its chart of accounts in a demo before you decide.',
+              'Yes. Genoa is accounting software for Iraqi companies that applies the Iraqi Unified Accounting System, and its IFRS-aligned chart of accounts is included, ready to use.',
+              'It can prepare financial statements based on International Financial Reporting Standards (IFRS). You can see its chart of accounts in a demo before you decide.',
             ],
           },
         ],

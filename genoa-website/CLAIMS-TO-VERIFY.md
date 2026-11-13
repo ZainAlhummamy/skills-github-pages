@@ -40,7 +40,13 @@ documents could not be opened while writing. ⚠️ **An accountant should check
   statement (كشف التدفق النقدي), described as "the main ones include".
 - IFRS: the Board has updated the system in recent years and published a guide to applying it under IFRS for the
   first time; editions differ in some detailed account numbers.
-- **Left out on purpose:** two-digit and three-digit account codes. The classic chart (13 inventory, 16 debtors,
+- ✅ (owner, 13 Nov 2026) "Genoa applied this system and a chart of IFAC is included". Read as: Genoa applies the
+  Unified Accounting System, and the chart in the software is its **IFRS**-aligned version (IFAC publishes no chart
+  of accounts). ⚠️ Confirm that reading. The guide and the Genoa feature page now say so, and the guide lists branch
+  codes copied from the app (`UAS` repo, `Services/UnifiedChart.cs`): 11, 12, 13 (131, 132, 134), 15, 21, 23 (232),
+  26 (261, 262, 263). The report list (trial balance, balance sheet, income statement, cash flow statement, statement
+  of changes in equity) is from the app's README and tests.
+- Earlier note, now settled by the line above: two-digit and three-digit account codes were left out. The classic chart (13 inventory, 16 debtors,
   18 cash) does not match the codes in the Genoa app (131 inventory, 132 receivables, 134 cash, 23, 26), which
   suggests the app follows a newer edition. Say which edition Genoa uses and the page can list its accounts, which
   would make it much stronger for search.
