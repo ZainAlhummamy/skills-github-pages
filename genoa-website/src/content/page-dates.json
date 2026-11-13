@@ -1,14 +1,14 @@
 {
   "/ar/": {
-    "hash": "b6266b5e888b0d29",
+    "hash": "aceabf3892e596c4",
     "modified": "2026-11-13"
   },
   "/ar/about/": {
-    "hash": "96307f34d5533df1",
+    "hash": "3474584b521d9142",
     "modified": "2026-11-13"
   },
   "/ar/companies/": {
-    "hash": "72a43ae9669fcf74",
+    "hash": "0135f8261ab5242b",
     "modified": "2026-11-13"
   },
   "/ar/companies/accounting/": {
@@ -48,15 +48,15 @@
     "modified": "2026-11-13"
   },
   "/ar/companies/unified-accounting-system/": {
-    "hash": "b3ff9f170ef418f5",
-    "modified": "2026-11-11"
+    "hash": "7d300fc806bf0b4e",
+    "modified": "2026-11-13"
   },
   "/ar/contact/": {
     "hash": "1b0822304219ff2d",
     "modified": "2026-11-11"
   },
   "/ar/government/": {
-    "hash": "87e15e8ff3a66580",
+    "hash": "9b004f60e863d6fc",
     "modified": "2026-11-13"
   },
   "/ar/government/budgets/": {
@@ -144,8 +144,8 @@
     "modified": "2026-11-13"
   },
   "/en/companies/unified-accounting-system/": {
-    "hash": "dbf1482165592c86",
-    "modified": "2026-11-11"
+    "hash": "92a9f25ac6796465",
+    "modified": "2026-11-13"
   },
   "/en/contact/": {
     "hash": "1ce3ab78854f6a2e",

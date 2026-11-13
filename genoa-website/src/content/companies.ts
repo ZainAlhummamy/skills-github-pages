@@ -12,10 +12,10 @@ export const companies: Product = {
 
   overview: {
     ar: {
-      title: "برنامج محاسبي عراقي للشركات مع إدارة المخازن | Genoa",
+      title: "نظام محاسبي للشركات العراقية مع إدارة المخازن | Genoa",
       description:
         "برنامج Genoa نظام محاسبي للشركات العراقية بدليل حسابات النظام المحاسبي الموحد وقوائم مالية وفق IFRS، يضم الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين.",
-      h1: "برنامج Genoa للمحاسبة والمخازن للشركات العراقية",
+      h1: "Genoa: نظام محاسبي للشركات العراقية مع إدارة المخازن",
       productName: "Genoa",
       answer:
         "Genoa برنامج محاسبي عراقي للشركات التي تشتري المواد وتخزنها وتبيعها، ويعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS). يضم البرنامج الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الذمم. ويوفر ميزتين اختياريتين هما تعدد العملات (الدولار الأمريكي إلى جانب الدينار العراقي) والكلفة الواصلة (إضافة الشحن والكمارك إلى كلفة المادة). والميزتان معطّلتان افتراضياً، وتُفعَّلان لكل شركة على حدة حسب حاجتها. وفي Genoa ميزتان تعملان بالذكاء الاصطناعي: مساعد ذكي يساعد المستخدم داخل البرنامج، وإضافة فاتورة مباشرة من صورتها.",
@@ -185,10 +185,10 @@ export const companies: Product = {
       related: ['accounting', 'sales-purchasing', 'customer-supplier-ledgers'],
       content: {
         ar: {
-          title: "برنامج محاسبي بالنظام المحاسبي الموحد وقوائم IFRS | Genoa",
+          title: "النظام المحاسبي الموحد العراقي: دليل الحسابات وقوائم IFRS | Genoa",
           description:
-            "يعتمد Genoa للشركات العراقية دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفق معايير IFRS، مع المخازن والمبيعات والذمم.",
-          h1: "النظام المحاسبي الموحد وقوائم IFRS المالية في برنامج Genoa",
+            "ما هو النظام المحاسبي الموحد في العراق؟ نظام محاسبي موحد بدليل حسابات مرمَّز. يعتمد برنامج Genoa دليل حساباته، ويمكنه إعداد القوائم المالية وفق معايير IFRS.",
+          h1: "النظام المحاسبي الموحد في العراق: دليل حساباته وقوائم IFRS في برنامج Genoa",
           navLabel: "النظام المحاسبي الموحد وقوائم IFRS",
           cardSummary: "يعتمد Genoa دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS).",
           answer:
@@ -236,6 +236,13 @@ export const companies: Product = {
             "صورة توضيحية مؤقتة لشاشة دليل الحسابات وفق النظام المحاسبي الموحد في Genoa — ستُستبدل بلقطة شاشة حقيقية ببيانات تجريبية",
           screenshotCaption: "صورة توضيحية مؤقتة لدليل الحسابات، ستُستبدل بلقطة شاشة حقيقية ببيانات تجريبية.",
           faqs: [
+            {
+              q: "هل يوجد نظام محاسبي للشركات العراقية بدليل حسابات النظام المحاسبي الموحد؟",
+              a: [
+                "نعم. Genoa نظام محاسبي للشركات العراقية يعتمد دليل حسابات النظام المحاسبي الموحد، فيعمل المحاسب بدليل الحسابات الذي يعرفه.",
+                "ويمكنه أيضاً إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS).",
+              ],
+            },
             {
               q: "ما الفرق بين النظام المحاسبي الموحد ومعايير IFRS؟",
               a: [
@@ -305,6 +312,13 @@ export const companies: Product = {
           screenshotCaption:
             "Placeholder image of the chart of accounts. It will be replaced with a real screenshot that uses test data.",
           faqs: [
+            {
+              q: "Is there accounting software for Iraqi companies built on the Unified Accounting System chart of accounts?",
+              a: [
+                "Yes. Genoa is accounting software for Iraqi companies that uses the chart of accounts of the Iraqi Unified Accounting System, so accountants work with the chart of accounts they already know.",
+                "It can also prepare financial statements based on International Financial Reporting Standards (IFRS).",
+              ],
+            },
             {
               q: "What is the difference between the Unified Accounting System and IFRS?",
               a: [

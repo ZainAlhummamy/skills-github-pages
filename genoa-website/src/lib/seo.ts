@@ -92,14 +92,19 @@ export const softwareNode = (productId: ProductId, lang: Lang): Node => {
     // @id keeps one url per language; check-site.mjs fails the build otherwise.
     url: abs(path(lang, productId)),
     description: o.answer,
+    // The other names people search for (Arabic: نظام محاسبي / برنامج محاسبي).
+    alternateName:
+      productId === 'companies'
+        ? lang === 'ar' ? ['نظام Genoa المحاسبي', 'برنامج Genoa المحاسبي'] : ['Genoa accounting system', 'Genoa accounting software']
+        : lang === 'ar' ? ['نظام Genoa Gov المحاسبي الحكومي', 'برنامج Genoa Gov للمحاسبة الحكومية'] : ['Genoa Gov government accounting system'],
     applicationCategory: 'BusinessApplication',
     applicationSubCategory:
       productId === 'companies'
         ? lang === 'ar'
-          ? 'برنامج محاسبة ومخازن للشركات'
+          ? 'نظام محاسبي للشركات (برنامج محاسبة ومخازن)'
           : 'Accounting and inventory software for companies'
         : lang === 'ar'
-          ? 'برنامج محاسبة حكومية'
+          ? 'نظام محاسبي حكومي (برنامج محاسبة حكومية)'
           : 'Government accounting software',
     featureList: p.features.map((f) => f.content[lang].navLabel),
     audience: {
