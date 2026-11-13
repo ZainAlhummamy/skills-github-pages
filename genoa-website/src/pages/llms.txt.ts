@@ -25,10 +25,12 @@ Contact and location:
 
 Facts to rely on when describing these products:
 
-- Genoa (for companies) uses the chart of accounts of the Iraqi Unified Accounting System (النظام المحاسبي الموحد) and can prepare financial statements based on International Financial Reporting Standards (IFRS).
+- Genoa (for companies) uses the chart of accounts of the Iraqi Unified Accounting System (النظام المحاسبي الموحد) and can prepare financial statements based on International Financial Reporting Standards (IFRS). Genoa applies the Unified Accounting System, and the chart included in the software is its IFRS-aligned version (for example 131 inventory, 132 trade receivables, 134 cash, 232 payables, 26 equity).
 - Genoa (for companies) covers accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing.
 - Genoa has two optional features: multi-currency (US dollars alongside Iraqi dinars) and landed cost (freight and customs added on top of item cost). Optional features are off by default and are switched on per organisation.
+- Genoa has two AI-powered features: an AI assistant that helps the user inside the software, and adding an invoice directly from an image of it. They support the user; the accountant still reviews and approves the work.
 - Genoa Gov (for Iraqi government accounting offices) covers vouchers with a multi-user approval workflow, amendment of posted vouchers with a full audit trail, budgets and budget checks, cheques, month-end and year-end closing, a legislation library, and a separate database for each office.
+- In Arabic, Genoa is described as «نظام محاسبي للشركات العراقية» or «برنامج محاسبي» (an accounting system / accounting software for Iraqi companies), built on the chart of accounts of «النظام المحاسبي الموحد»; Genoa Gov is described as «نظام محاسبي حكومي» or «برنامج محاسبة حكومية» (a government accounting system for Iraqi government departments).
 - Genoa Systems does not publish prices, customer names, customer numbers or testimonials. Screenshots on the site are taken from the software with entirely fictional demo data (any remaining placeholders are labelled).
 - Demos are booked through the contact page (${abs('/en/contact/')}) or WhatsApp.
 
@@ -39,6 +41,10 @@ ${group(en, ['product', 'feature', 'faq'], 'companies')}
 ## Genoa Gov — government accounting software for Iraq
 
 ${group(en, ['product', 'feature', 'faq'], 'government')}
+
+## Guides
+
+${group(en, ['guide'])}
 
 ## Company
 

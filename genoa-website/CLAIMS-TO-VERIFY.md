@@ -13,12 +13,68 @@ Highest-priority items were marked ⚠️ — they describe processes or policie
 The five ⚠️ items put to the owner on 11 Nov 2026 were answered. One ⚠️ item is **still open**: landed cost (next section), found later while taking real screenshots.
 
 - ✅ **IFRS wording** — reworded everywhere. Genoa uses the Unified Accounting System's chart of accounts and can prepare IFRS-based financial statements (approved wording in `CONTENT-GUIDE.md` §1); the site no longer says it follows the Unified Accounting System "in line with IFRS".
-- ✅ **AI** — reduced on the owner's instruction (SEO/GEO audit, 11 Nov 2026): one sentence on the about page only; removed from titles, meta descriptions, the home band and hero, the footer, the Organization JSON-LD and the share images, and the two AI FAQs ("Does Genoa / Genoa Gov use AI?") were removed. Still open: which AI capabilities exist and in which product, so they can be described concretely (see `OWNER-TODO.md`).
+- ✅ **AI** — (superseded 13 Nov 2026: two AI features confirmed, see "AI features" below.) Earlier: reduced on the owner's instruction (SEO/GEO audit, 11 Nov 2026): one sentence on the about page only; removed from titles, meta descriptions, the home band and hero, the footer, the Organization JSON-LD and the share images, and the two AI FAQs ("Does Genoa / Genoa Gov use AI?") were removed. Still open: which AI capabilities exist and in which product, so they can be described concretely (see `OWNER-TODO.md`).
 - ✅ **Backups** (`security.answer`, `security.sections[4]`) — confirmed: a written backup plan is agreed with each organisation at setup.
 - ✅ **Demos** (`contact.nextSteps[1]`) — confirmed: demos use test data.
 - ✅ **Privacy** (`contact.privacy`) — true while `FORM_ENDPOINT` is empty, as it is at launch. Reword it if a form service is ever set.
 
 Still open before launch: ⚠️ **landed cost** (next section). The other items below without a ✅ are lower-risk inferences, to review after launch.
+
+## Guide: the Unified Accounting System (added 13 Nov 2026)
+
+`/ar/guides/unified-accounting-system/` and its English twin (`src/content/guides.ts`) explain the system itself, so
+they state general accounting facts. They were written from published summaries (Iraqi university lecture notes and
+the Federal Board of Supreme Audit's listing of its 2026 guide), **not from the text of the system**: the primary
+documents could not be opened while writing. ⚠️ **An accountant should check every point before launch:**
+
+- Issued by the Board of Supreme Audit (today the Federal Board of Supreme Audit), which also issues its updates.
+- History: separate systems before it; a committee in the late 1970s; applied to public-sector units in the early
+  1980s and extended to private-sector companies in the mid-1980s. (One source gives 1 Jan 1982 and 1 Jan 1986, another
+  says "issued in 1985"; the page gives no exact date for that reason. Put the exact dates in if you have them.)
+- Scope: public, mixed and private-sector companies; banks and insurance companies have a unified system of their
+  own; state departments funded from the budget use the government accounting system.
+- Chart of accounts: classes 1 assets, 2 liabilities, 3 uses, 4 resources; 5 to 9 cost centres (production,
+  production services, marketing services, administrative services, capital operations); decimal coding; balance
+  sheet accounts in 1 and 2, result accounts in 3 and 4.
+- Final accounts: balance sheet (الميزانية العامة), current operations account (حساب العمليات الجارية), cash flow
+  statement (كشف التدفق النقدي), described as "the main ones include".
+- IFRS: the Board has updated the system in recent years and published a guide to applying it under IFRS for the
+  first time; editions differ in some detailed account numbers.
+- ✅ (owner, 13 Nov 2026) "Genoa applied this system and a chart of IFAC is included". Read as: Genoa applies the
+  Unified Accounting System, and the chart in the software is its **IFRS**-aligned version (IFAC publishes no chart
+  of accounts). ⚠️ Confirm that reading. The guide and the Genoa feature page now say so, and the guide lists branch
+  codes copied from the app (`UAS` repo, `Services/UnifiedChart.cs`): 11, 12, 13 (131, 132, 134), 15, 21, 23 (232),
+  26 (261, 262, 263). The report list (trial balance, balance sheet, income statement, cash flow statement, statement
+  of changes in equity) is from the app's README and tests.
+- Earlier note, now settled by the line above: two-digit and three-digit account codes were left out. The classic chart (13 inventory, 16 debtors,
+  18 cash) does not match the codes in the Genoa app (131 inventory, 132 receivables, 134 cash, 23, 26), which
+  suggests the app follows a newer edition. Say which edition Genoa uses and the page can list its accounts, which
+  would make it much stronger for search.
+
+## AI features (added 13 Nov 2026)
+
+The owner confirmed two things, in these words: Genoa has "AI to help a user", and can "add an invoice directly from
+image". The pages `companies.features[ai-assistant]` and `companies.features[invoice-from-image]`
+(`src/content/companies-ai.ts`) were written from that alone. **Confirm or correct each point:**
+
+- ⚠️ **Which product.** Both features are described as part of **Genoa (companies)** only. If they are (also) in
+  Genoa Gov, say so and the pages will be added there.
+- ⚠️ **Names.** The site calls them «المساعد الذكي» / "AI assistant" and «إضافة فاتورة من صورة» / "Invoice from
+  image". Give the names used in the app if they differ.
+- ⚠️ **"The software reads the image and adds the invoice from it"** (invoice-from-image `answer`, `sections[0]`,
+  `sections[2]`, both FAQs). Confirm this is the flow, and whether the user sees a draft to review before it is saved.
+  The pages *recommend* checking the invoice against the original; they do not claim a review step exists.
+- **"Entering invoices by hand in sales and purchasing stays as it is"** (invoice-from-image `faqs[1]`): inferred.
+- **"It is part of Genoa itself … not a separate program"** (ai-assistant `answer`, `sections[0]`): inferred.
+- **"An AI assistant shortens that time, because the user gets help inside the software itself"** (ai-assistant
+  `sections[1]`): general statement about the benefit, not a measured claim.
+- **Not optional.** Neither feature carries the "optional, off by default" wording. If they are switched on per
+  organisation, set `optional: true` on them.
+- **Home page drawings** (`src/components/AiShowcase.astro`): two decorative drawings (a chat, and a paper invoice
+  becoming an invoice), labelled "Illustration", with no figures or sample text.
+- Still unknown, and so turned into "ask in the demo" questions rather than stated: what the assistant can be asked,
+  Arabic support, which invoice types and languages are read, handwriting, and where data is processed. Answers to
+  these would make both pages much stronger (see `OWNER-TODO.md`).
 
 ## Found while taking real screenshots (Genoa app, `UAS` repo)
 

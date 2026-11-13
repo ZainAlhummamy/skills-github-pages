@@ -16,7 +16,7 @@ files: no server code, no database, no serverless functions, no secrets.
 | Install | `npm ci` |
 | Build | `npm run build` (Astro build, then `scripts/check-site.mjs` SEO checks; a failed check fails the build) |
 | Output directory | `genoa-website/dist/` |
-| Pages | 44 HTML pages (22 Arabic under `/ar/`, 22 English under `/en/`), `404.html`, root `/` redirect, `sitemap.xml`, `robots.txt`, `llms.txt`, `llms-full.txt` |
+| Pages | 50 HTML pages (25 Arabic under `/ar/`, 25 English under `/en/`), `404.html`, root `/` redirect, `sitemap.xml`, `robots.txt`, `llms.txt`, `llms-full.txt` |
 | URL style | Directories with trailing slash: `/ar/companies/inventory/`. Do not strip trailing slashes. |
 
 ## Environment variables (build time)

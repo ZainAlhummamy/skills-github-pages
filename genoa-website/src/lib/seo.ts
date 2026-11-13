@@ -49,8 +49,8 @@ export const organizationNode = (lang: Lang): Node => {
     areaServed: { '@type': 'Country', name: site.areaServed.en, identifier: site.areaServed.code },
     knowsAbout:
       lang === 'ar'
-        ? ['المحاسبة', 'المحاسبة الحكومية', 'إدارة المخازن', 'برامج المحاسبة في العراق', 'النظام المحاسبي الموحد', 'المعايير الدولية لإعداد التقارير المالية (IFRS)']
-        : ['Accounting software', 'Government accounting', 'Inventory management', 'Accounting in Iraq', 'Iraqi Unified Accounting System', 'International Financial Reporting Standards (IFRS)'],
+        ? ['المحاسبة', 'المحاسبة الحكومية', 'إدارة المخازن', 'برامج المحاسبة في العراق', 'النظام المحاسبي الموحد', 'المعايير الدولية لإعداد التقارير المالية (IFRS)', 'الذكاء الاصطناعي في المحاسبة']
+        : ['Accounting software', 'Government accounting', 'Inventory management', 'Accounting in Iraq', 'Iraqi Unified Accounting System', 'International Financial Reporting Standards (IFRS)', 'Artificial intelligence in accounting'],
     ...(email || phone
       ? {
           contactPoint: {
@@ -92,14 +92,19 @@ export const softwareNode = (productId: ProductId, lang: Lang): Node => {
     // @id keeps one url per language; check-site.mjs fails the build otherwise.
     url: abs(path(lang, productId)),
     description: o.answer,
+    // The other names people search for (Arabic: نظام محاسبي / برنامج محاسبي).
+    alternateName:
+      productId === 'companies'
+        ? lang === 'ar' ? ['نظام Genoa المحاسبي', 'برنامج Genoa المحاسبي'] : ['Genoa accounting system', 'Genoa accounting software']
+        : lang === 'ar' ? ['نظام Genoa Gov المحاسبي الحكومي', 'برنامج Genoa Gov للمحاسبة الحكومية'] : ['Genoa Gov government accounting system'],
     applicationCategory: 'BusinessApplication',
     applicationSubCategory:
       productId === 'companies'
         ? lang === 'ar'
-          ? 'برنامج محاسبة ومخازن للشركات'
+          ? 'نظام محاسبي للشركات (برنامج محاسبة ومخازن)'
           : 'Accounting and inventory software for companies'
         : lang === 'ar'
-          ? 'برنامج محاسبة حكومية'
+          ? 'نظام محاسبي حكومي (برنامج محاسبة حكومية)'
           : 'Government accounting software',
     featureList: p.features.map((f) => f.content[lang].navLabel),
     audience: {

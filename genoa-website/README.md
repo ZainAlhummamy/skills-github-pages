@@ -35,7 +35,7 @@ commit `page-dates.json` with the change; the build warns while a page's text no
 **Owner TODO.** Facts only the owner can give (city, official profiles, buyer FAQ answers, deployment model, …) are
 listed in `OWNER-TODO.md`; the build prints the ones it can detect.
 
-`LH_PAGES=key npm run lighthouse` audits 8 representative pages instead of all 44.
+`LH_PAGES=key npm run lighthouse` audits 8 representative pages instead of all 50.
 
 ## Before launch — required
 
@@ -71,10 +71,14 @@ Also before launch:
 src/config/site.ts        domain, WhatsApp, e-mail, form endpoint
 src/content/types.ts      the content contract (every page is generated from typed data)
 src/content/companies.ts  Genoa: overview, 7 feature pages, FAQ (ar + en)
+src/content/companies-ai.ts  Genoa: the 2 AI feature pages (AI assistant, invoice from image)
 src/content/government.ts Genoa Gov: overview, 7 feature pages, FAQ (ar + en)
 src/content/pages.ts      home, security & backups, about, contact, 404
+src/content/guides.ts     guides (explanatory pages): the Unified Accounting System, at /<lang>/guides/<slug>/
 src/content/screenshots.ts  real-screenshot registry (placeholders until filled)
 src/i18n/ui.ts            interface strings (nav, buttons, labels)
+src/styles/global.css     base styles; src/styles/refresh.css is the Nov 2026 visual refresh, loaded after it
+src/components/AiShowcase.astro  home page AI section (features marked `ai: true`)
 src/lib/seo.ts            JSON-LD builders (Organization, WebSite, SoftwareApplication, BreadcrumbList, FAQPage)
 src/lib/catalog.ts        page list + plain text for sitemap.xml, llms.txt, llms-full.txt
 src/pages/                routes (Astro)

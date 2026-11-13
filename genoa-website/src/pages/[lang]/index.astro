@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroLedger from '../../components/HeroLedger.astro';
 import Screenshot from '../../components/Screenshot.astro';
 import { hasRealScreenshot } from '../../content/screenshots';
+import AiShowcase from '../../components/AiShowcase.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import Icon from '../../components/Icon.astro';
 import { LANGS, type Lang } from '../../content/types';
@@ -69,6 +70,7 @@ const jsonld = pageGraph({
                     <Icon name={f.icon} />
                     <span>{f.content[lang].navLabel}</span>
                     {f.optional && <span class="badge-optional">{t('optionalBadge', lang)}</span>}
+                    {f.ai && <span class="badge-ai"><Icon name="spark" />{t('aiBadge', lang)}</span>}
                   </a>
                 </li>
               ))}
@@ -79,6 +81,8 @@ const jsonld = pageGraph({
       })}
     </div>
   </div>
+
+  <AiShowcase lang={lang} />
 
   {showInside && (
     <section class="section section-soft" aria-labelledby="inside-heading">

@@ -1,6 +1,7 @@
 ---
 import type { Lang } from '../content/types';
 import { productList } from '../content';
+import { guides } from '../content/guides';
 import { t, otherLang } from '../i18n/ui';
 import { path, swapLang } from '../lib/routes';
 import { site, companyIntro } from '../config/site';
@@ -34,6 +35,7 @@ const year = new Date().getFullYear();
         <ul>
           <li><a href={path(lang, 'about')}>{t('about', lang)}</a></li>
           <li><a href={path(lang, 'security-backups')}>{t('security', lang)}</a></li>
+          {guides.map((g) => <li><a href={path(lang, 'guides', g.slug)}>{g.content[lang].navLabel}</a></li>)}
           <li><a href={path(lang, 'contact')}>{t('bookDemo', lang)}</a></li>
           <li><a href="/sitemap.xml">{t('sitemap', lang)}</a></li>
           <li><a href="/llms.txt">{t('forAI', lang)}</a></li>

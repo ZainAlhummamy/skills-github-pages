@@ -1,0 +1,70 @@
+---
+/* Home: the AI features of Genoa (every feature marked `ai` in the content), each with a small drawing.
+ * The drawings are decorative and carry no figures or sample text, so they claim nothing about what the
+ * features can do; names and summaries come from the feature pages. */
+import type { Lang } from '../content/types';
+import { products } from '../content';
+import { home } from '../content/pages';
+import { t } from '../i18n/ui';
+import { path } from '../lib/routes';
+import Icon from './Icon.astro';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const h = home[lang].ai;
+const features = products.companies.features.filter((f) => f.ai);
+const T = {
+  ar: { image: 'صورة الفاتورة', invoice: 'الفاتورة في Genoa', user: 'المستخدم', assistant: 'المساعد الذكي' },
+  en: { image: 'Invoice image', invoice: 'Invoice in Genoa', user: 'User', assistant: 'AI assistant' },
+}[lang];
+---
+<section class="ai-band" aria-labelledby="ai-heading">
+  <div class="container">
+    <div class="ai-head" data-reveal>
+      <span class="ai-eyebrow"><Icon name="spark" />{h.eyebrow}</span>
+      <h2 id="ai-heading">{h.heading}</h2>
+      <p>{h.intro}</p>
+    </div>
+    <ul class="ai-grid">
+      {features.map((f, i) => {
+        const c = f.content[lang];
+        return (
+          <li data-reveal style={`--i:${i}`}>
+            <div class="ai-card">
+              {f.slug === 'invoice-from-image' ? (
+                <div class="ai-art art-scan" aria-hidden="true">
+                  <div class="art-col">
+                    <div class="paper"><i></i><i></i><i></i><i></i><i></i><b class="scanline"></b></div>
+                    <span class="art-label">{T.image}</span>
+                  </div>
+                  <span class="art-arrow"><Icon name="arrow" class="flip-rtl" /></span>
+                  <div class="art-col">
+                    <div class="doc">
+                      <div class="doc-row"><i></i><i></i><Icon name="check" /></div>
+                      <div class="doc-row"><i></i><i></i><Icon name="check" /></div>
+                      <div class="doc-row"><i></i><i></i><Icon name="check" /></div>
+                      <div class="doc-total"><i></i><i></i></div>
+                    </div>
+                    <span class="art-label">{T.invoice}</span>
+                  </div>
+                </div>
+              ) : (
+                <div class="ai-art art-chat" aria-hidden="true">
+                  <div class="bubble from-user"><span class="who">{T.user}</span><i></i><i></i></div>
+                  <div class="bubble from-ai"><span class="who"><Icon name="spark" />{T.assistant}</span><i></i><i></i><i></i></div>
+                  <div class="typing"><b></b><b></b><b></b></div>
+                </div>
+              )}
+              <div class="ai-card-body">
+                <span class="ai-icon"><Icon name={f.icon} /></span>
+                <h3><a href={path(lang, 'companies', f.slug)}>{c.navLabel}</a></h3>
+                <p>{c.cardSummary}</p>
+                <span class="more" aria-hidden="true">{t('learnMore', lang)} <Icon name="arrow" class="flip-rtl" /></span>
+              </div>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+    <p class="ai-note" data-reveal><Icon name="shield" />{h.note} <span class="ai-illus-note">({t('illustration', lang)})</span></p>
+  </div>
+</section>
