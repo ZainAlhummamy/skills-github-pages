@@ -1,7 +1,10 @@
 # Academic Accountant logo
 
-- **`logo.png`** (728×728, transparent outside the seal): the logo the site uses. It is the office's own photo logo
-  with its content unchanged, prepared for use as a logo:
+- **`logo.png`** (728×728, transparent outside the seal): the logo the site uses. It is the office's own photo logo,
+  prepared for use as a logo, with one change to its content:
+  - the small "odoo" wordmark in the icon row (calculator, magnifier, odoo) is replaced by a "Genoa" wordmark in IBM
+    Plex Sans Bold (the site's font), same place, baseline and size, in the ink of the line below it (owner's request,
+    16 Nov 2026). Everything else on the seal is as in the photo;
   - the camera's perspective corrected (the seal was 2.5% taller along an axis 7° off vertical) and the seal
     straightened by 3°;
   - cropped to the outer gold ring, transparent outside it;
