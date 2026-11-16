@@ -145,4 +145,5 @@ export type IconKey =
   | 'chart'
   | 'standard'
   | 'spark'
-  | 'scan';
+  | 'scan'
+  | 'support';

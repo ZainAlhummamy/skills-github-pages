@@ -1,0 +1,13 @@
+---
+/** One group of the office's phone numbers as tel: buttons (local form in Arabic, international in English). */
+import type { Lang } from '../../content/types';
+import { aaPhoneText, type AaPhone } from '../../content/academic-accountant';
+import Icon from '../Icon.astro';
+interface Props { lang: Lang; phones: readonly AaPhone[]; }
+const { lang, phones } = Astro.props;
+---
+<ul class="aa-phones">
+  {phones.map((p) => (
+    <li><a href={`tel:${p.e164}`}><Icon name="phone" /><span class="ltr">{aaPhoneText(p, lang)}</span></a></li>
+  ))}
+</ul>

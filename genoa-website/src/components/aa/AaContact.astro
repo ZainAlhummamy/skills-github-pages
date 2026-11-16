@@ -1,9 +1,13 @@
 ---
-/** The office's address, phone numbers (tel: links), optional WhatsApp, and Facebook / Instagram. */
+/**
+ * The office's phone numbers by purpose (accounting; technical consulting and IT services), each as its own tile of
+ * tel: buttons, then its address, optional WhatsApp, and Facebook / Instagram.
+ */
 import type { Lang } from '../../content/types';
-import { aaContactBlock, aaOffice, aaPhoneGroups, aaPhoneText } from '../../content/academic-accountant';
+import { aaContactBlock, aaOffice, aaPhoneGroups } from '../../content/academic-accountant';
 import Icon from '../Icon.astro';
 import AaSocial from './AaSocial.astro';
+import AaCallButtons from './AaCallButtons.astro';
 interface Props { lang: Lang; headingId?: string; }
 const { lang, headingId = 'aa-contact' } = Astro.props;
 const c = aaContactBlock[lang];
@@ -11,22 +15,16 @@ const c = aaContactBlock[lang];
 <section class="aa-contact" aria-labelledby={headingId} data-reveal>
   <h2 id={headingId}>{c.heading}</h2>
   <dl class="aa-contact-list">
+    {aaPhoneGroups.map((g) => (
+      <div class="aa-contact-phones" data-group={g.id}>
+        <dt><span class="aa-contact-icon"><Icon name={g.icon} /></span>{c.phoneGroups[g.id]}</dt>
+        <dd><AaCallButtons lang={lang} phones={g.phones} /></dd>
+      </div>
+    ))}
     <div>
       <dt><Icon name="pin" />{c.addressLabel}</dt>
       <dd>{aaOffice.address[lang].full}</dd>
     </div>
-    {aaPhoneGroups.map((g) => (
-      <div>
-        <dt><Icon name="phone" />{c.phoneGroups[g.id]}</dt>
-        <dd>
-          <ul class="aa-phones">
-            {g.phones.map((p) => (
-              <li><a href={`tel:${p.e164}`}><span class="ltr">{aaPhoneText(p, lang)}</span></a></li>
-            ))}
-          </ul>
-        </dd>
-      </div>
-    ))}
     {aaOffice.whatsapp ? (
       <div>
         <dt><Icon name="whatsapp" />WhatsApp</dt>

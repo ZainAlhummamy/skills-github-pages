@@ -30,29 +30,29 @@
   color: var(--aa-gold-light);
   background: var(--aa-navy);
 }
-.aa .answer-box,
-[dir='rtl'] .aa .answer-box {
+/* The rest of the answer (refresh.css, .answer-rest) keeps the old answer box's gold edge. */
+.aa .answer-rest {
   border-inline-start-color: var(--aa-gold);
 }
+/* The hub ends with its FAQ on a tinted band: unlike a closing CTA band, it keeps its padding above the footer. */
+.aa .hero-split ~ .section-soft:last-child {
+  padding-block-end: clamp(1.75rem, 1.4rem + 2.1vw, 3.15rem);
+}
+/* Copy beside the hero card on wide screens; the card follows the copy on narrower ones. */
 .aa-hero-grid {
   display: grid;
-  gap: 1.5rem 2.5rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem 3rem;
   align-items: center;
 }
-.aa-hero-grid:has(.aa-logo) {
-  grid-template-columns: minmax(0, 1fr) auto;
-}
-@media (max-width: 719px) {
-  .aa-hero-grid:has(.aa-logo) {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .aa-hero-grid picture {
-    order: -1;
+@media (min-width: 960px) {
+  .aa-hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, 25rem);
   }
 }
 .aa-logo {
   display: block;
-  width: clamp(112px, 22vw, 168px);
+  width: clamp(104px, 18vw, 132px);
   height: auto;
   aspect-ratio: 1;
   object-fit: cover;
@@ -60,6 +60,80 @@
   /* The logo carries its own gold ring: a white halo and a soft shadow lift it off the hero. */
   box-shadow: 0 0 0 5px #fff, 0 14px 34px -10px rgb(1 44 86 / 45%);
   background: #fff;
+}
+
+/* ---- Hero card: the seal and the numbers by purpose, on navy (white text 14:1, gold-light 7.97:1, navy-ink on
+   gold-light buttons 10:1) ---- */
+.aa-hero-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 1rem + 1.2vw, 1.85rem);
+  border: 1px solid rgb(217 194 116 / 35%);
+  border-radius: 20px;
+  background:
+    radial-gradient(420px 220px at 100% 0%, rgb(183 146 68 / 24%), transparent 65%),
+    var(--aa-navy);
+  box-shadow: 0 26px 52px -18px rgb(1 44 86 / 55%);
+}
+.aa-hero-calls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  width: 100%;
+  margin: 0;
+}
+.aa-hero-calls > div {
+  padding-top: 1rem;
+  border-top: 1px solid rgb(217 194 116 / 30%);
+}
+.aa-hero-calls dt {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #fff;
+}
+.aa-hero-calls dt svg {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  color: var(--aa-gold-light);
+}
+.aa-hero-calls dd {
+  margin: 0.65rem 0 0;
+}
+.aa-hero-card .aa-phones a {
+  border-color: var(--aa-gold-light);
+  background: var(--aa-gold-light);
+  color: var(--aa-navy-ink);
+}
+.aa-hero-card .aa-phones a:hover {
+  border-color: #fff;
+  background: #fff;
+  color: var(--aa-navy-ink);
+}
+/* Below the copy on a tablet: the seal beside the numbers, so the card stays short. */
+@media (min-width: 560px) and (max-width: 959px) {
+  .aa-hero-card {
+    grid-template-columns: auto minmax(0, 1fr);
+    justify-items: stretch;
+    align-items: center;
+    gap: 1.25rem 1.75rem;
+  }
+  .aa-hero-calls > div:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+}
+
+/* Keyboard focus on navy (hero card, free-consultation band): a white ring, 14:1, not the site's amber one. */
+.aa-hero-card :focus-visible,
+.aa .aa-cta :focus-visible {
+  outline-color: #fff;
 }
 
 /* ---- Headings: the bar under section headings (refresh.css draws it as a background) in gold; decorative ---- */
@@ -104,6 +178,12 @@
 /* ---- Key facts ---- */
 .aa .facts div {
   border-top: 3px solid var(--aa-gold);
+}
+/* The hub's six facts as 3 × 2, not five and one left over. */
+@media (min-width: 960px) {
+  .aa .facts {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* ---- Services list (services page) ---- */
@@ -171,7 +251,8 @@
   color: #d5dceb;
 }
 
-/* ---- Location and contact ---- */
+/* ---- Location and contact: one tile per purpose (accounting; technical consulting and IT services) with its call
+   buttons, then the address and the office's profiles. Navy on navy-soft is 12:1; gold-light icons on navy 7.97:1. ---- */
 .aa-contact {
   background: #fff;
   border: 1px solid var(--line);
@@ -185,8 +266,14 @@
 }
 .aa-contact-list {
   display: grid;
-  gap: 1rem;
-  margin: 1rem 0 0;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem 1.25rem;
+  margin: 1.25rem 0 0;
+}
+@media (min-width: 720px) {
+  .aa-contact-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 .aa-contact-list dt {
   display: flex;
@@ -206,6 +293,33 @@
   margin: 0.25rem 0 0;
   font-weight: 500;
 }
+.aa-contact-phones {
+  padding: 1rem 1.15rem 1.15rem;
+  border: 1px solid #d3dce8;
+  border-radius: 14px;
+  background: var(--aa-navy-soft);
+}
+.aa-contact-list .aa-contact-phones dt {
+  gap: 0.65rem;
+  font-size: 1.02rem;
+  line-height: 1.4;
+  color: var(--aa-navy);
+}
+.aa-contact-icon {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 10px;
+  background: var(--aa-navy);
+}
+.aa-contact-list .aa-contact-icon svg {
+  color: var(--aa-gold-light);
+}
+.aa-contact-list .aa-contact-phones dd {
+  margin-top: 0.8rem;
+}
 .aa-contact .aa-social a {
   color: var(--aa-navy);
 }
@@ -219,14 +333,40 @@
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem 1.25rem;
+  gap: 0.5rem 0.6rem;
 }
 .aa-phones li + li {
   margin: 0;
 }
+/* Call buttons: 44px tall touch targets. */
 .aa-phones a {
-  display: inline-block;
-  padding-block: 0.3rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.4rem 1.05rem;
+  border: 1px solid var(--aa-navy);
+  /* Half the 44px height: a pill at normal size, a rounded box when very large text wraps the number. */
+  border-radius: 22px;
+  background: #fff;
   font-weight: 700;
   color: var(--aa-navy);
+  text-decoration: none;
+}
+.aa-phones a svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+/* With very large text a number may wrap inside its button rather than push the page sideways. */
+.aa-phones a {
+  max-width: 100%;
+}
+.aa-phones a > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.aa-phones a:hover {
+  background: var(--aa-navy);
+  color: #fff;
 }

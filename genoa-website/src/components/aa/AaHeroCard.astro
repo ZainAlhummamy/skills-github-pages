@@ -1,0 +1,26 @@
+---
+/**
+ * The visual side of the office's heroes (hub, services), where the product pages show their screens: the office's
+ * seal and its numbers by purpose (accounting; technical consulting and IT services) as call buttons, on navy.
+ * The full contact block, with the address and profiles, is lower on the page (AaContact).
+ */
+import type { Lang } from '../../content/types';
+import { aaContactBlock, aaPhoneGroups } from '../../content/academic-accountant';
+import Icon from '../Icon.astro';
+import AaLogo from './AaLogo.astro';
+import AaCallButtons from './AaCallButtons.astro';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const c = aaContactBlock[lang];
+---
+<div class="aa-hero-card">
+  <AaLogo lang={lang} />
+  <dl class="aa-hero-calls">
+    {aaPhoneGroups.map((g) => (
+      <div data-group={g.id}>
+        <dt><Icon name={g.icon} />{c.phoneGroups[g.id]}</dt>
+        <dd><AaCallButtons lang={lang} phones={g.phones} /></dd>
+      </div>
+    ))}
+  </dl>
+</div>

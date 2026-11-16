@@ -6,11 +6,10 @@
 import '../../../styles/academic-accountant.css';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
-import AnswerBox from '../../../components/AnswerBox.astro';
 import KeyFacts from '../../../components/KeyFacts.astro';
 import FaqList from '../../../components/FaqList.astro';
 import Icon from '../../../components/Icon.astro';
-import AaLogo from '../../../components/aa/AaLogo.astro';
+import AaHeroCard from '../../../components/aa/AaHeroCard.astro';
 import AaConsultation from '../../../components/aa/AaConsultation.astro';
 import AaContact from '../../../components/aa/AaContact.astro';
 import { LANGS, type Lang } from '../../../content/types';
@@ -19,12 +18,15 @@ import { t } from '../../../i18n/ui';
 import { abs, path } from '../../../lib/routes';
 import { ids, pageGraph } from '../../../lib/seo';
 import { aaLogoForSchema } from '../../../lib/aa-logo';
+import { splitLead } from '../../../lib/text';
 
 export function getStaticPaths() {
   return LANGS.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Lang;
 const c = aaHub[lang];
+// The answer in two parts, as on the home, product and feature pages: its first sentence leads, the rest is a card.
+const answer = splitLead(c.answer);
 const pathname = path(lang, 'academic-accountant');
 const services = path(lang, 'academic-accountant', 'services');
 const crumbs = [
@@ -48,20 +50,25 @@ const jsonld = pageGraph({
 ---
 <BaseLayout lang={lang} title={c.title} description={c.description} ogImage={og} ogImageAlt={c.h1} jsonld={jsonld}>
   <div class="aa">
-    <section class="page-hero">
+    <section class="page-hero hero-split">
       <div class="container">
         <Breadcrumbs lang={lang} items={crumbs} />
         <div class="aa-hero-grid">
-          <div>
+          <div class="hero-copy">
             <span class="eyebrow">{c.eyebrow}</span>
             <h1>{c.h1}</h1>
-            <AnswerBox lang={lang} text={c.answer} />
+            <p class="answer answer-lead">{answer.lead}</p>
             <div class="btn-row">
               <a class="btn btn-primary" href={services}>{c.whatWeDo.allServices}</a>
               <a class="btn btn-ghost" href="#aa-contact"><Icon name="phone" />{aaContactBlock[lang].jump}</a>
             </div>
+            {answer.rest && (
+              <div class="answer-rest">
+                <p class="answer">{answer.rest}</p>
+              </div>
+            )}
           </div>
-          <AaLogo lang={lang} />
+          <AaHeroCard lang={lang} />
         </div>
       </div>
     </section>

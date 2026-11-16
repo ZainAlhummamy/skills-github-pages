@@ -67,11 +67,14 @@ export interface AaPhone {
 /** A phone number as shown on a page: local form in Arabic (as the office publishes it), international in English. */
 export const aaPhoneText = (phone: AaPhone, lang: Lang) => (lang === 'ar' ? phone.local : phone.intl);
 
-/** The office's numbers by purpose, in the order pages list them (labels: aaContactBlock[lang].phoneGroups). */
+/**
+ * The office's numbers by purpose, in the order pages list them (labels: aaContactBlock[lang].phoneGroups), each with
+ * the icon shown beside its label: a ledger for accounting, a headset for technical consulting and IT services.
+ */
 export type AaPhoneGroupId = 'accounting' | 'it';
-export const aaPhoneGroups: { id: AaPhoneGroupId; phones: readonly AaPhone[] }[] = [
-  { id: 'accounting', phones: aaOffice.phones },
-  { id: 'it', phones: aaOffice.itPhones },
+export const aaPhoneGroups: { id: AaPhoneGroupId; icon: IconKey; phones: readonly AaPhone[] }[] = [
+  { id: 'accounting', icon: 'ledger', phones: aaOffice.phones },
+  { id: 'it', icon: 'support', phones: aaOffice.itPhones },
 ];
 
 /** The one sentence that says how the office relates to Genoa Systems (see the TODO at the top). */
