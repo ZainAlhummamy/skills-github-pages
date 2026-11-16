@@ -1,17 +1,18 @@
 # Academic Accountant logo
 
-TODO(Zain): put the office's logo here as **`logo.jpg`** (or `logo.png` / `logo.webp`). Nothing else needs to change:
+- **`logo.png`** (728×728, transparent outside the seal): the logo the site uses. It is the office's own photo logo
+  with its content unchanged, prepared for use as a logo:
+  - the camera's perspective corrected (the seal was 2.5% taller along an axis 7° off vertical) and the seal
+    straightened by 3°;
+  - cropped to the outer gold ring, transparent outside it;
+  - the textured, shaded paper cleaned to white (near-neutral light pixels only, so the navy, the gold and their
+    edges are untouched);
+  - a mild lift of the navy and gold (contrast 6%, saturation 8%) and light sharpening.
+- **`logo-original.webp`** (805×789): the photo logo it was made from, kept for reference. The site does not use it.
 
-- the Academic Accountant pages show it in their hero, cropped to a circle, as AVIF/WebP (Astro's image pipeline);
-- their JSON-LD gets a `logo` (a 512×512 PNG made from it);
-- `npm run og -- academic-accountant` puts it on the office's share images (then commit `public/og/`).
-
-For now, use the photo logo from the office's Instagram (`logo-instagram.jpg`, 789×789; the Facebook copy is the same
-artwork). It is a photo mockup on textured paper, slightly rotated, with an "odoo" wordmark, so it is cropped to the
-seal. If the seal is off-centre, change `aaLogoPosition` in `src/lib/aa-logo.ts` (CSS `object-position` syntax, for
-example `'48% 46%'`). Later, replace it with a flat SVG/PNG of the seal without the odoo mark.
+The pages show `logo.png` in their hero as AVIF/WebP (Astro's image pipeline), the JSON-LD `logo` is a 512×512 PNG made
+from it, and `npm run og -- academic-accountant` puts it on the office's share images (then commit `public/og/`).
+Any `logo.{jpg,jpeg,png,webp}` here is picked up the same way, so a sharper vector original can simply replace it.
 
 The logo is used on the Academic Accountant pages only. It must not replace the site's favicon, apple-touch-icon,
 `logo-512.png` or the Genoa OG images: the site's brand is Genoa Systems.
-
-`cover-facebook.jpg` (960×353) is not used by the site.

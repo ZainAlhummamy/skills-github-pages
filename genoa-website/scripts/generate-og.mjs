@@ -109,7 +109,7 @@ body{width:1200px;height:630px;font-family:P,sans-serif;background:#012c56;color
 .bar{position:absolute;inset-block:0;inset-inline-start:0;width:18px;background:#b79244}
 .wrap{position:absolute;inset:70px 90px;display:flex;flex-direction:column}
 .brand{display:flex;align-items:center;gap:22px;font-size:30px;font-weight:700}
-.brand img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:5px solid #b79244}
+.brand img{width:132px;height:132px;border-radius:50%;object-fit:cover}
 .brand .ar{font-size:38px}
 .kicker{margin-top:${aaLogo ? 34 : 56}px;font-size:28px;font-weight:700;color:#d9c274}
 h1{margin-top:14px;font-size:${c.lang === 'ar' ? 56 : 54}px;line-height:1.25;font-weight:700;max-width:1020px}

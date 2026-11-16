@@ -2,10 +2,11 @@
  * The Academic Accountant logo, used only on the office's own pages (hero) and in its JSON-LD `logo`. It never
  * replaces the site's favicon, icons or Genoa Systems' logo.
  *
- * The file is optional: drop it in src/assets/academic-accountant/ as logo.jpg (or .jpeg, .png, .webp) and the pages,
- * the JSON-LD and `npm run og -- academic-accountant` pick it up. Without it nothing is rendered in its place.
- * TODO(Zain): add the logo there. The photo logo (logo-instagram.jpg, 789×789) works for now; a flat SVG/PNG without
- *   the odoo mark should replace it later. src/assets/academic-accountant/README.md has the details.
+ * The file is src/assets/academic-accountant/logo.png: the office's own seal, prepared from its photo logo
+ * (logo-original.webp, kept beside it) by straightening it, cropping it to the seal and cleaning the paper to white,
+ * with its content unchanged. src/assets/academic-accountant/README.md has the details. Any logo.{jpg,jpeg,png,webp}
+ * there is picked up by the pages, the JSON-LD and `npm run og -- academic-accountant`; without one, nothing is
+ * rendered in its place.
  */
 import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
@@ -18,9 +19,8 @@ const found = import.meta.glob<{ default: ImageMetadata }>('../assets/academic-a
 export const aaLogo: ImageMetadata | undefined = Object.values(found)[0]?.default;
 
 /**
- * Where the square crop of the photo sits (CSS object-position syntax). The photo logo is a slightly rotated mockup on
- * a grey background, so the seal may need nudging into the centre once the file is in. Pages show the square crop as a
- * circle (border-radius), which leaves the paper and background outside the seal out of view.
+ * Where the square crop sits (CSS object-position syntax). logo.png is already the seal alone, centred, so 'center'.
+ * Pages show it as a circle (border-radius); outside the seal it is transparent.
  */
 export const aaLogoPosition = 'center';
 

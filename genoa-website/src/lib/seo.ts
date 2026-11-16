@@ -149,7 +149,7 @@ export const academicAccountantNode = (lang: Lang, logo?: { src: string; width: 
     alternateName: [...aaOffice.alternateName],
     // The hub page in the language of the page this node is on (one url per language, as for the products).
     url: abs(path(lang, 'academic-accountant')),
-    // TODO(Zain): the logo file (src/assets/academic-accountant/). Until then the share image stands in as `image`.
+    // The office's seal (src/assets/academic-accountant/logo.png); without it the share image stands in as `image`.
     ...(logoNode ? { logo: logoNode } : {}),
     image: logoNode ? logoNode.url : abs(`/og/og-academic-accountant-${lang}.png`),
     description: hub.answer,
