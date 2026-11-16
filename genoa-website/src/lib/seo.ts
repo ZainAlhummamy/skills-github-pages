@@ -7,7 +7,8 @@
 import { site, placeholdersInUse, companyIntro, telephone } from '../config/site';
 import { modifiedOn } from './dates';
 import { products } from '../content';
-import { aaContactBlock, aaHub, aaOffice, aaPhoneGroups, aaServices } from '../content/academic-accountant';
+import { aaContactBlock, aaHub, aaOffice, aaPhoneGroups, aaRelationship, aaServices } from '../content/academic-accountant';
+import { splitLead } from './text';
 import type { Faq, Lang, ProductId } from '../content/types';
 import { abs, path } from './routes';
 
@@ -195,6 +196,21 @@ export const academicAccountantNode = (lang: Lang, logo?: { src: string; width: 
   };
 };
 
+/**
+ * Academic Accountant as referenced from Genoa's pages (each product's `creator`; `mentions` on the home, product,
+ * about and contact pages), so a crawler reading any of them can resolve the @id to a name. The same @id, @type and
+ * per-language url as its full node on its own pages (check-site.mjs checks both), with only its names and a short
+ * description: no address or phones, which must not read as Genoa Systems' own (CONTENT-GUIDE.md).
+ */
+export const academicAccountantRef = (lang: Lang): Node => ({
+  '@type': ['AccountingService', 'EducationalOrganization'],
+  '@id': ids.academicAccountant,
+  name: aaOffice.name,
+  alternateName: [...aaOffice.alternateName],
+  url: abs(path(lang, 'academic-accountant')),
+  description: `${splitLead(aaHub[lang].answer).lead} ${aaRelationship[lang]}.`,
+});
+
 export const breadcrumbNode = (pageUrl: string, items: { name: string; href: string }[]): Node => ({
   '@type': 'BreadcrumbList',
   '@id': `${pageUrl}#breadcrumb`,
@@ -279,6 +295,10 @@ export const pageGraph = (i: PageGraphInput) => {
   else for (const p of i.about ?? []) graph.push(softwareNode(p, i.lang));
   if (hasCrumbs) graph.push(breadcrumbNode(url, i.breadcrumbs!));
   if (i.faqs?.length) graph.push(faqNode(url, i.faqs, i.lang, false));
+  // A page that points to the office (a product's creator, a mention) but is not about it carries its short node.
+  if (i.subject !== 'academic-accountant' && JSON.stringify(graph).includes(`"${ids.academicAccountant}"`)) {
+    graph.push(academicAccountantRef(i.lang));
+  }
 
   return { '@context': 'https://schema.org', '@graph': graph };
 };

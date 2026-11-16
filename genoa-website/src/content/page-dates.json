@@ -1,10 +1,10 @@
 {
   "/ar/": {
-    "hash": "c8e0b403a9b747d3",
+    "hash": "1ce97b62b3d28dfb",
     "modified": "2026-11-16"
   },
   "/ar/about/": {
-    "hash": "41ab983e2ba67b84",
+    "hash": "5ee284268219c555",
     "modified": "2026-11-16"
   },
   "/ar/academic-accountant/": {
@@ -16,7 +16,7 @@
     "modified": "2026-11-16"
   },
   "/ar/companies/": {
-    "hash": "85978fc32217c8a9",
+    "hash": "f1c6499549dcfdb9",
     "modified": "2026-11-16"
   },
   "/ar/companies/accounting/": {
@@ -32,8 +32,8 @@
     "modified": "2026-11-16"
   },
   "/ar/companies/faq/": {
-    "hash": "37bb9fde2d3fd97d",
-    "modified": "2026-11-13"
+    "hash": "422d1ee8fff7007c",
+    "modified": "2026-11-16"
   },
   "/ar/companies/inventory/": {
     "hash": "54aa3614f2b6a5b5",
@@ -64,7 +64,7 @@
     "modified": "2026-11-16"
   },
   "/ar/government/": {
-    "hash": "ce9123446a66daba",
+    "hash": "0b9482bd848e8088",
     "modified": "2026-11-16"
   },
   "/ar/government/budgets/": {
@@ -76,8 +76,8 @@
     "modified": "2026-11-16"
   },
   "/ar/government/faq/": {
-    "hash": "ca6ef3db9ed10e52",
-    "modified": "2026-11-11"
+    "hash": "6f157ba185cba3b7",
+    "modified": "2026-11-16"
   },
   "/ar/government/legislation-library/": {
     "hash": "ce23ce6f46821119",
@@ -108,11 +108,11 @@
     "modified": "2026-11-11"
   },
   "/en/": {
-    "hash": "47979b8ffe3c1231",
+    "hash": "58c491ac6729e301",
     "modified": "2026-11-16"
   },
   "/en/about/": {
-    "hash": "2a1d1ab9b2635baa",
+    "hash": "72d66f99f88ee653",
     "modified": "2026-11-16"
   },
   "/en/academic-accountant/": {
@@ -124,7 +124,7 @@
     "modified": "2026-11-16"
   },
   "/en/companies/": {
-    "hash": "a5820768cf85423f",
+    "hash": "964d57df15e91bfd",
     "modified": "2026-11-16"
   },
   "/en/companies/accounting/": {
@@ -140,8 +140,8 @@
     "modified": "2026-11-16"
   },
   "/en/companies/faq/": {
-    "hash": "3cdf20e1e236c81a",
-    "modified": "2026-11-13"
+    "hash": "a3b4a734e87dc5b8",
+    "modified": "2026-11-16"
   },
   "/en/companies/inventory/": {
     "hash": "50afde5d7d66beaf",
@@ -172,7 +172,7 @@
     "modified": "2026-11-16"
   },
   "/en/government/": {
-    "hash": "8977e3160988a7c0",
+    "hash": "22259408d121044b",
     "modified": "2026-11-16"
   },
   "/en/government/budgets/": {
@@ -184,8 +184,8 @@
     "modified": "2026-11-16"
   },
   "/en/government/faq/": {
-    "hash": "fba9e5690616fd44",
-    "modified": "2026-11-11"
+    "hash": "61f4f4ddfdcd020b",
+    "modified": "2026-11-16"
   },
   "/en/government/legislation-library/": {
     "hash": "30a29c2c743b925d",

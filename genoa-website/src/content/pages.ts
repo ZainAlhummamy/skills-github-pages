@@ -20,14 +20,15 @@ const joinAnswer = (a: HomeAnswer): string => [a.lead, a.companies, a.government
 
 const homeAnswer: L<HomeAnswer> = {
   ar: {
-    lead: `${companyIntro('ar')}، ولها نظامان محاسبيان منفصلان.`,
+    // The owner, 16 Nov 2026: the two systems are Academic Accountant's product; Genoa Systems offers them.
+    lead: `${companyIntro('ar')}، تقدّم نظامين محاسبيين منفصلين من نتاج المحاسب الأكاديمي، بُنيا وفق خبراته المحاسبية والتقنية.`,
     companies:
       'Genoa نظام محاسبي عراقي للشركات، يعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفق معايير IFRS، ويجمع الحسابات وإدارة المخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمارها. وفيه مساعد ذكي يعمل بالذكاء الاصطناعي وإضافة فاتورة مباشرة من صورتها.',
     government:
       'وGenoa Gov نظام محاسبي حكومي لأقسام الحسابات في الدوائر الحكومية العراقية، يغطي المستندات ومنها مستند الصرف (سند الصرف)، وسلسلة المصادقة والموازنة والصكوك والغلق الشهري والسنوي.',
   },
   en: {
-    lead: `${companyIntro('en')}, with two separate accounting products for the Iraqi market.`,
+    lead: `${companyIntro('en')} offering two separate accounting products for the Iraqi market, built on the accounting and technology expertise of Academic Accountant.`,
     companies:
       'Genoa is for companies: it uses the Unified Accounting System chart of accounts, can prepare IFRS-based financial statements, and brings together accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. It also has an AI assistant and can add an invoice directly from an image.',
     government:
@@ -63,7 +64,7 @@ export const home: L<HomeContent> = {
   ar: {
     title: 'نظام محاسبي عراقي للشركات والدوائر الحكومية | Genoa Systems',
     description:
-      'نظام محاسبي عراقي للشركات والدوائر الحكومية: Genoa نظام محاسبي للشركات بدليل حسابات النظام المحاسبي الموحد وقوائم IFRS، وGenoa Gov نظام محاسبي حكومي لأقسام الحسابات.',
+      'نظام محاسبي عراقي للشركات والدوائر الحكومية من نتاج المحاسب الأكاديمي: Genoa للشركات بدليل النظام المحاسبي الموحد وقوائم IFRS، وGenoa Gov لأقسام الحسابات الحكومية.',
     h1: 'نظام محاسبي عراقي للشركات وللدوائر الحكومية',
     answer: joinAnswer(homeAnswer.ar),
     answerParts: homeAnswer.ar,
@@ -147,7 +148,7 @@ export const home: L<HomeContent> = {
   en: {
     title: 'Accounting Software for Iraq | Genoa Systems',
     description:
-      'Iraqi accounting software for companies and government: Genoa for accounts and inventory (Unified Accounting System chart of accounts, IFRS statements) and Genoa Gov.',
+      "Iraqi accounting software built on Academic Accountant's expertise: Genoa for companies (Unified Accounting System chart, IFRS statements) and Genoa Gov for government.",
     h1: 'Accounting software for Iraqi companies and government departments',
     answer: joinAnswer(homeAnswer.en),
     answerParts: homeAnswer.en,
