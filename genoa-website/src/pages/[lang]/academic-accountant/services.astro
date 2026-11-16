@@ -1,0 +1,119 @@
+---
+/**
+ * Academic Accountant services: the eleven services from the office's own post, grouped under four headings, each
+ * explained in plain words. No prices. Copy: src/content/academic-accountant.ts.
+ */
+import '../../../styles/academic-accountant.css';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import AnswerBox from '../../../components/AnswerBox.astro';
+import AaLogo from '../../../components/aa/AaLogo.astro';
+import AaConsultation from '../../../components/aa/AaConsultation.astro';
+import AaContact from '../../../components/aa/AaContact.astro';
+import { LANGS, type Lang } from '../../../content/types';
+import { aaContactBlock, aaGroupOrder, aaHub, aaServices, aaServicesPage } from '../../../content/academic-accountant';
+import { t } from '../../../i18n/ui';
+import { abs, path } from '../../../lib/routes';
+import { ids, pageGraph } from '../../../lib/seo';
+import { aaLogoForSchema } from '../../../lib/aa-logo';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Lang;
+const c = aaServicesPage[lang];
+const hub = path(lang, 'academic-accountant');
+const pathname = path(lang, 'academic-accountant', 'services');
+const crumbs = [
+  { name: t('home', lang), href: path(lang) },
+  { name: aaHub[lang].navLabel, href: hub },
+  { name: c.navLabel, href: pathname },
+];
+const og = `/og/og-academic-accountant-services-${lang}.png`;
+const jsonld = pageGraph({
+  lang,
+  pathname,
+  title: c.title,
+  description: c.description,
+  breadcrumbs: crumbs,
+  subject: 'academic-accountant',
+  aaLogo: await aaLogoForSchema(),
+  // The "accounting systems" group links to Genoa and Genoa Gov.
+  mentions: [ids.org, ids.product('companies'), ids.product('government')],
+  image: abs(og),
+});
+const groups = aaGroupOrder.map((id) => ({ id, heading: c.groups[id], services: aaServices.filter((s) => s.group === id) }));
+const toc = [
+  ...groups.map((g) => ({ id: g.id, label: g.heading })),
+  { id: 'who-for', label: c.whoFor.heading },
+  { id: 'aa-contact', label: aaContactBlock[lang].heading },
+];
+---
+<BaseLayout lang={lang} title={c.title} description={c.description} ogImage={og} ogImageAlt={c.h1} jsonld={jsonld}>
+  <div class="aa">
+    <section class="page-hero">
+      <div class="container">
+        <Breadcrumbs lang={lang} items={crumbs} />
+        <div class="aa-hero-grid">
+          <div>
+            <span class="eyebrow">{aaHub[lang].eyebrow}</span>
+            <h1>{c.h1}</h1>
+            <AnswerBox lang={lang} text={c.answer} />
+          </div>
+          <AaLogo lang={lang} />
+        </div>
+      </div>
+    </section>
+
+    <div class="section">
+      <div class="container content-grid">
+        <div class="article prose">
+          {groups.map((g) => (
+            <section class="aa-service-group" aria-labelledby={g.id} data-reveal>
+              <h2 id={g.id}>{g.heading}</h2>
+              <ul class="aa-services">
+                {g.services.map((s) => (
+                  <li id={`service-${s.id}`}>
+                    <h3>{s.content[lang].name}</h3>
+                    <p>{s.content[lang].body}</p>
+                  </li>
+                ))}
+              </ul>
+              {g.id === 'systems' && (
+                <>
+                  <p style="margin-top:1rem">{c.systemsLead}</p>
+                  <ul class="aa-systems">
+                    <li><a href={path(lang, 'companies')}>{t('companies', lang)}</a></li>
+                    <li><a href={path(lang, 'government')}>{t('government', lang)}</a></li>
+                  </ul>
+                </>
+              )}
+            </section>
+          ))}
+          <section class="aa-service-group" aria-labelledby="who-for" data-reveal>
+            <h2 id="who-for">{c.whoFor.heading}</h2>
+            <p>{c.whoFor.body}</p>
+            <ul>{c.whoFor.bullets.map((b) => <li>{b}</li>)}</ul>
+          </section>
+        </div>
+        <aside>
+          <nav class="toc" aria-labelledby="toc-heading">
+            <h2 id="toc-heading">{t('onThisPage', lang)}</h2>
+            <ul>{toc.map((x) => <li><a href={`#${x.id}`}>{x.label}</a></li>)}</ul>
+          </nav>
+          <div class="btn-row" style="flex-direction:column">
+            <a class="btn btn-ghost" href={hub}>{c.backToHub}</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <AaConsultation lang={lang} />
+
+    <div class="section" style="padding-top:0">
+      <div class="container">
+        <AaContact lang={lang} />
+      </div>
+    </div>
+  </div>
+</BaseLayout>

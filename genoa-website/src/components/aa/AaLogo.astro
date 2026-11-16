@@ -1,0 +1,28 @@
+---
+/**
+ * The Academic Accountant logo, cropped to a circle (AVIF/WebP from Astro's image pipeline). Renders nothing until
+ * the file is in src/assets/academic-accountant/ (see src/lib/aa-logo.ts).
+ */
+import { Picture } from 'astro:assets';
+import type { Lang } from '../../content/types';
+import { aaLogo, aaLogoAlt, aaLogoPosition } from '../../lib/aa-logo';
+interface Props { lang: Lang; size?: number; }
+const { lang, size = 168 } = Astro.props;
+const px = aaLogo ? Math.min(size, aaLogo.width, aaLogo.height) : size;
+---
+{aaLogo ? (
+  <Picture
+    src={aaLogo}
+    alt={aaLogoAlt[lang]}
+    width={px}
+    height={px}
+    densities={[1, 2]}
+    fit="cover"
+    position={aaLogoPosition}
+    formats={['avif', 'webp']}
+    loading="eager"
+    class="aa-logo"
+  />
+) : (
+  <Fragment set:html="<!-- TODO(Zain): Academic Accountant logo: add src/assets/academic-accountant/logo.jpg -->" />
+)}

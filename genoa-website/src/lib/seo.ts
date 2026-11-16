@@ -7,6 +7,7 @@
 import { site, placeholdersInUse, companyIntro, telephone } from '../config/site';
 import { modifiedOn } from './dates';
 import { products } from '../content';
+import { aaHub, aaOffice, aaServices } from '../content/academic-accountant';
 import type { Faq, Lang, ProductId } from '../content/types';
 import { abs, path } from './routes';
 
@@ -16,6 +17,8 @@ export const ids = {
   org: `${site.url}/#organization`,
   website: `${site.url}/#website`,
   product: (p: ProductId) => `${site.url}/#software-${p === 'companies' ? 'genoa' : 'genoa-gov'}`,
+  /** Academic Accountant (المحاسب الأكاديمي), the accounting office that works with Genoa Systems. */
+  academicAccountant: `${site.url}/#academic-accountant`,
 };
 
 export const organizationNode = (lang: Lang): Node => {
@@ -128,6 +131,61 @@ export const softwareNode = (productId: ProductId, lang: Lang): Node => {
   };
 };
 
+/**
+ * Academic Accountant: an accounting, consulting and training office in Baghdad, a separate node from Genoa Systems
+ * (#organization). Its facts come from its own profiles only (src/content/academic-accountant.ts).
+ *
+ * TODO(Zain): the relationship to Genoa Systems. Until it is confirmed there is no parentOrganization /
+ * subOrganization here: the two are joined only through the WebPage nodes (about / mentions, see pageGraph). The
+ * office's Facebook and Instagram profiles are its own sameAs, never Genoa Systems'.
+ */
+export const academicAccountantNode = (lang: Lang, logo?: { src: string; width: number; height: number }): Node => {
+  const hub = aaHub[lang];
+  const logoNode = logo ? { '@type': 'ImageObject', url: abs(logo.src), width: logo.width, height: logo.height } : undefined;
+  return {
+    '@type': ['AccountingService', 'EducationalOrganization'],
+    '@id': ids.academicAccountant,
+    name: aaOffice.name,
+    alternateName: [...aaOffice.alternateName],
+    // The hub page in the language of the page this node is on (one url per language, as for the products).
+    url: abs(path(lang, 'academic-accountant')),
+    // TODO(Zain): the logo file (src/assets/academic-accountant/). Until then the share image stands in as `image`.
+    ...(logoNode ? { logo: logoNode } : {}),
+    image: logoNode ? logoNode.url : abs(`/og/og-academic-accountant-${lang}.png`),
+    description: hub.answer,
+    slogan: lang === 'ar' ? 'خبراء المحاسبة والمالية' : 'Accounting and finance experts',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: aaOffice.address[lang].street,
+      addressLocality: 'Baghdad',
+      addressRegion: 'Baghdad',
+      addressCountry: 'IQ',
+    },
+    telephone: aaOffice.phones.map((p) => p.e164),
+    areaServed: { '@type': 'Country', name: site.areaServed.en, identifier: site.areaServed.code },
+    knowsAbout:
+      lang === 'ar'
+        ? ['المحاسبة', 'التدقيق', 'التحليل المالي', 'الموازنات التخطيطية', 'محاسبة الكلفة', 'الاحتسابات الضريبية في العراق', 'الأنظمة المحاسبية', 'المعايير الدولية لإعداد التقارير المالية (IFRS)', 'النظام المحاسبي الموحد في العراق']
+        : ['Accounting', 'Auditing', 'Financial analysis', 'Budgeting', 'Cost accounting', 'Tax calculation in Iraq', 'Accounting systems', 'International Financial Reporting Standards (IFRS)', 'Iraqi Unified Accounting System'],
+    sameAs: [aaOffice.profiles.facebook, aaOffice.profiles.instagram],
+    // No prices: the office publishes none.
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: lang === 'ar' ? 'خدمات المحاسب الأكاديمي' : 'Academic Accountant services',
+      url: abs(path(lang, 'academic-accountant', 'services')),
+      itemListElement: aaServices.map((sv) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: sv.content[lang].name,
+          description: sv.content[lang].body,
+          areaServed: { '@type': 'Country', name: site.areaServed.en },
+        },
+      })),
+    },
+  };
+};
+
 export const breadcrumbNode = (pageUrl: string, items: { name: string; href: string }[]): Node => ({
   '@type': 'BreadcrumbList',
   '@id': `${pageUrl}#breadcrumb`,
@@ -161,6 +219,16 @@ export interface PageGraphInput {
   breadcrumbs?: { name: string; href: string }[];
   /** Product(s) this page is about. Their SoftwareApplication nodes are included. */
   about?: ProductId[];
+  /**
+   * A subject other than Genoa Systems and its products: the page is about the Academic Accountant office. Its node is
+   * included and becomes the page's `about`; `about` (products) is ignored, so name Genoa Systems and its products in
+   * `mentions` instead.
+   */
+  subject?: 'academic-accountant';
+  /** The Academic Accountant logo for its node (src/lib/aa-logo.ts), when the page has it. */
+  aaLogo?: { src: string; width: number; height: number };
+  /** Entities the page mentions without being about them, by @id (e.g. ids.academicAccountant on /about/). */
+  mentions?: string[];
   /** FAQs shown on the page (feature pages) -> separate FAQPage node. */
   faqs?: Faq[];
   /** FAQ page: the WebPage itself is the FAQPage. */
@@ -189,13 +257,17 @@ export const pageGraph = (i: PageGraphInput) => {
     publisher: { '@id': ids.org },
     primaryImageOfPage: { '@type': 'ImageObject', url: i.image },
     ...(hasCrumbs ? { breadcrumb: { '@id': `${url}#breadcrumb` } } : {}),
-    ...(i.about?.length
-      ? { about: i.about.map((p) => ({ '@id': ids.product(p) })) }
-      : { about: { '@id': ids.org } }),
+    ...(i.subject === 'academic-accountant'
+      ? { about: { '@id': ids.academicAccountant } }
+      : i.about?.length
+        ? { about: i.about.map((p) => ({ '@id': ids.product(p) })) }
+        : { about: { '@id': ids.org } }),
+    ...(i.mentions?.length ? { mentions: i.mentions.map((id) => ({ '@id': id })) } : {}),
   });
 
   graph.push(page, websiteNode(i.lang), organizationNode(i.lang));
-  for (const p of i.about ?? []) graph.push(softwareNode(p, i.lang));
+  if (i.subject === 'academic-accountant') graph.push(academicAccountantNode(i.lang, i.aaLogo));
+  else for (const p of i.about ?? []) graph.push(softwareNode(p, i.lang));
   if (hasCrumbs) graph.push(breadcrumbNode(url, i.breadcrumbs!));
   if (i.faqs?.length) graph.push(faqNode(url, i.faqs, i.lang, false));
 

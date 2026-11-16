@@ -1,0 +1,41 @@
+---
+/** The office's address, phone numbers (tel: links), optional WhatsApp, and Facebook / Instagram. */
+import type { Lang } from '../../content/types';
+import { aaContactBlock, aaOffice, aaPhoneText } from '../../content/academic-accountant';
+import Icon from '../Icon.astro';
+import AaSocial from './AaSocial.astro';
+interface Props { lang: Lang; headingId?: string; }
+const { lang, headingId = 'aa-contact' } = Astro.props;
+const c = aaContactBlock[lang];
+---
+<section class="aa-contact" aria-labelledby={headingId} data-reveal>
+  <h2 id={headingId}>{c.heading}</h2>
+  <dl class="aa-contact-list">
+    <div>
+      <dt><Icon name="pin" />{c.addressLabel}</dt>
+      <dd>{aaOffice.address[lang].full}</dd>
+    </div>
+    <div>
+      <dt><Icon name="phone" />{c.phonesLabel}</dt>
+      <dd>
+        <ul class="aa-phones">
+          {aaOffice.phones.map((p) => (
+            <li><a href={`tel:${p.e164}`}><span class="ltr">{aaPhoneText(p, lang)}</span></a></li>
+          ))}
+        </ul>
+      </dd>
+    </div>
+    {aaOffice.whatsapp ? (
+      <div>
+        <dt><Icon name="whatsapp" />WhatsApp</dt>
+        <dd><a href={`https://wa.me/${aaOffice.whatsapp}`} rel="noopener" target="_blank">{c.whatsapp}</a></dd>
+      </div>
+    ) : (
+      <Fragment set:html="<!-- TODO(Zain): confirm which number is on WhatsApp (aaOffice.whatsapp, src/content/academic-accountant.ts); a wa.me link appears here then. -->" />
+    )}
+    <div>
+      <dt>{c.followLabel}</dt>
+      <dd><AaSocial lang={lang} /></dd>
+    </div>
+  </dl>
+</section>

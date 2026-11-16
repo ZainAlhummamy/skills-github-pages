@@ -6,6 +6,18 @@
 import { productList } from '../content';
 import { about, contact, home, security } from '../content/pages';
 import { guides } from '../content/guides';
+import {
+  aaConsultation,
+  aaContactBlock,
+  aaGroupOrder,
+  aaHub,
+  aaOffice,
+  aaOnAbout,
+  aaOnContact,
+  aaPhoneText,
+  aaServices,
+  aaServicesPage,
+} from '../content/academic-accountant';
 import type { Faq, Lang, ProductId, Section } from '../content/types';
 import { LANGS } from '../content/types';
 import { t } from '../i18n/ui';
@@ -16,7 +28,8 @@ export interface CatalogPage {
   path: string;
   title: string;
   description: string;
-  kind: 'home' | 'product' | 'feature' | 'faq' | 'guide' | 'security' | 'about' | 'contact';
+  /** 'office': the Academic Accountant pages (an accounting office that works with Genoa Systems). */
+  kind: 'home' | 'product' | 'feature' | 'faq' | 'guide' | 'office' | 'security' | 'about' | 'contact';
   product?: ProductId;
   /** Plain-text body for llms-full.txt (Markdown-ish). */
   text: () => string;
@@ -31,6 +44,12 @@ const sectionsText = (sections: Section[]) =>
     .join('\n\n');
 
 const faqText = (faqs: Faq[]) => faqs.map((f) => `### ${f.q}\n\n${f.a.join('\n\n')}`).join('\n\n');
+
+/** The Academic Accountant office's address, phones and profiles, as plain text. */
+const aaContactText = (lang: Lang) => {
+  const c = aaContactBlock[lang];
+  return `## ${c.heading}\n\n- ${c.addressLabel}: ${aaOffice.address[lang].full}\n- ${c.phonesLabel}: ${aaOffice.phones.map((p) => aaPhoneText(p, lang)).join(', ')}\n- Facebook: ${aaOffice.profiles.facebook}\n- Instagram: ${aaOffice.profiles.instagram}`;
+};
 
 export const catalog = (lang: Lang): CatalogPage[] => {
   const out: CatalogPage[] = [];
@@ -124,6 +143,48 @@ export const catalog = (lang: Lang): CatalogPage[] => {
     });
   }
 
+  const hub = aaHub[lang];
+  out.push({
+    lang,
+    path: path(lang, 'academic-accountant'),
+    title: hub.title,
+    description: hub.description,
+    kind: 'office',
+    text: () =>
+      [
+        hub.answer,
+        hub.keyFacts.map((k) => `- ${k.label}: ${k.value}`).join('\n'),
+        `## ${hub.whatWeDo.heading}\n\n${hub.whatWeDo.intro}\n\n${hub.whatWeDo.cards.map((c) => `- ${c.title}: ${c.body}`).join('\n')}`,
+        sectionsText([hub.training]),
+        `## ${hub.systems.heading}\n\n${hub.systems.intro}\n\n- ${t('companies', lang)}: ${hub.systems.genoa}\n- ${t('government', lang)}: ${hub.systems.genoaGov}\n\n${hub.systems.demoLead} ${hub.systems.demoLink}.`,
+        `## ${aaConsultation[lang].heading}\n\n${aaConsultation[lang].body}`,
+        aaContactText(lang),
+        `## ${hub.faqHeading}\n\n${faqText(hub.faqs)}`,
+      ].join('\n\n'),
+  });
+  const sv = aaServicesPage[lang];
+  out.push({
+    lang,
+    path: path(lang, 'academic-accountant', 'services'),
+    title: sv.title,
+    description: sv.description,
+    kind: 'office',
+    text: () =>
+      [
+        sv.answer,
+        ...aaGroupOrder.map(
+          (g) =>
+            `## ${sv.groups[g]}\n\n${aaServices
+              .filter((s) => s.group === g)
+              .map((s) => `### ${s.content[lang].name}\n\n${s.content[lang].body}`)
+              .join('\n\n')}${g === 'systems' ? `\n\n${sv.systemsLead} ${t('companies', lang)}, ${t('government', lang)}.` : ''}`,
+        ),
+        `## ${sv.whoFor.heading}\n\n${sv.whoFor.body}\n\n${sv.whoFor.bullets.map((b) => `- ${b}`).join('\n')}`,
+        `## ${aaConsultation[lang].heading}\n\n${aaConsultation[lang].body}`,
+        aaContactText(lang),
+      ].join('\n\n'),
+  });
+
   const s = security[lang];
   out.push({
     lang,
@@ -140,7 +201,7 @@ export const catalog = (lang: Lang): CatalogPage[] => {
     title: a.title,
     description: a.description,
     kind: 'about',
-    text: () => [a.answer, sectionsText(a.sections)].join('\n\n'),
+    text: () => [a.answer, sectionsText(a.sections), `## ${aaOnAbout[lang].heading}\n\n${aaOnAbout[lang].body}`].join('\n\n'),
   });
   const c = contact[lang];
   out.push({
@@ -149,7 +210,12 @@ export const catalog = (lang: Lang): CatalogPage[] => {
     title: c.title,
     description: c.description,
     kind: 'contact',
-    text: () => [c.answer, `## ${c.nextHeading}\n\n${c.nextSteps.map((x, i) => `${i + 1}. ${x}`).join('\n')}`].join('\n\n'),
+    text: () =>
+      [
+        c.answer,
+        `## ${c.nextHeading}\n\n${c.nextSteps.map((x, i) => `${i + 1}. ${x}`).join('\n')}`,
+        `## ${aaOnContact[lang].heading}\n\n${aaOnContact[lang].body}\n\n- ${aaContactBlock[lang].addressLabel}: ${aaOffice.address[lang].full}\n- ${aaContactBlock[lang].phonesLabel}: ${aaOffice.phones.map((p) => aaPhoneText(p, lang)).join(', ')}`,
+      ].join('\n\n'),
   });
   return out;
 };

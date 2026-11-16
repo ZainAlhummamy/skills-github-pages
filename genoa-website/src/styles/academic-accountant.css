@@ -1,0 +1,233 @@
+/* =====================================================================
+   Academic Accountant pages only (/<lang>/academic-accountant/…), imported by those two pages and scoped to their
+   `.aa` wrapper inside <main>. The global header and footer keep Genoa blue.
+   Colours are the office's seal: navy and gold.
+   Contrast (WCAG): gold #B79244 is 2.91:1 on white, so on white it is decoration only (rules, borders), never text
+   or an icon; gold is 4.82:1 and gold-light 7.97:1 on navy, so there they carry headings and icons. Body text keeps
+   the site's ink colours.
+   ===================================================================== */
+
+.aa {
+  --aa-navy: #012c56;
+  --aa-navy-ink: #001b38;
+  --aa-gold: #b79244;
+  --aa-gold-light: #d9c274;
+  --aa-navy-soft: #e9eef5;
+}
+
+/* ---- Hero ---- */
+.aa .page-hero,
+[dir='rtl'] .aa .page-hero {
+  background:
+    radial-gradient(55% 75% at 88% -5%, rgb(1 44 86 / 14%), transparent 62%),
+    radial-gradient(45% 65% at 2% 8%, rgb(183 146 68 / 12%), transparent 60%),
+    linear-gradient(180deg, #f5f7fa, #fff);
+  border-top: 4px solid var(--aa-gold);
+}
+.aa .page-hero::before {
+  background-image: repeating-linear-gradient(to bottom, transparent 0 33px, rgb(1 44 86 / 6%) 33px 34px);
+}
+.aa .eyebrow {
+  color: var(--aa-gold-light);
+  background: var(--aa-navy);
+}
+.aa .answer-box,
+[dir='rtl'] .aa .answer-box {
+  border-inline-start-color: var(--aa-gold);
+}
+.aa-hero-grid {
+  display: grid;
+  gap: 1.5rem 2.5rem;
+  align-items: center;
+}
+.aa-hero-grid:has(.aa-logo) {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+@media (max-width: 719px) {
+  .aa-hero-grid:has(.aa-logo) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .aa-hero-grid picture {
+    order: -1;
+  }
+}
+.aa-logo {
+  display: block;
+  width: clamp(112px, 22vw, 168px);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--aa-gold);
+  box-shadow: 0 0 0 6px #fff, 0 14px 34px -10px rgb(1 44 86 / 45%);
+  background: var(--aa-navy);
+}
+
+/* ---- Headings: the double rule in gold ---- */
+.aa :is(.section-head, .article section) > h2::after,
+.aa h2.ruled::after {
+  border-color: var(--aa-gold);
+}
+
+/* ---- Buttons ---- */
+.aa .btn-primary {
+  background: var(--aa-navy);
+  box-shadow: 0 6px 16px -6px rgb(1 44 86 / 55%);
+}
+.aa .btn-primary:hover {
+  background: var(--aa-navy-ink);
+}
+.btn-aa {
+  background: var(--aa-gold-light);
+  color: var(--aa-navy-ink);
+}
+.btn-aa:hover {
+  background: #e6d498;
+  color: var(--aa-navy-ink);
+}
+
+/* ---- Cards (what the office does) ---- */
+.aa .card .icon {
+  background: var(--aa-navy);
+  color: var(--aa-gold-light);
+}
+.aa .card:hover .icon {
+  background: var(--aa-navy-ink);
+  color: #fff;
+}
+.aa .card .more {
+  color: var(--aa-navy);
+}
+.aa .card:hover {
+  border-color: var(--aa-gold);
+}
+
+/* ---- Key facts ---- */
+.aa .facts div {
+  border-top: 3px solid var(--aa-gold);
+}
+
+/* ---- Services list (services page) ---- */
+.aa-service-group + .aa-service-group {
+  margin-top: 2.5rem;
+}
+.aa-services {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: grid;
+  gap: 0.75rem;
+}
+.aa-services li + li {
+  margin: 0;
+}
+.aa-services li {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-inline-start: 4px solid var(--aa-navy);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+.aa-services h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.08rem;
+  color: var(--aa-navy);
+}
+.aa-services p {
+  margin: 0;
+}
+
+/* ---- Accounting systems (links to Genoa) ---- */
+.aa-systems {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  display: grid;
+  gap: 0.6rem;
+}
+.aa-systems li + li {
+  margin: 0;
+}
+.aa-systems li {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+}
+.aa-systems a {
+  font-weight: 700;
+}
+
+/* ---- Free consultation band: navy, gold heading (large text on navy) ---- */
+.aa .cta-band.aa-cta {
+  background:
+    radial-gradient(800px 300px at 0% 0%, rgb(183 146 68 / 22%), transparent 60%),
+    var(--aa-navy);
+  border: 1px solid rgb(217 194 116 / 35%);
+}
+.aa .cta-band.aa-cta h2 {
+  color: var(--aa-gold-light);
+}
+.aa .cta-band.aa-cta p {
+  color: #d5dceb;
+}
+
+/* ---- Location and contact ---- */
+.aa-contact {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--aa-gold);
+  border-radius: var(--radius);
+  padding: clamp(1.25rem, 1rem + 1vw, 2rem);
+  box-shadow: var(--shadow);
+}
+.aa-contact h2 {
+  margin-top: 0;
+}
+.aa-contact-list {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0 0;
+}
+.aa-contact-list dt {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+.aa-contact-list dt svg {
+  width: 20px;
+  height: 20px;
+  color: var(--aa-navy);
+  flex: none;
+}
+.aa-contact-list dd {
+  margin: 0.25rem 0 0;
+  font-weight: 500;
+}
+.aa-contact .aa-social a {
+  color: var(--aa-navy);
+}
+.aa-contact .aa-social a:hover {
+  background: var(--aa-navy);
+  color: var(--aa-gold-light);
+}
+.aa-phones {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+}
+.aa-phones li + li {
+  margin: 0;
+}
+.aa-phones a {
+  display: inline-block;
+  padding-block: 0.3rem;
+  font-weight: 700;
+  color: var(--aa-navy);
+}

@@ -1,8 +1,11 @@
 // Renders the Open Graph images (1200x630 PNG) and the raster icons with the
 // pre-installed Playwright Chromium. Run with: npm run og
 // Output is committed under public/, so builds do not need a browser.
+//
+// With arguments, only the share images whose file name contains one of them are rendered, and the icons and
+// favicon are left alone: `npm run og -- academic-accountant` renders the Academic Accountant images only.
 import { createRequire } from 'node:module';
-import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
+import { readFileSync, mkdirSync, writeFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
@@ -22,6 +25,13 @@ const faces = `
 const logo = readFileSync(pub('brand/genoa-mark.svg'), 'utf8');
 // The app's own small-size favicon, used for the 32px PNG.
 const favicon = readFileSync(pub('favicon.svg'), 'utf8');
+// The Academic Accountant logo (optional; src/assets/academic-accountant/logo.*), on that office's images only.
+const aaLogoFile = ['jpg', 'jpeg', 'png', 'webp']
+  .map((ext) => resolve(root, `src/assets/academic-accountant/logo.${ext}`))
+  .find((f) => existsSync(f));
+const aaLogo = aaLogoFile
+  ? `data:image/${aaLogoFile.endsWith('.png') ? 'png' : aaLogoFile.endsWith('.webp') ? 'webp' : 'jpeg'};base64,${readFileSync(aaLogoFile).toString('base64')}`
+  : '';
 const sized = (svg, size) => svg.replace(/<svg\b[^>]*>/, (tag) => tag.replace(/\s(width|height)="[^"]*"/g, '').replace('<svg', `<svg width="${size}" height="${size}"`));
 
 const cards = [
@@ -61,7 +71,52 @@ const cards = [
     title: 'Vouchers and approvals, budgets, cheques, month and year closing',
     sub: 'Full audit trail for amendments · a separate database per office',
   },
+  // Academic Accountant (src/content/academic-accountant.ts): the office's own colours and name, not Genoa's.
+  {
+    file: 'og-academic-accountant-ar', lang: 'ar', theme: 'aa',
+    kicker: 'خبراء المحاسبة والمالية · بغداد – المنصور',
+    title: 'المحاسب الأكاديمي: خدمات محاسبية ومالية وتدريب في بغداد',
+    sub: 'تدقيق · استشارة · أنظمة — خبرة أكثر من 15 سنة في مجال المحاسبة',
+  },
+  {
+    file: 'og-academic-accountant-en', lang: 'en', theme: 'aa',
+    kicker: 'Accounting and finance experts · Al-Mansour, Baghdad',
+    title: 'Academic Accountant: accounting, finance and training in Baghdad',
+    sub: 'Audit · advice · systems — more than 15 years in accounting',
+  },
+  {
+    file: 'og-academic-accountant-services-ar', lang: 'ar', theme: 'aa',
+    kicker: 'بغداد – المنصور',
+    title: 'الخدمات المحاسبية والمالية والتدقيق',
+    sub: 'تنظيم الحسابات · التدقيق والتقارير · الموازنات والضريبة والكلفة · الأنظمة المحاسبية',
+  },
+  {
+    file: 'og-academic-accountant-services-en', lang: 'en', theme: 'aa',
+    kicker: 'Al-Mansour, Baghdad',
+    title: 'Accounting, audit and financial advisory services',
+    sub: 'Bookkeeping · audit and reports · budgets, tax and cost · accounting systems',
+  },
 ];
+const only = process.argv.slice(2);
+const selected = only.length ? cards.filter((c) => only.some((o) => c.file.includes(o))) : cards;
+if (only.length && !selected.length) throw new Error(`No share image matches ${only.join(', ')}`);
+
+// Academic Accountant: navy (#012C56) with gold (#B79244), white title; its logo in a gold ring when the file exists.
+const aaHtml = (c) => `<!doctype html><html lang="${c.lang}" dir="${c.lang === 'ar' ? 'rtl' : 'ltr'}"><head><meta charset="utf-8"><style>${faces}
+*{box-sizing:border-box;margin:0}
+body{width:1200px;height:630px;font-family:P,sans-serif;background:#012c56;color:#fff;position:relative;overflow:hidden}
+.bg{position:absolute;inset:0;background:radial-gradient(900px 500px at ${c.lang === 'ar' ? '0%' : '100%'} 0%, #b7924433, transparent 60%)}
+.bar{position:absolute;inset-block:0;inset-inline-start:0;width:18px;background:#b79244}
+.wrap{position:absolute;inset:70px 90px;display:flex;flex-direction:column}
+.brand{display:flex;align-items:center;gap:22px;font-size:30px;font-weight:700}
+.brand img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:5px solid #b79244}
+.brand .ar{font-size:38px}
+.kicker{margin-top:${aaLogo ? 34 : 56}px;font-size:28px;font-weight:700;color:#d9c274}
+h1{margin-top:14px;font-size:${c.lang === 'ar' ? 56 : 54}px;line-height:1.25;font-weight:700;max-width:1020px}
+.sub{margin-top:auto;font-size:26px;color:#d5dceb;border-top:2px solid #b79244;padding-top:18px}
+</style></head><body><div class="bg"></div><div class="bar"></div><div class="wrap">
+<div class="brand">${aaLogo ? `<img src="${aaLogo}" alt="">` : ''}<span class="${c.lang === 'ar' ? 'ar' : ''}">${c.lang === 'ar' ? 'المحاسب الأكاديمي' : 'Academic Accountant'}</span></div>
+<div class="kicker">${c.kicker}</div><h1>${c.title}</h1><div class="sub">${c.sub}</div></div></body></html>`;
 
 const ogHtml = (c) => `<!doctype html><html lang="${c.lang}" dir="${c.lang === 'ar' ? 'rtl' : 'ltr'}"><head><meta charset="utf-8"><style>${faces}
 *{box-sizing:border-box;margin:0}
@@ -105,29 +160,32 @@ const browser = await chromium.launch();
 try {
   mkdirSync(pub('og'), { recursive: true });
   const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
-  for (const c of cards) {
-    await page.setContent(ogHtml(c), { waitUntil: 'load' });
+  for (const c of selected) {
+    await page.setContent(c.theme === 'aa' ? aaHtml(c) : ogHtml(c), { waitUntil: 'load' });
     await page.evaluate(() => document.fonts.ready);
     await page.screenshot({ path: pub(`og/${c.file}.png`), type: 'png' });
     console.log('wrote', `public/og/${c.file}.png`);
   }
-  for (const [file, size, svg] of [['logo-512.png', 512, logo], ['apple-touch-icon.png', 180, logo], ['favicon-32.png', 32, favicon]]) {
-    const p = await browser.newPage({ viewport: { width: size, height: size }, deviceScaleFactor: 1 });
-    await p.setContent(`<html><body style="margin:0;background:transparent">${sized(svg, size)}</body></html>`);
-    await p.screenshot({ path: pub(file), omitBackground: true });
-    await p.close();
-    console.log('wrote', `public/${file}`);
+  // A filtered run (`npm run og -- <name>`) renders only the chosen share images: icons and favicon stay as they are.
+  if (!only.length) {
+    for (const [file, size, svg] of [['logo-512.png', 512, logo], ['apple-touch-icon.png', 180, logo], ['favicon-32.png', 32, favicon]]) {
+      const p = await browser.newPage({ viewport: { width: size, height: size }, deviceScaleFactor: 1 });
+      await p.setContent(`<html><body style="margin:0;background:transparent">${sized(svg, size)}</body></html>`);
+      await p.screenshot({ path: pub(file), omitBackground: true });
+      await p.close();
+      console.log('wrote', `public/${file}`);
+    }
+    // favicon.ico for browsers and tools that ask for /favicon.ico: 16, 32 and 48px PNGs from favicon.svg in one ICO.
+    const pngs = [];
+    for (const size of [16, 32, 48]) {
+      const p = await browser.newPage({ viewport: { width: size, height: size }, deviceScaleFactor: 1 });
+      await p.setContent(`<html><body style="margin:0;background:transparent">${sized(favicon, size)}</body></html>`);
+      pngs.push([size, await p.screenshot({ omitBackground: true })]);
+      await p.close();
+    }
+    writeFileSync(pub('favicon.ico'), ico(pngs));
+    console.log('wrote', 'public/favicon.ico');
   }
-  // favicon.ico for browsers and tools that ask for /favicon.ico: 16, 32 and 48px PNGs from favicon.svg in one ICO.
-  const pngs = [];
-  for (const size of [16, 32, 48]) {
-    const p = await browser.newPage({ viewport: { width: size, height: size }, deviceScaleFactor: 1 });
-    await p.setContent(`<html><body style="margin:0;background:transparent">${sized(favicon, size)}</body></html>`);
-    pngs.push([size, await p.screenshot({ omitBackground: true })]);
-    await p.close();
-  }
-  writeFileSync(pub('favicon.ico'), ico(pngs));
-  console.log('wrote', 'public/favicon.ico');
 } finally {
   await browser.close();
 }
