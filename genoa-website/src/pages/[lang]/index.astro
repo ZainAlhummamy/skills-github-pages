@@ -1,8 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import HeroLedger from '../../components/HeroLedger.astro';
-import Screenshot from '../../components/Screenshot.astro';
-import { hasRealScreenshot } from '../../content/screenshots';
+import HeroShots from '../../components/HeroShots.astro';
 import AiShowcase from '../../components/AiShowcase.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import Icon from '../../components/Icon.astro';
@@ -23,9 +21,8 @@ const h = home[lang];
 const og = `/og/og-home-${lang}.png`;
 // Comparison table column headings (product names, the same in both languages).
 const columns = ['Genoa', 'Genoa Gov'];
-// Real screenshots for the 'inside the software' pair (shown only when both exist).
-const insideIds = ['companies-overview', hasRealScreenshot('government-vouchers-approval') ? 'government-vouchers-approval' : 'government-overview'];
-const showInside = insideIds.every(hasRealScreenshot);
+// Row-header icons of the comparison table, beside the row labels.
+const rowIcons = { for: 'users', modules: 'box', distinctive: 'spark', more: 'arrow' } as const;
 const jsonld = pageGraph({
   lang,
   pathname: path(lang),
@@ -36,25 +33,36 @@ const jsonld = pageGraph({
 });
 ---
 <BaseLayout lang={lang} title={h.title} description={h.description} ogImage={og} jsonld={jsonld}>
-  <section class="page-hero">
+  <section class="page-hero home-hero hero-split">
     <div class="container hero-grid">
-      <div>
+      <div class="hero-copy">
         <span class="eyebrow">Genoa Systems</span>
         <h1>{h.h1}</h1>
-        <p class="answer">{h.answer}</p>
+        {/* The answer in its three parts (see HomeAnswer): the lead, the buttons, then one block per product. */}
+        <p class="answer answer-lead">{h.answerParts.lead}</p>
         <div class="btn-row">
           <a class="btn btn-primary" href={path(lang, 'contact')}>{t('bookDemo', lang)}</a>
           <a class="btn btn-wa" href={whatsappLink(t('whatsappPrefill', lang))} rel="noopener" target="_blank"><Icon name="whatsapp" />{t('whatsapp', lang)}</a>
         </div>
-        <ul class="highlights">
-          {h.highlights.map((x, i) => <li style={`--i:${i}`}><Icon name="check" />{x}</li>)}
-        </ul>
+        <div class="answer-products">
+          {productList.map((p) => (
+            <div class="answer-product" data-product={p.id}>
+              <span class="product-chip">{p.id === 'companies' ? t('companies', lang) : t('government', lang)}</span>
+              <p class="answer">{h.answerParts[p.id]}</p>
+            </div>
+          ))}
+        </div>
       </div>
-      <HeroLedger lang={lang} />
+      <HeroShots lang={lang} front="companies-overview" back="government-vouchers-approval" />
+    </div>
+    <div class="container">
+      <ul class="highlights">
+        {h.highlights.map((x, i) => <li style={`--i:${i}`}><Icon name="check" />{x}</li>)}
+      </ul>
     </div>
   </section>
 
-  <div class="section">
+  <div class="section home-products">
     <div class="container product-split">
       {productList.map((p) => {
         const card = h.products[p.id];
@@ -84,27 +92,22 @@ const jsonld = pageGraph({
 
   <AiShowcase lang={lang} />
 
-  {showInside && (
-    <section class="section section-soft" aria-labelledby="inside-heading">
-      <div class="container">
-        <div class="section-head" data-reveal>
+  {/* The two screenshots are in the hero now: this points to each product's own screens. */}
+  <section class="section screens-note-section" aria-labelledby="inside-heading">
+    <div class="container">
+      <div class="screens-note" data-reveal>
+        <div>
           <h2 id="inside-heading">{t('galleryHeading', lang)}</h2>
-          <p>{t('galleryIntro', lang)}</p>
+          <p>{t('galleryMore', lang)}</p>
         </div>
-        <div class="inside-grid">
-          {insideIds.map((id, i) => {
-            const pid = id.startsWith('companies') ? 'companies' : 'government';
-            return (
-              <div data-reveal style={`--i:${i}`}>
-                <h3><a href={path(lang, pid)}>{pid === 'companies' ? t('companies', lang) : t('government', lang)}</a></h3>
-                <Screenshot lang={lang} id={id} alt="" caption="" sizes="(min-width: 900px) min(557px, calc(50vw - 30px)), calc(100vw - 34px)" />
-              </div>
-            );
-          })}
+        <div class="btn-row">
+          {productList.map((p) => (
+            <a class="btn btn-ghost" href={`${path(lang, p.id)}#gallery-heading`}>{p.id === 'companies' ? t('screensGenoa', lang) : t('screensGov', lang)}</a>
+          ))}
         </div>
       </div>
-    </section>
-  )}
+    </div>
+  </section>
 
   <section class="section section-soft" aria-labelledby="compare-heading">
     <div class="container">
@@ -118,16 +121,16 @@ const jsonld = pageGraph({
           <thead>
             <tr>
               <td></td>
-              <th scope="col">{columns[0]}</th>
-              <th scope="col">{columns[1]}</th>
+              <th scope="col" data-product="companies">{columns[0]}</th>
+              <th scope="col" data-product="government">{columns[1]}</th>
             </tr>
           </thead>
           <tbody>
-            <tr><th scope="row">{h.compare.rowLabels.for}</th><td>{h.compare.genoa.for}</td><td>{h.compare.gov.for}</td></tr>
-            <tr><th scope="row">{h.compare.rowLabels.modules}</th><td>{h.compare.genoa.modules}</td><td>{h.compare.gov.modules}</td></tr>
-            <tr><th scope="row">{h.compare.rowLabels.distinctive}</th><td>{h.compare.genoa.distinctive}</td><td>{h.compare.gov.distinctive}</td></tr>
+            <tr><th scope="row"><Icon name={rowIcons.for} />{h.compare.rowLabels.for}</th><td>{h.compare.genoa.for}</td><td>{h.compare.gov.for}</td></tr>
+            <tr><th scope="row"><Icon name={rowIcons.modules} />{h.compare.rowLabels.modules}</th><td>{h.compare.genoa.modules}</td><td>{h.compare.gov.modules}</td></tr>
+            <tr><th scope="row"><Icon name={rowIcons.distinctive} />{h.compare.rowLabels.distinctive}</th><td>{h.compare.genoa.distinctive}</td><td>{h.compare.gov.distinctive}</td></tr>
             <tr>
-              <th scope="row">{h.compare.rowLabels.more}</th>
+              <th scope="row"><Icon name={rowIcons.more} class="flip-rtl" />{h.compare.rowLabels.more}</th>
               <td><a href={path(lang, 'companies')}>{t('companies', lang)}</a></td>
               <td><a href={path(lang, 'government')}>{t('government', lang)}</a></td>
             </tr>
@@ -154,11 +157,13 @@ const jsonld = pageGraph({
   <div class="section section-soft">
     <div class="container product-split">
       <section class="product-card" aria-labelledby="security-heading" data-reveal>
+        <span class="card-icon" aria-hidden="true"><Icon name="shield" /></span>
         <h2 id="security-heading">{h.security.heading}</h2>
         <p>{h.security.body}</p>
         <a class="btn btn-ghost" href={path(lang, 'security-backups')}><Icon name="shield" />{h.security.link}</a>
       </section>
       <section class="product-card" aria-labelledby="faq-heading" data-reveal style="--i:1">
+        <span class="card-icon" aria-hidden="true"><Icon name="book" /></span>
         <h2 id="faq-heading">{h.faq.heading}</h2>
         <p>{h.faq.body}</p>
         <ul class="module-links">

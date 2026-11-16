@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
-import AnswerBox from '../../../components/AnswerBox.astro';
+import HeroShots from '../../../components/HeroShots.astro';
 import Screenshot from '../../../components/Screenshot.astro';
 import KeyFacts from '../../../components/KeyFacts.astro';
 import Sections from '../../../components/Sections.astro';
@@ -15,6 +15,9 @@ import { guides } from '../../../content/guides';
 import { t } from '../../../i18n/ui';
 import { abs, path } from '../../../lib/routes';
 import { pageGraph } from '../../../lib/seo';
+import { splitLead } from '../../../lib/text';
+import { hasRealScreenshot } from '../../../content/screenshots';
+import { whatsappLink } from '../../../config/site';
 
 export function getStaticPaths() {
   return LANGS.flatMap((lang) =>
@@ -27,6 +30,12 @@ const p = products[productId];
 const f = p.features.find((x) => x.slug === Astro.params.feature)!;
 const c = f.content[lang];
 const guide = f.guide ? guides.find((x) => x.slug === f.guide) : undefined;
+// The answer: its first sentence as the hero lead, the rest in a card under the buttons (one paragraph everywhere else).
+const answer = splitLead(c.answer);
+// With a real screenshot of this feature the hero shows it, over the product's dashboard. Without one the hero is text
+// only and the labelled placeholder stays in the article (and in the build's owner TODO), so nothing passes for real.
+const shotId = `${productId}-${f.slug}`;
+const realShot = hasRealScreenshot(shotId);
 const crumbs = [
   { name: t('home', lang), href: path(lang) },
   { name: p.overview[lang].productName, href: path(lang, productId) },
@@ -53,18 +62,32 @@ const toc = [
 ];
 ---
 <BaseLayout lang={lang} title={c.title} description={c.description} ogImage={og} ogImageAlt={c.h1} jsonld={jsonld}>
-  <section class="page-hero" data-product={productId} data-ai={f.ai ? 'true' : undefined}>
+  <section class="page-hero hero-split" data-product={productId} data-ai={f.ai ? 'true' : undefined}>
     <div class="container">
       <Breadcrumbs lang={lang} items={crumbs} />
-      <div class="hero-meta">
-        <span class="hero-icon" aria-hidden="true"><Icon name={f.icon} /></span>
-        <span class="eyebrow">{p.brand}</span>
-        {f.optional && <span class="badge-optional">{t('optionalBadge', lang)}</span>}
-        {f.ai && <span class="badge-ai"><Icon name="spark" />{t('aiBadge', lang)}</span>}
+      <div class:list={[realShot ? 'hero-grid' : 'hero-solo']}>
+        <div class="hero-copy">
+          <div class="hero-meta">
+            <span class="hero-icon" aria-hidden="true"><Icon name={f.icon} /></span>
+            <span class="eyebrow">{p.brand}</span>
+            {f.optional && <span class="badge-optional">{t('optionalBadge', lang)}</span>}
+            {f.ai && <span class="badge-ai"><Icon name="spark" />{t('aiBadge', lang)}</span>}
+          </div>
+          <h1>{c.h1}</h1>
+          <p class="answer answer-lead">{answer.lead}</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href={path(lang, 'contact')}>{t('bookDemo', lang)}</a>
+            <a class="btn btn-wa" href={whatsappLink(t('whatsappPrefill', lang))} rel="noopener" target="_blank"><Icon name="whatsapp" />{t('whatsapp', lang)}</a>
+          </div>
+          {answer.rest && (
+            <div class="answer-rest">
+              <p class="answer">{answer.rest}</p>
+            </div>
+          )}
+          {f.optional && <p class="note" style="margin-top:1rem;max-width:72ch">{t('optionalNote', lang)}</p>}
+        </div>
+        {realShot && <HeroShots lang={lang} front={shotId} back={`${productId}-overview`} />}
       </div>
-      <h1>{c.h1}</h1>
-      <AnswerBox lang={lang} text={c.answer} />
-      {f.optional && <p class="note" style="margin-top:1rem;max-width:72ch">{t('optionalNote', lang)}</p>}
     </div>
   </section>
 
@@ -72,10 +95,13 @@ const toc = [
     <div class="container content-grid">
       <div class="article">
         <KeyFacts lang={lang} facts={c.keyFacts} />
-        <div style="margin-block:2rem" data-reveal>
-          <Screenshot lang={lang} id={`${productId}-${f.slug}`} alt={c.screenshotAlt} caption={c.screenshotCaption} />
-        </div>
-        <div class="prose">
+        {!realShot && (
+          <div style="margin-block:2rem" data-reveal>
+            <Screenshot lang={lang} id={shotId} alt={c.screenshotAlt} caption={c.screenshotCaption} />
+          </div>
+        )}
+        {/* The screenshot used to separate the key facts from the text; with it in the hero, a margin does. */}
+        <div class="prose" style={realShot ? 'margin-top:2rem' : undefined}>
           <Sections sections={c.sections} />
           <section aria-labelledby="feature-faq" data-reveal>
             <h2 id="feature-faq">{faqHeading}</h2>

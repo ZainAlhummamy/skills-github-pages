@@ -5,9 +5,41 @@ import { companyIntro } from '../config/site';
  * Rules: see CONTENT-GUIDE.md. Sentences that go beyond the confirmed product
  * facts are listed in CLAIMS-TO-VERIFY.md. */
 
+/**
+ * The home answer in three parts: the company (the hero lead), then one part per product (the product blocks beside
+ * it). `answer` joins them into the one quotable paragraph used everywhere else (llms.txt, the catalog), so editing a
+ * part edits the answer. The government part keeps its leading «و» in Arabic: it continues the same paragraph.
+ */
+export interface HomeAnswer {
+  lead: string;
+  companies: string;
+  government: string;
+}
+
+const joinAnswer = (a: HomeAnswer): string => [a.lead, a.companies, a.government].join(' ');
+
+const homeAnswer: L<HomeAnswer> = {
+  ar: {
+    lead: `${companyIntro('ar')}، ولها نظامان محاسبيان منفصلان.`,
+    companies:
+      'Genoa نظام محاسبي عراقي للشركات، يعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفق معايير IFRS، ويجمع الحسابات وإدارة المخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمارها. وفيه مساعد ذكي يعمل بالذكاء الاصطناعي وإضافة فاتورة مباشرة من صورتها.',
+    government:
+      'وGenoa Gov نظام محاسبي حكومي لأقسام الحسابات في الدوائر الحكومية العراقية، يغطي المستندات ومنها مستند الصرف (سند الصرف)، وسلسلة المصادقة والموازنة والصكوك والغلق الشهري والسنوي.',
+  },
+  en: {
+    lead: `${companyIntro('en')}, with two separate accounting products for the Iraqi market.`,
+    companies:
+      'Genoa is for companies: it uses the Unified Accounting System chart of accounts, can prepare IFRS-based financial statements, and brings together accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. It also has an AI assistant and can add an invoice directly from an image.',
+    government:
+      'Genoa Gov is for the accounts sections of Iraqi government departments and covers vouchers, including payment vouchers, with multi-user approval, budgets and allocation checks, cheques, and month-end and year-end closing.',
+  },
+};
+
 export interface HomeContent extends PageMeta {
   answer: string;
-  /** Short chips under the hero CTAs. Confirmed facts only. */
+  /** The same answer in its three parts, for the hero (see HomeAnswer). */
+  answerParts: HomeAnswer;
+  /** Short items in a grid under the hero. Confirmed facts only. */
   highlights: string[];
   products: {
     companies: { heading: string; body: string; cta: string };
@@ -33,7 +65,8 @@ export const home: L<HomeContent> = {
     description:
       'نظام محاسبي عراقي للشركات والدوائر الحكومية: Genoa نظام محاسبي للشركات بدليل حسابات النظام المحاسبي الموحد وقوائم IFRS، وGenoa Gov نظام محاسبي حكومي لأقسام الحسابات.',
     h1: 'نظام محاسبي عراقي للشركات وللدوائر الحكومية',
-    answer: `${companyIntro('ar')}، ولها نظامان محاسبيان منفصلان. Genoa نظام محاسبي عراقي للشركات، يعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفق معايير IFRS، ويجمع الحسابات وإدارة المخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمارها. وفيه مساعد ذكي يعمل بالذكاء الاصطناعي وإضافة فاتورة مباشرة من صورتها. وGenoa Gov نظام محاسبي حكومي لأقسام الحسابات في الدوائر الحكومية العراقية، يغطي المستندات ومنها مستند الصرف (سند الصرف)، وسلسلة المصادقة والموازنة والصكوك والغلق الشهري والسنوي.`,
+    answer: joinAnswer(homeAnswer.ar),
+    answerParts: homeAnswer.ar,
     highlights: [
       'النظام المحاسبي الموحد وقوائم IFRS',
       'سلسلة مصادقة متعددة المستخدمين',
@@ -116,7 +149,8 @@ export const home: L<HomeContent> = {
     description:
       'Iraqi accounting software for companies and government: Genoa for accounts and inventory (Unified Accounting System chart of accounts, IFRS statements) and Genoa Gov.',
     h1: 'Accounting software for Iraqi companies and government departments',
-    answer: `${companyIntro('en')}, with two separate accounting products for the Iraqi market. Genoa is for companies: it uses the Unified Accounting System chart of accounts, can prepare IFRS-based financial statements, and brings together accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. It also has an AI assistant and can add an invoice directly from an image. Genoa Gov is for the accounts sections of Iraqi government departments and covers vouchers, including payment vouchers, with multi-user approval, budgets and allocation checks, cheques, and month-end and year-end closing.`,
+    answer: joinAnswer(homeAnswer.en),
+    answerParts: homeAnswer.en,
     highlights: [
       'Unified Accounting System and IFRS statements',
       'Multi-user approval workflow',

@@ -269,7 +269,7 @@ h2.ruled::after {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding-block: clamp(3rem, 2rem + 4vw, 5.5rem);
+  padding-block: clamp(2.25rem, 1.5rem + 3vw, 4rem);
   color: #e6ecf7;
   background: #0b1326;
 }
@@ -669,4 +669,276 @@ h2.ruled::after {
     radial-gradient(50% 90% at 100% 0%, rgb(47 95 208 / 45%), transparent 65%),
     radial-gradient(40% 80% at 0% 100%, rgb(11 110 99 / 40%), transparent 65%),
     #0b1326;
+}
+
+/* =====================================================================
+   Home and product pages (Nov 2026): the real screens in the hero, the
+   answer split so the buttons sit right under its first sentence, and
+   tighter, easier-to-scan sections. `.hero-split` marks those heroes; the
+   `.home-*` rules are the home page's own. The same rules as above apply
+   (transform/opacity motion only under no-preference, text at 4.5:1 or more).
+   ===================================================================== */
+
+/* ---------- Hero: the answer in parts (home: lead + one block per product; product pages: lead + the rest) ---------- */
+.hero-split h1 {
+  margin-bottom: 0.45em;
+}
+.answer-lead {
+  font-size: clamp(1.15rem, 1.05rem + 0.45vw, 1.35rem);
+  line-height: 1.65;
+  color: var(--ink);
+  max-width: 46ch;
+}
+.hero-split .btn-row {
+  margin-top: 1.25rem;
+}
+.answer-products {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.answer-product,
+.answer-rest {
+  padding: 0.9rem 1.15rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgb(255 255 255 / 82%);
+  box-shadow: 0 1px 2px rgb(15 27 45 / 4%);
+}
+:is(.answer-product, .answer-rest) .answer {
+  font-size: 1rem;
+  max-width: none;
+}
+/* Product pages: the rest of the answer keeps the old answer box's product-coloured edge. */
+.answer-rest {
+  margin-top: 1.5rem;
+  border-inline-start: 4px solid var(--brand);
+}
+[data-product='government'] .answer-rest {
+  border-inline-start-color: var(--gov);
+}
+[data-ai='true'] .answer-rest {
+  border-inline-start-color: var(--ai);
+}
+/* Feature pages without a real screenshot: the hero is text only, at a readable measure. */
+.hero-solo .hero-copy {
+  max-width: 52rem;
+}
+.product-chip {
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  padding: 0.1rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--brand-ink);
+  background: var(--brand-soft);
+}
+.answer-product[data-product='government'] .product-chip {
+  color: var(--gov-ink);
+  background: var(--gov-soft);
+}
+
+/* ---------- Hero: the two real screens, layered (one grid cell) ---------- */
+.hero-shots {
+  position: relative;
+  display: grid;
+  padding-block: 0.5rem 2.5rem;
+}
+.hero-shot {
+  grid-area: 1 / 1;
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--shadow);
+  text-decoration: none;
+}
+.hero-shot img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+}
+.hero-shot.back {
+  width: 80%;
+  justify-self: end;
+  align-self: start;
+  rotate: 2.5deg;
+}
+.hero-shot.front {
+  z-index: 1;
+  width: 86%;
+  justify-self: start;
+  align-self: end;
+  /* A percentage margin follows the box's width, so the overlap keeps its shape at every size. */
+  margin-block-start: 24%;
+  rotate: -1.5deg;
+  box-shadow: 0 2px 4px rgb(15 27 45 / 6%), 0 26px 52px -16px rgb(15 27 45 / 30%);
+}
+/* The screen under the pointer or focus comes to the front. */
+.hero-shot:is(:hover, :focus-visible) {
+  z-index: 2;
+}
+.hero-shots[data-count='1'] .hero-shot {
+  width: 100%;
+  margin: 0;
+  rotate: none;
+}
+.hero-shots-tag {
+  position: absolute;
+  z-index: 3;
+  inset-block-end: 0.25rem;
+  inset-inline-end: 0.5rem;
+  padding: 0.2rem 0.75rem;
+  font-size: 0.85rem;
+  color: var(--gov-ink);
+  background: var(--gov-soft);
+  border: 1px solid #b9e0d9;
+  box-shadow: 0 4px 12px -4px rgb(15 27 45 / 18%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-shot {
+    transition: rotate 0.4s var(--ease-out), translate 0.4s var(--ease-out), box-shadow 0.3s;
+  }
+  .hero-shot:is(:hover, :focus-visible) {
+    rotate: 0deg;
+    translate: 0 -4px;
+  }
+}
+
+/* ---------- Hero: highlights as a 3 × 2 grid ---------- */
+.home-hero .highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 0.6rem;
+  margin-top: clamp(1.75rem, 1.25rem + 2vw, 2.75rem);
+}
+.home-hero .highlights li {
+  border-radius: 12px;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.95rem;
+}
+
+/* ---------- Section rhythm: about 30% less space between sections ---------- */
+.hero-split ~ .section {
+  padding-block: clamp(1.75rem, 1.4rem + 2.1vw, 3.15rem);
+}
+/* The CTA band is the last section: the footer's own margin is the gap below it. */
+.hero-split ~ .section:last-child {
+  padding-block-end: 0;
+}
+
+/* ---------- Product cards: modules as a two-column chip grid ---------- */
+.home-products .product-card > p {
+  max-width: 62ch;
+}
+.home-products .module-links {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13.5rem), 1fr));
+  gap: 0.45rem;
+  margin-top: 0.5rem;
+}
+.home-products .module-links a {
+  min-height: 48px;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--line);
+  background: rgb(255 255 255 / 72%);
+}
+.home-products .module-links a:hover {
+  border-color: #c5d0e4;
+  background: #fff;
+}
+/* A long label wraps beside its icon; only a badge moves to the next line. */
+.home-products .module-links a > span:not([class]) {
+  flex: 1 1 7rem;
+  min-width: 0;
+}
+.home-products .product-card > .btn {
+  align-self: stretch;
+}
+
+/* ---------- "See the software": a slim note (the screens are in the hero) ---------- */
+.home-hero ~ .screens-note-section {
+  padding-block: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem) 0;
+  background: var(--soft);
+}
+.screens-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  padding: clamp(1.25rem, 1rem + 1vw, 1.75rem) clamp(1.25rem, 1rem + 1.5vw, 2.25rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+.screens-note h2 {
+  margin-bottom: 0.25rem;
+}
+.screens-note p {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--muted);
+}
+.screens-note .btn-row {
+  margin: 0;
+}
+
+/* ---------- Comparison table: product-coloured columns, row icons ---------- */
+.compare thead th[data-product] {
+  border-top: 4px solid var(--brand);
+  color: var(--brand-ink);
+}
+.compare thead th[data-product='government'] {
+  border-top-color: var(--gov);
+  color: var(--gov-ink);
+}
+.compare tbody th svg {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-inline-end: 0.45rem;
+  vertical-align: -0.2em;
+  color: var(--brand);
+}
+
+/* ---------- Principles: a decorative number on each card ---------- */
+.principles {
+  counter-reset: principle;
+}
+.principles > div {
+  counter-increment: principle;
+}
+.principles > div::before {
+  content: counter(principle);
+  /* Decorative: the cards are not a sequence, so screen readers skip the number where this syntax is known. */
+  content: counter(principle) / '';
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-bottom: 0.85rem;
+  border-radius: 10px;
+  font-weight: 700;
+  color: var(--brand-ink);
+  background: var(--brand-soft);
+}
+
+/* ---------- Security and FAQ cards: an icon on each ---------- */
+.card-icon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  color: var(--brand);
+  background: var(--brand-soft);
+}
+.card-icon svg {
+  width: 22px;
+  height: 22px;
 }

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "targets": {
+    "/ar/": {
+      "targetKind": "existing-ui",
+      "projectId": "c513555b-f8fe-4af3-a289-aa9ce2166740",
+      "baselineDraftId": "c400ea3e-6ab7-432d-b3f4-a8545f423697",
+      "activeDraftId": "75e2a810-5074-4b3c-851b-81012f422839",
+      "designSystemPath": ".superdesign/design-system.md",
+      "referenceIds": [
+        "genoa-website-public-brand-genoa-mark.svg",
+        "fba047e5-1a62-4368-a401-12d63649ca07",
+        "7a501e1e-b31f-4d56-99da-96660dfc8f46"
+      ],
+      "brandAssets": {
+        "logo": {
+          "assetKey": "genoa-website-public-brand-genoa-mark.svg",
+          "url": "https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/projects/c513555b-f8fe-4af3-a289-aa9ce2166740/brand-assets/genoa-website-public-brand-genoa-mark.svg/genoa-mark.svg",
+          "sourcePath": "public/brand/genoa-mark.svg"
+        }
+      },
+      "contextFiles": [
+        ".superdesign/design-system.md",
+        ".superdesign/init/theme.md:1:73",
+        ".superdesign/context/home-ar-main.html",
+        "src/styles/global.css:34:171",
+        "src/styles/global.css:346:495",
+        "src/styles/global.css:519:807",
+        "src/styles/global.css:912:938",
+        "src/styles/global.css:1112:1279",
+        "src/styles/global.css:1310:1527",
+        "src/styles/global.css:1642:1664",
+        "src/styles/global.css:1764:1778",
+        "src/styles/global.css:1961:2057",
+        "src/styles/refresh.css"
+      ],
+      "fingerprints": {
+        ".superdesign/design-system.md": "829e8be915c1fe27fcbc33b2ed1fadc5a71672574588ed00b00bf22464ed1b81",
+        ".superdesign/init/theme.md": "cdf0cd3d60fca8f025a020e263e2f3ec03ac32938e7b5d5ffc81f1e00a4b0ef2",
+        ".superdesign/context/home-ar-main.html": "bd930743e67346d458012730896ca8561d2cda052fae608bfd54fafc0769fb57",
+        "src/styles/global.css": "fd7b920efebaa4c55756090817dc032874ca5151d733ff28faf2c0170b2a1811",
+        "src/styles/refresh.css": "1a445209c598e5bebfd0d4604a4bb388e4c1783636e1ddae065f22e1fce224d7"
+      },
+      "components": [
+        {
+          "name": "SiteHeader",
+          "id": "22ec2571-5433-4b18-83c1-43ff9aeea549",
+          "sourcePath": "src/components/Header.astro",
+          "logoAssetKey": "genoa-website-public-brand-genoa-mark.svg",
+          "version": 4
+        },
+        {
+          "name": "SiteFooter",
+          "id": "8c581b52-7d8d-4720-9149-0f5e813df4be",
+          "sourcePath": "src/components/Footer.astro",
+          "logoAssetKey": "genoa-website-public-brand-genoa-mark.svg",
+          "version": 3
+        }
+      ],
+      "drafts": {
+        "c400ea3e-6ab7-432d-b3f4-a8545f423697": {
+          "title": "Current home (ar) — baseline",
+          "visualDirection": "faithful reproduction of the live Arabic home page",
+          "currentVersion": 5
+        },
+        "75e2a810-5074-4b3c-851b-81012f422839": {
+          "title": "Genoa Systems Home - Direction A",
+          "visualDirection": "A: show the software — layered real screenshots in the hero, answer split into lead + one block per product, CTAs under the lead, 3x2 highlights, 2-col module chips, numbered principles",
+          "parentDraftId": "c400ea3e-6ab7-432d-b3f4-a8545f423697",
+          "currentVersion": 3,
+          "selected": true,
+          "implemented": "Built into src/pages/[lang]/index.astro, src/components/HeroShots.astro and src/styles/refresh.css (home block); the code now differs from the context fingerprints, so the next design round on /ar/ should take the incremental-refresh path."
+        },
+        "6f12fd6e-96fc-457e-bc9a-07587cf9e711": {
+          "title": "Genoa Systems Home (Direction B)",
+          "visualDirection": "B: guided chooser — centred short hero, two product tiles carrying each product answer + real screenshot + 4 modules, sticky in-page pill nav, 2x2 principles, merged trust row",
+          "parentDraftId": "c400ea3e-6ab7-432d-b3f4-a8545f423697",
+          "currentVersion": 3
+        }
+      },
+      "updatedAt": "2026-11-16T15:48:48.822Z"
+    }
+  }
+}

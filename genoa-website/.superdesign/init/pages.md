@@ -1,0 +1,732 @@
+# Pages — dependency trees
+
+Local imports traced recursively (node_modules skipped). Rendered text lives in the content .ts files; styling is global CSS (src/styles/global.css + refresh.css).
+
+### src/pages/[lang]/index.astro
+- `src/layouts/BaseLayout.astro`
+  - `src/styles/global.css`
+  - `src/styles/refresh.css`
+  - `src/content/types.ts`
+  - `src/i18n/ui.ts`
+    - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts`
+    - `src/config/site.ts`
+    - `src/content/types.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Header.astro`
+    - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/components/Logo.astro`
+      - `src/lib/routes.ts` (see above)
+      - `src/content/types.ts` (see above)
+      - `src/components/BrandMark.astro`
+    - `src/components/Icon.astro`
+  - `src/components/Footer.astro`
+    - `src/content/types.ts` (see above)
+    - `src/content/index.ts`
+      - `src/content/companies.ts`
+        - `src/content/types.ts` (see above)
+        - `src/content/companies-ai.ts`
+          - `src/content/types.ts` (see above)
+      - `src/content/government.ts`
+        - `src/content/types.ts` (see above)
+      - `src/content/types.ts` (see above)
+    - `src/content/guides.ts`
+      - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/config/site.ts` (see above)
+    - `src/components/Logo.astro` (see above)
+    - `src/components/aa/AaSocial.astro`
+      - `src/content/types.ts` (see above)
+      - `src/content/academic-accountant.ts`
+        - `src/content/types.ts` (see above)
+        - `src/config/site.ts` (see above)
+      - `src/components/Icon.astro` (see above)
+    - `src/content/academic-accountant.ts` (see above)
+- `src/components/HeroLedger.astro`
+  - `src/content/types.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/components/Screenshot.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/content/screenshots.ts`
+    - `src/content/types.ts` (see above)
+    - `src/content/screenshots.json`
+- `src/content/screenshots.ts` (see above)
+- `src/components/AiShowcase.astro`
+  - `src/content/types.ts` (see above)
+  - `src/content/index.ts` (see above)
+  - `src/content/pages.ts`
+    - `src/content/types.ts` (see above)
+    - `src/config/site.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/components/CtaBand.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/components/Icon.astro` (see above)
+- `src/content/types.ts` (see above)
+- `src/content/index.ts` (see above)
+- `src/content/pages.ts` (see above)
+- `src/i18n/ui.ts` (see above)
+- `src/lib/routes.ts` (see above)
+- `src/lib/seo.ts`
+  - `src/config/site.ts` (see above)
+  - `src/lib/dates.ts`
+    - `src/content/page-dates.json`
+  - `src/content/index.ts` (see above)
+  - `src/content/academic-accountant.ts` (see above)
+  - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+- `src/config/site.ts` (see above)
+
+### src/pages/[lang]/[product]/index.astro
+- `src/layouts/BaseLayout.astro`
+  - `src/styles/global.css`
+  - `src/styles/refresh.css`
+  - `src/content/types.ts`
+  - `src/i18n/ui.ts`
+    - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts`
+    - `src/config/site.ts`
+    - `src/content/types.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Header.astro`
+    - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/components/Logo.astro`
+      - `src/lib/routes.ts` (see above)
+      - `src/content/types.ts` (see above)
+      - `src/components/BrandMark.astro`
+    - `src/components/Icon.astro`
+  - `src/components/Footer.astro`
+    - `src/content/types.ts` (see above)
+    - `src/content/index.ts`
+      - `src/content/companies.ts`
+        - `src/content/types.ts` (see above)
+        - `src/content/companies-ai.ts`
+          - `src/content/types.ts` (see above)
+      - `src/content/government.ts`
+        - `src/content/types.ts` (see above)
+      - `src/content/types.ts` (see above)
+    - `src/content/guides.ts`
+      - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/config/site.ts` (see above)
+    - `src/components/Logo.astro` (see above)
+    - `src/components/aa/AaSocial.astro`
+      - `src/content/types.ts` (see above)
+      - `src/content/academic-accountant.ts`
+        - `src/content/types.ts` (see above)
+        - `src/config/site.ts` (see above)
+      - `src/components/Icon.astro` (see above)
+    - `src/content/academic-accountant.ts` (see above)
+- `src/components/Breadcrumbs.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/AnswerBox.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/Screenshot.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/content/screenshots.ts`
+    - `src/content/types.ts` (see above)
+    - `src/content/screenshots.json`
+- `src/components/HeroAgeing.astro`
+  - `src/content/types.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/components/ScreensGallery.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+  - `src/content/screenshots.ts` (see above)
+  - `src/components/Screenshot.astro` (see above)
+- `src/content/screenshots.ts` (see above)
+- `src/components/HeroApproval.astro`
+  - `src/content/types.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/components/KeyFacts.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/Sections.astro`
+  - `src/content/types.ts` (see above)
+- `src/components/FeatureCards.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/components/FaqList.astro`
+  - `src/content/types.ts` (see above)
+- `src/components/CtaBand.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/components/Icon.astro` (see above)
+- `src/content/types.ts` (see above)
+- `src/content/index.ts` (see above)
+- `src/i18n/ui.ts` (see above)
+- `src/lib/routes.ts` (see above)
+- `src/lib/seo.ts`
+  - `src/config/site.ts` (see above)
+  - `src/lib/dates.ts`
+    - `src/content/page-dates.json`
+  - `src/content/index.ts` (see above)
+  - `src/content/academic-accountant.ts` (see above)
+  - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+- `src/config/site.ts` (see above)
+
+### src/pages/[lang]/[product]/[feature].astro
+- `src/layouts/BaseLayout.astro`
+  - `src/styles/global.css`
+  - `src/styles/refresh.css`
+  - `src/content/types.ts`
+  - `src/i18n/ui.ts`
+    - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts`
+    - `src/config/site.ts`
+    - `src/content/types.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Header.astro`
+    - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/components/Logo.astro`
+      - `src/lib/routes.ts` (see above)
+      - `src/content/types.ts` (see above)
+      - `src/components/BrandMark.astro`
+    - `src/components/Icon.astro`
+  - `src/components/Footer.astro`
+    - `src/content/types.ts` (see above)
+    - `src/content/index.ts`
+      - `src/content/companies.ts`
+        - `src/content/types.ts` (see above)
+        - `src/content/companies-ai.ts`
+          - `src/content/types.ts` (see above)
+      - `src/content/government.ts`
+        - `src/content/types.ts` (see above)
+      - `src/content/types.ts` (see above)
+    - `src/content/guides.ts`
+      - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/config/site.ts` (see above)
+    - `src/components/Logo.astro` (see above)
+    - `src/components/aa/AaSocial.astro`
+      - `src/content/types.ts` (see above)
+      - `src/content/academic-accountant.ts`
+        - `src/content/types.ts` (see above)
+        - `src/config/site.ts` (see above)
+      - `src/components/Icon.astro` (see above)
+    - `src/content/academic-accountant.ts` (see above)
+- `src/components/Breadcrumbs.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/AnswerBox.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/Screenshot.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/content/screenshots.ts`
+    - `src/content/types.ts` (see above)
+    - `src/content/screenshots.json`
+- `src/components/KeyFacts.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/Sections.astro`
+  - `src/content/types.ts` (see above)
+- `src/components/FeatureCards.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/components/FaqList.astro`
+  - `src/content/types.ts` (see above)
+- `src/components/CtaBand.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/components/Icon.astro` (see above)
+- `src/content/types.ts` (see above)
+- `src/content/index.ts` (see above)
+- `src/content/guides.ts` (see above)
+- `src/i18n/ui.ts` (see above)
+- `src/lib/routes.ts` (see above)
+- `src/lib/seo.ts`
+  - `src/config/site.ts` (see above)
+  - `src/lib/dates.ts`
+    - `src/content/page-dates.json`
+  - `src/content/index.ts` (see above)
+  - `src/content/academic-accountant.ts` (see above)
+  - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+
+### src/pages/[lang]/[product]/faq.astro
+- `src/layouts/BaseLayout.astro`
+  - `src/styles/global.css`
+  - `src/styles/refresh.css`
+  - `src/content/types.ts`
+  - `src/i18n/ui.ts`
+    - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts`
+    - `src/config/site.ts`
+    - `src/content/types.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Header.astro`
+    - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/components/Logo.astro`
+      - `src/lib/routes.ts` (see above)
+      - `src/content/types.ts` (see above)
+      - `src/components/BrandMark.astro`
+    - `src/components/Icon.astro`
+  - `src/components/Footer.astro`
+    - `src/content/types.ts` (see above)
+    - `src/content/index.ts`
+      - `src/content/companies.ts`
+        - `src/content/types.ts` (see above)
+        - `src/content/companies-ai.ts`
+          - `src/content/types.ts` (see above)
+      - `src/content/government.ts`
+        - `src/content/types.ts` (see above)
+      - `src/content/types.ts` (see above)
+    - `src/content/guides.ts`
+      - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/config/site.ts` (see above)
+    - `src/components/Logo.astro` (see above)
+    - `src/components/aa/AaSocial.astro`
+      - `src/content/types.ts` (see above)
+      - `src/content/academic-accountant.ts`
+        - `src/content/types.ts` (see above)
+        - `src/config/site.ts` (see above)
+      - `src/components/Icon.astro` (see above)
+    - `src/content/academic-accountant.ts` (see above)
+- `src/components/Breadcrumbs.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/AnswerBox.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/FaqList.astro`
+  - `src/content/types.ts` (see above)
+- `src/components/CtaBand.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/components/Icon.astro` (see above)
+- `src/content/types.ts` (see above)
+- `src/content/index.ts` (see above)
+- `src/i18n/ui.ts` (see above)
+- `src/lib/routes.ts` (see above)
+- `src/lib/seo.ts`
+  - `src/config/site.ts` (see above)
+  - `src/lib/dates.ts`
+    - `src/content/page-dates.json`
+  - `src/content/index.ts` (see above)
+  - `src/content/academic-accountant.ts` (see above)
+  - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+
+### src/pages/[lang]/contact.astro
+- `src/layouts/BaseLayout.astro`
+  - `src/styles/global.css`
+  - `src/styles/refresh.css`
+  - `src/content/types.ts`
+  - `src/i18n/ui.ts`
+    - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts`
+    - `src/config/site.ts`
+    - `src/content/types.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Header.astro`
+    - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/components/Logo.astro`
+      - `src/lib/routes.ts` (see above)
+      - `src/content/types.ts` (see above)
+      - `src/components/BrandMark.astro`
+    - `src/components/Icon.astro`
+  - `src/components/Footer.astro`
+    - `src/content/types.ts` (see above)
+    - `src/content/index.ts`
+      - `src/content/companies.ts`
+        - `src/content/types.ts` (see above)
+        - `src/content/companies-ai.ts`
+          - `src/content/types.ts` (see above)
+      - `src/content/government.ts`
+        - `src/content/types.ts` (see above)
+      - `src/content/types.ts` (see above)
+    - `src/content/guides.ts`
+      - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/config/site.ts` (see above)
+    - `src/components/Logo.astro` (see above)
+    - `src/components/aa/AaSocial.astro`
+      - `src/content/types.ts` (see above)
+      - `src/content/academic-accountant.ts`
+        - `src/content/types.ts` (see above)
+        - `src/config/site.ts` (see above)
+      - `src/components/Icon.astro` (see above)
+    - `src/content/academic-accountant.ts` (see above)
+- `src/components/Breadcrumbs.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/Icon.astro` (see above)
+- `src/components/ErrorMsg.astro`
+  - `src/content/types.ts` (see above)
+  - `src/content/pages.ts`
+    - `src/content/types.ts` (see above)
+    - `src/config/site.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/content/types.ts` (see above)
+- `src/content/pages.ts` (see above)
+- `src/content/academic-accountant.ts` (see above)
+- `src/i18n/ui.ts` (see above)
+- `src/lib/routes.ts` (see above)
+- `src/lib/seo.ts`
+  - `src/config/site.ts` (see above)
+  - `src/lib/dates.ts`
+    - `src/content/page-dates.json`
+  - `src/content/index.ts` (see above)
+  - `src/content/academic-accountant.ts` (see above)
+  - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+- `src/config/site.ts` (see above)
+
+### src/pages/[lang]/about.astro
+- `src/layouts/BaseLayout.astro`
+  - `src/styles/global.css`
+  - `src/styles/refresh.css`
+  - `src/content/types.ts`
+  - `src/i18n/ui.ts`
+    - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts`
+    - `src/config/site.ts`
+    - `src/content/types.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Header.astro`
+    - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/components/Logo.astro`
+      - `src/lib/routes.ts` (see above)
+      - `src/content/types.ts` (see above)
+      - `src/components/BrandMark.astro`
+    - `src/components/Icon.astro`
+  - `src/components/Footer.astro`
+    - `src/content/types.ts` (see above)
+    - `src/content/index.ts`
+      - `src/content/companies.ts`
+        - `src/content/types.ts` (see above)
+        - `src/content/companies-ai.ts`
+          - `src/content/types.ts` (see above)
+      - `src/content/government.ts`
+        - `src/content/types.ts` (see above)
+      - `src/content/types.ts` (see above)
+    - `src/content/guides.ts`
+      - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/config/site.ts` (see above)
+    - `src/components/Logo.astro` (see above)
+    - `src/components/aa/AaSocial.astro`
+      - `src/content/types.ts` (see above)
+      - `src/content/academic-accountant.ts`
+        - `src/content/types.ts` (see above)
+        - `src/config/site.ts` (see above)
+      - `src/components/Icon.astro` (see above)
+    - `src/content/academic-accountant.ts` (see above)
+- `src/components/Breadcrumbs.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/AnswerBox.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/Sections.astro`
+  - `src/content/types.ts` (see above)
+- `src/components/CtaBand.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/content/types.ts` (see above)
+- `src/content/index.ts` (see above)
+- `src/content/pages.ts`
+  - `src/content/types.ts` (see above)
+  - `src/config/site.ts` (see above)
+- `src/content/academic-accountant.ts` (see above)
+- `src/i18n/ui.ts` (see above)
+- `src/lib/routes.ts` (see above)
+- `src/lib/seo.ts`
+  - `src/config/site.ts` (see above)
+  - `src/lib/dates.ts`
+    - `src/content/page-dates.json`
+  - `src/content/index.ts` (see above)
+  - `src/content/academic-accountant.ts` (see above)
+  - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+
+### src/pages/[lang]/security-backups.astro
+- `src/layouts/BaseLayout.astro`
+  - `src/styles/global.css`
+  - `src/styles/refresh.css`
+  - `src/content/types.ts`
+  - `src/i18n/ui.ts`
+    - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts`
+    - `src/config/site.ts`
+    - `src/content/types.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Header.astro`
+    - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/components/Logo.astro`
+      - `src/lib/routes.ts` (see above)
+      - `src/content/types.ts` (see above)
+      - `src/components/BrandMark.astro`
+    - `src/components/Icon.astro`
+  - `src/components/Footer.astro`
+    - `src/content/types.ts` (see above)
+    - `src/content/index.ts`
+      - `src/content/companies.ts`
+        - `src/content/types.ts` (see above)
+        - `src/content/companies-ai.ts`
+          - `src/content/types.ts` (see above)
+      - `src/content/government.ts`
+        - `src/content/types.ts` (see above)
+      - `src/content/types.ts` (see above)
+    - `src/content/guides.ts`
+      - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/config/site.ts` (see above)
+    - `src/components/Logo.astro` (see above)
+    - `src/components/aa/AaSocial.astro`
+      - `src/content/types.ts` (see above)
+      - `src/content/academic-accountant.ts`
+        - `src/content/types.ts` (see above)
+        - `src/config/site.ts` (see above)
+      - `src/components/Icon.astro` (see above)
+    - `src/content/academic-accountant.ts` (see above)
+- `src/components/Breadcrumbs.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/AnswerBox.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/Sections.astro`
+  - `src/content/types.ts` (see above)
+- `src/components/FeatureCards.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/components/CtaBand.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/content/types.ts` (see above)
+- `src/content/index.ts` (see above)
+- `src/content/pages.ts`
+  - `src/content/types.ts` (see above)
+  - `src/config/site.ts` (see above)
+- `src/i18n/ui.ts` (see above)
+- `src/lib/routes.ts` (see above)
+- `src/lib/seo.ts`
+  - `src/config/site.ts` (see above)
+  - `src/lib/dates.ts`
+    - `src/content/page-dates.json`
+  - `src/content/index.ts` (see above)
+  - `src/content/academic-accountant.ts` (see above)
+  - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+
+### src/pages/[lang]/guides/[guide].astro
+- `src/layouts/BaseLayout.astro`
+  - `src/styles/global.css`
+  - `src/styles/refresh.css`
+  - `src/content/types.ts`
+  - `src/i18n/ui.ts`
+    - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts`
+    - `src/config/site.ts`
+    - `src/content/types.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Header.astro`
+    - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/components/Logo.astro`
+      - `src/lib/routes.ts` (see above)
+      - `src/content/types.ts` (see above)
+      - `src/components/BrandMark.astro`
+    - `src/components/Icon.astro`
+  - `src/components/Footer.astro`
+    - `src/content/types.ts` (see above)
+    - `src/content/index.ts`
+      - `src/content/companies.ts`
+        - `src/content/types.ts` (see above)
+        - `src/content/companies-ai.ts`
+          - `src/content/types.ts` (see above)
+      - `src/content/government.ts`
+        - `src/content/types.ts` (see above)
+      - `src/content/types.ts` (see above)
+    - `src/content/guides.ts`
+      - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/config/site.ts` (see above)
+    - `src/components/Logo.astro` (see above)
+    - `src/components/aa/AaSocial.astro`
+      - `src/content/types.ts` (see above)
+      - `src/content/academic-accountant.ts`
+        - `src/content/types.ts` (see above)
+        - `src/config/site.ts` (see above)
+      - `src/components/Icon.astro` (see above)
+    - `src/content/academic-accountant.ts` (see above)
+- `src/components/Breadcrumbs.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/AnswerBox.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/KeyFacts.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/Sections.astro`
+  - `src/content/types.ts` (see above)
+- `src/components/FeatureCards.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/components/FaqList.astro`
+  - `src/content/types.ts` (see above)
+- `src/components/CtaBand.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/components/Icon.astro` (see above)
+- `src/content/types.ts` (see above)
+- `src/content/index.ts` (see above)
+- `src/content/guides.ts` (see above)
+- `src/i18n/ui.ts` (see above)
+- `src/lib/routes.ts` (see above)
+- `src/lib/seo.ts`
+  - `src/config/site.ts` (see above)
+  - `src/lib/dates.ts`
+    - `src/content/page-dates.json`
+  - `src/content/index.ts` (see above)
+  - `src/content/academic-accountant.ts` (see above)
+  - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+
+### src/pages/[lang]/academic-accountant/index.astro
+- `src/styles/academic-accountant.css`
+- `src/layouts/BaseLayout.astro`
+  - `src/styles/global.css`
+  - `src/styles/refresh.css`
+  - `src/content/types.ts`
+  - `src/i18n/ui.ts`
+    - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts`
+    - `src/config/site.ts`
+    - `src/content/types.ts` (see above)
+  - `src/config/site.ts` (see above)
+  - `src/components/Header.astro`
+    - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/components/Logo.astro`
+      - `src/lib/routes.ts` (see above)
+      - `src/content/types.ts` (see above)
+      - `src/components/BrandMark.astro`
+    - `src/components/Icon.astro`
+  - `src/components/Footer.astro`
+    - `src/content/types.ts` (see above)
+    - `src/content/index.ts`
+      - `src/content/companies.ts`
+        - `src/content/types.ts` (see above)
+        - `src/content/companies-ai.ts`
+          - `src/content/types.ts` (see above)
+      - `src/content/government.ts`
+        - `src/content/types.ts` (see above)
+      - `src/content/types.ts` (see above)
+    - `src/content/guides.ts`
+      - `src/content/types.ts` (see above)
+    - `src/i18n/ui.ts` (see above)
+    - `src/lib/routes.ts` (see above)
+    - `src/config/site.ts` (see above)
+    - `src/components/Logo.astro` (see above)
+    - `src/components/aa/AaSocial.astro`
+      - `src/content/types.ts` (see above)
+      - `src/content/academic-accountant.ts`
+        - `src/content/types.ts` (see above)
+        - `src/config/site.ts` (see above)
+      - `src/components/Icon.astro` (see above)
+    - `src/content/academic-accountant.ts` (see above)
+- `src/components/Breadcrumbs.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/AnswerBox.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/KeyFacts.astro`
+  - `src/content/types.ts` (see above)
+  - `src/i18n/ui.ts` (see above)
+- `src/components/FaqList.astro`
+  - `src/content/types.ts` (see above)
+- `src/components/Icon.astro` (see above)
+- `src/components/aa/AaLogo.astro`
+  - `src/content/types.ts` (see above)
+  - `src/lib/aa-logo.ts`
+- `src/components/aa/AaConsultation.astro`
+  - `src/content/types.ts` (see above)
+  - `src/content/academic-accountant.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+- `src/components/aa/AaContact.astro`
+  - `src/content/types.ts` (see above)
+  - `src/content/academic-accountant.ts` (see above)
+  - `src/components/Icon.astro` (see above)
+  - `src/components/aa/AaSocial.astro` (see above)
+- `src/content/types.ts` (see above)
+- `src/content/academic-accountant.ts` (see above)
+- `src/i18n/ui.ts` (see above)
+- `src/lib/routes.ts` (see above)
+- `src/lib/seo.ts`
+  - `src/config/site.ts` (see above)
+  - `src/lib/dates.ts`
+    - `src/content/page-dates.json`
+  - `src/content/index.ts` (see above)
+  - `src/content/academic-accountant.ts` (see above)
+  - `src/content/types.ts` (see above)
+  - `src/lib/routes.ts` (see above)
+- `src/lib/aa-logo.ts` (see above)
+

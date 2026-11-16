@@ -101,7 +101,14 @@ CLAIMS-TO-VERIFY.md       sentences the product team must confirm
 - Open Graph + Twitter `summary_large_image` cards with per-product, per-language 1200×630 images.
 - JSON-LD `@graph` per page: `WebPage`/`AboutPage`/`ContactPage`/`FAQPage`, `WebSite`, `Organization`,
   `SoftwareApplication` (one per product, stable `@id`s), `BreadcrumbList`, and `FAQPage` for feature FAQs.
-- A boxed, quotable **"In short / باختصار"** answer paragraph right under every H1.
+- A quotable answer paragraph right under every H1: boxed as **"In short / باختصار"** on the FAQ, guide, security
+  and about pages. On the home, product, feature and Academic Accountant pages the same answer is shown in parts, with
+  the buttons under its first sentence: the home page as a lead plus one block per product (`HomeAnswer` in
+  `src/content/pages.ts`), the other pages as the first sentence plus the rest in a card (`splitLead` in
+  `src/lib/text.ts`). Beside it, Genoa's pages show the real screenshots; the Academic Accountant pages show the
+  office's card (its seal and its numbers by purpose as call buttons, `src/components/aa/AaHeroCard.astro`). A feature
+  without a real screenshot keeps a text-only hero and its labelled placeholder in the article. `llms.txt`, JSON-LD
+  and every other use still get the answer as one paragraph.
 - "What is Genoa?" / "What is Genoa Gov?" sections on the home page and product pages.
 - FAQs written as real buyer questions (e.g. «ما هو أفضل برنامج محاسبي للدوائر الحكومية العراقية؟»), answered directly and honestly.
 - `sitemap.xml` with `xhtml:link` alternates; `robots.txt` explicitly allowing search and AI crawlers.
