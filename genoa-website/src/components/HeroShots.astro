@@ -1,0 +1,49 @@
+---
+/* Home hero: the two products' real screens, layered — Genoa's dashboard in front, a Genoa Gov payment voucher
+ * behind. Both are screenshots of the software with fictional demo data (tagged as such), and each opens at full
+ * size like every other screenshot on the site. On a wide screen they are beside the hero text and the browser
+ * raises their priority once it sees them; on a phone they sit under it, below the first screen, so neither may claim
+ * high priority up front (that held back the fonts and page in mobile Lighthouse). The back one loads lazily. */
+import type { Lang } from '../content/types';
+import { t } from '../i18n/ui';
+import { screenshotFor } from '../content/screenshots';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+
+// Displayed width: about 460px of the hero's visual column on wide screens, most of the screen on a phone.
+const sizes = '(min-width: 960px) 470px, 82vw';
+const shots = (
+  [
+    { id: 'companies-overview', place: 'front', loading: 'eager' },
+    { id: 'government-vouchers-approval', place: 'back', loading: 'lazy' },
+  ] as const
+).map((s) => {
+  const shot = screenshotFor(s.id);
+  const srcset = shot.widths?.length
+    ? [...shot.widths.map((w) => `${shot.src.replace(/\.webp$/, `-${w}w.webp`)} ${w}w`), `${shot.src} ${shot.width}w`].join(', ')
+    : undefined;
+  return { ...s, shot, srcset, alt: shot.alt?.[lang] ?? t('realShotNote', lang) };
+})
+  // Only real screens: a placeholder drawing is never shown as "demo data".
+  .filter((s) => !s.shot.placeholder);
+---
+{shots.length > 0 && (
+<div class="hero-shots" data-count={shots.length}>
+  {shots.map((s) => (
+    <a class:list={['hero-shot', s.place]} href={s.shot.src} target="_blank" rel="noopener" title={t('openFullSize', lang)}>
+      <span class="shot-bar" aria-hidden="true"><i></i><i></i><i></i></span>
+      <img
+        src={s.shot.src}
+        srcset={s.srcset}
+        sizes={s.srcset ? sizes : undefined}
+        alt={s.alt}
+        width={s.shot.width}
+        height={s.shot.height}
+        loading={s.loading}
+        decoding="async"
+      />
+    </a>
+  ))}
+  <span class="tag demo hero-shots-tag">{t('demoDataTag', lang)}</span>
+</div>
+)}

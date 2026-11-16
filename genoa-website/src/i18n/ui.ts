@@ -59,6 +59,13 @@ export const ui = {
     ar: 'لقطات شاشة حقيقية من البرنامج، ببيانات تجريبية بالكامل. اضغط على أي صورة لفتحها بالحجم الكامل.',
     en: 'Real screenshots of the software, with entirely fictional demo data. Select any image to open it at full size.',
   },
+  /** Home: under "See the software", now that its two screenshots are in the hero. */
+  galleryMore: {
+    ar: 'لقطات شاشة حقيقية من البرنامج، ببيانات تجريبية بالكامل. لمشاهدة المزيد من الشاشات، راجع صفحة كل برنامج.',
+    en: "Real screenshots of the software, with entirely fictional demo data. For more screens, see each product's page.",
+  },
+  screensGenoa: { ar: 'شاشات Genoa', en: 'Genoa screens' },
+  screensGov: { ar: 'شاشات Genoa Gov', en: 'Genoa Gov screens' },
   ctaHeading: {
     ar: 'شاهد البرنامج بنفسك',
     en: 'See the software for yourself',

@@ -5,7 +5,7 @@
       "targetKind": "existing-ui",
       "projectId": "c513555b-f8fe-4af3-a289-aa9ce2166740",
       "baselineDraftId": "c400ea3e-6ab7-432d-b3f4-a8545f423697",
-      "activeDraftId": "c400ea3e-6ab7-432d-b3f4-a8545f423697",
+      "activeDraftId": "75e2a810-5074-4b3c-851b-81012f422839",
       "designSystemPath": ".superdesign/design-system.md",
       "referenceIds": [
         "genoa-website-public-brand-genoa-mark.svg",
@@ -67,7 +67,9 @@
           "title": "Genoa Systems Home - Direction A",
           "visualDirection": "A: show the software — layered real screenshots in the hero, answer split into lead + one block per product, CTAs under the lead, 3x2 highlights, 2-col module chips, numbered principles",
           "parentDraftId": "c400ea3e-6ab7-432d-b3f4-a8545f423697",
-          "currentVersion": 3
+          "currentVersion": 3,
+          "selected": true,
+          "implemented": "Built into src/pages/[lang]/index.astro, src/components/HeroShots.astro and src/styles/refresh.css (home block); the code now differs from the context fingerprints, so the next design round on /ar/ should take the incremental-refresh path."
         },
         "6f12fd6e-96fc-457e-bc9a-07587cf9e711": {
           "title": "Genoa Systems Home (Direction B)",
@@ -76,7 +78,7 @@
           "currentVersion": 3
         }
       },
-      "updatedAt": "2026-11-16T15:22:11.359Z"
+      "updatedAt": "2026-11-16T15:48:48.822Z"
     }
   }
 }
