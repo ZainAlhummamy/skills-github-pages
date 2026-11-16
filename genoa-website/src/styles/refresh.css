@@ -672,15 +672,15 @@ h2.ruled::after {
 }
 
 /* =====================================================================
-   Home page (Nov 2026): the real screens in the hero, the answer split into
-   a lead and one block per product with the buttons right under the lead,
-   and tighter, easier-to-scan sections. Home-only selectors; the same rules
-   as above apply (transform/opacity motion only under no-preference, text at
-   4.5:1 or more).
+   Home and product pages (Nov 2026): the real screens in the hero, the
+   answer split so the buttons sit right under its first sentence, and
+   tighter, easier-to-scan sections. `.hero-split` marks those heroes; the
+   `.home-*` rules are the home page's own. The same rules as above apply
+   (transform/opacity motion only under no-preference, text at 4.5:1 or more).
    ===================================================================== */
 
-/* ---------- Hero: the answer in three parts ---------- */
-.home-hero h1 {
+/* ---------- Hero: the answer in parts (home: lead + one block per product; product pages: lead + the rest) ---------- */
+.hero-split h1 {
   margin-bottom: 0.45em;
 }
 .answer-lead {
@@ -689,7 +689,7 @@ h2.ruled::after {
   color: var(--ink);
   max-width: 46ch;
 }
-.home-hero .btn-row {
+.hero-split .btn-row {
   margin-top: 1.25rem;
 }
 .answer-products {
@@ -697,16 +697,25 @@ h2.ruled::after {
   gap: 0.75rem;
   margin-top: 1.5rem;
 }
-.answer-product {
+.answer-product,
+.answer-rest {
   padding: 0.9rem 1.15rem 1rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgb(255 255 255 / 82%);
   box-shadow: 0 1px 2px rgb(15 27 45 / 4%);
 }
-.answer-product .answer {
+:is(.answer-product, .answer-rest) .answer {
   font-size: 1rem;
   max-width: none;
+}
+/* Product pages: the rest of the answer keeps the old answer box's product-coloured edge. */
+.answer-rest {
+  margin-top: 1.5rem;
+  border-inline-start: 4px solid var(--brand);
+}
+[data-product='government'] .answer-rest {
+  border-inline-start-color: var(--gov);
 }
 .product-chip {
   display: inline-block;
@@ -805,12 +814,12 @@ h2.ruled::after {
   font-size: 0.95rem;
 }
 
-/* ---------- Section rhythm: about 30% less space between home sections ---------- */
-.home-hero ~ .section {
+/* ---------- Section rhythm: about 30% less space between sections ---------- */
+.hero-split ~ .section {
   padding-block: clamp(1.75rem, 1.4rem + 2.1vw, 3.15rem);
 }
 /* The CTA band is the last section: the footer's own margin is the gap below it. */
-.home-hero ~ .section:last-child {
+.hero-split ~ .section:last-child {
   padding-block-end: 0;
 }
 

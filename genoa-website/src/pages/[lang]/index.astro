@@ -33,7 +33,7 @@ const jsonld = pageGraph({
 });
 ---
 <BaseLayout lang={lang} title={h.title} description={h.description} ogImage={og} jsonld={jsonld}>
-  <section class="page-hero home-hero">
+  <section class="page-hero home-hero hero-split">
     <div class="container hero-grid">
       <div class="hero-copy">
         <span class="eyebrow">Genoa Systems</span>
@@ -53,7 +53,7 @@ const jsonld = pageGraph({
           ))}
         </div>
       </div>
-      <HeroShots lang={lang} />
+      <HeroShots lang={lang} front="companies-overview" back="government-vouchers-approval" />
     </div>
     <div class="container">
       <ul class="highlights">

@@ -1,29 +1,35 @@
 ---
-/* Home hero: the two products' real screens, layered — Genoa's dashboard in front, a Genoa Gov payment voucher
- * behind. Both are screenshots of the software with fictional demo data (tagged as such), and each opens at full
- * size like every other screenshot on the site. On a wide screen they are beside the hero text and the browser
- * raises their priority once it sees them; on a phone they sit under it, below the first screen, so neither may claim
- * high priority up front (that held back the fonts and page in mobile Lighthouse). The back one loads lazily. */
+/* Hero screens: two real screenshots, layered — `front` in front, `back` behind and offset. Used by the home page
+ * (Genoa's dashboard over a Genoa Gov payment voucher) and the product pages (each product's own screens). They are
+ * screenshots of the software with fictional demo data (tagged as such), and each opens at full size like every other
+ * screenshot on the site. On a wide screen they are beside the hero text and the browser raises their priority once
+ * it sees them; on a phone they sit under it, below the first screen, so neither claims high priority up front (that
+ * held back the fonts and page in mobile Lighthouse). The back one loads lazily. */
 import type { Lang } from '../content/types';
 import { t } from '../i18n/ui';
 import { screenshotFor } from '../content/screenshots';
-interface Props { lang: Lang; }
-const { lang } = Astro.props;
+interface Props {
+  lang: Lang;
+  /** Screenshot keys (see src/content/screenshots.ts). */
+  front: string;
+  back?: string;
+}
+const { lang, front, back } = Astro.props;
 
 // Displayed width: about 460px of the hero's visual column on wide screens, most of the screen on a phone.
 const sizes = '(min-width: 960px) 470px, 82vw';
-const shots = (
-  [
-    { id: 'companies-overview', place: 'front', loading: 'eager' },
-    { id: 'government-vouchers-approval', place: 'back', loading: 'lazy' },
-  ] as const
-).map((s) => {
-  const shot = screenshotFor(s.id);
-  const srcset = shot.widths?.length
-    ? [...shot.widths.map((w) => `${shot.src.replace(/\.webp$/, `-${w}w.webp`)} ${w}w`), `${shot.src} ${shot.width}w`].join(', ')
-    : undefined;
-  return { ...s, shot, srcset, alt: shot.alt?.[lang] ?? t('realShotNote', lang) };
-})
+const slots: { id: string; place: 'front' | 'back'; loading: 'eager' | 'lazy' }[] = [
+  { id: front, place: 'front', loading: 'eager' },
+];
+if (back) slots.push({ id: back, place: 'back', loading: 'lazy' });
+const shots = slots
+  .map((s) => {
+    const shot = screenshotFor(s.id);
+    const srcset = shot.widths?.length
+      ? [...shot.widths.map((w) => `${shot.src.replace(/\.webp$/, `-${w}w.webp`)} ${w}w`), `${shot.src} ${shot.width}w`].join(', ')
+      : undefined;
+    return { ...s, shot, srcset, alt: shot.alt?.[lang] ?? t('realShotNote', lang) };
+  })
   // Only real screens: a placeholder drawing is never shown as "demo data".
   .filter((s) => !s.shot.placeholder);
 ---
