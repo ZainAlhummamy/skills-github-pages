@@ -88,9 +88,10 @@ the two phone numbers. **Zain should confirm or correct:**
   and technology expertise, and with them the office offers accounting, technology and AI services for accounting and
   financial work. The pages say exactly that (`aaRelationship`, `aaAlongside`): in the header, the home page (hero
   by-line and a section), the product heroes (by-line), the office's pages, `/about/`, `/contact/` and `llms.txt`.
-- ⚠️ **"Genoa Systems develops them."** The office's FAQ and `llms.txt` keep the site's existing statement that Genoa
-  Systems makes the two products (`companyIntro`). Nothing says same owner, parent or subsidiary, and the JSON-LD has
-  no `parentOrganization` / `subOrganization`: confirm the legal relationship if it should be stated.
+- ✅ **No "Genoa Systems develops them" on the office's pages** (the owner, 16 Nov 2026). Nothing says same owner,
+  parent or subsidiary either, and the JSON-LD has no `parentOrganization` / `subOrganization`: confirm the legal
+  relationship if it should be stated. Genoa Systems' own pages (home, about, footer, `llms.txt` header) still
+  describe it as the company that makes the two products (`companyIntro`, `footerTagline`).
 - ⚠️ **The IT and AI services** (added to the services page, 16 Nov 2026) are described only as what the owner said:
   "technical consulting and IT services" and "AI services for accounting and financial work", offered with Genoa and
   Genoa Gov. Say what they include, if the pages should describe them.

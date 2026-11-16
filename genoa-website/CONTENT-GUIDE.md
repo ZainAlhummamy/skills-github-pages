@@ -69,7 +69,8 @@ added to `CLAIMS-TO-VERIFY.md` for the team to confirm before launch.
 - Genoa and Genoa Gov (the owner, 16 Nov 2026): «نظاما Genoa للشركات وGenoa Gov للدوائر الحكومية من نتاج المحاسب
   الأكاديمي، بُنيا وفق خبراته المحاسبية والتقنية» / "products of Academic Accountant, built on its accounting and
   technology expertise"; «ويقدّم المكتب معهما خدمات محاسبية وتقنية، وخدمات ذكاء اصطناعي خاصة بالأعمال المحاسبية
-  والمالية» (`aaRelationship`, `aaAlongside`). Genoa Systems develops the two products (`companyIntro`). The legal
+  والمالية» (`aaRelationship`, `aaAlongside`). The office's pages do not say who develops them (the owner asked to drop
+  «وتطوّرهما Genoa Systems»). The legal
   relationship between the office and Genoa Systems is not confirmed: never same owner, parent or subsidiary. Never
   put its address or phones where they could be read as Genoa Systems' own (Genoa Systems' city is not confirmed),
   and never add its profiles to Genoa Systems' `sameAs`.

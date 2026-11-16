@@ -1,5 +1,4 @@
 import type { Faq, IconKey, KeyFact, L, Lang, PageMeta } from './types';
-import { companyIntro } from '../config/site';
 
 /**
  * Academic Accountant (المحاسب الأكاديمي): the accounting, consulting and training office whose accounting and
@@ -12,9 +11,10 @@ import { companyIntro } from '../config/site';
  * "More than 15 years of experience in accounting" is the only number that may be used.
  *
  * TODO(Zain): the legal relationship between the office and Genoa Systems (same owner? parent / subsidiary?). The
- *   pages say what the owner stated (the two systems are the office's product, built on its expertise; Genoa Systems
- *   develops them). Do not write same owner, parent company or subsidiary, and do not add parentOrganization /
- *   subOrganization to the JSON-LD (src/lib/seo.ts, academicAccountantNode), until it is confirmed.
+ *   pages say what the owner stated (the two systems are the office's product, built on its expertise), and the
+ *   office's pages do not say who develops them (the owner, 16 Nov 2026: drop "Genoa Systems develops them"). Do not
+ *   write same owner, parent company or subsidiary, and do not add parentOrganization / subOrganization to the
+ *   JSON-LD (src/lib/seo.ts, academicAccountantNode), until it is confirmed.
  * TODO(Zain): whether the Facebook and Instagram profiles below are also official Genoa Systems profiles. Until then
  *   they are the office's only: they go in the office's sameAs, never in Genoa Systems' (src/config/site.ts, sameAs).
  */
@@ -457,7 +457,7 @@ export const aaHub: L<AaHubContent> = {
     },
     systems: {
       heading: 'Genoa وGenoa Gov: من نتاج المحاسب الأكاديمي',
-      intro: `${aaRelationship.ar}. و${companyIntro('ar')}، تطوّر النظامين، وهما منفصلان:`,
+      intro: `${aaRelationship.ar}، وهما نظامان منفصلان:`,
       genoa: 'برنامج محاسبة ومخازن للشركات العراقية.',
       genoaGov: 'برنامج محاسبة حكومية لأقسام الحسابات في الدوائر الحكومية العراقية.',
       alongside: `${aaAlongside.ar}.`,
@@ -490,7 +490,7 @@ export const aaHub: L<AaHubContent> = {
       },
       {
         q: 'ما علاقة المحاسب الأكاديمي بأنظمة Genoa (جينوا)؟',
-        a: [`${aaRelationship.ar}، وتطوّرهما Genoa Systems. ${aaAlongside.ar}.`],
+        a: [`${aaRelationship.ar}. ${aaAlongside.ar}.`],
       },
     ],
   },
@@ -550,7 +550,7 @@ export const aaHub: L<AaHubContent> = {
     },
     systems: {
       heading: 'Genoa and Genoa Gov: products of Academic Accountant',
-      intro: `${aaRelationship.en}. ${companyIntro('en')} that develops them as two separate products:`,
+      intro: `${aaRelationship.en}. They are two separate products:`,
       genoa: 'accounting and inventory software for companies.',
       genoaGov: 'government accounting software for the accounts sections of Iraqi government departments.',
       alongside: `${aaAlongside.en}.`,
@@ -583,7 +583,7 @@ export const aaHub: L<AaHubContent> = {
       },
       {
         q: 'How is Academic Accountant related to Genoa and Genoa Gov?',
-        a: [`${aaRelationship.en}; Genoa Systems develops them. ${aaAlongside.en}.`],
+        a: [`${aaRelationship.en}. ${aaAlongside.en}.`],
       },
     ],
   },

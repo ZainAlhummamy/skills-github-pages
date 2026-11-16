@@ -49,7 +49,7 @@ ${group(en, ['guide'])}
 
 ## Academic Accountant (المحاسب الأكاديمي): the accounting office in Baghdad behind Genoa and Genoa Gov
 
-Academic Accountant («${aaOffice.nameAr}»; its profiles also call it "Academy accountant" and "AA") is an accounting, financial consulting and training office in Baghdad, Iraq, with more than 15 years of experience in accounting. ${aaRelationship.en}; Genoa Systems develops them. ${aaAlongside.en}. The address and phone numbers in this section are the office's, not Genoa Systems' (Genoa Systems' own contact details are at the top of this file).
+Academic Accountant («${aaOffice.nameAr}»; its profiles also call it "Academy accountant" and "AA") is an accounting, financial consulting and training office in Baghdad, Iraq, with more than 15 years of experience in accounting. ${aaRelationship.en}. ${aaAlongside.en}. The address and phone numbers in this section are the office's, not Genoa Systems' (Genoa Systems' own contact details are at the top of this file).
 
 - Address: ${aaOffice.address.en.full}
 ${aaPhoneGroups.map((g) => { const label = aaContactBlock.en.phoneGroups[g.id]; return `- Phone for ${label.charAt(0).toLowerCase()}${label.slice(1)}: ${g.phones.map((p) => p.intl).join(', ')}`; }).join('\n')}
