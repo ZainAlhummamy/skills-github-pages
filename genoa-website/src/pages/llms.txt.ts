@@ -15,7 +15,7 @@ export const GET: APIRoute = () => {
 
   const body = `# ${site.companyName}
 
-> ${companyIntro('en')}. It makes two separate accounting products for the Iraqi market: Genoa, accounting and inventory software for companies, and Genoa Gov, government accounting software for the accounts sections of Iraqi government departments. It is not the US computer-hardware maker of the same name. The website is Arabic first (${abs('/ar/')}) with a full English version (${abs('/en/')}).
+> ${companyIntro('en')}. It offers two separate accounting products for the Iraqi market, built on the accounting and technology expertise of Academic Accountant (see below): Genoa, accounting and inventory software for companies, and Genoa Gov, government accounting software for the accounts sections of Iraqi government departments. It is not the US computer-hardware maker of the same name. The website is Arabic first (${abs('/ar/')}) with a full English version (${abs('/en/')}).
 
 Contact and location:
 

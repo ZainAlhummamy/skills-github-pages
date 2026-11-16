@@ -90,8 +90,10 @@ the two phone numbers. **Zain should confirm or correct:**
   by-line and a section), the product heroes (by-line), the office's pages, `/about/`, `/contact/` and `llms.txt`.
 - ✅ **No "Genoa Systems develops them" on the office's pages** (the owner, 16 Nov 2026). Nothing says same owner,
   parent or subsidiary either, and the JSON-LD has no `parentOrganization` / `subOrganization`: confirm the legal
-  relationship if it should be stated. Genoa Systems' own pages (home, about, footer, `llms.txt` header) still
-  describe it as the company that makes the two products (`companyIntro`, `footerTagline`).
+  relationship if it should be stated. Genoa Systems' own pages no longer say it develops or makes the two products
+  either (the owner, 16 Nov 2026): the footer, `/about/`, `llms.txt` and the Organization / WebSite JSON-LD say it
+  *offers* them and that they are Academic Accountant's product, and each SoftwareApplication's `creator` is the
+  office (`publisher` stays Genoa Systems).
 - ⚠️ **The IT and AI services** (added to the services page, 16 Nov 2026) are described only as what the owner said:
   "technical consulting and IT services" and "AI services for accounting and financial work", offered with Genoa and
   Genoa Gov. Say what they include, if the pages should describe them.

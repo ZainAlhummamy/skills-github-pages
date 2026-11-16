@@ -40,8 +40,8 @@ export const organizationNode = (lang: Lang): Node => {
     // Leads with what sets this Genoa Systems apart from the defunct US hardware maker of the same name.
     description:
       lang === 'ar'
-        ? `${companyIntro('ar')}. تطوّر برنامجين محاسبيين منفصلين للسوق العراقي: Genoa، برنامج محاسبة ومخازن للشركات يعتمد دليل حسابات النظام المحاسبي الموحد ويمكنه إعداد القوائم المالية وفق IFRS، وGenoa Gov، برنامج محاسبة حكومية لأقسام الحسابات في الدوائر الحكومية.`
-        : `${companyIntro('en')}. It makes two separate accounting products for the Iraqi market: Genoa, accounting and inventory software for companies that uses the Unified Accounting System chart of accounts and can prepare IFRS-based financial statements, and Genoa Gov, government accounting software for the accounts sections of government departments.`,
+        ? `${companyIntro('ar')}. تقدّم برنامجين محاسبيين منفصلين للسوق العراقي، هما من نتاج المحاسب الأكاديمي: Genoa، برنامج محاسبة ومخازن للشركات يعتمد دليل حسابات النظام المحاسبي الموحد ويمكنه إعداد القوائم المالية وفق IFRS، وGenoa Gov، برنامج محاسبة حكومية لأقسام الحسابات في الدوائر الحكومية.`
+        : `${companyIntro('en')}. It offers two separate accounting products for the Iraqi market, built on the accounting and technology expertise of Academic Accountant: Genoa, accounting and inventory software for companies that uses the Unified Accounting System chart of accounts and can prepare IFRS-based financial statements, and Genoa Gov, government accounting software for the accounts sections of government departments.`,
     // TODO(owner): the city (src/config/site.ts, city). Until then the address names the country only.
     address: {
       '@type': 'PostalAddress',
@@ -80,8 +80,8 @@ export const websiteNode = (lang: Lang): Node => ({
   publisher: { '@id': ids.org },
   description:
     lang === 'ar'
-      ? 'الموقع الرسمي لـ Genoa Systems، مطوّر برنامجي Genoa وGenoa Gov.'
-      : 'Official website of Genoa Systems, maker of Genoa and Genoa Gov.',
+      ? 'الموقع الرسمي لـ Genoa Systems وبرنامجي Genoa وGenoa Gov.'
+      : 'Official website of Genoa Systems and of Genoa and Genoa Gov.',
 });
 
 export const softwareNode = (productId: ProductId, lang: Lang): Node => {
@@ -123,7 +123,8 @@ export const softwareNode = (productId: ProductId, lang: Lang): Node => {
       geographicArea: { '@type': 'Country', name: site.areaServed.en },
     },
     publisher: { '@id': ids.org },
-    creator: { '@id': ids.org },
+    // The two products are Academic Accountant's (the owner, 16 Nov 2026); its node is on the office's pages.
+    creator: { '@id': ids.academicAccountant },
     image: abs(`/og/og-${productId}-${lang}.png`),
     // TODO(owner): operatingSystem (e.g. "Web browser" for a web app, or "Windows"), once the deployment model is
     // confirmed. inLanguage is left off here on purpose: on a SoftwareApplication it states the software's own
