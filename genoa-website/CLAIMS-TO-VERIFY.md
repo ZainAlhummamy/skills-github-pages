@@ -76,6 +76,33 @@ image". The pages `companies.features[ai-assistant]` and `companies.features[inv
   Arabic support, which invoice types and languages are read, handwriting, and where data is processed. Answers to
   these would make both pages much stronger (see `OWNER-TODO.md`).
 
+## Academic Accountant (added 16 Nov 2026)
+
+`/ar/academic-accountant/`, `/ar/academic-accountant/services/` and their English twins
+(`src/content/academic-accountant.ts`) were written only from the office's Facebook and Instagram pages. Facts stated as
+they appear there: the name, tagline, «تدقيق - استشارة - أنظمة», "more than 15 years in accounting", the eleven
+services (2 May 2026 post), the training lines, the free initial consultation for new businesses, the address and
+the two phone numbers. **Zain should confirm or correct:**
+
+- ⚠️ **Relationship to Genoa Systems.** Every page says only "the office works with Genoa Systems and offers its
+  accounting systems" (`aaRelationship`). Nothing says same owner, parent or subsidiary, and the JSON-LD has no
+  `parentOrganization` / `subOrganization`. Confirm the wording, or give the real relationship.
+- ⚠️ **"Offers its accounting systems" covers Genoa and Genoa Gov.** The hub's "Accounting systems" section and the
+  services page link to both products. If the office offers only Genoa (companies), say so.
+- **Service explanations** (`aaServices[*].content.*.body`): one or two sentences each that explain what the service
+  is in general accounting terms (e.g. "Setting up the journal, where entries are recorded in date order …",
+  "Dividing an industrial or production business into cost centres …", "its chart of accounts, documents, document
+  flow and reports"). They describe the service, not results; check each matches what the office actually does.
+- **Hub cards and FAQ answers** summarise the same eleven services in shorter words.
+- **"Its work falls into these areas"** (`aaHub.whatWeDo.intro`): the four groups (bookkeeping, analysis, reporting,
+  systems) are the site's grouping, not the office's.
+- **«النظام المحاسبي المحدث وفق المعايير الدولية»** is rendered in English as "the updated accounting system in line
+  with international standards". If the workshops are on a named system or standard (e.g. IFRS), say which.
+- **"To ask about the workshops, call the office"**: assumes the phone numbers are the right channel for training.
+- **English building name** "Business Avenue Building" (`aaOffice.address.en`): spelling not confirmed.
+- **JSON-LD `knowsAbout`** includes IFRS (the office's Facebook shared the IASB/IFRS page) and the Iraqi Unified
+  Accounting System (from the brief).
+
 ## Found while taking real screenshots (Genoa app, `UAS` repo)
 
 - ⚠️ **Landed cost.** The Genoa app has no landed-cost or freight feature in its code (no allocation of freight/customs to item cost). The closest is a purchase tax code that can be set to add to goods cost. The website still describes landed cost as a feature (from the original brief), and its screenshot slot stays a placeholder. Confirm whether landed cost exists (another branch/version?) — if not, remove or reword the landed-cost page, the home and overview mentions, and the FAQ answers.
