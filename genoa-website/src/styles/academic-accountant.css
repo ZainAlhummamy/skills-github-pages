@@ -22,7 +22,6 @@
     radial-gradient(55% 75% at 88% -5%, rgb(1 44 86 / 14%), transparent 62%),
     radial-gradient(45% 65% at 2% 8%, rgb(183 146 68 / 12%), transparent 60%),
     linear-gradient(180deg, #f5f7fa, #fff);
-  border-top: 4px solid var(--aa-gold);
 }
 .aa .page-hero::before {
   background-image: repeating-linear-gradient(to bottom, transparent 0 33px, rgb(1 44 86 / 6%) 33px 34px);
@@ -63,10 +62,10 @@
   background: var(--aa-navy);
 }
 
-/* ---- Headings: the double rule in gold ---- */
+/* ---- Headings: the bar under section headings (refresh.css draws it as a background) in gold; decorative ---- */
 .aa :is(.section-head, .article section) > h2::after,
 .aa h2.ruled::after {
-  border-color: var(--aa-gold);
+  background: linear-gradient(90deg, var(--aa-gold), var(--aa-gold-light));
 }
 
 /* ---- Buttons ---- */
