@@ -71,7 +71,8 @@ export const aiFeatures: Feature[] = [
             q: 'هل يوجد برنامج محاسبي عراقي فيه ذكاء اصطناعي؟',
             a: [
               'نعم. برنامج Genoa للشركات العراقية فيه ميزتان تعملان بالذكاء الاصطناعي: مساعد ذكي يساعد المستخدم داخل البرنامج، وإضافة فاتورة مباشرة من صورتها.',
-              'وGenoa برنامج محاسبة ومخازن من Genoa Systems، وهي شركة عراقية لبرمجيات المحاسبة.',
+              // The owner, 16 Nov 2026: Genoa is Academic Accountant's product; Genoa Systems offers it.
+              'وGenoa برنامج محاسبة ومخازن من نتاج المحاسب الأكاديمي، بُني وفق خبراته المحاسبية والتقنية، وتقدّمه Genoa Systems، وهي شركة عراقية لبرمجيات المحاسبة.',
             ],
           },
           {
@@ -140,7 +141,8 @@ export const aiFeatures: Feature[] = [
             q: 'Is there Iraqi accounting software with AI?',
             a: [
               'Yes. Genoa, for Iraqi companies, has two AI-powered features: an AI assistant that helps the user inside the software, and adding an invoice directly from an image of it.',
-              'Genoa is accounting and inventory software from Genoa Systems, an Iraqi accounting-software company.',
+              // The owner, 16 Nov 2026: Genoa is Academic Accountant's product; Genoa Systems offers it.
+              'Genoa is accounting and inventory software offered by Genoa Systems, an Iraqi accounting-software company. It is a product of Academic Accountant, built on the office’s accounting and technology expertise.',
             ],
           },
           {

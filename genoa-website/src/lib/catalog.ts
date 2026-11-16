@@ -14,6 +14,7 @@ import {
   aaOffice,
   aaOnAbout,
   aaOnContact,
+  aaOnHome,
   aaPhoneGroups,
   aaPhoneText,
   aaServices,
@@ -29,7 +30,7 @@ export interface CatalogPage {
   path: string;
   title: string;
   description: string;
-  /** 'office': the Academic Accountant pages (an accounting office that works with Genoa Systems). */
+  /** 'office': the Academic Accountant pages (the accounting office whose expertise Genoa and Genoa Gov were built on). */
   kind: 'home' | 'product' | 'feature' | 'faq' | 'guide' | 'office' | 'security' | 'about' | 'contact';
   product?: ProductId;
   /** Plain-text body for llms-full.txt (Markdown-ish). */
@@ -70,6 +71,7 @@ export const catalog = (lang: Lang): CatalogPage[] => {
         h.answer,
         `## ${h.products.companies.heading}\n\n${h.products.companies.body}`,
         `## ${h.products.government.heading}\n\n${h.products.government.body}`,
+        `## ${aaOnHome[lang].heading}\n\n${aaOnHome[lang].body}\n\n${aaOnHome[lang].offers.map((o) => `- ${o.text}`).join('\n')}`,
         `## ${h.ai.heading}\n\n${h.ai.intro} ${h.ai.note}`,
         `## ${h.compare.heading}\n\n${h.compare.intro}\n\n- Genoa — ${h.compare.rowLabels.for}: ${h.compare.genoa.for}. ${h.compare.rowLabels.modules}: ${h.compare.genoa.modules}. ${h.compare.rowLabels.distinctive}: ${h.compare.genoa.distinctive}.\n- Genoa Gov — ${h.compare.rowLabels.for}: ${h.compare.gov.for}. ${h.compare.rowLabels.modules}: ${h.compare.gov.modules}. ${h.compare.rowLabels.distinctive}: ${h.compare.gov.distinctive}.`,
         `## ${h.principles.heading}\n\n${h.principles.items.map((i) => `- ${i.title}: ${i.body}`).join('\n')}`,
@@ -161,7 +163,7 @@ export const catalog = (lang: Lang): CatalogPage[] => {
         hub.keyFacts.map((k) => `- ${k.label}: ${k.value}`).join('\n'),
         `## ${hub.whatWeDo.heading}\n\n${hub.whatWeDo.intro}\n\n${hub.whatWeDo.cards.map((c) => `- ${c.title}: ${c.body}`).join('\n')}`,
         sectionsText([hub.training]),
-        `## ${hub.systems.heading}\n\n${hub.systems.intro}\n\n- ${t('companies', lang)}: ${hub.systems.genoa}\n- ${t('government', lang)}: ${hub.systems.genoaGov}\n\n${hub.systems.demoLead} ${hub.systems.demoLink}.`,
+        `## ${hub.systems.heading}\n\n${hub.systems.intro}\n\n- ${t('companies', lang)}: ${hub.systems.genoa}\n- ${t('government', lang)}: ${hub.systems.genoaGov}\n\n${hub.systems.alongside}\n\n${hub.systems.demoLead} ${hub.systems.demoLink}.`,
         `## ${aaConsultation[lang].heading}\n\n${aaConsultation[lang].body}`,
         aaContactText(lang),
         `## ${hub.faqHeading}\n\n${faqText(hub.faqs)}`,

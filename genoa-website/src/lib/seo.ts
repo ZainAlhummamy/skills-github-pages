@@ -40,8 +40,8 @@ export const organizationNode = (lang: Lang): Node => {
     // Leads with what sets this Genoa Systems apart from the defunct US hardware maker of the same name.
     description:
       lang === 'ar'
-        ? `${companyIntro('ar')}. تطوّر برنامجين محاسبيين منفصلين للسوق العراقي: Genoa، برنامج محاسبة ومخازن للشركات يعتمد دليل حسابات النظام المحاسبي الموحد ويمكنه إعداد القوائم المالية وفق IFRS، وGenoa Gov، برنامج محاسبة حكومية لأقسام الحسابات في الدوائر الحكومية.`
-        : `${companyIntro('en')}. It makes two separate accounting products for the Iraqi market: Genoa, accounting and inventory software for companies that uses the Unified Accounting System chart of accounts and can prepare IFRS-based financial statements, and Genoa Gov, government accounting software for the accounts sections of government departments.`,
+        ? `${companyIntro('ar')}. تقدّم برنامجين محاسبيين منفصلين للسوق العراقي، هما من نتاج المحاسب الأكاديمي: Genoa، برنامج محاسبة ومخازن للشركات يعتمد دليل حسابات النظام المحاسبي الموحد ويمكنه إعداد القوائم المالية وفق IFRS، وGenoa Gov، برنامج محاسبة حكومية لأقسام الحسابات في الدوائر الحكومية.`
+        : `${companyIntro('en')}. It offers two separate accounting products for the Iraqi market, built on the accounting and technology expertise of Academic Accountant: Genoa, accounting and inventory software for companies that uses the Unified Accounting System chart of accounts and can prepare IFRS-based financial statements, and Genoa Gov, government accounting software for the accounts sections of government departments.`,
     // TODO(owner): the city (src/config/site.ts, city). Until then the address names the country only.
     address: {
       '@type': 'PostalAddress',
@@ -80,8 +80,8 @@ export const websiteNode = (lang: Lang): Node => ({
   publisher: { '@id': ids.org },
   description:
     lang === 'ar'
-      ? 'الموقع الرسمي لـ Genoa Systems، مطوّر برنامجي Genoa وGenoa Gov.'
-      : 'Official website of Genoa Systems, maker of Genoa and Genoa Gov.',
+      ? 'الموقع الرسمي لـ Genoa Systems وبرنامجي Genoa وGenoa Gov.'
+      : 'Official website of Genoa Systems and of Genoa and Genoa Gov.',
 });
 
 export const softwareNode = (productId: ProductId, lang: Lang): Node => {
@@ -123,7 +123,8 @@ export const softwareNode = (productId: ProductId, lang: Lang): Node => {
       geographicArea: { '@type': 'Country', name: site.areaServed.en },
     },
     publisher: { '@id': ids.org },
-    creator: { '@id': ids.org },
+    // The two products are Academic Accountant's (the owner, 16 Nov 2026); its node is on the office's pages.
+    creator: { '@id': ids.academicAccountant },
     image: abs(`/og/og-${productId}-${lang}.png`),
     // TODO(owner): operatingSystem (e.g. "Web browser" for a web app, or "Windows"), once the deployment model is
     // confirmed. inLanguage is left off here on purpose: on a SoftwareApplication it states the software's own
@@ -133,9 +134,10 @@ export const softwareNode = (productId: ProductId, lang: Lang): Node => {
 
 /**
  * Academic Accountant: an accounting, consulting and training office in Baghdad, a separate node from Genoa Systems
- * (#organization). Its facts come from its own profiles only (src/content/academic-accountant.ts).
+ * (#organization). Its facts come from its own profiles and the owner (src/content/academic-accountant.ts): Genoa and
+ * Genoa Gov are its product, built on its accounting and technology expertise (said in `description`).
  *
- * TODO(Zain): the relationship to Genoa Systems. Until it is confirmed there is no parentOrganization /
+ * TODO(Zain): the legal relationship to Genoa Systems. Until it is confirmed there is no parentOrganization /
  * subOrganization here: the two are joined only through the WebPage nodes (about / mentions, see pageGraph). The
  * office's Facebook and Instagram profiles are its own sameAs, never Genoa Systems'.
  */
@@ -172,8 +174,8 @@ export const academicAccountantNode = (lang: Lang, logo?: { src: string; width: 
     areaServed: { '@type': 'Country', name: site.areaServed.en, identifier: site.areaServed.code },
     knowsAbout:
       lang === 'ar'
-        ? ['المحاسبة', 'التدقيق', 'التحليل المالي', 'الموازنات التخطيطية', 'محاسبة الكلفة', 'الاحتسابات الضريبية في العراق', 'الأنظمة المحاسبية', 'المعايير الدولية لإعداد التقارير المالية (IFRS)', 'النظام المحاسبي الموحد في العراق']
-        : ['Accounting', 'Auditing', 'Financial analysis', 'Budgeting', 'Cost accounting', 'Tax calculation in Iraq', 'Accounting systems', 'International Financial Reporting Standards (IFRS)', 'Iraqi Unified Accounting System'],
+        ? ['المحاسبة', 'التدقيق', 'التحليل المالي', 'الموازنات التخطيطية', 'محاسبة الكلفة', 'الاحتسابات الضريبية في العراق', 'الأنظمة المحاسبية', 'تقنية المعلومات', 'الذكاء الاصطناعي في الأعمال المحاسبية والمالية', 'المعايير الدولية لإعداد التقارير المالية (IFRS)', 'النظام المحاسبي الموحد في العراق']
+        : ['Accounting', 'Auditing', 'Financial analysis', 'Budgeting', 'Cost accounting', 'Tax calculation in Iraq', 'Accounting systems', 'Information technology', 'AI for accounting and finance', 'International Financial Reporting Standards (IFRS)', 'Iraqi Unified Accounting System'],
     sameAs: [aaOffice.profiles.facebook, aaOffice.profiles.instagram],
     // No prices: the office publishes none.
     hasOfferCatalog: {

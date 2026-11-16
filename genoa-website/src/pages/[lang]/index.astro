@@ -4,12 +4,14 @@ import HeroShots from '../../components/HeroShots.astro';
 import AiShowcase from '../../components/AiShowcase.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import Icon from '../../components/Icon.astro';
+import AaByline from '../../components/aa/AaByline.astro';
+import AaOnHome from '../../components/aa/AaOnHome.astro';
 import { LANGS, type Lang } from '../../content/types';
 import { products, productList } from '../../content';
 import { home } from '../../content/pages';
 import { t } from '../../i18n/ui';
 import { path } from '../../lib/routes';
-import { pageGraph } from '../../lib/seo';
+import { ids, pageGraph } from '../../lib/seo';
 import { abs } from '../../lib/routes';
 import { whatsappLink } from '../../config/site';
 
@@ -29,6 +31,8 @@ const jsonld = pageGraph({
   title: h.title,
   description: h.description,
   about: ['companies', 'government'],
+  // The office whose expertise the two products were built on (the hero's by-line and its own section).
+  mentions: [ids.academicAccountant],
   image: abs(og),
 });
 ---
@@ -36,7 +40,10 @@ const jsonld = pageGraph({
   <section class="page-hero home-hero hero-split">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <span class="eyebrow">Genoa Systems</span>
+        <div class="hero-eyebrow-row">
+          <span class="eyebrow">Genoa Systems</span>
+          <AaByline lang={lang} />
+        </div>
         <h1>{h.h1}</h1>
         {/* The answer in its three parts (see HomeAnswer): the lead, the buttons, then one block per product. */}
         <p class="answer answer-lead">{h.answerParts.lead}</p>
@@ -89,6 +96,8 @@ const jsonld = pageGraph({
       })}
     </div>
   </div>
+
+  <AaOnHome lang={lang} />
 
   <AiShowcase lang={lang} />
 

@@ -375,17 +375,17 @@ export const security: L<ArticleContent> = {
 export const about: L<ArticleContent> = {
   ar: {
     title: 'عن Genoa Systems | برامج محاسبة للسوق العراقي',
-    description: `${companyIntro('ar')}، تطوّر Genoa، برنامج محاسبة ومخازن للشركات، وGenoa Gov، برنامج محاسبة حكومية لأقسام الحسابات في الدوائر الحكومية.`,
+    description: `${companyIntro('ar')}، تقدّم Genoa، برنامج محاسبة ومخازن للشركات، وGenoa Gov، برنامج محاسبة حكومية لأقسام الحسابات في الدوائر الحكومية.`,
     h1: 'عن Genoa Systems',
-    answer: `${companyIntro('ar')}. منتجاها برنامجان محاسبيان منفصلان للسوق العراقي: Genoa للشركات، وGenoa Gov لأقسام الحسابات في الدوائر الحكومية. يركّز البرنامجان على العمل اليومي للمحاسب في العراق: المستندات والقيود، والمخازن والذمم، والموازنة والصكوك، والغلق في نهاية الفترة.`,
+    answer: `${companyIntro('ar')}، تقدّم برنامجين محاسبيين منفصلين للسوق العراقي، هما من نتاج المحاسب الأكاديمي: Genoa للشركات، وGenoa Gov لأقسام الحسابات في الدوائر الحكومية. يركّز البرنامجان على العمل اليومي للمحاسب في العراق: المستندات والقيود، والمخازن والذمم، والموازنة والصكوك، والغلق في نهاية الفترة.`,
     sections: [
       {
-        heading: 'ماذا تطوّر Genoa Systems؟',
+        heading: 'ماذا تقدّم Genoa Systems؟',
         body: [
           'Genoa برنامج محاسبة ومخازن للشركات، يعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS)، ويجمع الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمارها، مع ميزتين اختياريتين هما تعدد العملات والكلفة الواصلة.',
           'Genoa Gov برنامج محاسبة حكومية لأقسام الحسابات في الدوائر الحكومية العراقية، يغطي المستندات وسلسلة المصادقة، وتعديل المستندات المرحّلة مع سجل تدقيق كامل، والموازنة، والصكوك، والغلق الشهري والسنوي، ومكتبة التشريعات، مع قاعدة بيانات مستقلة لكل دائرة.',
           // AI: the two features the owner confirmed on 13 Nov 2026 (CONTENT-GUIDE.md section 1).
-          'وتبني Genoa Systems حلولها المالية والمحاسبية بأحدث التقنيات، مع ذكاء اصطناعي موجّه للأعمال المحاسبية والمالية. ففي Genoa مساعد ذكي يساعد المستخدم داخل البرنامج، وميزة تضيف الفاتورة مباشرة من صورتها.',
+          'وقد بُني النظامان وفق الخبرات المحاسبية والتقنية للمحاسب الأكاديمي، بأحدث التقنيات ومع ذكاء اصطناعي موجّه للأعمال المحاسبية والمالية. ففي Genoa مساعد ذكي يساعد المستخدم داخل البرنامج، وميزة تضيف الفاتورة مباشرة من صورتها.',
         ],
       },
       {
@@ -414,17 +414,17 @@ export const about: L<ArticleContent> = {
   },
   en: {
     title: 'About Genoa Systems | Accounting Software for Iraq',
-    description: `${companyIntro('en')} that makes Genoa, accounting and inventory software for companies, and Genoa Gov, government accounting software.`,
+    description: `${companyIntro('en')} that offers Genoa, accounting and inventory software for companies, and Genoa Gov, government accounting software.`,
     h1: 'About Genoa Systems',
-    answer: `${companyIntro('en')}. Its two separate accounting products for the Iraqi market are Genoa, for companies, and Genoa Gov, for the accounts sections of government departments. Both focus on the day-to-day work of accountants in Iraq: vouchers and journal entries, stock and balances, budgets and cheques, and closing at the end of each period.`,
+    answer: `${companyIntro('en')}. It offers two separate accounting products for the Iraqi market, built on the accounting and technology expertise of Academic Accountant: Genoa, for companies, and Genoa Gov, for the accounts sections of government departments. Both focus on the day-to-day work of accountants in Iraq: vouchers and journal entries, stock and balances, budgets and cheques, and closing at the end of each period.`,
     sections: [
       {
-        heading: 'What does Genoa Systems build?',
+        heading: 'What does Genoa Systems offer?',
         body: [
           'Genoa is accounting and inventory software for companies that uses the chart of accounts of the Iraqi Unified Accounting System and can prepare financial statements based on International Financial Reporting Standards (IFRS). It brings together accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing, plus two optional features: multi-currency and landed cost.',
           'Genoa Gov is government accounting software for the accounts sections of Iraqi government departments. It covers vouchers and their approval workflow, amendment of posted vouchers with a full audit trail, budgets, cheques, month-end and year-end closing, and a legislation library, with a separate database for each office.',
           // AI: the two features the owner confirmed on 13 Nov 2026 (CONTENT-GUIDE.md section 1).
-          'Genoa Systems builds its financial and accounting solutions with the latest technology, with AI designed for accounting and financial work: Genoa has an AI assistant that helps the user inside the software, and a feature that adds an invoice directly from an image of it.',
+          'Both were built on the accounting and technology expertise of Academic Accountant, with the latest technology and with AI designed for accounting and financial work: Genoa has an AI assistant that helps the user inside the software, and a feature that adds an invoice directly from an image of it.',
         ],
       },
       {

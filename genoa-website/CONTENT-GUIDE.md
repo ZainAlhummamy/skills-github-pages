@@ -54,25 +54,32 @@ added to `CLAIMS-TO-VERIFY.md` for the team to confirm before launch.
 - Legislation library.
 - A separate database per office.
 
-**Academic Accountant (المحاسب الأكاديمي), an accounting office that works with Genoa Systems**
-(source: its own Facebook and Instagram pages; copy in `src/content/academic-accountant.ts`)
+**Academic Accountant (المحاسب الأكاديمي), the accounting office whose expertise Genoa and Genoa Gov were built on**
+(sources: its own Facebook and Instagram pages, and the owner on 16 Nov 2026; copy in `src/content/academic-accountant.ts`)
 - Name: «المحاسب الأكاديمي» / "Academic Accountant" (its profiles also say "Academy accountant" and "AA"). It calls
   itself «مكتب المحاسب الأكاديمي».
 - Tagline «خبراء المحاسبة والمالية»; «تعليم واستشارات مالية ومحاسبية وتدقيقية»; seal «تدقيق - استشارة - أنظمة».
 - «خبرة أكثر من 15 سنة في مجال المحاسبة» — the only number that may be used about the office.
-- The eleven services of its 2 May 2026 post; training: «ورش تدريبية في النظام المحاسبي المحدث وفق المعايير
+- The eleven services of its 2 May 2026 post, plus two the owner added on 16 Nov 2026 (technical consulting and IT
+  services; AI services for accounting and financial work); training: «ورش تدريبية في النظام المحاسبي المحدث وفق المعايير
   الدولية», «بناء قدرات», «تدريب وتطوير مهني»; «استشارة أولية مجانية لأصحاب المشاريع الجديدة».
 - Address: بغداد – المنصور – بناية بزنس أفنيو، قرب جامع أبو جعفر المنصور. Phones: accounting consulting and
   services 07827777420 and 07712594596; technical consulting and IT services 07714487455 (owner, 16 Nov 2026). Not its
   e-mail address.
-- Relationship, until the owner says more: «يعمل مع Genoa Systems ويقدّم أنظمتها المحاسبية» / "works with Genoa Systems
-  and offers its accounting systems". Never same owner, parent or subsidiary. Never put its address or phones where
-  they could be read as Genoa Systems' own (Genoa Systems' city is not confirmed), and never add its profiles to
-  Genoa Systems' `sameAs`.
+- Genoa and Genoa Gov (the owner, 16 Nov 2026): «نظاما Genoa للشركات وGenoa Gov للدوائر الحكومية من نتاج المحاسب
+  الأكاديمي، بُنيا وفق خبراته المحاسبية والتقنية» / "products of Academic Accountant, built on its accounting and
+  technology expertise"; «ويقدّم المكتب معهما خدمات محاسبية وتقنية، وخدمات ذكاء اصطناعي خاصة بالأعمال المحاسبية
+  والمالية» (`aaRelationship`, `aaAlongside`). Never say Genoa Systems develops, makes or builds them (the owner asked
+  to drop «وتطوّرهما Genoa Systems»): Genoa Systems *offers* them («تقدّم»). The legal
+  relationship between the office and Genoa Systems is not confirmed: never same owner, parent or subsidiary. Never
+  put its address or phones where they could be read as Genoa Systems' own (Genoa Systems' city is not confirmed),
+  and never add its profiles to Genoa Systems' `sameAs`.
+- What its AI and IT services are is not detailed yet: say that they exist and what they are for, nothing more.
 - Never invent clients, testimonials, certifications, staff names, counts, prices, course names or results. No
   third-party product names (support is «للأنظمة المحاسبية المستخدمة لدى العميل»). Avoid «أفضل» from its Facebook
   intro (a superlative).
-- Its navy and gold appear on its own pages only; the site's brand, favicon and share images stay Genoa's.
+- Its navy and gold appear on its own pages, and where Genoa's pages present it: the by-line in the home and product
+  heroes and the home page section. The site's brand, favicon and share images stay Genoa's.
 
 ## 2. Never write
 

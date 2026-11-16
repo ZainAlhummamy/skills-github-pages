@@ -10,6 +10,9 @@ export const ui = {
   companiesShort: { ar: 'للشركات', en: 'Companies' },
   government: { ar: 'Genoa Gov للدوائر الحكومية', en: 'Genoa Gov for government' },
   governmentShort: { ar: 'للدوائر الحكومية', en: 'Government' },
+  /** Header: the line under each product's name (see Header.astro). */
+  navCompaniesSub: { ar: 'للشركات', en: 'for companies' },
+  navGovSub: { ar: 'للدوائر الحكومية', en: 'for government' },
   security: { ar: 'الأمان والنسخ الاحتياطي', en: 'Security and backups' },
   securityShort: { ar: 'الأمان', en: 'Security' },
   about: { ar: 'من نحن', en: 'About' },
@@ -75,9 +78,10 @@ export const ui = {
     en: 'Book a demo and we will walk you through the screens that matter to you, or send us your question on WhatsApp.',
   },
   footerTagline: {
-    // Follows the company introduction (companyIntro, src/config/site.ts) in the footer.
-    ar: 'تطوّر Genoa للشركات وGenoa Gov للدوائر الحكومية.',
-    en: 'It makes Genoa for companies and Genoa Gov for government departments.',
+    // Follows the company introduction (companyIntro, src/config/site.ts) in the footer. The two products are
+    // Academic Accountant's (the owner, 16 Nov 2026): Genoa Systems offers them, it is not said to develop them.
+    ar: 'تقدّم Genoa للشركات وGenoa Gov للدوائر الحكومية، وهما من نتاج المحاسب الأكاديمي.',
+    en: 'It offers Genoa for companies and Genoa Gov for government departments, both products of Academic Accountant.',
   },
   footerProducts: { ar: 'المنتجات', en: 'Products' },
   footerCompany: { ar: 'الشركة', en: 'Company' },

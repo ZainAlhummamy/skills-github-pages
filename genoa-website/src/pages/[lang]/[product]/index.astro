@@ -11,11 +11,12 @@ import FeatureCards from '../../../components/FeatureCards.astro';
 import FaqList from '../../../components/FaqList.astro';
 import CtaBand from '../../../components/CtaBand.astro';
 import Icon from '../../../components/Icon.astro';
+import AaByline from '../../../components/aa/AaByline.astro';
 import { LANGS, type Lang, type ProductId } from '../../../content/types';
 import { products } from '../../../content';
 import { t } from '../../../i18n/ui';
 import { abs, path } from '../../../lib/routes';
-import { pageGraph } from '../../../lib/seo';
+import { ids, pageGraph } from '../../../lib/seo';
 import { splitLead } from '../../../lib/text';
 import { whatsappLink } from '../../../config/site';
 
@@ -53,6 +54,8 @@ const jsonld = pageGraph({
   description: o.description,
   breadcrumbs: crumbs,
   about: [productId],
+  // Built on Academic Accountant's accounting and technology expertise (the hero's by-line links to the office).
+  mentions: [ids.academicAccountant],
   image: abs(og),
 });
 const crossSell = {
@@ -66,7 +69,10 @@ const crossSell = {
       <Breadcrumbs lang={lang} items={crumbs} />
       <div class="hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow">{productId === 'companies' ? t('companies', lang) : t('government', lang)}</span>
+          <div class="hero-eyebrow-row">
+            <span class="eyebrow">{productId === 'companies' ? t('companies', lang) : t('government', lang)}</span>
+            <AaByline lang={lang} />
+          </div>
           <h1>{o.h1}</h1>
           <p class="answer answer-lead">{answer.lead}</p>
           <div class="btn-row">

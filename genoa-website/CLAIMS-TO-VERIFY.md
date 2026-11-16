@@ -84,11 +84,19 @@ they appear there: the name, tagline, «تدقيق - استشارة - أنظمة
 services (2 May 2026 post), the training lines, the free initial consultation for new businesses, the address and
 the two phone numbers. **Zain should confirm or correct:**
 
-- ⚠️ **Relationship to Genoa Systems.** Every page says only "the office works with Genoa Systems and offers its
-  accounting systems" (`aaRelationship`). Nothing says same owner, parent or subsidiary, and the JSON-LD has no
-  `parentOrganization` / `subOrganization`. Confirm the wording, or give the real relationship.
-- ⚠️ **"Offers its accounting systems" covers Genoa and Genoa Gov.** The hub's "Accounting systems" section and the
-  services page link to both products. If the office offers only Genoa (companies), say so.
+- ✅ **Genoa and Genoa Gov** (the owner, 16 Nov 2026): «هذين النظامين هم نتاج مكتبنا», built on the office's accounting
+  and technology expertise, and with them the office offers accounting, technology and AI services for accounting and
+  financial work. The pages say exactly that (`aaRelationship`, `aaAlongside`): in the header, the home page (hero
+  by-line and a section), the product heroes (by-line), the office's pages, `/about/`, `/contact/` and `llms.txt`.
+- ✅ **No "Genoa Systems develops them" on the office's pages** (the owner, 16 Nov 2026). Nothing says same owner,
+  parent or subsidiary either, and the JSON-LD has no `parentOrganization` / `subOrganization`: confirm the legal
+  relationship if it should be stated. Genoa Systems' own pages no longer say it develops or makes the two products
+  either (the owner, 16 Nov 2026): the footer, `/about/`, `llms.txt` and the Organization / WebSite JSON-LD say it
+  *offers* them and that they are Academic Accountant's product, and each SoftwareApplication's `creator` is the
+  office (`publisher` stays Genoa Systems).
+- ⚠️ **The IT and AI services** (added to the services page, 16 Nov 2026) are described only as what the owner said:
+  "technical consulting and IT services" and "AI services for accounting and financial work", offered with Genoa and
+  Genoa Gov. Say what they include, if the pages should describe them.
 - **Service explanations** (`aaServices[*].content.*.body`): one or two sentences each that explain what the service
   is in general accounting terms (e.g. "Setting up the journal, where entries are recorded in date order …",
   "Dividing an industrial or production business into cost centres …", "its chart of accounts, documents, document

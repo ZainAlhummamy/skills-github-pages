@@ -1,22 +1,22 @@
 {
   "/ar/": {
-    "hash": "3f9d5d799aaef878",
+    "hash": "c8e0b403a9b747d3",
     "modified": "2026-11-16"
   },
   "/ar/about/": {
-    "hash": "dc5fc2c832044342",
+    "hash": "41ab983e2ba67b84",
     "modified": "2026-11-16"
   },
   "/ar/academic-accountant/": {
-    "hash": "ddeb1414ff2a8988",
+    "hash": "3749bea3ad5f10ba",
     "modified": "2026-11-16"
   },
   "/ar/academic-accountant/services/": {
-    "hash": "c748cc6f601e799a",
+    "hash": "417552baf19bb26d",
     "modified": "2026-11-16"
   },
   "/ar/companies/": {
-    "hash": "558741c46f378cf6",
+    "hash": "85978fc32217c8a9",
     "modified": "2026-11-16"
   },
   "/ar/companies/accounting/": {
@@ -24,7 +24,7 @@
     "modified": "2026-11-16"
   },
   "/ar/companies/ai-assistant/": {
-    "hash": "3cc26ce595184197",
+    "hash": "0ed9d609e877102a",
     "modified": "2026-11-16"
   },
   "/ar/companies/customer-supplier-ledgers/": {
@@ -60,11 +60,11 @@
     "modified": "2026-11-16"
   },
   "/ar/contact/": {
-    "hash": "0cb968e173da0891",
+    "hash": "122c2f7411b209ec",
     "modified": "2026-11-16"
   },
   "/ar/government/": {
-    "hash": "a80957b27c65e313",
+    "hash": "ce9123446a66daba",
     "modified": "2026-11-16"
   },
   "/ar/government/budgets/": {
@@ -108,23 +108,23 @@
     "modified": "2026-11-11"
   },
   "/en/": {
-    "hash": "f3a339eeef4843c0",
+    "hash": "47979b8ffe3c1231",
     "modified": "2026-11-16"
   },
   "/en/about/": {
-    "hash": "20bfeec9372a8ae1",
+    "hash": "2a1d1ab9b2635baa",
     "modified": "2026-11-16"
   },
   "/en/academic-accountant/": {
-    "hash": "56e88102d6af247f",
+    "hash": "d91e4723338d991e",
     "modified": "2026-11-16"
   },
   "/en/academic-accountant/services/": {
-    "hash": "616aa27e48602c3a",
+    "hash": "c75fadf638da183c",
     "modified": "2026-11-16"
   },
   "/en/companies/": {
-    "hash": "1f2ef8ec9dc3078c",
+    "hash": "a5820768cf85423f",
     "modified": "2026-11-16"
   },
   "/en/companies/accounting/": {
@@ -132,7 +132,7 @@
     "modified": "2026-11-16"
   },
   "/en/companies/ai-assistant/": {
-    "hash": "0de7e555d835c9f0",
+    "hash": "fd97664365b97838",
     "modified": "2026-11-16"
   },
   "/en/companies/customer-supplier-ledgers/": {
@@ -168,11 +168,11 @@
     "modified": "2026-11-16"
   },
   "/en/contact/": {
-    "hash": "687c00f903a877bc",
+    "hash": "d617e52f75cbd23f",
     "modified": "2026-11-16"
   },
   "/en/government/": {
-    "hash": "b835df258e49720f",
+    "hash": "8977e3160988a7c0",
     "modified": "2026-11-16"
   },
   "/en/government/budgets/": {

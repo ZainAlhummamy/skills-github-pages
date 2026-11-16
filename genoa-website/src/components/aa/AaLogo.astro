@@ -1,27 +1,37 @@
 ---
 /**
  * The Academic Accountant logo, cropped to a circle (AVIF/WebP from Astro's image pipeline). Renders nothing until
- * the file is in src/assets/academic-accountant/ (see src/lib/aa-logo.ts).
+ * the file is in src/assets/academic-accountant/ (see src/lib/aa-logo.ts). `size` is the largest width it is shown
+ * at (a 1x and a 2x file are made); `decorative` hides it from screen readers where the link it sits in already names
+ * the office (it keeps its alt: the site checker wants one on every image).
  */
 import { Picture } from 'astro:assets';
 import type { Lang } from '../../content/types';
 import { aaLogo, aaLogoAlt, aaLogoPosition } from '../../lib/aa-logo';
-interface Props { lang: Lang; size?: number; }
-const { lang, size = 168 } = Astro.props;
+interface Props {
+  lang: Lang;
+  size?: number;
+  class?: string;
+  loading?: 'eager' | 'lazy';
+  decorative?: boolean;
+}
+const { lang, size = 168, class: cls = 'aa-logo', loading = 'eager', decorative = false } = Astro.props;
 const px = aaLogo ? Math.min(size, aaLogo.width, aaLogo.height) : size;
 ---
 {aaLogo ? (
   <Picture
     src={aaLogo}
     alt={aaLogoAlt[lang]}
+    aria-hidden={decorative ? 'true' : undefined}
     width={px}
     height={px}
     densities={[1, 2]}
     fit="cover"
     position={aaLogoPosition}
     formats={['avif', 'webp']}
-    loading="eager"
-    class="aa-logo"
+    loading={loading}
+    decoding="async"
+    class={cls}
   />
 ) : (
   <Fragment set:html="<!-- Academic Accountant logo: none in src/assets/academic-accountant/ -->" />

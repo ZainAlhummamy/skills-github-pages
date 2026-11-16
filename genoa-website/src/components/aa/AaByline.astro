@@ -1,0 +1,17 @@
+---
+/**
+ * "A product of Academic Accountant": the office's seal and a link to its page, beside the eyebrow of the home and
+ * product heroes (the owner, 16 Nov 2026: Genoa and Genoa Gov were built on the office's accounting and technology
+ * expertise). The seal is decorative: the link text names the office.
+ */
+import type { Lang } from '../../content/types';
+import { aaOnHome } from '../../content/academic-accountant';
+import { path } from '../../lib/routes';
+import AaLogo from './AaLogo.astro';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+---
+<a class="aa-byline" href={path(lang, 'academic-accountant')}>
+  <AaLogo lang={lang} size={28} class="aa-byline-seal" decorative />
+  <span>{aaOnHome[lang].byline}</span>
+</a>
