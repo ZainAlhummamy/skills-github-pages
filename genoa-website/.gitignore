@@ -3,3 +3,4 @@ dist/
 .astro/
 reports/lighthouse/*.json
 .DS_Store
+.superdesign/tmp/
