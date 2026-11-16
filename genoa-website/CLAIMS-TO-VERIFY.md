@@ -88,6 +88,10 @@ the two phone numbers. **Zain should confirm or correct:**
   and technology expertise, and with them the office offers accounting, technology and AI services for accounting and
   financial work. The pages say exactly that (`aaRelationship`, `aaAlongside`): in the header, the home page (hero
   by-line and a section), the product heroes (by-line), the office's pages, `/about/`, `/contact/` and `llms.txt`.
+  For search and AI assistants it is also in the home and product answers (the paragraph under the H1) and meta
+  descriptions, in a "Who is behind Genoa / Genoa Gov?" FAQ on each product's FAQ page (FAQPage JSON-LD), and in a
+  short Academic Accountant node (names, url, description; no address or phones) on every page whose JSON-LD points
+  to it (`academicAccountantRef`, src/lib/seo.ts).
 - ✅ **No "Genoa Systems develops them" on the office's pages** (the owner, 16 Nov 2026). Nothing says same owner,
   parent or subsidiary either, and the JSON-LD has no `parentOrganization` / `subOrganization`: confirm the legal
   relationship if it should be stated. Genoa Systems' own pages no longer say it develops or makes the two products

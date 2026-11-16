@@ -13,11 +13,11 @@ export const government: Product = {
     ar: {
       title: "نظام محاسبي حكومي للدوائر العراقية | Genoa Gov",
       description:
-        "Genoa Gov نظام محاسبي حكومي (برنامج محاسبة حكومية) لأقسام الحسابات في الدوائر العراقية: مصادقة متعددة المستخدمين، سجل تعديلات، تخصيصات، صكوك، وغلق شهري وسنوي.",
+        "Genoa Gov نظام محاسبي حكومي (برنامج محاسبة حكومية) من نتاج المحاسب الأكاديمي لأقسام الحسابات في الدوائر العراقية: مصادقة متعددة المستخدمين، تخصيصات، صكوك، وغلق.",
       h1: "Genoa Gov: نظام محاسبي حكومي للدوائر العراقية",
       productName: "Genoa Gov",
       answer:
-        "Genoa Gov نظام محاسبي حكومي، أي برنامج محاسبة حكومية، لأقسام الحسابات في الدوائر الحكومية العراقية. يضم مستندات القبض والقيد ومستندات الصرف (سندات الصرف)، مع سير عمل للتدقيق والمصادقة يشترك فيه أكثر من مستخدم، وتعديل المستندات المرحّلة مع سجل تعديلات كامل، والموازنة والتحقق من كفاية التخصيص، والصكوك، والغلق الشهري وغلق السنة المالية، ومكتبة للتشريعات. وتعمل كل دائرة في Genoa Gov بقاعدة بيانات منفصلة خاصة بها.",
+        "Genoa Gov نظام محاسبي حكومي، أي برنامج محاسبة حكومية، لأقسام الحسابات في الدوائر الحكومية العراقية. يضم مستندات القبض والقيد ومستندات الصرف (سندات الصرف)، مع سير عمل للتدقيق والمصادقة يشترك فيه أكثر من مستخدم، وتعديل المستندات المرحّلة مع سجل تعديلات كامل، والموازنة والتحقق من كفاية التخصيص، والصكوك، والغلق الشهري وغلق السنة المالية، ومكتبة للتشريعات. وتعمل كل دائرة في Genoa Gov بقاعدة بيانات منفصلة خاصة بها. وGenoa Gov من نتاج المحاسب الأكاديمي، بُني وفق خبراته المحاسبية والتقنية.",
       whatIs: {
         heading: "ما هو Genoa Gov؟",
         body: [
@@ -92,11 +92,11 @@ export const government: Product = {
     en: {
       title: "Government Accounting Software for Iraq | Genoa Gov",
       description:
-        "Genoa Gov is accounting software for Iraqi government departments: multi-user voucher approval, audit trail, allocation checks, cheques and closing.",
+        "Genoa Gov, from Academic Accountant, is accounting software for Iraqi government departments: multi-user voucher approval, audit trail, allocation checks, cheques, closing.",
       h1: "Genoa Gov: accounting software for Iraqi government departments",
       productName: "Genoa Gov",
       answer:
-        "Genoa Gov is government accounting software for the accounts sections of Iraqi government departments. It covers payment, receipt and journal vouchers with a multi-user audit and approval workflow, amendment of posted vouchers with a full audit trail, budgets with allocation checks before spending, cheques, month-end and year-end closing, and a legislation library. Each office in Genoa Gov works in its own separate database.",
+        "Genoa Gov is government accounting software for the accounts sections of Iraqi government departments. It covers payment, receipt and journal vouchers with a multi-user audit and approval workflow, amendment of posted vouchers with a full audit trail, budgets with allocation checks before spending, cheques, month-end and year-end closing, and a legislation library. Each office in Genoa Gov works in its own separate database. Genoa Gov is a product of Academic Accountant, built on its accounting and technology expertise.",
       whatIs: {
         heading: "What is Genoa Gov?",
         body: [
@@ -1124,6 +1124,14 @@ export const government: Product = {
           heading: "المستندات والموازنة والصكوك والغلق",
           faqs: [
             {
+              // The owner, 16 Nov 2026: the product is Academic Accountant's; Genoa Systems offers it.
+              q: "من يقف وراء برنامج Genoa Gov؟",
+              a: [
+                "برنامج Genoa Gov من نتاج المحاسب الأكاديمي، مكتب المحاسبة والاستشارات المالية في المنصور ببغداد، صاحب الخبرة التي تزيد على 15 سنة في مجال المحاسبة. وقد بُني البرنامج وفق خبرات المكتب المحاسبية والتقنية، وتقدّمه Genoa Systems، وهي شركة عراقية لبرمجيات المحاسبة.",
+                "ويقدّم المحاسب الأكاديمي مع البرنامج خدمات محاسبية وتقنية، وخدمات ذكاء اصطناعي خاصة بالأعمال المحاسبية والمالية.",
+              ],
+            },
+            {
               q: "كيف تتم المصادقة على مستند الصرف في Genoa Gov؟",
               a: [
                 "في Genoa Gov يمر مستند الصرف بسير عمل للتدقيق والمصادقة يشترك فيه أكثر من مستخدم قبل المصادقة عليه.",
@@ -1253,6 +1261,14 @@ export const government: Product = {
         {
           heading: "Vouchers, budgets, cheques and closing",
           faqs: [
+            {
+              // The owner, 16 Nov 2026: the product is Academic Accountant's; Genoa Systems offers it.
+              q: "Who is behind Genoa Gov?",
+              a: [
+                "Genoa Gov is a product of Academic Accountant (المحاسب الأكاديمي), an accounting and financial consulting office in Al-Mansour, Baghdad, with more than 15 years of experience in accounting. It was built on the office's accounting and technology expertise, and it is offered by Genoa Systems, an Iraqi accounting-software company.",
+                "Alongside Genoa Gov, Academic Accountant offers accounting and technology services, and AI services for accounting and financial work.",
+              ],
+            },
             {
               q: "How does the approval chain for payment vouchers work in Genoa Gov?",
               a: [

@@ -14,11 +14,11 @@ export const companies: Product = {
     ar: {
       title: "نظام محاسبي للشركات العراقية مع إدارة المخازن | Genoa",
       description:
-        "برنامج Genoa نظام محاسبي للشركات العراقية بدليل حسابات النظام المحاسبي الموحد وقوائم مالية وفق IFRS، يضم الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين.",
+        "برنامج Genoa نظام محاسبي للشركات العراقية من نتاج المحاسب الأكاديمي، بدليل النظام المحاسبي الموحد وقوائم IFRS، ويضم الحسابات والمخازن والمبيعات والمشتريات والذمم.",
       h1: "Genoa: نظام محاسبي للشركات العراقية مع إدارة المخازن",
       productName: "Genoa",
       answer:
-        "Genoa برنامج محاسبي عراقي للشركات التي تشتري المواد وتخزنها وتبيعها، ويعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS). يضم البرنامج الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الذمم. ويوفر ميزتين اختياريتين هما تعدد العملات (الدولار الأمريكي إلى جانب الدينار العراقي) والكلفة الواصلة (إضافة الشحن والكمارك إلى كلفة المادة). والميزتان معطّلتان افتراضياً، وتُفعَّلان لكل شركة على حدة حسب حاجتها. وفي Genoa ميزتان تعملان بالذكاء الاصطناعي: مساعد ذكي يساعد المستخدم داخل البرنامج، وإضافة فاتورة مباشرة من صورتها.",
+        "Genoa برنامج محاسبي عراقي للشركات التي تشتري المواد وتخزنها وتبيعها، ويعتمد دليل حسابات النظام المحاسبي الموحد، ويمكنه إعداد القوائم المالية وفقاً للمعايير الدولية لإعداد التقارير المالية (IFRS). يضم البرنامج الحسابات والمخازن والمبيعات والمشتريات وذمم الزبائن والمجهزين مع أعمار الذمم. ويوفر ميزتين اختياريتين هما تعدد العملات (الدولار الأمريكي إلى جانب الدينار العراقي) والكلفة الواصلة (إضافة الشحن والكمارك إلى كلفة المادة). والميزتان معطّلتان افتراضياً، وتُفعَّلان لكل شركة على حدة حسب حاجتها. وفي Genoa ميزتان تعملان بالذكاء الاصطناعي: مساعد ذكي يساعد المستخدم داخل البرنامج، وإضافة فاتورة مباشرة من صورتها. وGenoa من نتاج المحاسب الأكاديمي، بُني وفق خبراته المحاسبية والتقنية.",
       whatIs: {
         heading: "ما هو Genoa؟",
         body: [
@@ -96,11 +96,11 @@ export const companies: Product = {
     en: {
       title: "Accounting and Inventory Software for Iraq | Genoa",
       description:
-        "Genoa is accounting software for Iraqi companies: the Unified Accounting System chart of accounts, IFRS-based statements, inventory, sales, purchasing and ledgers.",
+        "Genoa, from Academic Accountant, is accounting software for Iraqi companies: Unified Accounting System chart of accounts, IFRS statements, inventory, sales and ledgers.",
       h1: "Genoa: accounting and inventory software for Iraqi companies",
       productName: "Genoa",
       answer:
-        "Genoa is accounting software for Iraqi companies that buy, stock and sell goods, and it uses the chart of accounts of the Iraqi Unified Accounting System and can prepare financial statements based on International Financial Reporting Standards (IFRS). It covers accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. Two optional features are available: multi-currency (the US dollar alongside the Iraqi dinar) and landed cost (freight and customs added on top of item cost). Both are off by default and are switched on per organisation. Genoa also has two AI-powered features: an AI assistant that helps the user inside the software, and adding an invoice directly from an image of it.",
+        "Genoa is accounting software for Iraqi companies that buy, stock and sell goods, and it uses the chart of accounts of the Iraqi Unified Accounting System and can prepare financial statements based on International Financial Reporting Standards (IFRS). It covers accounting, inventory, sales and purchasing, and customer and supplier ledgers with ageing. Two optional features are available: multi-currency (the US dollar alongside the Iraqi dinar) and landed cost (freight and customs added on top of item cost). Both are off by default and are switched on per organisation. Genoa also has two AI-powered features: an AI assistant that helps the user inside the software, and adding an invoice directly from an image of it. Genoa is a product of Academic Accountant, built on its accounting and technology expertise.",
       whatIs: {
         heading: "What is Genoa?",
         body: [
@@ -1299,6 +1299,14 @@ export const companies: Product = {
               ],
             },
             {
+              // The owner, 16 Nov 2026: the product is Academic Accountant's; Genoa Systems offers it.
+              q: "من يقف وراء برنامج Genoa؟",
+              a: [
+                "برنامج Genoa من نتاج المحاسب الأكاديمي، مكتب المحاسبة والاستشارات المالية في المنصور ببغداد، صاحب الخبرة التي تزيد على 15 سنة في مجال المحاسبة. وقد بُني البرنامج وفق خبرات المكتب المحاسبية والتقنية، وتقدّمه Genoa Systems، وهي شركة عراقية لبرمجيات المحاسبة.",
+                "ويقدّم المحاسب الأكاديمي مع البرنامج خدمات محاسبية وتقنية، وخدمات ذكاء اصطناعي خاصة بالأعمال المحاسبية والمالية.",
+              ],
+            },
+            {
               q: "هل في برنامج Genoa ذكاء اصطناعي؟",
               a: [
                 "نعم. في برنامج Genoa ميزتان تعملان بالذكاء الاصطناعي: مساعد ذكي يساعد المستخدم أثناء عمله داخل البرنامج، وإضافة فاتورة مباشرة من صورتها بدلاً من إدخالها يدوياً.",
@@ -1435,6 +1443,14 @@ export const companies: Product = {
               a: [
                 "Genoa uses the chart of accounts of the Iraqi Unified Accounting System and can prepare financial statements based on International Financial Reporting Standards (IFRS); these are two separate frameworks.",
                 "The same chart of accounts is used across accounting, inventory, sales and purchasing, and customer and supplier ledgers, because they are all in one product. The Unified Accounting System and IFRS statements page has the details.",
+              ],
+            },
+            {
+              // The owner, 16 Nov 2026: the product is Academic Accountant's; Genoa Systems offers it.
+              q: "Who is behind Genoa?",
+              a: [
+                "Genoa is a product of Academic Accountant (المحاسب الأكاديمي), an accounting and financial consulting office in Al-Mansour, Baghdad, with more than 15 years of experience in accounting. It was built on the office's accounting and technology expertise, and it is offered by Genoa Systems, an Iraqi accounting-software company.",
+                "Alongside Genoa, Academic Accountant offers accounting and technology services, and AI services for accounting and financial work.",
               ],
             },
             {
