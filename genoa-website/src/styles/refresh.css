@@ -717,6 +717,13 @@ h2.ruled::after {
 [data-product='government'] .answer-rest {
   border-inline-start-color: var(--gov);
 }
+[data-ai='true'] .answer-rest {
+  border-inline-start-color: var(--ai);
+}
+/* Feature pages without a real screenshot: the hero is text only, at a readable measure. */
+.hero-solo .hero-copy {
+  max-width: 52rem;
+}
 .product-chip {
   display: inline-block;
   margin-bottom: 0.4rem;

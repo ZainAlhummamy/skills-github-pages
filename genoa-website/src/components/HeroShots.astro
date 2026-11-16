@@ -1,10 +1,11 @@
 ---
 /* Hero screens: two real screenshots, layered — `front` in front, `back` behind and offset. Used by the home page
- * (Genoa's dashboard over a Genoa Gov payment voucher) and the product pages (each product's own screens). They are
- * screenshots of the software with fictional demo data (tagged as such), and each opens at full size like every other
- * screenshot on the site. On a wide screen they are beside the hero text and the browser raises their priority once
- * it sees them; on a phone they sit under it, below the first screen, so neither claims high priority up front (that
- * held back the fonts and page in mobile Lighthouse). The back one loads lazily. */
+ * (Genoa's dashboard over a Genoa Gov payment voucher), the product pages (each product's own screens) and the
+ * feature pages (the feature's screen over the product's dashboard). They are screenshots of the software with
+ * fictional demo data (tagged as such), and each opens at full size like every other screenshot on the site.
+ * Loading, as measured with Lighthouse: on a wide screen the front screen is the page's largest element, so it is not
+ * lazy; on a phone it sits below the first screen, so it asks for low priority and does not hold back the fonts and
+ * text (high priority did, in mobile Lighthouse). The back one loads lazily. */
 import type { Lang } from '../content/types';
 import { t } from '../i18n/ui';
 import { screenshotFor } from '../content/screenshots';
@@ -18,8 +19,8 @@ const { lang, front, back } = Astro.props;
 
 // Displayed width: about 460px of the hero's visual column on wide screens, most of the screen on a phone.
 const sizes = '(min-width: 960px) 470px, 82vw';
-const slots: { id: string; place: 'front' | 'back'; loading: 'eager' | 'lazy' }[] = [
-  { id: front, place: 'front', loading: 'eager' },
+const slots: { id: string; place: 'front' | 'back'; loading: 'eager' | 'lazy'; priority?: 'low' }[] = [
+  { id: front, place: 'front', loading: 'eager', priority: 'low' },
 ];
 if (back) slots.push({ id: back, place: 'back', loading: 'lazy' });
 const shots = slots
@@ -46,6 +47,7 @@ const shots = slots
         width={s.shot.width}
         height={s.shot.height}
         loading={s.loading}
+        fetchpriority={s.priority}
         decoding="async"
       />
     </a>
