@@ -14,6 +14,7 @@ import {
   aaOffice,
   aaOnAbout,
   aaOnContact,
+  aaPhoneGroups,
   aaPhoneText,
   aaServices,
   aaServicesPage,
@@ -45,10 +46,14 @@ const sectionsText = (sections: Section[]) =>
 
 const faqText = (faqs: Faq[]) => faqs.map((f) => `### ${f.q}\n\n${f.a.join('\n\n')}`).join('\n\n');
 
+/** The Academic Accountant office's phone numbers by purpose, one list line per group. */
+const aaPhonesText = (lang: Lang) =>
+  aaPhoneGroups.map((g) => `- ${aaContactBlock[lang].phoneGroups[g.id]}: ${g.phones.map((p) => aaPhoneText(p, lang)).join(', ')}`).join('\n');
+
 /** The Academic Accountant office's address, phones and profiles, as plain text. */
 const aaContactText = (lang: Lang) => {
   const c = aaContactBlock[lang];
-  return `## ${c.heading}\n\n- ${c.addressLabel}: ${aaOffice.address[lang].full}\n- ${c.phonesLabel}: ${aaOffice.phones.map((p) => aaPhoneText(p, lang)).join(', ')}\n- Facebook: ${aaOffice.profiles.facebook}\n- Instagram: ${aaOffice.profiles.instagram}`;
+  return `## ${c.heading}\n\n- ${c.addressLabel}: ${aaOffice.address[lang].full}\n${aaPhonesText(lang)}\n- Facebook: ${aaOffice.profiles.facebook}\n- Instagram: ${aaOffice.profiles.instagram}`;
 };
 
 export const catalog = (lang: Lang): CatalogPage[] => {
@@ -214,7 +219,7 @@ export const catalog = (lang: Lang): CatalogPage[] => {
       [
         c.answer,
         `## ${c.nextHeading}\n\n${c.nextSteps.map((x, i) => `${i + 1}. ${x}`).join('\n')}`,
-        `## ${aaOnContact[lang].heading}\n\n${aaOnContact[lang].body}\n\n- ${aaContactBlock[lang].addressLabel}: ${aaOffice.address[lang].full}\n- ${aaContactBlock[lang].phonesLabel}: ${aaOffice.phones.map((p) => aaPhoneText(p, lang)).join(', ')}`,
+        `## ${aaOnContact[lang].heading}\n\n${aaOnContact[lang].body}\n\n- ${aaContactBlock[lang].addressLabel}: ${aaOffice.address[lang].full}\n${aaPhonesText(lang)}`,
       ].join('\n\n'),
   });
   return out;

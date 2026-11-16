@@ -62,8 +62,9 @@ added to `CLAIMS-TO-VERIFY.md` for the team to confirm before launch.
 - «خبرة أكثر من 15 سنة في مجال المحاسبة» — the only number that may be used about the office.
 - The eleven services of its 2 May 2026 post; training: «ورش تدريبية في النظام المحاسبي المحدث وفق المعايير
   الدولية», «بناء قدرات», «تدريب وتطوير مهني»; «استشارة أولية مجانية لأصحاب المشاريع الجديدة».
-- Address: بغداد – المنصور – بناية بزنس أفنيو، قرب جامع أبو جعفر المنصور. Phones 07827777420 and 07712594596
-  (not its e-mail address).
+- Address: بغداد – المنصور – بناية بزنس أفنيو، قرب جامع أبو جعفر المنصور. Phones: accounting consulting and
+  services 07827777420 and 07712594596; technical consulting and IT services 07714487455 (owner, 16 Nov 2026). Not its
+  e-mail address.
 - Relationship, until the owner says more: «يعمل مع Genoa Systems ويقدّم أنظمتها المحاسبية» / "works with Genoa Systems
   and offers its accounting systems". Never same owner, parent or subsidiary. Never put its address or phones where
   they could be read as Genoa Systems' own (Genoa Systems' city is not confirmed), and never add its profiles to

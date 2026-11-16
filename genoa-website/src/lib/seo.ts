@@ -7,7 +7,7 @@
 import { site, placeholdersInUse, companyIntro, telephone } from '../config/site';
 import { modifiedOn } from './dates';
 import { products } from '../content';
-import { aaHub, aaOffice, aaServices } from '../content/academic-accountant';
+import { aaContactBlock, aaHub, aaOffice, aaPhoneGroups, aaServices } from '../content/academic-accountant';
 import type { Faq, Lang, ProductId } from '../content/types';
 import { abs, path } from './routes';
 
@@ -161,7 +161,14 @@ export const academicAccountantNode = (lang: Lang, logo?: { src: string; width: 
       addressRegion: 'Baghdad',
       addressCountry: 'IQ',
     },
+    // The main numbers (accounting consulting and services), then one ContactPoint per purpose.
     telephone: aaOffice.phones.map((p) => p.e164),
+    contactPoint: aaPhoneGroups.map((g) => ({
+      '@type': 'ContactPoint',
+      contactType: aaContactBlock[lang].phoneGroups[g.id],
+      telephone: g.phones.length === 1 ? g.phones[0].e164 : g.phones.map((p) => p.e164),
+      areaServed: site.areaServed.code,
+    })),
     areaServed: { '@type': 'Country', name: site.areaServed.en, identifier: site.areaServed.code },
     knowsAbout:
       lang === 'ar'

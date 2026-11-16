@@ -25,16 +25,18 @@ export const aaOffice = {
   /** Other names it goes by: Arabic, Facebook's "Academy accountant", Instagram's "AA". */
   alternateName: ['المحاسب الأكاديمي', 'Academy accountant', 'AA'],
   /**
-   * The office's phone numbers as published on its profiles. The e-mail address on its Facebook page is deliberately
-   * not published here.
+   * Accounting consulting and services: the phone numbers published on the office's profiles (also the numbers on the
+   * free-consultation call buttons). The e-mail address on its Facebook page is deliberately not published here.
    */
   phones: [
     { e164: '+9647827777420', local: '07827777420', intl: '+964 782 777 7420' },
     { e164: '+9647712594596', local: '07712594596', intl: '+964 771 259 4596' },
   ],
+  /** Technical consulting and IT services (owner, 16 Nov 2026). */
+  itPhones: [{ e164: '+9647714487455', local: '07714487455', intl: '+964 771 448 7455' }],
   /**
    * WhatsApp number, digits only (9647…), for a wa.me link on the hub's contact section.
-   * TODO(Zain): confirm which of the two numbers (if any) is on WhatsApp. Empty: no WhatsApp link is shown.
+   * TODO(Zain): confirm which of the numbers (if any) is on WhatsApp. Empty: no WhatsApp link is shown.
    */
   whatsapp: '',
   /** The office's own profiles (its sameAs). Not Genoa Systems' profiles: see the TODO at the top. */
@@ -55,8 +57,22 @@ export const aaOffice = {
   } satisfies L<{ street: string; full: string }>,
 } as const;
 
+/** One phone number: E.164 for tel: links and JSON-LD, local and international forms for display. */
+export interface AaPhone {
+  e164: string;
+  local: string;
+  intl: string;
+}
+
 /** A phone number as shown on a page: local form in Arabic (as the office publishes it), international in English. */
-export const aaPhoneText = (phone: (typeof aaOffice.phones)[number], lang: Lang) => (lang === 'ar' ? phone.local : phone.intl);
+export const aaPhoneText = (phone: AaPhone, lang: Lang) => (lang === 'ar' ? phone.local : phone.intl);
+
+/** The office's numbers by purpose, in the order pages list them (labels: aaContactBlock[lang].phoneGroups). */
+export type AaPhoneGroupId = 'accounting' | 'it';
+export const aaPhoneGroups: { id: AaPhoneGroupId; phones: readonly AaPhone[] }[] = [
+  { id: 'accounting', phones: aaOffice.phones },
+  { id: 'it', phones: aaOffice.itPhones },
+];
 
 /** The one sentence that says how the office relates to Genoa Systems (see the TODO at the top). */
 export const aaRelationship: L = {
@@ -266,7 +282,8 @@ export interface AaContactBlock {
   /** Hero button that jumps to this block. */
   jump: string;
   addressLabel: string;
-  phonesLabel: string;
+  /** What each group of phone numbers is for (aaPhoneGroups). */
+  phoneGroups: Record<AaPhoneGroupId, string>;
   followLabel: string;
   facebook: string;
   instagram: string;
@@ -278,7 +295,10 @@ export const aaContactBlock: L<AaContactBlock> = {
     heading: 'موقع المكتب وأرقام التواصل',
     jump: 'العنوان والهاتف',
     addressLabel: 'العنوان',
-    phonesLabel: 'الهاتف',
+    phoneGroups: {
+      accounting: 'الاستشارات والخدمات المحاسبية',
+      it: 'الاستشارات التقنية وخدمات تقنية المعلومات',
+    },
     followLabel: 'تابِع المحاسب الأكاديمي',
     facebook: 'المحاسب الأكاديمي على فيسبوك',
     instagram: 'المحاسب الأكاديمي على إنستغرام',
@@ -288,7 +308,10 @@ export const aaContactBlock: L<AaContactBlock> = {
     heading: 'Office location and phone numbers',
     jump: 'Address and phone',
     addressLabel: 'Address',
-    phonesLabel: 'Phone',
+    phoneGroups: {
+      accounting: 'Accounting consulting and services',
+      it: 'Technical consulting and IT services',
+    },
     followLabel: 'Follow Academic Accountant',
     facebook: 'Academic Accountant on Facebook',
     instagram: 'Academic Accountant on Instagram',
@@ -380,7 +403,7 @@ export const aaHub: L<AaHubContent> = {
       // Course JSON-LD (see the brief, §2C); until then training stays this one section.
       body: [
         'يقدّم المحاسب الأكاديمي ورشاً تدريبية في النظام المحاسبي المحدث وفق المعايير الدولية، ويعمل على بناء القدرات والتدريب والتطوير المهني.',
-        'للاستفسار عن الورش التدريبية، اتصل بالمكتب على أحد الرقمين أدناه.',
+        'للاستفسار عن الورش التدريبية، اتصل بالمكتب على أرقام الاستشارات والخدمات المحاسبية أدناه.',
       ],
     },
     systems: {
@@ -396,7 +419,7 @@ export const aaHub: L<AaHubContent> = {
       {
         q: 'أين يقع مكتب المحاسب الأكاديمي؟',
         a: [
-          'يقع مكتب المحاسب الأكاديمي في بغداد، منطقة المنصور، بناية بزنس أفنيو، قرب جامع أبو جعفر المنصور. ورقما هاتفه 07827777420 و07712594596.',
+          'يقع مكتب المحاسب الأكاديمي في بغداد، منطقة المنصور، بناية بزنس أفنيو، قرب جامع أبو جعفر المنصور. وللاستشارات والخدمات المحاسبية اتصل على 07827777420 أو 07712594596، وللاستشارات التقنية وخدمات تقنية المعلومات على 07714487455.',
         ],
       },
       {
@@ -474,7 +497,7 @@ export const aaHub: L<AaHubContent> = {
       heading: 'Training and capacity building',
       body: [
         'Academic Accountant runs training workshops on the updated accounting system in line with international standards, and offers capacity building, training and professional development.',
-        'To ask about the workshops, call the office on one of the numbers below.',
+        'To ask about the workshops, call the office on its accounting consulting and services numbers below.',
       ],
     },
     systems: {
@@ -490,7 +513,7 @@ export const aaHub: L<AaHubContent> = {
       {
         q: 'Where is the Academic Accountant office?',
         a: [
-          'The Academic Accountant office is in the Business Avenue Building in Al-Mansour, Baghdad, near Abu Jaafar Al-Mansour Mosque. Its phone numbers are +964 782 777 7420 and +964 771 259 4596.',
+          'The Academic Accountant office is in the Business Avenue Building in Al-Mansour, Baghdad, near Abu Jaafar Al-Mansour Mosque. For accounting consulting and services call +964 782 777 7420 or +964 771 259 4596; for technical consulting and IT services, call +964 771 448 7455.',
         ],
       },
       {

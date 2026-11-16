@@ -5,7 +5,7 @@ import Icon from '../../components/Icon.astro';
 import ErrorMsg from '../../components/ErrorMsg.astro';
 import { LANGS, type Lang } from '../../content/types';
 import { contact, governorates } from '../../content/pages';
-import { aaOffice, aaOnContact, aaPhoneText } from '../../content/academic-accountant';
+import { aaContactBlock, aaOffice, aaOnContact, aaPhoneGroups, aaPhoneText } from '../../content/academic-accountant';
 import { t } from '../../i18n/ui';
 import { abs, path } from '../../lib/routes';
 import { ids, pageGraph } from '../../lib/seo';
@@ -144,11 +144,16 @@ const mode = site.formEndpoint ? 'endpoint' : 'whatsapp';
           <h2 id="aa-office-heading">{aa.heading}</h2>
           <p>{aa.body}</p>
           <p class="aa-office-address"><Icon name="pin" /><span>{aaOffice.address[lang].full}</span></p>
-          <ul class="aa-office-phones">
-            {aaOffice.phones.map((p) => (
-              <li><a href={`tel:${p.e164}`}><Icon name="phone" /><span class="ltr">{aaPhoneText(p, lang)}</span></a></li>
-            ))}
-          </ul>
+          {aaPhoneGroups.map((g) => (
+            <>
+              <p class="aa-office-group">{aaContactBlock[lang].phoneGroups[g.id]}</p>
+              <ul class="aa-office-phones">
+                {g.phones.map((p) => (
+                  <li><a href={`tel:${p.e164}`}><Icon name="phone" /><span class="ltr">{aaPhoneText(p, lang)}</span></a></li>
+                ))}
+              </ul>
+            </>
+          ))}
           <p><a href={path(lang, 'academic-accountant')}>{aa.link}</a></p>
         </section>
       </aside>
@@ -166,6 +171,12 @@ const mode = site.formEndpoint ? 'endpoint' : 'whatsapp';
       height: 20px;
       flex: none;
       margin-top: 0.2em;
+    }
+    .aa-office-group {
+      margin: 0.75rem 0 0;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--muted);
     }
     .aa-office-phones {
       list-style: none;
