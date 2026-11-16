@@ -1,0 +1,47 @@
+---
+/** The office's Facebook and Instagram profiles as icon links (its own profiles, not Genoa Systems'). */
+import type { Lang } from '../../content/types';
+import { aaContactBlock, aaOffice } from '../../content/academic-accountant';
+import Icon from '../Icon.astro';
+interface Props { lang: Lang; class?: string; }
+const { lang, class: cls } = Astro.props;
+const c = aaContactBlock[lang];
+const links = [
+  { href: aaOffice.profiles.facebook, icon: 'facebook', label: c.facebook },
+  { href: aaOffice.profiles.instagram, icon: 'instagram', label: c.instagram },
+];
+---
+<ul class:list={['aa-social', cls]}>
+  {links.map((l) => (
+    <li>
+      <a href={l.href} rel="noopener" target="_blank" aria-label={l.label} title={l.label}>
+        <Icon name={l.icon} />
+      </a>
+    </li>
+  ))}
+</ul>
+<style>
+  .aa-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .aa-social li + li {
+    margin: 0;
+  }
+  .aa-social a {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+  }
+  .aa-social :global(svg) {
+    width: 22px;
+    height: 22px;
+  }
+</style>

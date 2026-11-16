@@ -39,6 +39,8 @@ const pages = new Map();
 let siteOrigin;
 // JSON-LD entities by @id and page language: the url each page gives it, and the first page that did.
 const entityUrls = new Map();
+// JSON-LD @id -> its @type and the first page that defined it: one @id must name one kind of thing on every page.
+const entityTypes = new Map();
 
 for (const file of htmlFiles) {
   const p = toUrlPath(file);
@@ -97,11 +99,21 @@ for (const file of htmlFiles) {
   const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => m[1]);
   if (!blocks.length) err(p, 'no JSON-LD');
   const types = new Set();
+  const definedHere = new Set();
   for (const b of blocks) {
     try {
       const data = JSON.parse(b);
       for (const n of data['@graph'] ?? [data]) {
         [].concat(n['@type']).forEach((t) => types.add(t));
+        // @id collisions: a node defined twice on one page, or one @id given different types on different pages.
+        if (n['@id']) {
+          if (definedHere.has(n['@id'])) err(p, `JSON-LD @id ${n['@id']} is defined more than once`);
+          definedHere.add(n['@id']);
+          const type = [].concat(n['@type']).sort().join(',');
+          const seen = entityTypes.get(n['@id']);
+          if (!seen) entityTypes.set(n['@id'], { type, page: p });
+          else if (seen.type !== type) err(p, `JSON-LD @id ${n['@id']} is ${type} here but ${seen.type} on ${seen.page}`);
+        }
         if (n['@id'] && n.url) {
           const key = `${n['@id']} (${lang} pages)`;
           const urls = entityUrls.get(key) ?? new Map();
@@ -122,6 +134,12 @@ for (const file of htmlFiles) {
   if (depth > 1 && !types.has('BreadcrumbList')) err(p, 'JSON-LD missing BreadcrumbList');
   if (/\/(companies|government)\//.test(p) && !types.has('SoftwareApplication')) err(p, 'JSON-LD missing SoftwareApplication');
   if (/\/faq\/$/.test(p) && !types.has('FAQPage')) err(p, 'JSON-LD missing FAQPage');
+  // Academic Accountant pages: the office's own node, never a product's; the hub carries its FAQ.
+  if (/^\/(ar|en)\/academic-accountant\//.test(p)) {
+    if (!types.has('AccountingService')) err(p, 'JSON-LD missing the Academic Accountant node (AccountingService)');
+    if (types.has('SoftwareApplication')) err(p, 'JSON-LD: a SoftwareApplication node on an Academic Accountant page');
+    if (/academic-accountant\/$/.test(p) && !types.has('FAQPage')) err(p, 'JSON-LD missing FAQPage');
+  }
 
   // Internal links
   for (const m of html.matchAll(/\shref="(\/[^"#?]*)/g)) {
@@ -297,6 +315,22 @@ const ownerNotes = [];
   if (!software.includes('"operatingSystem"')) ownerNotes.push('the deployment model, for SoftwareApplication.operatingSystem (src/lib/seo.ts)');
   const placeholders = htmlFiles.filter((f) => readFileSync(f, 'utf8').includes('src="/placeholders/')).map(toUrlPath);
   if (placeholders.length) ownerNotes.push(`real screenshots for ${placeholders.join(', ')}`);
+  // Academic Accountant (src/content/academic-accountant.ts): what only Zain can give.
+  const aaHub = join(dist, 'en/academic-accountant/index.html');
+  if (existsSync(aaHub)) {
+    const aaHtml = readFileSync(aaHub, 'utf8');
+    const aa = [...aaHtml.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+      .flatMap((m) => JSON.parse(m[1])['@graph'] ?? [])
+      .find((n) => [].concat(n['@type']).includes('AccountingService')) ?? {};
+    if (!aa.logo) ownerNotes.push('Academic Accountant logo (src/assets/academic-accountant/logo.jpg, then npm run og -- academic-accountant)');
+    if (!aaHtml.includes('href="https://wa.me/')) ownerNotes.push('Academic Accountant: which phone number is on WhatsApp (aaOffice.whatsapp, src/content/academic-accountant.ts)');
+  }
+  // Every other Academic Accountant point (relationship to Genoa Systems, profiles, training, …) is a TODO(Zain) in src/.
+  const zain = walk(join(root, 'src'))
+    .filter((f) => /\.(ts|astro|md|css)$/.test(f))
+    .map((f) => [relative(root, f), (readFileSync(f, 'utf8').match(/TODO\(Zain\)/g) ?? []).length])
+    .filter(([, n]) => n);
+  if (zain.length) ownerNotes.push(`TODO(Zain) left: ${zain.map(([f, n]) => `${f} (${n})`).join(', ')}`);
 }
 
 console.log(`\nchecked ${pages.size} pages (${[...pages.keys()].filter((p) => p.startsWith('/ar/')).length} Arabic, ${[...pages.keys()].filter((p) => p.startsWith('/en/')).length} English)`);

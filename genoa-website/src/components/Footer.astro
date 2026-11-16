@@ -6,6 +6,8 @@ import { t, otherLang } from '../i18n/ui';
 import { path, swapLang } from '../lib/routes';
 import { site, companyIntro } from '../config/site';
 import Logo from './Logo.astro';
+import AaSocial from './aa/AaSocial.astro';
+import { aaContactBlock } from '../content/academic-accountant';
 interface Props { lang: Lang; pathname: string; hasAlternate?: boolean; }
 const { lang, pathname, hasAlternate = true } = Astro.props;
 const other = otherLang(lang);
@@ -44,6 +46,16 @@ const year = new Date().getFullYear();
           </li>
         </ul>
       </nav>
+      {/* Academic Accountant: an accounting office that works with Genoa Systems. The profiles are the office's own. */}
+      <nav aria-labelledby="footer-aa">
+        <h2 id="footer-aa">{t('academicAccountant', lang)}</h2>
+        <ul>
+          <li><a href={path(lang, 'academic-accountant')}>{t('aaHubLink', lang)}</a></li>
+          <li><a href={path(lang, 'academic-accountant', 'services')}>{t('aaServicesLink', lang)}</a></li>
+        </ul>
+        <p class="footer-follow">{aaContactBlock[lang].followLabel}</p>
+        <AaSocial lang={lang} />
+      </nav>
     </div>
     <div class="footer-bottom">
       <span>© {year} {site.companyName}. {t('rights', lang)}</span>
@@ -51,3 +63,17 @@ const year = new Date().getFullYear();
     </div>
   </div>
 </footer>
+<style>
+  .footer-follow {
+    margin: 1rem 0 0.5rem;
+    color: #fff;
+    font-weight: 700;
+  }
+  .site-footer :global(.aa-social a) {
+    padding: 0;
+  }
+  .site-footer :global(.aa-social a:hover) {
+    background: #fff;
+    color: #0c1626;
+  }
+</style>

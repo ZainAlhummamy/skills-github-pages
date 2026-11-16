@@ -4,8 +4,16 @@
     "modified": "2026-11-13"
   },
   "/ar/about/": {
-    "hash": "3474584b521d9142",
-    "modified": "2026-11-13"
+    "hash": "dc5fc2c832044342",
+    "modified": "2026-11-16"
+  },
+  "/ar/academic-accountant/": {
+    "hash": "9998b20539d8d4c5",
+    "modified": "2026-11-16"
+  },
+  "/ar/academic-accountant/services/": {
+    "hash": "9733c4b40b43ff8d",
+    "modified": "2026-11-16"
   },
   "/ar/companies/": {
     "hash": "0135f8261ab5242b",
@@ -52,8 +60,8 @@
     "modified": "2026-11-13"
   },
   "/ar/contact/": {
-    "hash": "1b0822304219ff2d",
-    "modified": "2026-11-11"
+    "hash": "0cb968e173da0891",
+    "modified": "2026-11-16"
   },
   "/ar/government/": {
     "hash": "9b004f60e863d6fc",
@@ -104,8 +112,16 @@
     "modified": "2026-11-13"
   },
   "/en/about/": {
-    "hash": "df17ddd47c1a9130",
-    "modified": "2026-11-13"
+    "hash": "20bfeec9372a8ae1",
+    "modified": "2026-11-16"
+  },
+  "/en/academic-accountant/": {
+    "hash": "36870db736cdb958",
+    "modified": "2026-11-16"
+  },
+  "/en/academic-accountant/services/": {
+    "hash": "aa7c3edc0f0ec752",
+    "modified": "2026-11-16"
   },
   "/en/companies/": {
     "hash": "8bc54dfab14be961",
@@ -152,8 +168,8 @@
     "modified": "2026-11-13"
   },
   "/en/contact/": {
-    "hash": "1ce3ab78854f6a2e",
-    "modified": "2026-11-11"
+    "hash": "687c00f903a877bc",
+    "modified": "2026-11-16"
   },
   "/en/government/": {
     "hash": "101487895ab3a579",

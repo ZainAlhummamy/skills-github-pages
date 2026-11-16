@@ -23,6 +23,7 @@ npm run build        # builds dist/ and runs the SEO checker (fails on errors)
 npm run preview      # serves dist/ on http://localhost:4321
 npm run lighthouse   # needs `npm run preview` running; writes reports/lighthouse/summary.md
 npm run og           # regenerates Open Graph images + icons, favicon.ico too (needs Playwright)
+npm run og -- academic-accountant  # only the share images whose name matches; icons and favicon untouched
 npm run dates        # after a copy change: records which pages changed (src/content/page-dates.json)
 npm run screenshot-sizes  # after importing screenshots: writes the 720w/1080w copies used by srcset
 ```
@@ -75,11 +76,14 @@ src/content/companies-ai.ts  Genoa: the 2 AI feature pages (AI assistant, invoic
 src/content/government.ts Genoa Gov: overview, 7 feature pages, FAQ (ar + en)
 src/content/pages.ts      home, security & backups, about, contact, 404
 src/content/guides.ts     guides (explanatory pages): the Unified Accounting System, at /<lang>/guides/<slug>/
+src/content/academic-accountant.ts  Academic Accountant (المحاسب الأكاديمي), the accounting office that works with
+                          Genoa Systems: hub + services pages at /<lang>/academic-accountant/, their own styles
+                          (src/styles/academic-accountant.css) and optional logo (src/assets/academic-accountant/)
 src/content/screenshots.ts  real-screenshot registry (placeholders until filled)
 src/i18n/ui.ts            interface strings (nav, buttons, labels)
 src/styles/global.css     base styles; src/styles/refresh.css is the Nov 2026 visual refresh, loaded after it
 src/components/AiShowcase.astro  home page AI section (features marked `ai: true`)
-src/lib/seo.ts            JSON-LD builders (Organization, WebSite, SoftwareApplication, BreadcrumbList, FAQPage)
+src/lib/seo.ts            JSON-LD builders (Organization, WebSite, SoftwareApplication, Academic Accountant, BreadcrumbList, FAQPage)
 src/lib/catalog.ts        page list + plain text for sitemap.xml, llms.txt, llms-full.txt
 src/pages/                routes (Astro)
 scripts/check-site.mjs    post-build SEO/GEO checks

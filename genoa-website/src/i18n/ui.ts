@@ -13,6 +13,10 @@ export const ui = {
   security: { ar: 'الأمان والنسخ الاحتياطي', en: 'Security and backups' },
   securityShort: { ar: 'الأمان', en: 'Security' },
   about: { ar: 'من نحن', en: 'About' },
+  // Academic Accountant (src/content/academic-accountant.ts): an accounting office that works with Genoa Systems.
+  academicAccountant: { ar: 'المحاسب الأكاديمي', en: 'Academic Accountant' },
+  aaHubLink: { ar: 'مكتب المحاسب الأكاديمي في بغداد', en: 'Academic Accountant office in Baghdad' },
+  aaServicesLink: { ar: 'الخدمات المحاسبية والمالية والتدقيق', en: 'Accounting, audit and financial services' },
   contact: { ar: 'تواصل معنا', en: 'Contact' },
   faq: { ar: 'الأسئلة الشائعة', en: 'FAQ' },
   bookDemo: { ar: 'احجز عرضاً توضيحياً', en: 'Book a demo' },

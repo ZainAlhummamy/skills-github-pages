@@ -15,6 +15,23 @@ and `npm run build` lists the ones it can detect under "Owner TODO".
 | 6 | **Details of the two AI features** (AI assistant, invoice from image): which product(s), their names in the app, what the assistant can be asked, which invoices are read (purchase / sales, Arabic / English, handwriting), whether the user reviews a draft, where data is processed. Plus a **demo-data screenshot of each**. | `src/content/companies-ai.ts`; screenshots: `npm run screenshots -- <folder>`, keys `companies-ai-assistant` and `companies-invoice-from-image`, then `npm run screenshot-sizes` | Both pages state only that the features exist and what they are for, turn the open points into "ask in the demo" questions, and show a labelled placeholder screenshot. See `CLAIMS-TO-VERIFY.md`, "AI features". |
 | 7 | **A real landed-cost screenshot** (demo data), or a decision on the landed-cost feature | `npm run screenshots -- <folder>`, key `companies-landed-cost`, then `npm run screenshot-sizes` | The landed-cost pages show a labelled placeholder. `CLAIMS-TO-VERIFY.md` notes the Genoa app's code has no landed-cost feature: settle that first. |
 
+### Academic Accountant (المحاسب الأكاديمي) — added 16 Nov 2026
+
+Each item is a `TODO(Zain)` in the code; `npm run build` lists the files that still have one.
+
+| # | What | Where it goes | What happens until then |
+|---|---|---|---|
+| A1 | **Relationship to Genoa Systems** (same owner? parent / subsidiary? partner?) | `src/content/academic-accountant.ts` (`aaRelationship`); JSON-LD `parentOrganization` / `subOrganization` in `src/lib/seo.ts` (`academicAccountantNode`) only if confirmed | Pages say "works with Genoa Systems and offers its accounting systems"; the two entities are joined only through the WebPage `about` / `mentions`. |
+| A2 | **Are the office's Facebook / Instagram also official Genoa Systems profiles?** | If yes: also add them to `src/config/site.ts` → `sameAs` | They are the office's `sameAs` only. Genoa Systems' `sameAs` stays empty (a wrong `sameAs` would weaken the Genoa entity). |
+| A3 | ✅ **Office logo** (16 Nov 2026): the photo logo, straightened, cropped and cleaned; its "odoo" wordmark replaced by "Genoa" (`src/assets/academic-accountant/logo.png`) | Optional: a vector original would be sharper; drop it in as `logo.png` / `.webp` and run `npm run og -- academic-accountant` | Done: in the office pages' hero, their JSON-LD `logo` and their share images. |
+| A4 | **WhatsApp**: which of 07827777420 / 07712594596 (accounting) / 07714487455 (technical consulting and IT) is on WhatsApp | `aaOffice.whatsapp` in `src/content/academic-accountant.ts` (digits, 9647…) | No wa.me link; phones are `tel:` links only. |
+| A5 | **Training details**: course names, format, duration, schedule, fees | Then add `/<lang>/academic-accountant/training/` with `Course` JSON-LD per course (provider → the office; no `offers` without fees) | Training is one section on the hub, from the profile lines only. |
+| A6 | **Third-party systems supported** (to name them, or not) | `aaServices` → `system-support` | "Technical support for the accounting systems a client already uses", no product names. |
+| A7 | **English spelling of the building** ("Business Avenue") | `aaOffice.address.en` | Used as written. |
+
+The site header has no Academic Accountant link: with it the English header no longer fits on one row at any width,
+which pushes "Book a demo" into the menu. The office is linked from the footer, `/about/` and `/contact/`.
+
 ## Outside the repository
 
 | # | What | Where |

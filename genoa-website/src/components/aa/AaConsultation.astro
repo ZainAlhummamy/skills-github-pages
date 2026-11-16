@@ -1,0 +1,24 @@
+---
+/** "Free initial consultation for new businesses": the office's call to action, with its phone numbers. */
+import type { Lang } from '../../content/types';
+import { aaConsultation, aaOffice, aaPhoneText } from '../../content/academic-accountant';
+import Icon from '../Icon.astro';
+interface Props { lang: Lang; headingId?: string; }
+const { lang, headingId = 'aa-consultation' } = Astro.props;
+const c = aaConsultation[lang];
+---
+<section class="section" aria-labelledby={headingId}>
+  <div class="container">
+    <div class="cta-band aa-cta" data-reveal>
+      <h2 id={headingId}>{c.heading}</h2>
+      <p>{c.body}</p>
+      <div class="btn-row">
+        {aaOffice.phones.map((p, i) => (
+          <a class:list={['btn', i === 0 ? 'btn-aa' : 'btn-ghost']} href={`tel:${p.e164}`}>
+            <Icon name="phone" />{c.call} <span class="ltr">{aaPhoneText(p, lang)}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
