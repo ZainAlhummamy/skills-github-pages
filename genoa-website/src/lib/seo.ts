@@ -133,9 +133,10 @@ export const softwareNode = (productId: ProductId, lang: Lang): Node => {
 
 /**
  * Academic Accountant: an accounting, consulting and training office in Baghdad, a separate node from Genoa Systems
- * (#organization). Its facts come from its own profiles only (src/content/academic-accountant.ts).
+ * (#organization). Its facts come from its own profiles and the owner (src/content/academic-accountant.ts): Genoa and
+ * Genoa Gov are its product, built on its accounting and technology expertise (said in `description`).
  *
- * TODO(Zain): the relationship to Genoa Systems. Until it is confirmed there is no parentOrganization /
+ * TODO(Zain): the legal relationship to Genoa Systems. Until it is confirmed there is no parentOrganization /
  * subOrganization here: the two are joined only through the WebPage nodes (about / mentions, see pageGraph). The
  * office's Facebook and Instagram profiles are its own sameAs, never Genoa Systems'.
  */
@@ -172,8 +173,8 @@ export const academicAccountantNode = (lang: Lang, logo?: { src: string; width: 
     areaServed: { '@type': 'Country', name: site.areaServed.en, identifier: site.areaServed.code },
     knowsAbout:
       lang === 'ar'
-        ? ['المحاسبة', 'التدقيق', 'التحليل المالي', 'الموازنات التخطيطية', 'محاسبة الكلفة', 'الاحتسابات الضريبية في العراق', 'الأنظمة المحاسبية', 'المعايير الدولية لإعداد التقارير المالية (IFRS)', 'النظام المحاسبي الموحد في العراق']
-        : ['Accounting', 'Auditing', 'Financial analysis', 'Budgeting', 'Cost accounting', 'Tax calculation in Iraq', 'Accounting systems', 'International Financial Reporting Standards (IFRS)', 'Iraqi Unified Accounting System'],
+        ? ['المحاسبة', 'التدقيق', 'التحليل المالي', 'الموازنات التخطيطية', 'محاسبة الكلفة', 'الاحتسابات الضريبية في العراق', 'الأنظمة المحاسبية', 'تقنية المعلومات', 'الذكاء الاصطناعي في الأعمال المحاسبية والمالية', 'المعايير الدولية لإعداد التقارير المالية (IFRS)', 'النظام المحاسبي الموحد في العراق']
+        : ['Accounting', 'Auditing', 'Financial analysis', 'Budgeting', 'Cost accounting', 'Tax calculation in Iraq', 'Accounting systems', 'Information technology', 'AI for accounting and finance', 'International Financial Reporting Standards (IFRS)', 'Iraqi Unified Accounting System'],
     sameAs: [aaOffice.profiles.facebook, aaOffice.profiles.instagram],
     // No prices: the office publishes none.
     hasOfferCatalog: {

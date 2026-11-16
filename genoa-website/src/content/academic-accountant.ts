@@ -2,17 +2,19 @@ import type { Faq, IconKey, KeyFact, L, Lang, PageMeta } from './types';
 import { companyIntro } from '../config/site';
 
 /**
- * Academic Accountant (المحاسب الأكاديمي): the accounting, consulting and training office connected to Genoa Systems.
- * Routes: /<lang>/academic-accountant/ (hub) and /<lang>/academic-accountant/services/.
+ * Academic Accountant (المحاسب الأكاديمي): the accounting, consulting and training office whose accounting and
+ * technology expertise Genoa and Genoa Gov were built on. Routes: /<lang>/academic-accountant/ (hub) and
+ * /<lang>/academic-accountant/services/; also in the header, on the home page (aaOnHome) and beside the products.
  *
- * Source: the office's own Facebook and Instagram pages (CONTENT-GUIDE.md, "Academic Accountant"). Those are the only
- * facts on these pages: no clients, testimonials, certifications, staff names, counts, prices or course content.
+ * Sources: the office's own Facebook and Instagram pages (CONTENT-GUIDE.md, "Academic Accountant"), and the owner's
+ * statement of 16 Nov 2026 on Genoa and Genoa Gov (aaRelationship, aaAlongside below). Those are the only facts on
+ * these pages: no clients, testimonials, certifications, staff names, counts, prices or course content.
  * "More than 15 years of experience in accounting" is the only number that may be used.
  *
- * TODO(Zain): the office's relationship to Genoa Systems. Until it is confirmed, every page says only that the office
- *   "works with Genoa Systems and offers its accounting systems" (aaRelationship below). Do not write same owner,
- *   parent company or subsidiary, and do not add parentOrganization / subOrganization to the JSON-LD
- *   (src/lib/seo.ts, academicAccountantNode), until it is.
+ * TODO(Zain): the legal relationship between the office and Genoa Systems (same owner? parent / subsidiary?). The
+ *   pages say what the owner stated (the two systems are the office's product, built on its expertise; Genoa Systems
+ *   develops them). Do not write same owner, parent company or subsidiary, and do not add parentOrganization /
+ *   subOrganization to the JSON-LD (src/lib/seo.ts, academicAccountantNode), until it is confirmed.
  * TODO(Zain): whether the Facebook and Instagram profiles below are also official Genoa Systems profiles. Until then
  *   they are the office's only: they go in the office's sameAs, never in Genoa Systems' (src/config/site.ts, sameAs).
  */
@@ -77,10 +79,19 @@ export const aaPhoneGroups: { id: AaPhoneGroupId; icon: IconKey; phones: readonl
   { id: 'it', icon: 'support', phones: aaOffice.itPhones },
 ];
 
-/** The one sentence that says how the office relates to Genoa Systems (see the TODO at the top). */
+/**
+ * How the office relates to Genoa and Genoa Gov (the owner, 16 Nov 2026): the two systems are the office's product,
+ * built on its accounting and technology expertise. One sentence without a full stop, used as written everywhere.
+ */
 export const aaRelationship: L = {
-  ar: 'يعمل المكتب مع Genoa Systems ويقدّم أنظمتها المحاسبية',
-  en: 'The office works with Genoa Systems and offers its accounting systems',
+  ar: 'نظاما Genoa للشركات وGenoa Gov للدوائر الحكومية من نتاج المحاسب الأكاديمي، بُنيا وفق خبراته المحاسبية والتقنية',
+  en: 'Genoa for companies and Genoa Gov for government departments are products of Academic Accountant, built on its accounting and technology expertise',
+};
+
+/** What the office offers alongside the two systems (the owner, 16 Nov 2026). One sentence without a full stop. */
+export const aaAlongside: L = {
+  ar: 'ويقدّم المكتب معهما خدمات محاسبية وتقنية، وخدمات ذكاء اصطناعي خاصة بالأعمال المحاسبية والمالية',
+  en: 'Alongside them, the office offers accounting and technology services, and AI services for accounting and financial work',
 };
 
 /* ---------- Services ---------- */
@@ -99,7 +110,10 @@ export interface AaService {
   content: L<{ name: string; body: string }>;
 }
 
-/** The eleven services from the office's 2 May 2026 post, in the post's order. */
+/**
+ * The eleven services from the office's 2 May 2026 post, in the post's order, then the two the owner added on
+ * 16 Nov 2026 (technical consulting and IT services; AI services for accounting and financial work).
+ */
 export const aaServices: AaService[] = [
   {
     id: 'accounts',
@@ -256,6 +270,36 @@ export const aaServices: AaService[] = [
       },
     },
   },
+  {
+    // The owner, 16 Nov 2026. Its phone number is the "technical consulting and IT services" one (aaOffice.itPhones).
+    id: 'it-services',
+    group: 'systems',
+    content: {
+      ar: {
+        name: 'الاستشارات التقنية وخدمات تقنية المعلومات',
+        body: 'استشارات تقنية وخدمات تقنية معلومات يقدّمها المكتب مع نظامي Genoa وGenoa Gov، ولها رقم هاتف خاص بها في معلومات التواصل.',
+      },
+      en: {
+        name: 'Technical consulting and IT services',
+        body: 'Technical consulting and IT services that the office offers alongside Genoa and Genoa Gov, with their own phone number in the contact details.',
+      },
+    },
+  },
+  {
+    // The owner, 16 Nov 2026. What the AI services are is not detailed yet: say only that they exist and what for.
+    id: 'ai',
+    group: 'systems',
+    content: {
+      ar: {
+        name: 'خدمات الذكاء الاصطناعي للأعمال المحاسبية والمالية',
+        body: 'خدمات ذكاء اصطناعي خاصة بالأعمال المحاسبية والمالية، يقدّمها المكتب مع نظامي Genoa وGenoa Gov.',
+      },
+      en: {
+        name: 'AI services for accounting and financial work',
+        body: 'AI services for accounting and financial work, which the office offers alongside Genoa and Genoa Gov.',
+      },
+    },
+  },
 ];
 
 /* ---------- Shared blocks (hub, services page) ---------- */
@@ -329,7 +373,7 @@ export interface AaHubContent extends PageMeta {
   navLabel: string;
   /** The office's tagline, shown above the H1. */
   eyebrow: string;
-  /** "In short": quotable on its own (name, Baghdad Al-Mansour, 15+ years, what it does, relationship to Genoa). */
+  /** The answer: quotable on its own (name, Baghdad Al-Mansour, 15+ years, what it does, Genoa and Genoa Gov). */
   answer: string;
   keyFacts: KeyFact[];
   whatWeDo: {
@@ -345,6 +389,8 @@ export interface AaHubContent extends PageMeta {
     /** One sentence each, from the wording in llms.txt; the link text is the product's label (src/i18n/ui.ts). */
     genoa: string;
     genoaGov: string;
+    /** After the two products: what the office offers with them (aaAlongside). */
+    alongside: string;
     demoLead: string;
     demoLink: string;
   };
@@ -356,17 +402,17 @@ export const aaHub: L<AaHubContent> = {
   ar: {
     title: 'المحاسب الأكاديمي في بغداد | محاسبة وتدقيق واستشارات وتدريب',
     description:
-      'المحاسب الأكاديمي مكتب محاسبة واستشارات مالية في المنصور ببغداد، بخبرة أكثر من 15 سنة: تنظيم الحسابات والتدقيق والأنظمة المحاسبية والتدريب.',
+      'المحاسب الأكاديمي مكتب محاسبة في المنصور ببغداد بخبرة أكثر من 15 سنة، ومن نتاجه نظاما Genoa وGenoa Gov: محاسبة وتدقيق وتقنية وذكاء اصطناعي.',
     h1: 'المحاسب الأكاديمي: خدمات محاسبية ومالية وتدريب في بغداد',
     navLabel: 'المحاسب الأكاديمي',
     eyebrow: 'خبراء المحاسبة والمالية',
-    answer: `المحاسب الأكاديمي مكتب محاسبة واستشارات مالية في منطقة المنصور ببغداد، بخبرة أكثر من 15 سنة في مجال المحاسبة. يقدّم تنظيم الحسابات والتدقيق والاستشارات المالية وتصميم الأنظمة المحاسبية، إلى جانب التدريب والتطوير المهني. و${aaRelationship.ar}.`,
+    answer: `المحاسب الأكاديمي مكتب محاسبة واستشارات مالية في منطقة المنصور ببغداد، بخبرة أكثر من 15 سنة في مجال المحاسبة. ومن نتاجه نظاما Genoa للشركات وGenoa Gov للدوائر الحكومية، وقد بُنيا وفق خبراته المحاسبية والتقنية. ويقدّم تنظيم الحسابات والتدقيق والاستشارات المالية والتدريب، إلى جانب الخدمات التقنية وخدمات الذكاء الاصطناعي الخاصة بالأعمال المحاسبية والمالية.`,
     keyFacts: [
       { label: 'الاسم', value: 'المحاسب الأكاديمي (Academic Accountant)' },
       { label: 'الموقع', value: 'بغداد، المنصور، بناية بزنس أفنيو' },
       { label: 'الخبرة', value: 'أكثر من 15 سنة في مجال المحاسبة' },
       { label: 'المجالات', value: 'تدقيق، استشارة، أنظمة' },
-      { label: 'العلاقة بـ Genoa Systems', value: 'يعمل معها ويقدّم أنظمتها المحاسبية' },
+      { label: 'من نتاجه', value: 'نظاما Genoa للشركات وGenoa Gov للدوائر الحكومية' },
       { label: 'الاستشارة الأولى', value: 'مجانية لأصحاب المشاريع الجديدة' },
     ],
     whatWeDo: {
@@ -394,8 +440,8 @@ export const aaHub: L<AaHubContent> = {
         {
           group: 'systems',
           icon: 'database',
-          title: 'الأنظمة المحاسبية',
-          body: 'تصميم وبناء الأنظمة المحاسبية الخاصة بالشركات، والدعم الفني للأنظمة المحاسبية المستخدمة لدى العميل.',
+          title: 'الأنظمة والتقنية والذكاء الاصطناعي',
+          body: 'تصميم وبناء الأنظمة المحاسبية، ومن نتاجه نظاما Genoa وGenoa Gov، والدعم الفني والاستشارات التقنية، وخدمات الذكاء الاصطناعي للأعمال المحاسبية والمالية.',
         },
       ],
       allServices: 'كل الخدمات المحاسبية والمالية بالتفصيل',
@@ -410,10 +456,11 @@ export const aaHub: L<AaHubContent> = {
       ],
     },
     systems: {
-      heading: 'الأنظمة المحاسبية وGenoa Systems',
-      intro: `يعمل المحاسب الأكاديمي مع Genoa Systems ويقدّم أنظمتها المحاسبية. و${companyIntro('ar')}، تطوّر نظامين منفصلين:`,
+      heading: 'Genoa وGenoa Gov: من نتاج المحاسب الأكاديمي',
+      intro: `${aaRelationship.ar}. و${companyIntro('ar')}، تطوّر النظامين، وهما منفصلان:`,
       genoa: 'برنامج محاسبة ومخازن للشركات العراقية.',
       genoaGov: 'برنامج محاسبة حكومية لأقسام الحسابات في الدوائر الحكومية العراقية.',
+      alongside: `${aaAlongside.ar}.`,
       demoLead: 'ولمشاهدة أيّ من النظامين:',
       demoLink: 'احجز عرضاً توضيحياً لـ Genoa أو Genoa Gov',
     },
@@ -428,7 +475,7 @@ export const aaHub: L<AaHubContent> = {
       {
         q: 'ما الخدمات التي يقدّمها المحاسب الأكاديمي؟',
         a: [
-          'يقدّم المحاسب الأكاديمي خدمات محاسبية ومالية وتدقيقية للشركات والمشاريع والمحلات، منها: تنظيم الحسابات والسجلات المحاسبية، وتدقيق البيانات المالية، وإعداد التقارير الدورية، والتحليل المالي والموازنات التخطيطية، والاحتسابات الضريبية، والاستشارات المالية والكلفوية، وتصميم الأنظمة المحاسبية ودعمها فنياً. وتجد وصف كل خدمة في صفحة الخدمات.',
+          'يقدّم المحاسب الأكاديمي خدمات محاسبية ومالية وتدقيقية للشركات والمشاريع والمحلات، منها: تنظيم الحسابات والسجلات المحاسبية، وتدقيق البيانات المالية، وإعداد التقارير الدورية، والتحليل المالي والموازنات التخطيطية، والاحتسابات الضريبية، والاستشارات المالية والكلفوية، وتصميم الأنظمة المحاسبية ودعمها فنياً، والاستشارات التقنية وخدمات تقنية المعلومات، وخدمات الذكاء الاصطناعي للأعمال المحاسبية والمالية. وتجد وصف كل خدمة في صفحة الخدمات.',
         ],
       },
       {
@@ -443,26 +490,24 @@ export const aaHub: L<AaHubContent> = {
       },
       {
         q: 'ما علاقة المحاسب الأكاديمي بأنظمة Genoa (جينوا)؟',
-        a: [
-          'المحاسب الأكاديمي مكتب محاسبة واستشارات في بغداد، يعمل مع Genoa Systems ويقدّم أنظمتها المحاسبية. وGenoa Systems تطوّر برنامج Genoa للمحاسبة في الشركات، وبرنامج Genoa Gov للمحاسبة الحكومية.',
-        ],
+        a: [`${aaRelationship.ar}، وتطوّرهما Genoa Systems. ${aaAlongside.ar}.`],
       },
     ],
   },
   en: {
     title: 'Academic Accountant in Baghdad | Accounting and Training',
     description:
-      'Academic Accountant is an accounting and consulting office in Al-Mansour, Baghdad, with 15+ years in accounting: bookkeeping, audit, systems and training.',
+      'Academic Accountant, the Baghdad accounting office behind Genoa and Genoa Gov: 15+ years in accounting, with audit, technology and AI services.',
     h1: 'Academic Accountant: accounting, finance and training services in Baghdad',
     navLabel: 'Academic Accountant',
     eyebrow: 'Accounting and finance experts',
-    answer: `Academic Accountant (المحاسب الأكاديمي) is an accounting and financial consulting office in Al-Mansour, Baghdad, with more than 15 years of experience in accounting. It offers bookkeeping, audit, financial advice and accounting system design, as well as training and professional development. ${aaRelationship.en}.`,
+    answer: `Academic Accountant (المحاسب الأكاديمي) is an accounting and financial consulting office in Al-Mansour, Baghdad, with more than 15 years of experience in accounting. Genoa for companies and Genoa Gov for government departments are its products, built on its accounting and technology expertise. It offers bookkeeping, audit, financial advice and training, as well as technology services and AI services for accounting and financial work.`,
     keyFacts: [
       { label: 'Name', value: 'Academic Accountant (in Arabic: المحاسب الأكاديمي)' },
       { label: 'Location', value: 'Business Avenue Building, Al-Mansour, Baghdad' },
       { label: 'Experience', value: 'More than 15 years in accounting' },
       { label: 'Focus', value: 'Audit, advice, systems' },
-      { label: 'Relationship to Genoa Systems', value: 'Works with it and offers its accounting systems' },
+      { label: 'Its software', value: 'Genoa for companies and Genoa Gov for government departments' },
       { label: 'First consultation', value: 'Free for owners of new businesses' },
     ],
     whatWeDo: {
@@ -490,8 +535,8 @@ export const aaHub: L<AaHubContent> = {
         {
           group: 'systems',
           icon: 'database',
-          title: 'Accounting systems',
-          body: 'Designing and building accounting systems for companies, and technical support for the accounting systems a client already uses.',
+          title: 'Systems, technology and AI',
+          body: 'Designing and building accounting systems (Genoa and Genoa Gov are the office’s own), technical support and IT consulting, and AI services for accounting and financial work.',
         },
       ],
       allServices: 'All accounting and financial services in detail',
@@ -504,10 +549,11 @@ export const aaHub: L<AaHubContent> = {
       ],
     },
     systems: {
-      heading: 'Accounting systems and Genoa Systems',
-      intro: `Academic Accountant works with Genoa Systems and offers its accounting systems. ${companyIntro('en')} that makes two separate products:`,
+      heading: 'Genoa and Genoa Gov: products of Academic Accountant',
+      intro: `${aaRelationship.en}. ${companyIntro('en')} that develops them as two separate products:`,
       genoa: 'accounting and inventory software for companies.',
       genoaGov: 'government accounting software for the accounts sections of Iraqi government departments.',
+      alongside: `${aaAlongside.en}.`,
       demoLead: 'To see either product:',
       demoLink: 'book a demo of Genoa or Genoa Gov',
     },
@@ -522,7 +568,7 @@ export const aaHub: L<AaHubContent> = {
       {
         q: 'What services does Academic Accountant offer?',
         a: [
-          'Academic Accountant offers accounting, finance and audit services to companies, projects and shops: bookkeeping and accounting records, auditing financial data, regular reports, financial analysis and planning budgets, tax calculations, financial and cost advice, and the design and technical support of accounting systems. Each service is described on the services page.',
+          'Academic Accountant offers accounting, finance and audit services to companies, projects and shops: bookkeeping and accounting records, auditing financial data, regular reports, financial analysis and planning budgets, tax calculations, financial and cost advice, the design and technical support of accounting systems, technical consulting and IT services, and AI services for accounting and financial work. Each service is described on the services page.',
         ],
       },
       {
@@ -536,10 +582,8 @@ export const aaHub: L<AaHubContent> = {
         ],
       },
       {
-        q: 'How is Academic Accountant related to Genoa Systems?',
-        a: [
-          'Academic Accountant is an accounting and consulting office in Baghdad that works with Genoa Systems and offers its accounting systems. Genoa Systems makes Genoa, accounting software for companies, and Genoa Gov, government accounting software.',
-        ],
+        q: 'How is Academic Accountant related to Genoa and Genoa Gov?',
+        a: [`${aaRelationship.en}; Genoa Systems develops them. ${aaAlongside.en}.`],
       },
     ],
   },
@@ -552,7 +596,7 @@ export interface AaServicesContent extends PageMeta {
   /** Intro under the H1: what the office offers and to whom. */
   answer: string;
   groups: Record<AaGroupId, string>;
-  /** Under the "accounting systems" group, before the links to Genoa and Genoa Gov. */
+  /** Under the "systems, technology and AI" group, before the links to Genoa and Genoa Gov. */
   systemsLead: string;
   whoFor: { heading: string; body: string; bullets: string[] };
   backToHub: string;
@@ -562,18 +606,18 @@ export const aaServicesPage: L<AaServicesContent> = {
   ar: {
     title: 'المحاسب الأكاديمي في بغداد: خدمات المحاسبة والتدقيق',
     description:
-      'خدمات المحاسب الأكاديمي في بغداد: تنظيم الحسابات والسجلات، والتدقيق والتقارير، والتحليل المالي والموازنات والضريبة والكلفة، والأنظمة المحاسبية.',
+      'خدمات المحاسب الأكاديمي في بغداد: تنظيم الحسابات، والتدقيق والتقارير، والتحليل المالي والضريبة والكلفة، والأنظمة والتقنية والذكاء الاصطناعي.',
     h1: 'الخدمات المحاسبية والمالية والتدقيق | المحاسب الأكاديمي',
     navLabel: 'الخدمات',
     answer:
-      'يقدّم المحاسب الأكاديمي، مكتب المحاسبة والاستشارات المالية في المنصور ببغداد، خدمات محاسبية ومالية وتدقيقية للشركات والمشاريع والمحلات. وتشمل تنظيم الحسابات والسجلات، والتدقيق وإعداد التقارير، والتحليل المالي والموازنات والضريبة والكلفة، وتصميم الأنظمة المحاسبية ودعمها فنياً.',
+      'يقدّم المحاسب الأكاديمي، مكتب المحاسبة والاستشارات المالية في المنصور ببغداد، خدمات محاسبية ومالية وتدقيقية للشركات والمشاريع والمحلات. وتشمل تنظيم الحسابات والسجلات، والتدقيق وإعداد التقارير، والتحليل المالي والموازنات والضريبة والكلفة، وتصميم الأنظمة المحاسبية ودعمها فنياً، والخدمات التقنية وخدمات الذكاء الاصطناعي للأعمال المحاسبية والمالية.',
     groups: {
       bookkeeping: 'تنظيم الحسابات والسجلات المحاسبية',
       'audit-reporting': 'التدقيق وإعداد التقارير',
       analysis: 'التحليل المالي والموازنات والضريبة والكلفة',
-      systems: 'الأنظمة المحاسبية',
+      systems: 'الأنظمة المحاسبية والتقنية والذكاء الاصطناعي',
     },
-    systemsLead: `${aaRelationship.ar}:`,
+    systemsLead: 'ومن نتاج خبرات المكتب المحاسبية والتقنية نظاما:',
     whoFor: {
       heading: 'لمن هذه الخدمات؟',
       body: 'يقدّم المحاسب الأكاديمي خدماته للمؤسسات على اختلاف أنواعها وأنظمتها المحاسبية، ومنها:',
@@ -589,18 +633,18 @@ export const aaServicesPage: L<AaServicesContent> = {
   en: {
     title: 'Accounting and Audit in Baghdad | Academic Accountant',
     description:
-      "Academic Accountant's services in Baghdad: bookkeeping and records, audit and reporting, financial analysis, budgets, tax and cost, and accounting systems.",
+      "Academic Accountant's services in Baghdad: bookkeeping, audit and reporting, financial analysis, tax and cost, and accounting systems, technology and AI.",
     h1: 'Accounting, Audit and Financial Advisory Services | Academic Accountant',
     navLabel: 'Services',
     answer:
-      'Academic Accountant, an accounting and financial consulting office in Al-Mansour, Baghdad, offers accounting, finance and audit services to companies, projects and shops. They cover bookkeeping and records, audit and reporting, financial analysis, budgeting, tax and cost, and the design and support of accounting systems.',
+      'Academic Accountant, an accounting and financial consulting office in Al-Mansour, Baghdad, offers accounting, finance and audit services to companies, projects and shops. They cover bookkeeping and records, audit and reporting, financial analysis, budgeting, tax and cost, the design and support of accounting systems, and technology and AI services for accounting and financial work.',
     groups: {
       bookkeeping: 'Bookkeeping and records',
       'audit-reporting': 'Audit and reporting',
       analysis: 'Financial analysis, budgeting, tax and cost',
-      systems: 'Accounting systems',
+      systems: 'Accounting systems, technology and AI',
     },
-    systemsLead: `${aaRelationship.en}:`,
+    systemsLead: 'Built on the office’s accounting and technology expertise:',
     whoFor: {
       heading: 'Who are these services for?',
       body: 'Academic Accountant works with organisations of every kind, whatever accounting system they use, including:',
@@ -620,13 +664,13 @@ export const aaServicesPage: L<AaServicesContent> = {
 /** The short paragraph on /about/ (relationship + link). */
 export const aaOnAbout: L<{ heading: string; body: string; link: string }> = {
   ar: {
-    heading: 'المحاسب الأكاديمي وGenoa Systems',
-    body: `المحاسب الأكاديمي مكتب محاسبة واستشارات مالية في بغداد. ${aaRelationship.ar}، إلى جانب خدماته في تنظيم الحسابات والتدقيق والتدريب.`,
+    heading: 'Genoa وGenoa Gov من نتاج المحاسب الأكاديمي',
+    body: `المحاسب الأكاديمي مكتب محاسبة واستشارات مالية في بغداد، بخبرة أكثر من 15 سنة في مجال المحاسبة. ${aaRelationship.ar}. ${aaAlongside.ar}، إلى جانب التدقيق والتدريب.`,
     link: 'تعرّف على مكتب المحاسب الأكاديمي في بغداد',
   },
   en: {
-    heading: 'Academic Accountant and Genoa Systems',
-    body: `Academic Accountant (المحاسب الأكاديمي) is an accounting and financial consulting office in Baghdad. ${aaRelationship.en}, alongside its own bookkeeping, audit and training services.`,
+    heading: 'Genoa and Genoa Gov: products of Academic Accountant',
+    body: `Academic Accountant (المحاسب الأكاديمي) is an accounting and financial consulting office in Baghdad, with more than 15 years of experience in accounting. ${aaRelationship.en}. ${aaAlongside.en}, as well as audit and training.`,
     link: 'About the Academic Accountant office in Baghdad',
   },
 };
@@ -635,12 +679,50 @@ export const aaOnAbout: L<{ heading: string; body: string; link: string }> = {
 export const aaOnContact: L<{ heading: string; body: string; link: string }> = {
   ar: {
     heading: 'مكتب المحاسب الأكاديمي في بغداد',
-    body: 'لخدمات المحاسبة والتدقيق والاستشارات المالية والتدريب، تواصل مع مكتب المحاسب الأكاديمي، وهو مكتب يعمل مع Genoa Systems. أما طلب العرض التوضيحي لبرامج Genoa فيكون عبر النموذج في هذه الصفحة.',
+    body: 'لخدمات المحاسبة والتدقيق والاستشارات المالية والتدريب، والخدمات التقنية وخدمات الذكاء الاصطناعي للأعمال المحاسبية والمالية، تواصل مع مكتب المحاسب الأكاديمي، الذي بُني نظاما Genoa وGenoa Gov وفق خبراته المحاسبية والتقنية. أما طلب العرض التوضيحي لبرامج Genoa فيكون عبر النموذج في هذه الصفحة.',
     link: 'تعرّف على المحاسب الأكاديمي وخدماته',
   },
   en: {
     heading: 'Academic Accountant office in Baghdad',
-    body: 'For accounting, audit, financial advice and training, contact the Academic Accountant office, which works with Genoa Systems. To book a demo of Genoa software, use the form on this page.',
+    body: 'For accounting, audit, financial advice and training, technology services and AI for accounting and financial work, contact the Academic Accountant office, whose accounting and technology expertise Genoa and Genoa Gov were built on. To book a demo of Genoa software, use the form on this page.',
     link: 'About Academic Accountant and its services',
+  },
+};
+
+/** The home page: a line in the hero beside "Genoa Systems", and a section beside the two products. */
+export interface AaOnHome {
+  /** Hero, beside the eyebrow: links to the hub. */
+  byline: string;
+  heading: string;
+  body: string;
+  offers: { icon: IconKey; text: string }[];
+  hubLink: string;
+  servicesLink: string;
+}
+
+export const aaOnHome: L<AaOnHome> = {
+  ar: {
+    byline: 'من نتاج المحاسب الأكاديمي',
+    heading: 'Genoa وGenoa Gov من نتاج المحاسب الأكاديمي',
+    body: 'بُني نظاما Genoa للشركات وGenoa Gov للدوائر الحكومية وفق الخبرات المحاسبية والتقنية لمكتب المحاسب الأكاديمي في بغداد، صاحب الخبرة التي تزيد على 15 سنة في مجال المحاسبة. ويقدّم المكتب مع النظامين:',
+    offers: [
+      { icon: 'ledger', text: 'خدمات محاسبية ومالية وتدقيقية' },
+      { icon: 'support', text: 'استشارات تقنية وخدمات تقنية المعلومات' },
+      { icon: 'spark', text: 'خدمات ذكاء اصطناعي خاصة بالأعمال المحاسبية والمالية' },
+    ],
+    hubLink: 'تعرّف على المحاسب الأكاديمي',
+    servicesLink: 'خدمات المكتب بالتفصيل',
+  },
+  en: {
+    byline: 'A product of Academic Accountant',
+    heading: 'Genoa and Genoa Gov: products of Academic Accountant',
+    body: 'Genoa for companies and Genoa Gov for government departments were built on the accounting and technology expertise of Academic Accountant, an accounting office in Baghdad with more than 15 years of experience in accounting. Alongside the two systems, the office offers:',
+    offers: [
+      { icon: 'ledger', text: 'Accounting, finance and audit services' },
+      { icon: 'support', text: 'Technical consulting and IT services' },
+      { icon: 'spark', text: 'AI services for accounting and financial work' },
+    ],
+    hubLink: 'About Academic Accountant',
+    servicesLink: 'The office’s services in detail',
   },
 };

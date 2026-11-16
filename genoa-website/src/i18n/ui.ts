@@ -10,6 +10,9 @@ export const ui = {
   companiesShort: { ar: 'للشركات', en: 'Companies' },
   government: { ar: 'Genoa Gov للدوائر الحكومية', en: 'Genoa Gov for government' },
   governmentShort: { ar: 'للدوائر الحكومية', en: 'Government' },
+  /** Header: the line under each product's name (see Header.astro). */
+  navCompaniesSub: { ar: 'للشركات', en: 'for companies' },
+  navGovSub: { ar: 'للدوائر الحكومية', en: 'for government' },
   security: { ar: 'الأمان والنسخ الاحتياطي', en: 'Security and backups' },
   securityShort: { ar: 'الأمان', en: 'Security' },
   about: { ar: 'من نحن', en: 'About' },

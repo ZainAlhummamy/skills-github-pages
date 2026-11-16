@@ -76,9 +76,10 @@ src/content/companies-ai.ts  Genoa: the 2 AI feature pages (AI assistant, invoic
 src/content/government.ts Genoa Gov: overview, 7 feature pages, FAQ (ar + en)
 src/content/pages.ts      home, security & backups, about, contact, 404
 src/content/guides.ts     guides (explanatory pages): the Unified Accounting System, at /<lang>/guides/<slug>/
-src/content/academic-accountant.ts  Academic Accountant (المحاسب الأكاديمي), the accounting office that works with
-                          Genoa Systems: hub + services pages at /<lang>/academic-accountant/, their own styles
-                          (src/styles/academic-accountant.css) and optional logo (src/assets/academic-accountant/)
+src/content/academic-accountant.ts  Academic Accountant (المحاسب الأكاديمي), the accounting office whose expertise
+                          Genoa and Genoa Gov were built on: hub + services pages at /<lang>/academic-accountant/
+                          (also in the header), their own styles (src/styles/academic-accountant.css), optional
+                          logo (src/assets/academic-accountant/), and its by-line and section on Genoa's pages
 src/content/screenshots.ts  real-screenshot registry (placeholders until filled)
 src/i18n/ui.ts            interface strings (nav, buttons, labels)
 src/styles/global.css     base styles; src/styles/refresh.css is the Nov 2026 visual refresh, loaded after it

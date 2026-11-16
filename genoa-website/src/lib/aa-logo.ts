@@ -1,6 +1,7 @@
 /**
- * The Academic Accountant logo, used only on the office's own pages (hero) and in its JSON-LD `logo`. It never
- * replaces the site's favicon, icons or Genoa Systems' logo.
+ * The Academic Accountant logo: on the office's own pages (hero card), in its JSON-LD `logo`, and where Genoa's pages
+ * present the office (the by-line in the home and product heroes, the home page section). It never replaces the
+ * site's favicon, icons or Genoa Systems' logo.
  *
  * The file is src/assets/academic-accountant/logo.png: the office's own seal, prepared from its photo logo
  * (logo-original.webp, kept beside it) by straightening it, cropping it to the seal and cleaning the paper to white;

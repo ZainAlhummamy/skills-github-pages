@@ -1,0 +1,37 @@
+---
+/**
+ * Home page: Academic Accountant beside the two products. Genoa and Genoa Gov were built on the office's accounting
+ * and technology expertise, and it offers accounting, technology and AI services with them (the owner, 16 Nov 2026).
+ * Copy: aaOnHome in src/content/academic-accountant.ts. Styles: refresh.css (.home-aa), in the office's navy and gold.
+ */
+import type { Lang } from '../../content/types';
+import { aaOnHome } from '../../content/academic-accountant';
+import { t } from '../../i18n/ui';
+import { path } from '../../lib/routes';
+import Icon from '../Icon.astro';
+import AaLogo from './AaLogo.astro';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const c = aaOnHome[lang];
+---
+<section class="section home-aa" aria-labelledby="home-aa-heading">
+  <div class="container">
+    <div class="home-aa-card" data-reveal>
+      <AaLogo lang={lang} size={132} class="home-aa-seal" loading="lazy" />
+      <div>
+        <span class="tag home-aa-tag">{t('academicAccountant', lang)}</span>
+        <h2 id="home-aa-heading">{c.heading}</h2>
+        <p>{c.body}</p>
+        <ul class="home-aa-offers">
+          {c.offers.map((o) => (
+            <li><span class="home-aa-icon"><Icon name={o.icon} /></span><span>{o.text}</span></li>
+          ))}
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn-primary" href={path(lang, 'academic-accountant')}>{c.hubLink}</a>
+          <a class="btn btn-ghost" href={path(lang, 'academic-accountant', 'services')}>{c.servicesLink}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -21,7 +21,7 @@ Each item is a `TODO(Zain)` in the code; `npm run build` lists the files that st
 
 | # | What | Where it goes | What happens until then |
 |---|---|---|---|
-| A1 | **Relationship to Genoa Systems** (same owner? parent / subsidiary? partner?) | `src/content/academic-accountant.ts` (`aaRelationship`); JSON-LD `parentOrganization` / `subOrganization` in `src/lib/seo.ts` (`academicAccountantNode`) only if confirmed | Pages say "works with Genoa Systems and offers its accounting systems"; the two entities are joined only through the WebPage `about` / `mentions`. |
+| A1 | **Legal relationship to Genoa Systems** (same owner? parent / subsidiary?). Answered for the products (16 Nov 2026): Genoa and Genoa Gov are the office's product, built on its accounting and technology expertise, and it offers accounting, technology and AI services with them. | `src/content/academic-accountant.ts` (`aaRelationship`, `aaAlongside`); JSON-LD `parentOrganization` / `subOrganization` in `src/lib/seo.ts` (`academicAccountantNode`) only if confirmed | Pages say what was stated, and that Genoa Systems develops the two products; nothing says same owner, parent or subsidiary. In the JSON-LD the two entities are joined only through the WebPage `about` / `mentions` (the home and product pages now mention the office). |
 | A2 | **Are the office's Facebook / Instagram also official Genoa Systems profiles?** | If yes: also add them to `src/config/site.ts` → `sameAs` | They are the office's `sameAs` only. Genoa Systems' `sameAs` stays empty (a wrong `sameAs` would weaken the Genoa entity). |
 | A3 | ✅ **Office logo** (16 Nov 2026): the photo logo, straightened, cropped and cleaned; its "odoo" wordmark replaced by "Genoa" (`src/assets/academic-accountant/logo.png`) | Optional: a vector original would be sharper; drop it in as `logo.png` / `.webp` and run `npm run og -- academic-accountant` | Done: in the office pages' hero, their JSON-LD `logo` and their share images. |
 | A4 | **WhatsApp**: which of 07827777420 / 07712594596 (accounting) / 07714487455 (technical consulting and IT) is on WhatsApp | `aaOffice.whatsapp` in `src/content/academic-accountant.ts` (digits, 9647…) | No wa.me link; phones are `tel:` links only. |
@@ -29,8 +29,9 @@ Each item is a `TODO(Zain)` in the code; `npm run build` lists the files that st
 | A6 | **Third-party systems supported** (to name them, or not) | `aaServices` → `system-support` | "Technical support for the accounting systems a client already uses", no product names. |
 | A7 | **English spelling of the building** ("Business Avenue") | `aaOffice.address.en` | Used as written. |
 
-The site header has no Academic Accountant link: with it the English header no longer fits on one row at any width,
-which pushes "Book a demo" into the menu. The office is linked from the footer, `/about/` and `/contact/`.
+The office is in the header (16 Nov 2026: the two products show their name over a short "for whom" line so the row
+still fits from 1024 px), on the home page (hero by-line and its own section), in the product heroes (by-line), and
+in the footer, `/about/` and `/contact/`.
 
 ## Outside the repository
 

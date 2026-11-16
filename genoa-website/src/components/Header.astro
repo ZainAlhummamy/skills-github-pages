@@ -7,9 +7,13 @@ import Icon from './Icon.astro';
 interface Props { lang: Lang; pathname: string; hasAlternate?: boolean; }
 const { lang, pathname, hasAlternate = true } = Astro.props;
 const other = otherLang(lang);
-const links = [
-  { href: path(lang, 'companies'), label: t('companies', lang) },
-  { href: path(lang, 'government'), label: t('government', lang) },
+// The two products as their name over a short "for whom" line, so the row still fits with Academic Accountant (the
+// office whose work they are) beside them. The space between the two spans keeps the accessible name
+// "Genoa for companies" / "Genoa للشركات".
+const links: { href: string; label: string; sub?: string }[] = [
+  { href: path(lang, 'companies'), label: 'Genoa', sub: t('navCompaniesSub', lang) },
+  { href: path(lang, 'government'), label: 'Genoa Gov', sub: t('navGovSub', lang) },
+  { href: path(lang, 'academic-accountant'), label: t('academicAccountant', lang) },
   { href: path(lang, 'security-backups'), label: t('securityShort', lang) },
   { href: path(lang, 'about'), label: t('about', lang) },
 ];
@@ -33,8 +37,8 @@ const altHref = hasAlternate ? swapLang(pathname, other) : path(other);
       <ul id="site-menu" class="nav-list site-menu" popover="auto">
         {links.map((l) => (
           <li>
-            <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined} data-section={inSection(l.href) ? 'true' : undefined}>
-              {l.label}
+            <a class:list={[l.sub && 'nav-two-line']} href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined} data-section={inSection(l.href) ? 'true' : undefined}>
+              {l.sub ? <><span class="nav-name">{l.label}</span> <span class="nav-sub">{l.sub}</span></> : l.label}
             </a>
           </li>
         ))}
@@ -54,6 +58,30 @@ const altHref = hasAlternate ? swapLang(pathname, other) : path(other);
 </header>
 <style>
   .menu-button :global(svg) { width: 22px; height: 22px; }
+  /* Product links: the name, and under it who it is for, smaller. */
+  .nav-two-line {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.05rem;
+    line-height: 1.2;
+  }
+  .nav-sub {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  /* Current page: the underline goes under the second line, so it never runs through it. */
+  .nav-list a.nav-two-line:is([aria-current='page'], [data-section='true']) {
+    text-decoration-line: none;
+  }
+  .nav-two-line:is([aria-current='page'], [data-section='true']) .nav-sub {
+    color: inherit;
+    text-decoration-line: underline;
+    text-decoration-thickness: 3px;
+    text-decoration-color: var(--brand);
+    text-underline-offset: 0.4em;
+  }
 </style>
 <script>
   // Browsers without the Popover API (for example Safari before 17) get the polyfill, and only they load it.
